@@ -1,0 +1,38 @@
+# Workflow for testing code and submitting codecov report
+name: Build, Test, and Coverage Report
+
+on:
+  # Triggers the workflow on push or pull request events
+  pull_request:
+    types: [opened, synchronize, closed]
+    
+jobs:
+  build:
+    #run project on latest ubuntu
+    runs-on: ubuntu-latest
+
+    # Sets project to the test environment
+    environment: test
+    
+    steps:
+      # Sets up the workflow to be run
+      - uses: actions/checkout@v3
+
+      # Lints bad formating for kotlin from code
+      - name: Kotlin Linter
+        uses: vroy/gha-kotlin-linter@v1
+
+      # Sets up JDK for JVM
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      # Install dependencies, run tests, and collect coverage
+      - name: Build Gradle
+        run: gradle build
+    
+      # Upload Code Coverage to Codecov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
