@@ -1,4 +1,4 @@
-# Create New Account
+# Get Rules and Amendments Data
 
 Returns json data about the account creation.
 
@@ -23,31 +23,9 @@ Returns json data about the account creation.
 
 - **Data Params:**
 
-  __Required:__ Username
+  None
 
-  `username: [string]`
-
-  `jshmoe1234`
-
-  __Required:__ Password
-
-  `password: [string]`
-
-  `MyPet'sName1234!`
-
-  __Required:__ Name
-
-  `name: [string]`
-
-  `Joe Shmoe`
-
-  __Required:__ Hour Cap
-
-  `hourCap: [double]`
-
-  20
-
-- **Auth Required:** Yes, JWT set in Authorization header.
+- **Auth Required:** Yes, TBD
 
 ## Response
 
@@ -61,7 +39,27 @@ Returns json data about the account creation.
   {
     "success": {
       "status": 200,
-      "message": ""
+      "rules": [
+        {
+          "ruleId": 1234,
+          "index": 35,
+          "title": "My Awesome Rule",
+          "description": "No one can win the game",
+          "amendments": [
+            {
+              "amendId": 2345,
+              "index": 2,
+              "description": "A player may only win if they blow up the DB"
+            },
+            {
+              "...": "As many as found"
+            }
+          ]
+        },
+        {
+          "...": "As many as found"
+        }
+      ]
     }
   }
   ```
@@ -76,8 +74,7 @@ Returns json data about the account creation.
   {
     "error": {
       "status": 400,
-      "message": "Bad Request - Non-Unique Fields",
-      "fields": ["field1", "field2"]
+      "message": "Bad Request"
     }
   }
   ```
@@ -117,16 +114,12 @@ Returns json data about the account creation.
 ## Sample Call
 
 ```javascript
-axios({
-  method: 'POST',
-  url: '/api/create_new_account',
+{
+  method: 'GET',
+  url: '/api/collect_rules_amendments/:gameId',
   responseType: 'json',
   data: {
-    username: 'jshmoe1234',
-    password: "MyPet'sName1234!",
-    userid: 123456,
-    name: 'Joe Shmoe',
-    hourCap: 20,
+    gameId: 1234
   }
-})
+}
 ```
