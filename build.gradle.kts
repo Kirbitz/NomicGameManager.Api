@@ -50,3 +50,10 @@ tasks.jacocoTestReport {
 		xml.required.set(true)
 	}
 }
+
+// This disables the extraneous jar of just this application's classes with none of the dependencies
+// necessary to run. The bootJar task is still enabled, and that task produces the jar with all the
+// dependencies bundled, creating a one file executable essentially.
+tasks.jar {
+	enabled = false
+}
