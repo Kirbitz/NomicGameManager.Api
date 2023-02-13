@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  database:
+    # The version is explicitly set so that there are no surprise versions that suddenly break the image
+    image: mysql/mysql-server:8.0.32
+
+    # This property specifies the policy on how docker should handle the container being stopped.
+    # See https://docs.docker.com/config/containers/start-containers-automatically/ for details.
+    restart: no
+    environment:
+    # TODO: Finalize this environment variables (Probably at least partially dependent
+    # on the database schema being finalized)
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'rootpassword'
+    ports:
+      - '3306:3306'
+    command: --init-file /data/application/init.sql
+    volumes:
+    # TODO: Add init file
+      - ./init.sql:/data/application/init.sql
+
+      # If you wish for any of the data to be persisted between reboots of the service
+      # while you are developing locally, the following line will start persisting data with
+      # the next reboot
+      # - database-volume:/var/lib/mysql
+
+volumes:
+  database-volume:
