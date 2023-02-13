@@ -59,3 +59,15 @@ tasks.jacocoTestReport {
 tasks.jar {
 	enabled = false
 }
+
+// This task dynamically adds the dependency to enable hot reload to the bootRun task.
+// It will automatically reboot the server if the built jar changes. If used alongside
+// build --continuous, this implements a full hot reload feature that could be useful
+// for many scenarios. The dependency is not always added to ensure that when we want
+// the server to run normally, it does not automatically reboot for whatever reason.
+task("addHotReload") {
+	doLast {
+		project.dependencies.add("implementation",
+			"org.springframework.boot:spring-boot-devtools")
+	}
+}
