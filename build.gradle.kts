@@ -27,6 +27,9 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	// Database libraries
+	implementation("org.ktorm:ktorm-support-mysql:3.6.0")
 }
 
 tasks.withType<KotlinCompile> {
