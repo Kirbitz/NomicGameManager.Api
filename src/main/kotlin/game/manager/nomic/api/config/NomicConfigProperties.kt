@@ -1,4 +1,4 @@
-package game.manager.nomic.api
+package game.manager.nomic.api.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
