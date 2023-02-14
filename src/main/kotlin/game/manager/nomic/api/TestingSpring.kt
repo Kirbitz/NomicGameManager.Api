@@ -15,6 +15,6 @@ class TestingSpring {
     }
     @GetMapping("springboot")
     fun helloWorld(): String {
-        return nomicConfig.dbPassword
+        return "Hello Spring!"
     }
 }
