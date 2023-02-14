@@ -1,4 +1,4 @@
-package game.manager.nomic.api
+package nomic.game.manager
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
