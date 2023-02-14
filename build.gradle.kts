@@ -28,6 +28,9 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
+	// Authentication libraries
+	implementation("com.auth0:java-jwt:4.2.2")
+
 	// Database libraries
 	implementation("org.ktorm:ktorm-support-mysql:3.6.0")
 }
