@@ -1,4 +1,4 @@
-package nomic.game.manager.domain.auth
+package nomic.domain.auth
 
 import java.io.File
 import java.security.KeyFactory

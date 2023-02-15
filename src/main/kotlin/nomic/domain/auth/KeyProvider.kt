@@ -1,4 +1,4 @@
-package nomic.game.manager.domain.auth
+package nomic.domain.auth
 
 import java.security.interfaces.RSAPrivateKey
 import java.security.interfaces.RSAPublicKey
