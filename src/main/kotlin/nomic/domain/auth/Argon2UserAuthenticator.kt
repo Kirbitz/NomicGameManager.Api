@@ -16,7 +16,8 @@ class Argon2UserAuthenticator(private val creds: CredentialRepository,
 
     override fun authenticateUserWithCredentials(username: Username, password: String) : AuthenticationResult {
         if (checkUserCredentials(username, password)) {
-            val token = tokenRegistry.issueToken()
+            val user = users.findUserByName(username)
+            val token = tokenRegistry.issueToken(user)
             return AuthenticationResult(true, token);
         } else {
             return AuthenticationResult(false)

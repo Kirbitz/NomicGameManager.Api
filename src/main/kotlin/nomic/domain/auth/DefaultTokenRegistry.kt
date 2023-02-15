@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.JWTVerificationException
+import nomic.domain.entities.User
 import java.time.Duration
 import java.time.Instant
 
@@ -20,8 +21,9 @@ class DefaultTokenRegistry(private val keyProvider : KeyProvider) : TokenRegistr
     }
 
 
-    override fun issueToken(claims : Map<String, String>) : String {
+    override fun issueToken(user: User, claims : Map<String, String>) : String {
         val tokenBuilder = JWT.create()
+            .withSubject(user.id.toString())
             .withIssuer("NomicGameManager.Api")
             .withIssuedAt(Instant.now())
             .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
@@ -37,9 +39,9 @@ class DefaultTokenRegistry(private val keyProvider : KeyProvider) : TokenRegistr
         try {
             val jwt = verifier.verify(rawToken)
             val claims = jwt.claims.mapValues { it.value.asString() }
-            return TokenValidationResult(true, claims)
+            return TokenValidationResult(true, jwt.subject, claims)
         } catch (e : JWTVerificationException) {
-            return TokenValidationResult(false, mapOf())
+            return TokenValidationResult(false, null, mapOf())
         }
     }
 }
