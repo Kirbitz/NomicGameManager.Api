@@ -6,6 +6,7 @@ import java.security.KeyFactory
 import java.security.KeyPairGenerator
 import java.security.interfaces.RSAPrivateKey
 import java.security.interfaces.RSAPublicKey
+import java.security.spec.PKCS8EncodedKeySpec
 import java.security.spec.X509EncodedKeySpec
 
 @Component
@@ -29,7 +30,7 @@ class FileKeyProvider : KeyProvider {
 
         val keyFactory = KeyFactory.getInstance("RSA")
         val publicKeySpec = X509EncodedKeySpec(publicKeyFile.readBytes())
-        val privateKeySpec = X509EncodedKeySpec(privateKeyFile.readBytes())
+        val privateKeySpec = PKCS8EncodedKeySpec(privateKeyFile.readBytes())
 
         val publicKey = keyFactory.generatePublic(publicKeySpec) as RSAPublicKey
         val privateKey = keyFactory.generatePrivate(privateKeySpec) as RSAPrivateKey
