@@ -3,17 +3,16 @@ package nomic.data.repositories
 import nomic.domain.entities.Credential
 import nomic.domain.entities.PasswordHash
 import nomic.domain.entities.User
-import nomic.domain.entities.Username
+import nomic.domain.entities.LoginName
 import org.springframework.stereotype.Component
 
 
 interface CredentialRepository {
-    fun create(user: User, passwordHash: PasswordHash) : Credential
-    fun changePassword(credential: Credential, newHashedPassword: PasswordHash) : Unit
+    fun create(user: User, loginName: LoginName, passwordHash: PasswordHash) : Credential
+    fun changePassword(credential: Credential, newPasswordHash: PasswordHash) : Unit
     fun getByUser(user: User) : Credential
-    fun getByName(username: Username) : Credential
+    fun getByName(loginName: LoginName) : Credential
 }
-
 
 // TODO: Implement Credentials Repository once the database is setup
 @Component
