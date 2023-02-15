@@ -10,19 +10,13 @@ import java.security.spec.PKCS8EncodedKeySpec
 import java.security.spec.X509EncodedKeySpec
 
 @Component
-class FileKeyProvider : KeyProvider {
-
-    // TODO Refactor into loading from configuration
-    companion object {
-        private const val publicKeyFileLocation : String = "public.key"
-        private const val privateKeyFileLocation : String = "private.pem"
-    }
+class FileKeyProvider(private val tokenConfig : JWTTokenConfigurationProperties) : KeyProvider {
 
     private var keyPair: RSAKeyPair? = null
 
     private fun loadKeyFiles() : Boolean {
-        val publicKeyFile = File(publicKeyFileLocation)
-        val privateKeyFile = File(privateKeyFileLocation)
+        val publicKeyFile = File(tokenConfig.publicKeyPath)
+        val privateKeyFile = File(tokenConfig.privateKeyPath)
 
         if (!publicKeyFile.exists() || !privateKeyFile.exists()) {
             return false
@@ -41,14 +35,14 @@ class FileKeyProvider : KeyProvider {
 
     private fun generateKeyPair() : RSAKeyPair {
         val generator = KeyPairGenerator.getInstance("RSA")
-        generator.initialize(2048)
+        generator.initialize(tokenConfig.signingKeySize)
 
         val pair = generator.generateKeyPair()
         val publicKey = pair.public as RSAPublicKey
         val privateKey = pair.private as RSAPrivateKey
 
-        val publicKeyFile = File(publicKeyFileLocation)
-        val privateKeyFile = File(privateKeyFileLocation)
+        val publicKeyFile = File(tokenConfig.publicKeyPath)
+        val privateKeyFile = File(tokenConfig.privateKeyPath)
 
         publicKeyFile.writeBytes(publicKey.encoded)
         privateKeyFile.writeBytes(privateKey.encoded)
