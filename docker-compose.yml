@@ -6,12 +6,12 @@ services:
 
     # This property specifies the policy on how docker should handle the container being stopped.
     # See https://docs.docker.com/config/containers/start-containers-automatically/ for details.
-    restart: no
+    restart: 'no'
     environment:
     # TODO: Finalize this environment variables (Probably at least partially dependent
     # on the database schema being finalized)
-      MYSQL_DATABASE: 'db'
-      MYSQL_USER: 'user'
+      MYSQL_DATABASE: 'Nomic'
+      MYSQL_USER: 'admin'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'rootpassword'
     ports:
