@@ -6,10 +6,12 @@ import nomic.domain.entities.User
 import nomic.domain.entities.LoginName
 import org.springframework.stereotype.Component
 
+interface Repository<TEntity> {
+    fun update(entity: TEntity)
+}
 
-interface CredentialRepository {
+interface CredentialRepository : Repository<Credential> {
     fun create(user: User, loginName: LoginName, passwordHash: PasswordHash) : Credential
-    fun changePassword(credential: Credential, newPasswordHash: PasswordHash) : Unit
     fun getByUser(user: User) : Credential
     fun getByName(loginName: LoginName) : Credential
 }
