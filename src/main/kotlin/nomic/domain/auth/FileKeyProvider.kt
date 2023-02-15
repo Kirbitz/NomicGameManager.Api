@@ -1,5 +1,6 @@
 package nomic.domain.auth
 
+import org.springframework.stereotype.Component
 import java.io.File
 import java.security.KeyFactory
 import java.security.KeyPairGenerator
@@ -7,6 +8,7 @@ import java.security.interfaces.RSAPrivateKey
 import java.security.interfaces.RSAPublicKey
 import java.security.spec.X509EncodedKeySpec
 
+@Component
 class FileKeyProvider : KeyProvider {
 
     // TODO Refactor into loading from configuration
