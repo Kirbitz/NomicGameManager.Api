@@ -1,6 +1,16 @@
 package nomic.domain.entities
 
-class Credential(val user: User, var username: Username, var passwordHash: PasswordHash) {
+import com.fasterxml.jackson.annotation.JsonValue
+
+class Credential(val user: User, var loginName: LoginName, var passwordHash: PasswordHash) {
+}
+
+@JvmInline
+value class LoginName(@JsonValue val rawName: String) {
+    init {
+        TODO("Discuss and add business logic regarding valid usernames " +
+                "(Probably alphanumeric with dashes and underlines only)")
+    }
 }
 
 @JvmInline

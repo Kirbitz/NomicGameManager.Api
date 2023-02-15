@@ -1,16 +1,16 @@
 package nomic.data.repositories
 
 import nomic.domain.entities.User
-import nomic.domain.entities.Username
+import nomic.domain.entities.LoginName
 import org.springframework.stereotype.Component
 
 interface UserRepository {
-    fun create(name: Username) : User
+    fun create(name: LoginName) : User
 
     fun getUserById(id: Int) : User
-    fun findUserByName(name: Username) : User
+    fun findUserByName(name: LoginName) : User
 
-    fun changeUsername(newName: Username) : Unit
+    fun changeUsername(newName: LoginName) : Unit
 
     // get games that user is hosting?
     // get games that user is part of?
@@ -18,7 +18,7 @@ interface UserRepository {
 
 @Component
 class UserRepositoryImpl : UserRepository {
-    override fun create(name: Username): User {
+    override fun create(name: LoginName): User {
         TODO("Not yet implemented")
     }
 
@@ -26,12 +26,11 @@ class UserRepositoryImpl : UserRepository {
         TODO("Not yet implemented")
     }
 
-    override fun findUserByName(name: Username): User {
+    override fun findUserByName(name: LoginName): User {
         TODO("Not yet implemented")
     }
 
-    override fun changeUsername(newName: Username) {
+    override fun changeUsername(newName: LoginName) {
         TODO("Not yet implemented")
     }
-
 }

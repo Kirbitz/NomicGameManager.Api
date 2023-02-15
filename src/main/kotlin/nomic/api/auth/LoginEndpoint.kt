@@ -1,7 +1,8 @@
 package nomic.api.auth
 
 import nomic.domain.auth.UserAuthenticator
-import nomic.domain.entities.Username
+
+import nomic.domain.entities.LoginName
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -16,7 +17,7 @@ class LoginEndpoint(val userAuthenticator: UserAuthenticator) {
     @ResponseBody
     fun loginRequest(@RequestBody request: LoginRequestModel): LoginResponseModel {
         val userAuthentication = userAuthenticator.authenticateUserWithCredentials(
-                                    Username(request.name), request.password)
+                                    LoginName(request.name), request.password)
 
         return LoginResponseModel(userAuthentication.isSuccess, userAuthentication.token)
     }
