@@ -1,7 +1,7 @@
-package nomic.game.manager.api.auth
+package nomic.api.auth
 
-import nomic.game.manager.domain.auth.UserAuthenticator
-import nomic.game.manager.domain.entities.Username
+import nomic.domain.auth.UserAuthenticator
+import nomic.domain.entities.Username
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping

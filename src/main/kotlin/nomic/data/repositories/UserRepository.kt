@@ -1,7 +1,7 @@
-package nomic.game.manager.data.repositories
+package nomic.data.repositories
 
-import nomic.game.manager.domain.entities.User
-import nomic.game.manager.domain.entities.Username
+import nomic.domain.entities.User
+import nomic.domain.entities.Username
 
 interface UserRepository {
     fun create(name: Username) : User

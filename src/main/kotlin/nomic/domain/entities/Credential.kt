@@ -1,4 +1,4 @@
-package nomic.game.manager.domain.entities
+package nomic.domain.entities
 
 class Credential(val user: User, var username: Username, var passwordHash: PasswordHash) {
 }

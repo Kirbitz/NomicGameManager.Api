@@ -1,4 +1,4 @@
-package nomic.game.manager.domain.auth
+package nomic.domain.auth
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier

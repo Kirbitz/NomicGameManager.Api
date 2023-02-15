@@ -1,6 +1,6 @@
-package nomic.game.manager.domain.auth
+package nomic.domain.auth
 
-import nomic.game.manager.domain.entities.Username
+import nomic.domain.entities.Username
 
 interface UserAuthenticator {
     fun authenticateUserWithCredentials(username: Username, password: String) : AuthenticationResult

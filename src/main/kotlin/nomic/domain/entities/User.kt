@@ -1,4 +1,4 @@
-package nomic.game.manager.domain.entities
+package nomic.domain.entities
 
 import com.fasterxml.jackson.annotation.JsonValue
 

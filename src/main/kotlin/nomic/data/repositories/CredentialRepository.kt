@@ -1,9 +1,9 @@
-package nomic.game.manager.data.repositories
+package nomic.data.repositories
 
-import nomic.game.manager.domain.entities.Credential
-import nomic.game.manager.domain.entities.PasswordHash
-import nomic.game.manager.domain.entities.User
-import nomic.game.manager.domain.entities.Username
+import nomic.domain.entities.Credential
+import nomic.domain.entities.PasswordHash
+import nomic.domain.entities.User
+import nomic.domain.entities.Username
 
 
 interface CredentialRepository {

@@ -1,4 +1,4 @@
-package nomic.game.manager.data.dtos
+package nomic.data.dtos
 
 import org.ktorm.entity.Entity
 import org.ktorm.schema.Table

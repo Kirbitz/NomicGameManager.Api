@@ -1,9 +1,9 @@
-package nomic.game.manager.domain.auth
+package nomic.domain.auth
 
-import nomic.game.manager.data.repositories.CredentialRepository
-import nomic.game.manager.data.repositories.UserRepository
-import nomic.game.manager.domain.entities.PasswordHash
-import nomic.game.manager.domain.entities.Username
+import nomic.data.repositories.CredentialRepository
+import nomic.data.repositories.UserRepository
+import nomic.domain.entities.PasswordHash
+import nomic.domain.entities.Username
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder
 import org.springframework.stereotype.Component
 
