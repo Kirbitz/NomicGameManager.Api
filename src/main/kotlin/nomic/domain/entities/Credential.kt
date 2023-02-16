@@ -11,10 +11,11 @@ class Credential(val user: User, var loginName: LoginName, var passwordHash: Pas
 @JvmInline
 value class LoginName(@JsonValue val rawName: String) {
     init {
-        TODO(
-            "Discuss and add business logic regarding valid usernames " +
-                "(Probably alphanumeric with dashes and underlines only)",
-        )
+        // This regex validates that the login name contains only alphanumeric characters or dashes or underscores.
+        val regex = Regex("^[a-zA-Z0-9\\-\\_]{1,45}\$")
+        if (!regex.matches(rawName)) {
+            throw InvalidLoginNameException(rawName)
+        }
     }
 }
 
