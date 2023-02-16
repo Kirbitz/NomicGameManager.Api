@@ -9,6 +9,7 @@ import org.ktorm.database.Database
 import org.ktorm.dsl.from
 import org.ktorm.dsl.map
 import org.ktorm.dsl.select
+import org.ktorm.jackson.KtormModule
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -26,6 +27,7 @@ class Rules_Amendments {
     constructor(nomicConfig: NomicConfigProperties) {
         database = DatabaseConfig(nomicConfig).connectDB()
         objectMapper = ObjectMapper()
+        objectMapper.registerModule(KtormModule())
     }
     // Path to endpoint is api/rules_amendments/ExistingGameId
     @GetMapping("rules_amendments/{gameid}")
@@ -42,6 +44,6 @@ class Rules_Amendments {
             println(e.cause)
         }
 
-        return ResponseEntity<Any>(rule, HttpStatus.OK)
+        return ResponseEntity<Any>(objectMapper.writeValueAsString(rule), HttpStatus.OK)
     }
 }
