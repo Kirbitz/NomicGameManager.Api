@@ -14,11 +14,11 @@ import org.mockito.kotlin.mock
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder
 import java.util.Optional
 
-class Argon2UserAuthenticatorTest
-{
+class Argon2UserAuthenticatorTest {
+
     private val auth: Argon2UserAuthenticator
 
-    private val authSucceededCondition : Condition<AuthenticationResult> = Condition({ it.isSuccess }, "Authentication is successful")
+    private val authSucceededCondition: Condition<AuthenticationResult> = Condition({ it.isSuccess }, "Authentication is successful")
 
     init {
         val encoder = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8()
@@ -47,8 +47,7 @@ class Argon2UserAuthenticatorTest
     }
 
     @Test
-    fun test_authenticate_badPassword()
-    {
+    fun test_authenticate_badPassword() {
         val attempt1 = auth.authenticateUserWithCredentials(LoginName("alfredo"), "password")
         val attempt2 = auth.authenticateUserWithCredentials(LoginName("see_sharp"), "super_secret_password")
 
@@ -58,8 +57,7 @@ class Argon2UserAuthenticatorTest
     }
 
     @Test
-    fun test_authenticate_badUsername()
-    {
+    fun test_authenticate_badUsername() {
         val attempt1 = auth.authenticateUserWithCredentials(LoginName("alfredo1"), "pass")
         val attempt2 = auth.authenticateUserWithCredentials(LoginName("see_sharp1"), "foobar")
 
@@ -69,8 +67,7 @@ class Argon2UserAuthenticatorTest
     }
 
     @Test
-    fun test_authenticate_success()
-    {
+    fun test_authenticate_success() {
         val attempt1 = auth.authenticateUserWithCredentials(LoginName("alfredo"), "pass")
         val attempt2 = auth.authenticateUserWithCredentials(LoginName("see_sharp"), "foobar")
 
