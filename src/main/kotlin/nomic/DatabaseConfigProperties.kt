@@ -7,6 +7,6 @@ data class DatabaseConfigProperties(
     var endpoint: String = "",
     var username: String = "",
     var password: String = "",
-    var port: Int = 1,
+    var port: Int = -1,
     var schema: String = "",
 )
