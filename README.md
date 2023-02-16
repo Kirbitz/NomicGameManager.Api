@@ -6,4 +6,4 @@ Just click a link and away you go!
 
 __Example__
 
-[api/hello/springboot](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+[api/collect_rules_amendments](documentation/get_rules_amendments.md)
