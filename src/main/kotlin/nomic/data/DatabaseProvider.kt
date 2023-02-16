@@ -9,9 +9,11 @@ import org.springframework.context.annotation.Configuration
 class DatabaseProvider {
 
     @Bean
-    fun getDatabase(props: DatabaseConfigProperties) : Database {
-        return Database.connect(url = "jdbc:mysql://${props.endpoint}/${props.schema}",
+    fun getDatabase(props: DatabaseConfigProperties): Database {
+        return Database.connect(
+            url = "jdbc:mysql://${props.endpoint}/${props.schema}",
             user = props.username,
-            password = props.password)
+            password = props.password,
+        )
     }
 }

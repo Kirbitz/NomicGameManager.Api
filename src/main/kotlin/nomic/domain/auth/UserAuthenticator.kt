@@ -3,7 +3,7 @@ package nomic.domain.auth
 import nomic.domain.entities.LoginName
 
 interface UserAuthenticator {
-    fun authenticateUserWithCredentials(loginName: LoginName, password: String) : AuthenticationResult
+    fun authenticateUserWithCredentials(loginName: LoginName, password: String): AuthenticationResult
     fun createUser(loginName: LoginName, password: String)
 }
 

@@ -11,7 +11,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 class RoutingSecurityConfig {
 
     @Bean
-    fun filterChain(http : HttpSecurity, tokenRegistry: TokenRegistry) : SecurityFilterChain {
+    fun filterChain(http: HttpSecurity, tokenRegistry: TokenRegistry): SecurityFilterChain {
         val filter = AuthenticationSecurityFilter(tokenRegistry)
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter::class.java)
 

@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.GenericFilterBean
 
 class AuthenticationSecurityFilter(
-    private val tokenRegistry: TokenRegistry
+    private val tokenRegistry: TokenRegistry,
 ) : GenericFilterBean() {
 
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
@@ -24,7 +24,7 @@ class AuthenticationSecurityFilter(
         val rawToken = authorizationHeader.substring("Bearer ".length)
 
         val validation = tokenRegistry.validateToken(rawToken)
-        if(validation.isSuccess) {
+        if (validation.isSuccess) {
             val auth = UsernamePasswordAuthenticationToken(validation.subject, rawToken, listOf())
             SecurityContextHolder.getContext().authentication = auth
         }
@@ -32,5 +32,3 @@ class AuthenticationSecurityFilter(
         chain?.doFilter(request, response)
     }
 }
-
-

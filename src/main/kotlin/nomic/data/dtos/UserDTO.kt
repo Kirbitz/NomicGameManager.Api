@@ -1,6 +1,5 @@
 package nomic.data.dtos
 
-
 import org.ktorm.database.Database
 import org.ktorm.entity.Entity
 import org.ktorm.entity.sequenceOf

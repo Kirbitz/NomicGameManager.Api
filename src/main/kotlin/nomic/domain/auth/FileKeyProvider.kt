@@ -10,11 +10,11 @@ import java.security.spec.PKCS8EncodedKeySpec
 import java.security.spec.X509EncodedKeySpec
 
 @Component
-class FileKeyProvider(private val tokenConfig : JWTTokenConfigurationProperties) : KeyProvider {
+class FileKeyProvider(private val tokenConfig: JWTTokenConfigurationProperties) : KeyProvider {
 
     private var keyPair: RSAKeyPair? = null
 
-    private fun loadKeyFiles() : Boolean {
+    private fun loadKeyFiles(): Boolean {
         val publicKeyFile = File(tokenConfig.publicKeyPath)
         val privateKeyFile = File(tokenConfig.privateKeyPath)
 
@@ -33,7 +33,7 @@ class FileKeyProvider(private val tokenConfig : JWTTokenConfigurationProperties)
         return true
     }
 
-    private fun generateKeyPair() : RSAKeyPair {
+    private fun generateKeyPair(): RSAKeyPair {
         val generator = KeyPairGenerator.getInstance("RSA")
         generator.initialize(tokenConfig.signingKeySize)
 

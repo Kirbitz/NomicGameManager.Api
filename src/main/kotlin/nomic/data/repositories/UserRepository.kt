@@ -1,16 +1,16 @@
 package nomic.data.repositories
 
-import nomic.domain.entities.User
 import nomic.domain.entities.LoginName
+import nomic.domain.entities.User
 import org.springframework.stereotype.Component
 
 interface UserRepository {
-    fun create(name: LoginName) : User
+    fun create(name: LoginName): User
 
-    fun getUserById(id: Int) : User
-    fun findUserByName(name: LoginName) : User
+    fun getUserById(id: Int): User
+    fun findUserByName(name: LoginName): User
 
-    fun changeUsername(newName: LoginName) : Unit
+    fun changeUsername(newName: LoginName): Unit
 
     // get games that user is hosting?
     // get games that user is part of?

@@ -4,9 +4,9 @@ import nomic.data.dtos.CredentialDTO
 import nomic.data.dtos.credentials
 import nomic.data.dtos.users
 import nomic.domain.entities.Credential
+import nomic.domain.entities.LoginName
 import nomic.domain.entities.PasswordHash
 import nomic.domain.entities.User
-import nomic.domain.entities.LoginName
 import org.ktorm.database.Database
 import org.ktorm.dsl.eq
 import org.ktorm.entity.add
@@ -18,9 +18,9 @@ interface Repository<TEntity> {
 }
 
 interface CredentialRepository : Repository<Credential> {
-    fun create(user: User, loginName: LoginName, passwordHash: PasswordHash) : Credential
-    fun getByUser(user: User) : Credential
-    fun getByName(loginName: LoginName) : Credential
+    fun create(user: User, loginName: LoginName, passwordHash: PasswordHash): Credential
+    fun getByUser(user: User): Credential
+    fun getByName(loginName: LoginName): Credential
 }
 
 // TODO: Implement Credentials Repository once the database is setup
@@ -51,17 +51,20 @@ class CredentialRepositoryImpl(private val db: Database) : CredentialRepository 
 
     override fun getByUser(user: User): Credential {
         val credDto = db.credentials.find { it.userId eq user.id } ?: TODO("Not Found")
-        return Credential(user,
+        return Credential(
+            user,
             LoginName(credDto.username),
-            PasswordHash(credDto.passwordHash))
+            PasswordHash(credDto.passwordHash),
+        )
     }
 
     override fun getByName(loginName: LoginName): Credential {
         val credDto = db.credentials.find { it.username eq loginName.rawName } ?: TODO("Not Found")
         val user = User(credDto.user.id, credDto.user.name)
-        return Credential(user,
+        return Credential(
+            user,
             loginName,
-            PasswordHash(credDto.passwordHash))
+            PasswordHash(credDto.passwordHash),
+        )
     }
-
 }

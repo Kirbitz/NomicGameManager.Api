@@ -8,7 +8,7 @@ import nomic.domain.entities.User
 import java.time.Duration
 import java.time.Instant
 
-class DefaultTokenRegistry(private val keyProvider : KeyProvider) : TokenRegistry {
+class DefaultTokenRegistry(private val keyProvider: KeyProvider) : TokenRegistry {
     private val algorithm: Algorithm
     private val verifier: JWTVerifier
 
@@ -20,8 +20,7 @@ class DefaultTokenRegistry(private val keyProvider : KeyProvider) : TokenRegistr
             .build()
     }
 
-
-    override fun issueToken(user: User, claims : Map<String, String>) : String {
+    override fun issueToken(user: User, claims: Map<String, String>): String {
         val tokenBuilder = JWT.create()
             .withSubject(user.id.toString())
             .withIssuer("NomicGameManager.Api")
@@ -40,7 +39,7 @@ class DefaultTokenRegistry(private val keyProvider : KeyProvider) : TokenRegistr
             val jwt = verifier.verify(rawToken)
             val claims = jwt.claims.mapValues { it.value.asString() }
             return TokenValidationResult(true, jwt.subject, claims)
-        } catch (e : JWTVerificationException) {
+        } catch (e: JWTVerificationException) {
             return TokenValidationResult(false, null, mapOf())
         }
     }
