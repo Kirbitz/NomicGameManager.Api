@@ -33,6 +33,10 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
+	// Testing
+	testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+	testImplementation("org.mockito:mockito-junit-jupiter:5.1.1")
+
 	// Authentication libraries
 	implementation("com.auth0:java-jwt:4.2.2")
 	implementation("org.springframework.security:spring-security-crypto:6.0.1")
