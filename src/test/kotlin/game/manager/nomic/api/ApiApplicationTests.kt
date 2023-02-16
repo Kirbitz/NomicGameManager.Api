@@ -7,5 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest
 class ApiApplicationTests {
     @Test
     fun contextLoads() {
+        main(arrayOf<String>())
     }
 }
