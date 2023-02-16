@@ -20,7 +20,7 @@ class RoutingSecurityConfig {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeHttpRequests {
-                it.requestMatchers("/auth/login").permitAll()
+                it.requestMatchers("/api/auth/**").permitAll()
                     .anyRequest().authenticated()
             }
         return http.build()
