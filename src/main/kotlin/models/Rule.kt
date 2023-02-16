@@ -7,7 +7,7 @@ import org.ktorm.schema.int
 import org.ktorm.schema.varchar
 
 /**
- * Data Class for an Amendment
+ * Interface for Rule Table
  *
  * @property ruleId the unique if for the rule
  * @property index the position of the rule within the context of a game

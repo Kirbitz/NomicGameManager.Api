@@ -1,12 +1,13 @@
 package game.manager.nomic.api
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import game.manager.nomic.api.config.DatabaseConfig
 import game.manager.nomic.api.config.NomicConfigProperties
-import models.Amendment
+import models.Rule
 import models.Rules
 import org.ktorm.database.Database
-import org.ktorm.dsl.forEach
 import org.ktorm.dsl.from
+import org.ktorm.dsl.map
 import org.ktorm.dsl.select
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -19,15 +20,28 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("api")
 class Rules_Amendments {
 
-    private val database : Database
+    private val database: Database
+    private val objectMapper: ObjectMapper
 
     constructor(nomicConfig: NomicConfigProperties) {
         database = DatabaseConfig(nomicConfig).connectDB()
+        objectMapper = ObjectMapper()
     }
     // Path to endpoint is api/rules_amendments/ExistingGameId
     @GetMapping("rules_amendments/{gameid}")
     fun getRulesAmendments(@PathVariable(value="gameid") gameId : String): ResponseEntity<Any> {
-        database.from(Rules).select(Rules.title).forEach { row -> println(row[Rules.title]) }
-        return ResponseEntity<Any>(Amendment(21, 1, "Hello World"), HttpStatus.BAD_REQUEST)
+        var rule : List<Rule> = listOf<Rule>()
+        try {
+            if(gameId.isNullOrEmpty() || !gameId.matches(Regex("\\d+"))) {
+                throw IllegalArgumentException("Please enter a valid GameId!")
+            }
+
+            rule = database.from(Rules).select(Rules.title).map { row -> Rules.createEntity(row)}
+            println(rule)
+        } catch(e : Exception) {
+            println(e.cause)
+        }
+
+        return ResponseEntity<Any>(rule, HttpStatus.OK)
     }
 }
