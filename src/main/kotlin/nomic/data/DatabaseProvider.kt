@@ -1,6 +1,6 @@
 package nomic.data
 
-import nomic.DatabaseConfigProperties
+import nomic.NomicConfigProperties
 import org.ktorm.database.Database
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Configuration
 class DatabaseProvider {
 
     @Bean
-    fun getDatabase(props: DatabaseConfigProperties): Database {
+    fun getDatabase(props: NomicConfigProperties): Database {
         return Database.connect(
-            url = "jdbc:mysql://${props.endpoint}/${props.schema}",
-            user = props.username,
-            password = props.password,
+            url = "jdbc:mysql://${props.dbEndpoint}:${props.dbPort}/${props.dbName}",
+            user = props.dbUsername,
+            password = props.dbPassword,
         )
     }
 }
