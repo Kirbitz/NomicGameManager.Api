@@ -2,7 +2,11 @@ package nomic.domain.entities
 
 import com.fasterxml.jackson.annotation.JsonValue
 
-class Credential(val user: User, var loginName: LoginName, var passwordHash: PasswordHash)
+class Credential(val user: User, var loginName: LoginName, var passwordHash: PasswordHash) : Entity {
+    override val id: Int
+        get() = user.id
+
+}
 
 @JvmInline
 value class LoginName(@JsonValue val rawName: String) {
