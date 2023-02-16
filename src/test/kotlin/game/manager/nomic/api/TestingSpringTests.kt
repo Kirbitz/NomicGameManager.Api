@@ -11,9 +11,9 @@ import org.springframework.http.HttpStatus
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
-class TestingSpringTests (@Autowired val client: TestRestTemplate) {
+class TestingSpringTests(@Autowired val client: TestRestTemplate) {
     @Test
-    fun `Basic Endpoint Pass Test` () {
+    fun `Basic Endpoint Pass Test`() {
         val entity = client.getForEntity<String>("/api/hello/springboot")
         assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
         assertThat(entity.body).contains("Hello")
