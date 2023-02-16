@@ -5,9 +5,11 @@ import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.JWTVerificationException
 import nomic.domain.entities.User
+import org.springframework.stereotype.Component
 import java.time.Duration
 import java.time.Instant
 
+@Component
 class DefaultTokenRegistry(private val keyProvider: KeyProvider) : TokenRegistry {
     private val algorithm: Algorithm
     private val verifier: JWTVerifier
