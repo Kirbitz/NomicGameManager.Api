@@ -7,6 +7,7 @@ import org.springframework.http.HttpRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
@@ -18,7 +19,7 @@ import java.util.Base64
 @RequestMapping("api/auth")
 class LoginEndpoint(val userAuthenticator: UserAuthenticator) {
 
-    @GetMapping("login")
+    @PostMapping("login")
     fun loginRequest(@RequestHeader(HttpHeaders.AUTHORIZATION)
                      authorization: String): ResponseEntity<LoginResponseModel> {
         val credentialBytes = Base64.getDecoder().decode(authorization.substring("Basic ".length))
