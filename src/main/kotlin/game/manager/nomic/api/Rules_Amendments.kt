@@ -32,22 +32,26 @@ class Rules_Amendments {
     // Path to endpoint is api/rules_amendments/ExistingGameId
     @GetMapping("rules_amendments/{gameid}")
     fun getRulesAmendments(@PathVariable(value="gameid") gameId : String): ResponseEntity<Any> {
+        var responseHeader : HttpHeaders = HttpHeaders()
+        responseHeader.set("Content-Type", "application/json")
+        responseHeader.set("charset", "UTF-8")
+
         var rule: List<Rule> = listOf<Rule>()
+
         try {
-            if (gameId.isNullOrEmpty() || !gameId.matches(Regex("\\d+"))) {
+            if(gameId.isEmpty() || !gameId.matches(Regex("\\d+"))) {
                 throw IllegalArgumentException("Please enter a valid GameId!")
             }
 
             rule = database.from(Rules)
                 .select(Rules.ruleId, Rules.index, Rules.title, Rules.description, Rules.mutable)
                 .map { row -> Rules.createEntity(row) }
-        } catch (e: Exception) {
-            println(e.cause)
+        } catch(exception: IllegalArgumentException) {
+            return ResponseEntity.badRequest().headers(responseHeader).body(exception.message)
+        } catch(exception: Exception) {
+            return ResponseEntity.internalServerError().headers(responseHeader).body("Internal Server Error!")
         }
 
-        var responseHeader : HttpHeaders = HttpHeaders()
-        responseHeader.set("Content-Type", "application/json")
-        responseHeader.set("charset", "UTF-8")
         return ResponseEntity.ok().headers(responseHeader).body(objectMapper.writeValueAsString(rule))
     }
 }
