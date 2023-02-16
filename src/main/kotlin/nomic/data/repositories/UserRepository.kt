@@ -3,7 +3,6 @@ package nomic.data.repositories
 import nomic.data.EntityNotFoundException
 import nomic.data.dtos.UserDTO
 import nomic.data.dtos.users
-import nomic.domain.entities.LoginName
 import nomic.domain.entities.User
 import org.ktorm.database.Database
 import org.ktorm.dsl.eq
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component
 import java.util.Optional
 
 interface UserRepository : Repository<User> {
-    fun create(name: String) : User
+    fun create(name: String): User
     fun findUserByName(name: String): Optional<User>
 
     // get games that user is hosting?
@@ -37,7 +36,7 @@ class UserRepositoryImpl(private val db: Database) : UserRepository {
     }
 
     override fun update(entity: User) {
-        val userDto = db.users.find {it.id eq entity.id} ?: throw EntityNotFoundException(entity.id)
+        val userDto = db.users.find { it.id eq entity.id } ?: throw EntityNotFoundException(entity.id)
         userDto.name = entity.name
         userDto.flushChanges()
     }
@@ -50,5 +49,4 @@ class UserRepositoryImpl(private val db: Database) : UserRepository {
     override fun delete(entity: User) {
         db.users.find { it.id eq entity.id }?.delete()
     }
-
 }
