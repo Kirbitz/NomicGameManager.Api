@@ -5,8 +5,7 @@ import org.assertj.core.api.Condition
 import org.junit.jupiter.api.Test
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder
 
-class PasswordHashTest
-{
+class PasswordHashTest {
 
     @Test
     fun test_passwordHashes_createDomainObject() {
@@ -16,9 +15,9 @@ class PasswordHashTest
         val pass2 = encoder.encode("Super_alpha012\$#")
         val pass3 = encoder.encode("C#>>>>>>Kotlin")
 
-        Assertions.assertThat(PasswordHash(pass1)).has(Condition({ it.rawHash.equals(pass1)}, "pass1"))
-        Assertions.assertThat(PasswordHash(pass2)).has(Condition({ it.rawHash.equals(pass2)}, "pass2"))
-        Assertions.assertThat(PasswordHash(pass3)).has(Condition({ it.rawHash.equals(pass3)}, "pass3"))
+        Assertions.assertThat(PasswordHash(pass1)).has(Condition({ it.rawHash.equals(pass1) }, "pass1"))
+        Assertions.assertThat(PasswordHash(pass2)).has(Condition({ it.rawHash.equals(pass2) }, "pass2"))
+        Assertions.assertThat(PasswordHash(pass3)).has(Condition({ it.rawHash.equals(pass3) }, "pass3"))
     }
 
     @Test

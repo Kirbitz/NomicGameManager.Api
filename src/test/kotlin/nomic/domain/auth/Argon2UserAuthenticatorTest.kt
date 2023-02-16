@@ -12,8 +12,7 @@ import org.junit.jupiter.api.Test
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder
-import java.util.*
-import java.util.function.Predicate
+import java.util.Optional
 
 class Argon2UserAuthenticatorTest
 {
@@ -32,20 +31,17 @@ class Argon2UserAuthenticatorTest
 
         val credsRepo = mock<CredentialRepository>
         {
-            on { getByName(credBob.loginName)} doReturn Optional.of(credBob)
-            on { getByName(credJane.loginName)} doReturn  Optional.of(credJane)
+            on { getByName(credBob.loginName) } doReturn Optional.of(credBob)
+            on { getByName(credJane.loginName) } doReturn Optional.of(credJane)
         }
 
         val userRepo = mock<UserRepository>
         {
-            on { getById(credBob.id)} doReturn  Optional.of(credBob.user)
-            on { getById(credJane.id)} doReturn  Optional.of(credJane.user)
+            on { getById(credBob.id) } doReturn Optional.of(credBob.user)
+            on { getById(credJane.id) } doReturn Optional.of(credJane.user)
         }
 
-        val tokenRepo = mock<TokenRegistry>
-        {
-
-        }
+        val tokenRepo = mock<TokenRegistry>()
 
         auth = Argon2UserAuthenticator(credsRepo, userRepo, tokenRepo)
     }
@@ -81,6 +77,4 @@ class Argon2UserAuthenticatorTest
         Assertions.assertThat(attempt1).`is`(authSucceededCondition)
         Assertions.assertThat(attempt2).`is`(authSucceededCondition)
     }
-
-
 }
