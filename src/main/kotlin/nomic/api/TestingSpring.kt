@@ -9,12 +9,6 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("api/hello")
 class TestingSpring {
     // Path to this is BASEURL/api/hello/springboot
-    private val nomicConfig: NomicConfigProperties
-
-    constructor(nomicConfig: NomicConfigProperties) {
-        this.nomicConfig = nomicConfig
-    }
-
     @GetMapping("springboot")
     fun helloWorld(): String {
         return "Hello Spring!"
