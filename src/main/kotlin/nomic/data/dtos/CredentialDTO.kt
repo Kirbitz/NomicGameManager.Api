@@ -14,10 +14,10 @@ interface CredentialDTO : Entity<CredentialDTO> {
     var passwordHash: String
 }
 
-object Credentials : Table<CredentialDTO>("credentials") {
-    val userId = int("user_id").primaryKey().references(Users) { it.user }
+object Credentials : Table<CredentialDTO>("Credential") {
+    val userId = int("userId").primaryKey().references(Users) { it.user }
     var username = varchar("username").bindTo { it.username }
-    var passwordHash = varchar("password_hash").bindTo { it.passwordHash }
+    var passwordHash = varchar("password").bindTo { it.passwordHash }
 }
 
 val Database.credentials get() = this.sequenceOf(Credentials)

@@ -9,12 +9,12 @@ import org.ktorm.schema.varchar
 
 interface UserDTO : Entity<UserDTO> {
     companion object : Entity.Factory<UserDTO>()
-    val id: Int
-    val name: String
+    var id: Int
+    var name: String
 }
 
-object Users : Table<UserDTO>("users") {
-    val id = int("id").primaryKey().bindTo { it.id }
+object Users : Table<UserDTO>("User") {
+    val id = int("userId").primaryKey().bindTo { it.id }
     val name = varchar("name").bindTo { it.name }
 }
 
