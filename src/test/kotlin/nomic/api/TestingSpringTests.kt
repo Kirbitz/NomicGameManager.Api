@@ -16,6 +16,6 @@ class TestingSpringTests(@Autowired val client: TestRestTemplate) {
     fun `Basic Endpoint Fail Test No Auth`() {
         val entity = client.getForEntity<String>("/api/hello/springboot")
         assertThat(entity.statusCode).isEqualTo(HttpStatus.FORBIDDEN)
-        assertThat(entity.body).isEmpty()
+        assertThat(entity.body).isNull()
     }
 }
