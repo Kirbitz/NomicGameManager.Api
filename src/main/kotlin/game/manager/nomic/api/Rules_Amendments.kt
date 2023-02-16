@@ -10,7 +10,7 @@ import org.ktorm.dsl.from
 import org.ktorm.dsl.map
 import org.ktorm.dsl.select
 import org.ktorm.jackson.KtormModule
-import org.springframework.http.HttpStatus
+import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -32,18 +32,22 @@ class Rules_Amendments {
     // Path to endpoint is api/rules_amendments/ExistingGameId
     @GetMapping("rules_amendments/{gameid}")
     fun getRulesAmendments(@PathVariable(value="gameid") gameId : String): ResponseEntity<Any> {
-        var rule : List<Rule> = listOf<Rule>()
+        var rule: List<Rule> = listOf<Rule>()
         try {
-            if(gameId.isNullOrEmpty() || !gameId.matches(Regex("\\d+"))) {
+            if (gameId.isNullOrEmpty() || !gameId.matches(Regex("\\d+"))) {
                 throw IllegalArgumentException("Please enter a valid GameId!")
             }
 
-            rule = database.from(Rules).select(Rules.title).map { row -> Rules.createEntity(row)}
-            println(rule)
-        } catch(e : Exception) {
+            rule = database.from(Rules)
+                .select(Rules.ruleId, Rules.index, Rules.title, Rules.description, Rules.mutable)
+                .map { row -> Rules.createEntity(row) }
+        } catch (e: Exception) {
             println(e.cause)
         }
 
-        return ResponseEntity<Any>(objectMapper.writeValueAsString(rule), HttpStatus.OK)
+        var responseHeader : HttpHeaders = HttpHeaders()
+        responseHeader.set("Content-Type", "application/json")
+        responseHeader.set("charset", "UTF-8")
+        return ResponseEntity.ok().headers(responseHeader).body(objectMapper.writeValueAsString(rule))
     }
 }
