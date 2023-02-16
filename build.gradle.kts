@@ -1,12 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+	id("com.diffplug.spotless") version "6.15.0"
 	id("org.springframework.boot") version "3.0.2"
 	id("io.spring.dependency-management") version "1.1.0"
 	id("org.jetbrains.dokka") version "1.7.20"
 	kotlin("jvm") version "1.7.22"
 	kotlin("plugin.spring") version "1.7.22"
 	jacoco
+
 }
 
 subprojects {
@@ -16,6 +18,12 @@ subprojects {
 jacoco {
 	toolVersion = "0.8.8"
 	reportsDirectory.set(layout.buildDirectory.dir("$buildDir/jacoco"))
+}
+
+spotless {
+	kotlin {
+		ktlint()
+	}
 }
 
 group = "game.manager.nomic"
