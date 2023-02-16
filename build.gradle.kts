@@ -32,6 +32,7 @@ dependencies {
 	implementation("com.auth0:java-jwt:4.2.2")
 	implementation("org.springframework.security:spring-security-crypto:6.0.1")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.bouncycastle:bcprov-jdk18on:1.72")
 
 	// Database libraries
 	implementation("org.ktorm:ktorm-support-mysql:3.6.0")
