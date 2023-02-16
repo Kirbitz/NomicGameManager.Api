@@ -38,8 +38,10 @@ class Rules_Amendments {
                 throw IllegalArgumentException("Please enter a valid GameId!")
             }
 
-            rule = database.from(Rules).select(Rules.title).map { row -> Rules.createEntity(row)}
-            println(rule)
+            rule = database
+                .from(Rules)
+                .select(Rules.ruleId, Rules.index, Rules.title, Rules.description, Rules.mutable)
+                .map { row -> Rules.createEntity(row)}
         } catch(e : Exception) {
             println(e.cause)
         }
