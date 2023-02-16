@@ -18,8 +18,12 @@ class Argon2UserAuthenticator(
 
     override fun authenticateUserWithCredentials(loginName: LoginName, password: String): AuthenticationResult {
         val credential = creds.getByName(loginName)
-        if (checkUserCredentials(credential, password)) {
-            val token = tokenRegistry.issueToken(credential.user)
+        if (credential.isEmpty) {
+            return AuthenticationResult(false)
+        }
+
+        if (checkUserCredentials(credential.get(), password)) {
+            val token = tokenRegistry.issueToken(credential.get().user)
             return AuthenticationResult(true, token)
         } else {
             return AuthenticationResult(false)
@@ -30,9 +34,8 @@ class Argon2UserAuthenticator(
         val encoder = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8()
         val passwordHash = PasswordHash(encoder.encode(password))
 
-        val user = User(name)
-        users.create(user)
-        creds.create(Credential(user, loginName, passwordHash))
+        val user = users.create(name)
+        creds.create(user, loginName, passwordHash)
     }
 
     private fun checkUserCredentials(credential: Credential, password: String): Boolean {
