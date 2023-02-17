@@ -13,7 +13,7 @@ import org.ktorm.dsl.eq
 import org.ktorm.entity.add
 import org.ktorm.entity.find
 import org.springframework.stereotype.Component
-import java.util.*
+import java.util.Optional
 
 interface CredentialRepository : Repository<Credential> {
     fun create(user: User, loginName: LoginName, passwordHash: PasswordHash): Credential
