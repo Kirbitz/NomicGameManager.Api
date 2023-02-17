@@ -15,9 +15,8 @@ import org.ktorm.entity.find
 import org.springframework.stereotype.Component
 import java.util.*
 
-
 interface CredentialRepository : Repository<Credential> {
-    fun create(user: User, loginName: LoginName, passwordHash: PasswordHash) : Credential
+    fun create(user: User, loginName: LoginName, passwordHash: PasswordHash): Credential
     fun getByUser(user: User): Optional<Credential> = getById(user.id)
     fun getByName(loginName: LoginName): Optional<Credential>
 }
@@ -26,7 +25,7 @@ interface CredentialRepository : Repository<Credential> {
 @Component
 class CredentialRepositoryImpl(private val db: Database) : CredentialRepository {
 
-    override fun create(user: User, loginName: LoginName, passwordHash: PasswordHash) : Credential {
+    override fun create(user: User, loginName: LoginName, passwordHash: PasswordHash): Credential {
         var userDto = db.users.find { it.id eq user.id } ?: throw EntityNotFoundException(user.id)
 
         val credential = CredentialDTO {
@@ -52,24 +51,28 @@ class CredentialRepositoryImpl(private val db: Database) : CredentialRepository 
         val userDto = db.users.find { it.id eq id } ?: return Optional.empty()
         val credDto = db.credentials.find { it.userId eq id } ?: return Optional.empty()
 
-        return Optional.of(Credential(
-            User(id, userDto.name),
-            LoginName(credDto.username),
-            PasswordHash(credDto.passwordHash),
-        ))
+        return Optional.of(
+            Credential(
+                User(id, userDto.name),
+                LoginName(credDto.username),
+                PasswordHash(credDto.passwordHash)
+            )
+        )
     }
 
     override fun delete(entity: Credential) {
-        db.credentials.find { it.userId eq entity.id}?.delete()
+        db.credentials.find { it.userId eq entity.id }?.delete()
     }
 
     override fun getByName(loginName: LoginName): Optional<Credential> {
         val credDto = db.credentials.find { it.username eq loginName.rawName } ?: return Optional.empty()
         val user = User(credDto.user.id, credDto.user.name)
-        return Optional.of(Credential(
-            user,
-            loginName,
-            PasswordHash(credDto.passwordHash),
-        ))
+        return Optional.of(
+            Credential(
+                user,
+                loginName,
+                PasswordHash(credDto.passwordHash)
+            )
+        )
     }
 }

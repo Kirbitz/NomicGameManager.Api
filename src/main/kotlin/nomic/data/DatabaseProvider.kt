@@ -13,7 +13,7 @@ class DatabaseProvider {
         return Database.connect(
             url = "jdbc:mysql://${props.dbEndpoint}:${props.dbPort}/${props.dbName}",
             user = props.dbUsername,
-            password = props.dbPassword,
+            password = props.dbPassword
         )
     }
 }

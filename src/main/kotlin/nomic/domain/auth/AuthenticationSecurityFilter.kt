@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.GenericFilterBean
 
 class AuthenticationSecurityFilter(
-    private val tokenRegistry: TokenRegistry,
+    private val tokenRegistry: TokenRegistry
 ) : GenericFilterBean() {
 
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {

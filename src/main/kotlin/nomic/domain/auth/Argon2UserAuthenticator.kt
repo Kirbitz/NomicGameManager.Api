@@ -5,7 +5,6 @@ import nomic.data.repositories.UserRepository
 import nomic.domain.entities.Credential
 import nomic.domain.entities.LoginName
 import nomic.domain.entities.PasswordHash
-import nomic.domain.entities.User
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder
 import org.springframework.stereotype.Component
 
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component
 class Argon2UserAuthenticator(
     private val creds: CredentialRepository,
     private val users: UserRepository,
-    private val tokenRegistry: TokenRegistry,
+    private val tokenRegistry: TokenRegistry
 ) : UserAuthenticator {
 
     override fun authenticateUserWithCredentials(loginName: LoginName, password: String): AuthenticationResult {

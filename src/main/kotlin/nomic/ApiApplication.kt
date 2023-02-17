@@ -8,7 +8,7 @@ import org.springframework.boot.runApplication
 @SpringBootApplication
 @EnableConfigurationProperties(
     JWTTokenConfigurationProperties::class,
-    NomicConfigProperties::class,
+    NomicConfigProperties::class
 )
 class ApiApplication
 

@@ -6,5 +6,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 data class JWTTokenConfigurationProperties(
     var signingKeySize: Int = 2048,
     var publicKeyPath: String = "",
-    var privateKeyPath: String = "",
+    var privateKeyPath: String = ""
 )
