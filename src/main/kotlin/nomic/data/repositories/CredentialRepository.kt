@@ -21,7 +21,6 @@ interface CredentialRepository : Repository<Credential> {
     fun getByName(loginName: LoginName): Optional<Credential>
 }
 
-// TODO: Implement Credentials Repository once the database is setup
 @Component
 class CredentialRepositoryImpl(private val db: Database) : CredentialRepository {
 
