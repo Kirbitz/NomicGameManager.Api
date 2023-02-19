@@ -2,7 +2,6 @@ package nomic.api.auth
 
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Condition
-import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
@@ -20,14 +19,14 @@ class LoginEndpointTest(@Autowired val client: TestRestTemplate) {
 
     private val hasToken = Condition<LoginResponseModel?>(Predicate { it.token != null }, "Login Response has Token")
 
-    //@Test
+    // @Test
     fun test_loginFails_noCredentials() {
         val entity = client.getForEntity<LoginResponseModel>("/api/auth/login")
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.FORBIDDEN)
         Assertions.assertThat(entity.body).isNull()
     }
 
-    //@Test
+    // @Test
     fun test_loginFails_badCredentials() {
         val headers = HttpHeaders()
         val creds = Base64.getEncoder().encodeToString("baduser:badpassword".toByteArray())
@@ -39,7 +38,7 @@ class LoginEndpointTest(@Autowired val client: TestRestTemplate) {
         Assertions.assertThat(entity.body).isNotNull().isNot(hasToken)
     }
 
-    //@Test
+    // @Test
     fun test_loginSucceeds() {
         val headers = HttpHeaders()
         // TODO Add credentials
