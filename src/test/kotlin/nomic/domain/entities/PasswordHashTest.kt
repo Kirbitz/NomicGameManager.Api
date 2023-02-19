@@ -22,8 +22,6 @@ class PasswordHashTest {
 
     @Test
     fun test_passwords_throwException() {
-        val encoder = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8()
-
         Assertions.assertThatThrownBy { PasswordHash("hash") }
         Assertions.assertThatThrownBy { PasswordHash("abcdefg") }
         Assertions.assertThatThrownBy { PasswordHash("\$argon2id\$v=2") }
