@@ -26,7 +26,7 @@ class DefaultTokenRegistry(
     private val verifier: JWTVerifier
 
     init {
-        val keyPair = keyProvider.GetKeyPair()
+        val keyPair = keyProvider.getKeyPair()
         algorithm = Algorithm.RSA256(keyPair.publicKey, keyPair.privateKey)
         verifier = JWT.require(algorithm)
             .withIssuer("NomicGameManager.Api")
