@@ -7,19 +7,18 @@ import nomic.domain.entities.LoginName
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder
 import org.springframework.stereotype.Component
 
+/**
+ * This implementation of UserAuthenticator hashes passwords using the Argon2id algorithm with the defaults for Spring Security v5.8
+ * @see UserAuthenticator
+ *
+ * @param creds This dependency is used to retrieve and create all necessary credential data objects
+ * @param users This dependency is user to retrieve and create user entities
+ * @param tokenRegistry This dependency is used to issue JWT Tokens upon authentication
+ */
 @Component
 class Argon2UserAuthenticator(
-    /**
-     * This dependency is used to retrieve and create all necessary credential data objects
-     */
     private val creds: CredentialRepository,
-    /**
-     * This dependency is user to retrieve and create user entities
-     */
     private val users: UserRepository,
-    /**
-     * This dependency is used to issue JWT Tokens upon authentication
-     */
     private val tokenRegistry: TokenRegistry
 ) : UserAuthenticator {
 
