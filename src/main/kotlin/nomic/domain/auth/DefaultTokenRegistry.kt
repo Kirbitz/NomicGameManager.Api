@@ -5,12 +5,13 @@ import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.JWTVerificationException
 import nomic.domain.entities.User
+import nomic.data.repositories.UserRepository
 import org.springframework.stereotype.Component
 import java.time.Duration
 import java.time.Instant
 
 @Component
-class DefaultTokenRegistry(private val keyProvider: KeyProvider) : TokenRegistry {
+class DefaultTokenRegistry(private val keyProvider: KeyProvider, private val usersRepo : UserRepository) : TokenRegistry {
     private val algorithm: Algorithm
     private val verifier: JWTVerifier
 
@@ -37,10 +38,16 @@ class DefaultTokenRegistry(private val keyProvider: KeyProvider) : TokenRegistry
     }
 
     override fun validateToken(rawToken: String): TokenValidationResult {
+        // TODO Refactor out the exception, possibly swap out jwt libraries
         try {
             val jwt = verifier.verify(rawToken)
+
+            // TODO Possibly reconsider whether this is safe.
+            // While the signing should verify integrity and since only we sign, meaning the subject should be a valid user id,
+            // Do we still need to validate the subject as an User instead of assuming?
+            val user = usersRepo.getById(jwt.subject.toInt()).get()
             val claims = jwt.claims.mapValues { it.value.asString() }
-            return TokenValidationResult(true, jwt.subject, claims)
+            return TokenValidationResult(true, user, claims)
         } catch (e: JWTVerificationException) {
             return TokenValidationResult(false, null, mapOf())
         }

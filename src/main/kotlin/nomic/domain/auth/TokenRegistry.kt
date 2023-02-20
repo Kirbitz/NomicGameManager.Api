@@ -7,4 +7,4 @@ interface TokenRegistry {
     fun validateToken(rawToken: String): TokenValidationResult
 }
 
-data class TokenValidationResult(val isSuccess: Boolean, val subject: String?, val validClaims: Map<String, String>)
+data class TokenValidationResult(val isSuccess: Boolean, val subject: User? = null, val validClaims: Map<String, String> = mapOf())
