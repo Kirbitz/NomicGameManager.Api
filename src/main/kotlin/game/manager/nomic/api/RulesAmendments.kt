@@ -3,8 +3,11 @@ package game.manager.nomic.api
 import com.fasterxml.jackson.databind.ObjectMapper
 import game.manager.nomic.api.config.DatabaseConfig
 import game.manager.nomic.api.config.NomicConfigProperties
-import models.Rule
-import models.Rules
+import models.AmendmentModel
+import models.NomicProblemDetails
+import models.RulesAmendmentsModel
+import models.entities.Amendments
+import models.entities.Rules
 import org.ktorm.database.Database
 import org.ktorm.dsl.*
 import org.ktorm.jackson.KtormModule
@@ -30,7 +33,7 @@ class RulesAmendments(nomicConfig: NomicConfigProperties) {
         responseHeader.set("Content-Type", "application/json")
         responseHeader.set("charset", "UTF-8")
 
-        var rule: List<Rule> = listOf<Rule>()
+        val rules: MutableList<RulesAmendmentsModel> = mutableListOf()
 
         try {
             val gameIdInt: Int = gameId.toIntOrNull() ?: throw IllegalArgumentException("Please enter a valid GameId!")
