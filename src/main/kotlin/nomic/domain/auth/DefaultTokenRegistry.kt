@@ -11,7 +11,17 @@ import java.time.Duration
 import java.time.Instant
 
 @Component
-class DefaultTokenRegistry(private val keyProvider: KeyProvider, private val usersRepo : UserRepository) : TokenRegistry {
+class DefaultTokenRegistry(
+    /**
+     * This dependency is used to retrieve the RSA keys used to sign all JWT Tokens to validate authenticity and integrity
+     */
+    private val keyProvider: KeyProvider,
+    
+    /**
+     * This dependency is used to retrieve the user entity that is the subject of valid JWT Tokens
+     */
+    private val usersRepo : UserRepository
+) : TokenRegistry {
     private val algorithm: Algorithm
     private val verifier: JWTVerifier
 
