@@ -4,8 +4,8 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.JWTVerificationException
-import nomic.domain.entities.User
 import nomic.data.repositories.UserRepository
+import nomic.domain.entities.User
 import org.springframework.stereotype.Component
 import java.time.Duration
 import java.time.Instant
@@ -16,11 +16,11 @@ class DefaultTokenRegistry(
      * This dependency is used to retrieve the RSA keys used to sign all JWT Tokens to validate authenticity and integrity
      */
     private val keyProvider: KeyProvider,
-    
+
     /**
      * This dependency is used to retrieve the user entity that is the subject of valid JWT Tokens
      */
-    private val usersRepo : UserRepository
+    private val usersRepo: UserRepository
 ) : TokenRegistry {
     private val algorithm: Algorithm
     private val verifier: JWTVerifier

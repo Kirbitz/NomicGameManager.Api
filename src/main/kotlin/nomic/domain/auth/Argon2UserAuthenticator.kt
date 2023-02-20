@@ -4,7 +4,6 @@ import nomic.data.repositories.CredentialRepository
 import nomic.data.repositories.UserRepository
 import nomic.domain.entities.Credential
 import nomic.domain.entities.LoginName
-import nomic.domain.entities.PasswordHash
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder
 import org.springframework.stereotype.Component
 
@@ -29,7 +28,7 @@ class Argon2UserAuthenticator(
         }
     }
 
-    override fun createUser(name: String, loginName: LoginName, password: String) : AuthenticationResult {
+    override fun createUser(name: String, loginName: LoginName, password: String): AuthenticationResult {
         /*val encoder = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8()
         val passwordHash = PasswordHash(encoder.encode(password))
 
