@@ -44,7 +44,7 @@ class Argon2UserAuthenticator(
         val user = users.create(name)
         creds.create(user, loginName, passwordHash)
         return AuthenticationResult(true, tokenRegistry.issueToken(user))*/
-        return TODO("Not yet implemented")
+        TODO("Not yet implemented")
     }
 
     private fun checkUserCredentials(credential: Credential, password: String): Boolean {
