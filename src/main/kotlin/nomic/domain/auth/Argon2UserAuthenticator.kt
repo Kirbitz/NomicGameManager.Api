@@ -30,13 +30,14 @@ class Argon2UserAuthenticator(
     }
 
     override fun createUser(name: String, loginName: LoginName, password: String) : AuthenticationResult {
-        val encoder = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8()
+        /*val encoder = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8()
         val passwordHash = PasswordHash(encoder.encode(password))
 
         // TODO Add business rules regarding logins and passwords
         val user = users.create(name)
         creds.create(user, loginName, passwordHash)
-        return AuthenticationResult(true, tokenRegistry.issueToken(user))
+        return AuthenticationResult(true, tokenRegistry.issueToken(user))*/
+        return TODO("Not yet implemented")
     }
 
     private fun checkUserCredentials(credential: Credential, password: String): Boolean {
