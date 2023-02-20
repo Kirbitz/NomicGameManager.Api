@@ -1,4 +1,4 @@
-package models
+package models.entities
 
 import org.ktorm.entity.Entity
 import org.ktorm.schema.Table
@@ -22,6 +22,7 @@ interface Rule : Entity<Rule> {
     val title: String
     val description: String
     val mutable: Boolean
+    val gameId: Int
 }
 
 object Rules : Table<Rule>("Rule") {
@@ -30,4 +31,5 @@ object Rules : Table<Rule>("Rule") {
     val title = varchar("title").bindTo {it.title}
     val description = varchar("description").bindTo {it.description}
     val mutable = boolean("mutable").bindTo {it.mutable}
+    val gameId = int("gameId").bindTo { it.gameId }
 }
