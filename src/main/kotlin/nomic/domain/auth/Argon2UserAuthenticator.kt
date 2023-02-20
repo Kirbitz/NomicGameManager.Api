@@ -9,8 +9,17 @@ import org.springframework.stereotype.Component
 
 @Component
 class Argon2UserAuthenticator(
+    /**
+     * This dependency is used to retrieve and create all necessary credential data objects
+     */
     private val creds: CredentialRepository,
+    /**
+     * This dependency is user to retrieve and create user entities
+     */
     private val users: UserRepository,
+    /**
+     * This dependency is used to issue JWT Tokens upon authentication
+     */
     private val tokenRegistry: TokenRegistry
 ) : UserAuthenticator {
 
