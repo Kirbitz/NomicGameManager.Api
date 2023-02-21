@@ -13,9 +13,9 @@ import java.time.Instant
 /**
  * This implementation of TokenRegistry offers a straightforward implementation using RSA for token signing.
  *
- * @see TokenRegistry
- * @param keyProvider This dependency is used to retrieve the RSA keys used to sign all JWT Tokens to validate authenticity and integrity
- * @param usersRepo This dependency is used to retrieve the user entity that is the subject of valid JWT Tokens
+ * @see[TokenRegistry]
+ * @param[keyProvider] This dependency is used to retrieve the RSA keys used to sign all JWT Tokens to validate authenticity and integrity
+ * @param[usersRepo] This dependency is used to retrieve the user entity that is the subject of valid JWT Tokens
  */
 @Component
 class DefaultTokenRegistry(

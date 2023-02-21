@@ -11,8 +11,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * This Spring [Configuration] configures the filter chain to add in [AuthenticationSecurityFilter] and configures Spring Security to require
  * authentication to all endpoints other than the /api/auth endpoints.
  *
- * @see org.springframework.context.annotation.Configuration
- * @see org.springframework.security.web.SecurityFilterChain
+ * @see[org.springframework.context.annotation.Configuration]
+ * @see[org.springframework.security.web.SecurityFilterChain]
  */
 @Configuration
 class RoutingSecurityConfig {

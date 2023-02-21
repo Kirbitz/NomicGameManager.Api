@@ -18,10 +18,10 @@ interface KeyProvider {
 /**
  * A wrapper pairing the JDK's RSA public and private keys
  *
- * @see java.security.interfaces.RSAPrivateKey
- * @see java.security.interfaces.RSAPublicKey
+ * @see[java.security.interfaces.RSAPrivateKey]
+ * @see[java.security.interfaces.RSAPublicKey]
  *
- * @property publicKey The public key component of RSA encryption
- * @property privateKey The private key component of RSA encryption
+ * @property[publicKey] The public key component of RSA encryption
+ * @property[privateKey] The private key component of RSA encryption
  */
 data class RSAKeyPair(val publicKey: RSAPublicKey, val privateKey: RSAPrivateKey)

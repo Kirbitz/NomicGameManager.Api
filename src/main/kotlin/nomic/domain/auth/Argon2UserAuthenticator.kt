@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component
 
 /**
  * This implementation of [UserAuthenticator] hashes passwords using the Argon2id algorithm with the defaults for Spring Security v5.8
- * @see UserAuthenticator
- * @see org.springframework.security.crypto.argon2.Argon2PasswordEncoder
+ * @see[UserAuthenticator]
+ * @see[org.springframework.security.crypto.argon2.Argon2PasswordEncoder]
  *
- * @param creds This dependency is used to retrieve and create all necessary credential data objects
- * @param users This dependency is user to retrieve and create user entities
- * @param tokenRegistry This dependency is used to issue JWT Tokens upon authentication
+ * @param[creds] This dependency is used to retrieve and create all necessary credential data objects
+ * @param[users] This dependency is user to retrieve and create user entities
+ * @param[tokenRegistry] This dependency is used to issue JWT Tokens upon authentication
  */
 @Component
 class Argon2UserAuthenticator(

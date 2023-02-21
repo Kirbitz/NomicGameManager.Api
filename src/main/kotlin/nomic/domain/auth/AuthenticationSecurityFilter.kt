@@ -13,11 +13,11 @@ import org.springframework.web.filter.GenericFilterBean
  * it constructs and adds a [UsernamePasswordAuthenticationToken] to the current [SecurityContext]. Regardless of validation success,
  * it continues the filter chain.
  *
- * @param tokenRegistry This dependency is used to validate JWT Tokens passed through the Authorization header.
- * @see org.springframework.security.core.context.SecurityContext
- * @see org.springframework.security.authentication.UsernamePasswordAuthenticationToken
- * @see org.springframework.web.filter.GenericFilterBean
- * @see jakarta.servlet.FilterChain
+ * @param[tokenRegistry] This dependency is used to validate JWT Tokens passed through the Authorization header.
+ * @see[org.springframework.security.core.context.SecurityContext]
+ * @see[org.springframework.security.authentication.UsernamePasswordAuthenticationToken]
+ * @see[org.springframework.web.filter.GenericFilterBean]
+ * @see[jakarta.servlet.FilterChain]
  */
 class AuthenticationSecurityFilter(
     private val tokenRegistry: TokenRegistry
