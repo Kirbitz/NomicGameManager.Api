@@ -41,7 +41,7 @@ class CredentialRepositoryImplTest {
                 this.name = testCreds1.user.name
             }
 
-            this.username = testCreds1.loginName.rawName
+            this.loginName = testCreds1.loginName.rawName
             this.passwordHash = testCreds1.passwordHash.rawHash
         }
 
@@ -57,7 +57,7 @@ class CredentialRepositoryImplTest {
                 this.name = testCreds2.user.name
             }
 
-            this.username = testCreds2.loginName.rawName
+            this.loginName = testCreds2.loginName.rawName
             this.passwordHash = testCreds2.passwordHash.rawHash
         }
 
@@ -79,7 +79,7 @@ class CredentialRepositoryImplTest {
                 this.name = "Cincinnatus"
             }
 
-            this.username = "SimpleFarmer"
+            this.loginName = "SimpleFarmer"
             this.passwordHash = password.rawHash
         }
 

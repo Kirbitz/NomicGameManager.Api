@@ -10,13 +10,13 @@ import org.ktorm.schema.varchar
 interface CredentialDTO : Entity<CredentialDTO> {
     companion object : Entity.Factory<CredentialDTO>()
     var user: UserDTO
-    var username: String
+    var loginName: String
     var passwordHash: String
 }
 
 object Credentials : Table<CredentialDTO>("Credential") {
     val userId = int("userId").primaryKey().references(Users) { it.user }
-    var username = varchar("username").bindTo { it.username }
+    var loginName = varchar("username").bindTo { it.loginName }
     var passwordHash = varchar("password").bindTo { it.passwordHash }
 }
 

@@ -29,7 +29,7 @@ class CredentialRepositoryImpl(private val db: Database) : CredentialRepository 
 
         val credential = CredentialDTO {
             this.user = userDto
-            this.username = loginName.rawName
+            this.loginName = loginName.rawName
             this.passwordHash = passwordHash.rawHash
         }
 
@@ -41,7 +41,7 @@ class CredentialRepositoryImpl(private val db: Database) : CredentialRepository 
         val credDto = db.credentials.find { it.userId eq entity.user.id } ?: throw EntityNotFoundException(entity.id)
 
         credDto.passwordHash = entity.passwordHash.rawHash
-        credDto.username = entity.loginName.rawName
+        credDto.loginName = entity.loginName.rawName
 
         credDto.flushChanges()
     }
@@ -53,7 +53,7 @@ class CredentialRepositoryImpl(private val db: Database) : CredentialRepository 
         return Optional.of(
             Credential(
                 User(id, userDto.name),
-                LoginName(credDto.username),
+                LoginName(credDto.loginName),
                 PasswordHash(credDto.passwordHash)
             )
         )
@@ -64,7 +64,7 @@ class CredentialRepositoryImpl(private val db: Database) : CredentialRepository 
     }
 
     override fun getByName(loginName: LoginName): Optional<Credential> {
-        val credDto = db.credentials.find { it.username eq loginName.rawName } ?: return Optional.empty()
+        val credDto = db.credentials.find { it.loginName eq loginName.rawName } ?: return Optional.empty()
         val user = User(credDto.user.id, credDto.user.name)
         return Optional.of(
             Credential(
