@@ -9,6 +9,12 @@ import java.security.interfaces.RSAPublicKey
 import java.security.spec.PKCS8EncodedKeySpec
 import java.security.spec.X509EncodedKeySpec
 
+/**
+ * This implementation of [KeyProvider] generates, persists, and loads RSA keys on the filesystem in the locations specified by [tokenConfig]
+ *
+ * @see JWTTokenConfigurationProperties
+ * @param tokenConfig This dependency is the configuration parsed by Spring with the various properties needed for the JWT Token RSA keys
+ */
 @Component
 class FileKeyProvider(private val tokenConfig: JWTTokenConfigurationProperties) : KeyProvider {
 
@@ -51,7 +57,12 @@ class FileKeyProvider(private val tokenConfig: JWTTokenConfigurationProperties) 
         return keyPair!!
     }
 
-    override fun GetKeyPair(): RSAKeyPair {
+    /**
+     * Retrieves or generates a RSA key pair
+     *
+     * @return A pairing of RSA public and private keys
+     */
+    override fun getKeyPair(): RSAKeyPair {
         if (loadKeyFiles()) {
             return keyPair!!
         }
