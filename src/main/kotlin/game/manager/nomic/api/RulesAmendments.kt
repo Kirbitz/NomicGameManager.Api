@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("api")
 class RulesAmendments(nomicConfig: NomicConfigProperties) {
 
-    private val database: Database = DatabaseConfig(nomicConfig).connectDB()
+    private val databaseConfig: DatabaseConfig = DatabaseConfig(nomicConfig)
     private val objectMapper: ObjectMapper = ObjectMapper()
 
     // Path to endpoint is api/rules_amendments/ExistingGameId
@@ -36,6 +36,8 @@ class RulesAmendments(nomicConfig: NomicConfigProperties) {
         val rules: MutableList<RulesAmendmentsModel> = mutableListOf()
 
         try {
+            val database: Database = databaseConfig.connectDB()
+
             val gameIdInt: Int = gameId.toIntOrNull() ?: throw IllegalArgumentException("Please enter a valid GameId!")
 
             var currId: Int? = -1

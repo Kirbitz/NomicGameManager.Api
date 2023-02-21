@@ -37,6 +37,7 @@ dependencies {
 	implementation("org.ktorm:ktorm-jackson:3.6.0")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.+")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.mockito:mockito-core:5.1.1")
 	testImplementation("io.mockk:mockk:1.13.4")
 }
 

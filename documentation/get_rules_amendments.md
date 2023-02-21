@@ -92,12 +92,6 @@ Returns json data about the account creation.
   }
   ```
 
-  **Code:** `429 TOO MANY REQUESTS`
-
-  **Content:**
-
-  None
-
   **Code:** `500 INTERNAL SERVER ERROR`
 
   **Content:**
