@@ -1,4 +1,6 @@
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.net.URL
 
 plugins {
     id("org.springframework.boot") version "3.0.2"
@@ -68,5 +70,20 @@ tasks.jacocoTestReport {
     dependsOn(tasks.test)
     reports {
         xml.required.set(true)
+    }
+}
+
+tasks.withType<DokkaTask>().configureEach {
+    dokkaSourceSets.configureEach {
+        externalDocumentationLink {
+            url.set(URL("https://docs.spring.io/spring-framework/docs/current/kdoc-api/"))
+            packageListUrl.set(URL("https://docs.spring.io/spring-framework/docs/current/kdoc-api/package-list"))
+        }
+
+        // TODO Revisit and track down package list for spring security
+        /*externalDocumentationLink {
+            url.set(URL("https://docs.spring.io/spring-security/site/docs/current/kdoc-api/"))
+            packageListUrl.set(URL("https://docs.spring.io/spring-security/site/docs/current/kdoc-api/package-list"))
+        }*/
     }
 }
