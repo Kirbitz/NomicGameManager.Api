@@ -1,5 +1,6 @@
-package game.manager.nomic.api
+package nomic.api
 
+import nomic.main
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
