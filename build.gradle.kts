@@ -85,5 +85,10 @@ tasks.withType<DokkaTask>().configureEach {
             url.set(URL("https://docs.spring.io/spring-security/site/docs/current/kdoc-api/"))
             packageListUrl.set(URL("https://docs.spring.io/spring-security/site/docs/current/kdoc-api/package-list"))
         }*/
+
+        externalDocumentationLink {
+            url.set(URL("https://www.ktorm.org/api-docs/"))
+            packageListUrl.set(URL("https://www.ktorm.org/api-docs/package-list"))
+        }
     }
 }
