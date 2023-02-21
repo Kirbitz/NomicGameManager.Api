@@ -74,6 +74,7 @@ tasks.jacocoTestReport {
 }
 
 tasks.withType<DokkaTask>().configureEach {
+    suppressInheritedMembers.set(true)
     dokkaSourceSets.configureEach {
         externalDocumentationLink {
             url.set(URL("https://docs.spring.io/spring-framework/docs/current/kdoc-api/"))
