@@ -12,6 +12,14 @@ import org.ktorm.entity.find
 import org.springframework.stereotype.Component
 import java.util.Optional
 
+/**
+ * This implementation of [nomic.data.repositories.UserRepository][UserRepository] uses a
+ * KTorm [org.ktorm.database.Database][Database] as the data access layer.
+ *
+ * @see[nomic.data.repositories.UserRepository]
+ * @see[org.ktorm.database.Database]
+ * @param[db] A connected instance of [org.ktorm.database.Database][Database] to use as the database
+ */
 @Component
 class UserRepositoryImpl(private val db: Database) : UserRepository {
     override fun create(name: String): User {

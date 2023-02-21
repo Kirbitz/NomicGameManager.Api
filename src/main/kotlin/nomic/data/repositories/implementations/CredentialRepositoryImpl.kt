@@ -16,6 +16,14 @@ import org.ktorm.entity.find
 import org.springframework.stereotype.Component
 import java.util.Optional
 
+/**
+ * This implementation of [nomic.data.repositories.CredentialRepository][CredentialRepository] uses a
+ * KTorm [org.ktorm.database.Database][Database] as the data access layer.
+ *
+ * @see[nomic.data.repositories.CredentialRepository]
+ * @see[org.ktorm.database.Database]
+ * @param[db] A connected instance of [org.ktorm.database.Database][Database] to use as the database
+ */
 @Component
 class CredentialRepositoryImpl(private val db: Database) : CredentialRepository {
 
