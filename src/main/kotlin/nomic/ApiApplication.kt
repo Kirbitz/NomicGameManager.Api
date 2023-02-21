@@ -1,12 +1,14 @@
-package game.manager.nomic.api
+package nomic
 
-import game.manager.nomic.api.config.NomicConfigProperties
+import nomic.data.DatabaseConfigProperties
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-@EnableConfigurationProperties(NomicConfigProperties::class)
+@EnableConfigurationProperties(
+    DatabaseConfigProperties::class
+)
 class ApiApplication
 
 fun main(args: Array<String>) {
