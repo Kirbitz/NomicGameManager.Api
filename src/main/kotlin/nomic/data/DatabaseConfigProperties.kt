@@ -6,5 +6,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 data class DatabaseConfigProperties(
     var connectionString: String = "",
     var username: String = "",
-    var password: String = "",
+    var password: String = ""
 )
