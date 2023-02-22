@@ -20,7 +20,7 @@ jobs:
 
       # Lints bad formating for kotlin from code
       - name: Kotlin Linter
-        uses: vroy/gha-kotlin-linter@v1
+        uses: vroy/gha-kotlin-linter@v4
 
       # Sets up JDK for JVM
       - name: Set up JDK
