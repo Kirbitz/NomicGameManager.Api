@@ -30,24 +30,26 @@ class LoginEndpointTest(@Autowired val client: TestRestTemplate) {
     @Test
     fun test_loginFails_badCredentials() {
         val headers = HttpHeaders()
-        val creds = Base64.getEncoder().encodeToString("baduser:badpassword".toByteArray())
+        val creds = Base64.getEncoder().encodeToString("FakeUser:Real*Password".toByteArray())
         headers.set("Authorization", "Basic $creds")
 
-        val request = HttpEntity<Any>(null, headers)
+        val request = HttpEntity<Any>(headers)
         val entity = client.postForEntity("/api/auth/login", request, LoginResponseModel::class.java)
+
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(entity.body).isNotNull().isNot(hasToken)
     }
 
     @Test
     fun test_loginSucceeds() {
-        val headers = HttpHeaders()
         // TODO Add credentials
-        val creds = Base64.getEncoder().encodeToString("".toByteArray())
+        val creds = Base64.getEncoder().encodeToString("TestUser:password".toByteArray())
+        val headers = HttpHeaders()
         headers.set("Authorization", "Basic $creds")
 
-        val request = HttpEntity<Any>(null, headers)
+        val request = HttpEntity<Any>(headers)
         val entity = client.postForEntity("/api/auth/login", request, LoginResponseModel::class.java)
+
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(entity.body).isNotNull().has(hasToken)
     }
