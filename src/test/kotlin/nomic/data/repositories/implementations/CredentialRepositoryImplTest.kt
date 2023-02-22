@@ -1,4 +1,4 @@
-package nomic.data.repositories
+package nomic.data.repositories.implementations
 
 import nomic.data.dtos.CredentialDTO
 import nomic.data.dtos.UserDTO
