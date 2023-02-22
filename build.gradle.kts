@@ -49,6 +49,7 @@ dependencies {
     // Database libraries
     implementation("org.ktorm:ktorm-support-mysql:3.6.0")
     implementation("mysql:mysql-connector-java:8.0.25")
+	testImplementation("com.h2database:h2")
 }
 
 tasks.withType<KotlinCompile> {

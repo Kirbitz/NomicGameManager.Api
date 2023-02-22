@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("api/hello")
 class TestingSpring {
     // Path to this is BASEURL/api/hello/springboot
+
     @GetMapping("springboot")
     fun helloWorld(): String {
         return "Hello Spring!"

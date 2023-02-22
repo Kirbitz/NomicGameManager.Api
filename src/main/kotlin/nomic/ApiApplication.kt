@@ -1,6 +1,7 @@
 package nomic
 
 import nomic.domain.auth.JWTTokenConfigurationProperties
+import nomic.data.DatabaseConfigProperties
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
@@ -8,7 +9,7 @@ import org.springframework.boot.runApplication
 @SpringBootApplication
 @EnableConfigurationProperties(
     JWTTokenConfigurationProperties::class,
-    NomicConfigProperties::class
+    DatabaseConfigProperties::class
 )
 class ApiApplication
 
