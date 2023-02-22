@@ -1,4 +1,4 @@
-package nomic.api
+package nomic
 
 import nomic.main
 import org.junit.jupiter.api.Test
