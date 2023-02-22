@@ -21,7 +21,7 @@ jacoco {
 
 spotless {
     kotlin {
-        ktlint()
+        ktlint("0.46.1") // Same version that CI uses
     }
 }
 
