@@ -33,12 +33,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("mysql:mysql-connector-java:8.0.25")
 	implementation("org.ktorm:ktorm-support-mysql:3.6.0")
-	implementation("org.ktorm:ktorm-core:3.6.0")
-	implementation("org.ktorm:ktorm-jackson:3.6.0")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.+")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.mockito:mockito-core:5.1.1")
-	testImplementation("io.mockk:mockk:1.13.4")
+	testImplementation("com.h2database:h2")
 }
 
 tasks.withType<KotlinCompile> {
