@@ -27,7 +27,10 @@ class RulesAmendments(val ruleAmendmentDomain: RuleAmendmentDomain) {
             rulesAmendments = ruleAmendmentDomain.getRulesAmendments(gameId)
         } catch(exception: IllegalArgumentException) {
             val illegalArgumentProblem = NomicProblemDetails(true, "gameId was not a valid integer")
-            return ResponseEntity.badRequest().headers(responseHeader).body(illegalArgumentProblem)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(responseHeader).body(illegalArgumentProblem)
+        } catch(exception: EntityNotFoundException) {
+            val notFoundException = NomicProblemDetails(true, "No rules were found for that game")
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(responseHeader).body(notFoundException)
         } catch(exception: Exception) {
             val internalError = NomicProblemDetails(true, "Internal server error")
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(responseHeader).body(internalError)
