@@ -21,7 +21,7 @@ import java.util.Base64
  */
 @RestController
 @RequestMapping("api/auth")
-class LoginEndpoint(val userAuthenticator: UserAuthenticator) {
+class LoginEndpoint(private val userAuthenticator: UserAuthenticator) {
 
     /**
      * This endpoint is the core of the controller. It accepts the Authorization header expecting Basic Authentication and
