@@ -92,6 +92,19 @@ Returns json data about the account creation.
   }
   ```
 
+  **Code:** `404 DATA NOT FOUND`
+  
+  **Content:**
+
+  ```json
+  {
+    "error": {
+      "status": 404,
+      "message": "Data not found"
+    }
+  }
+  ```
+
   **Code:** `500 INTERNAL SERVER ERROR`
 
   **Content:**
