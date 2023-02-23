@@ -15,8 +15,8 @@ import org.ktorm.schema.varchar
  * @property description the clarifying text for the rule
  * @property mutable flag for mutable/immutable rules
  */
-interface Rule : Entity<Rule> {
-    companion object : Entity.Factory<Rule>()
+interface RuleDTO : Entity<RuleDTO> {
+    companion object : Entity.Factory<RuleDTO>()
     val ruleId: Int
     val index: Int
     val title: String
@@ -25,11 +25,11 @@ interface Rule : Entity<Rule> {
     val gameId: Int
 }
 
-object Rules : Table<Rule>("Rule") {
-    val ruleId = int("ruleId").primaryKey().bindTo {it.ruleId}
-    val index = int("index").bindTo {it.index}
-    val title = varchar("title").bindTo {it.title}
-    val description = varchar("description").bindTo {it.description}
-    val mutable = boolean("mutable").bindTo {it.mutable}
+object Rules : Table<RuleDTO>("Rule") {
+    val ruleId = int("ruleId").primaryKey().bindTo { it.ruleId }
+    val index = int("index").bindTo { it.index }
+    val title = varchar("title").bindTo { it.title }
+    val description = varchar("description").bindTo { it.description }
+    val mutable = boolean("mutable").bindTo { it.mutable }
     val gameId = int("gameId").bindTo { it.gameId }
 }

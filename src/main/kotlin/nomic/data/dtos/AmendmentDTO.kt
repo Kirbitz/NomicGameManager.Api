@@ -16,8 +16,8 @@ import org.ktorm.schema.varchar
  * @property ruleId the foreign key back to a rule
  * @property active flag for whether an amendment is still in effect
  */
-interface Amendment : Entity<Amendment> {
-    companion object : Entity.Factory<Amendment>()
+interface AmendmentDTO : Entity<AmendmentDTO> {
+    companion object : Entity.Factory<AmendmentDTO>()
     val amendId: Int
     val index: Int
     val description: String
@@ -26,7 +26,7 @@ interface Amendment : Entity<Amendment> {
     val active: Boolean
 }
 
-object Amendments : Table<Amendment>("Amendment") {
+object Amendments : Table<AmendmentDTO>("Amendment") {
     val amendId = int("amendId").primaryKey().bindTo { it.amendId }
     val index = int("index").bindTo { it.index }
     val description = varchar("description").bindTo { it.description }

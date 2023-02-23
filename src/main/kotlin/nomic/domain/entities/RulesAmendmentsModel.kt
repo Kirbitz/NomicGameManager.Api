@@ -1,4 +1,4 @@
-package models
+package nomic.domain.entities
 
 data class RulesAmendmentsModel(
     val ruleId: Int? = null,
