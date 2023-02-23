@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.util.Base64
 
 /**
  * This controller listens on `api/auth/login` for users to authenticate via HTTP Basic authentication and receive a JWT Token. Users
@@ -33,14 +32,11 @@ class LoginEndpoint(private val userAuthenticator: UserAuthenticator) {
     @PostMapping("login")
     fun loginRequest(
         @RequestHeader(HttpHeaders.AUTHORIZATION)
-        authorization: String
+        authorization: BasicAuthenticationHeader
     ): ResponseEntity<LoginResponseModel> {
-        val credentialBytes = Base64.getDecoder().decode(authorization.substring("Basic ".length))
-        val credentials = String(credentialBytes).split(':')
-
         val userAuthentication = userAuthenticator.authenticateUserWithCredentials(
-            LoginName(credentials[0]),
-            credentials[1]
+            LoginName(authorization.username),
+            authorization.password
         )
 
         val responseModel = LoginResponseModel(userAuthentication.isSuccess, userAuthentication.token)
