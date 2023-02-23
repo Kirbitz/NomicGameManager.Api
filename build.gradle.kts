@@ -33,6 +33,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("mysql:mysql-connector-java:8.0.25")
 	implementation("org.ktorm:ktorm-support-mysql:3.6.0")
+	implementation("org.ktorm:ktorm-core:3.6.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("com.h2database:h2")
 }

@@ -1,16 +1,14 @@
-package game.manager.nomic.api
+package nomic.api
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import game.manager.nomic.api.config.DatabaseConfig
-import game.manager.nomic.api.config.NomicConfigProperties
+import nomic.data.DatabaseProvider
+import nomic.data.DatabaseConfigProperties
 import models.AmendmentModel
-import models.NomicProblemDetails
 import models.RulesAmendmentsModel
-import models.entities.Amendments
-import models.entities.Rules
+import nomic.data.dtos.Amendments
+import nomic.data.dtos.Rules
 import org.ktorm.database.Database
 import org.ktorm.dsl.*
-import org.ktorm.jackson.KtormModule
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -20,15 +18,13 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("api")
-class RulesAmendments(nomicConfig: NomicConfigProperties) {
+class RulesAmendments(val nomicConfig: DatabaseConfigProperties) {
 
-    private val databaseConfig: DatabaseConfig = DatabaseConfig(nomicConfig)
-    private val objectMapper: ObjectMapper = ObjectMapper()
+    private val databaseConfig: DatabaseProvider = DatabaseProvider()
 
     // Path to endpoint is api/rules_amendments/ExistingGameId
     @GetMapping("rules_amendments/{gameid}")
     fun getRulesAmendments(@PathVariable(value="gameid") gameId : String): ResponseEntity<Any> {
-        objectMapper.registerModule(KtormModule())
         val responseHeader = HttpHeaders()
         responseHeader.set("Content-Type", "application/json")
         responseHeader.set("charset", "UTF-8")
@@ -36,7 +32,7 @@ class RulesAmendments(nomicConfig: NomicConfigProperties) {
         val rules: MutableList<RulesAmendmentsModel> = mutableListOf()
 
         try {
-            val database: Database = databaseConfig.connectDB()
+            val database: Database = databaseConfig.getDatabase(nomicConfig)
 
             val gameIdInt: Int = gameId.toIntOrNull() ?: throw IllegalArgumentException("Please enter a valid GameId!")
 
@@ -72,13 +68,13 @@ class RulesAmendments(nomicConfig: NomicConfigProperties) {
 
         } catch(exception: IllegalArgumentException) {
             val illegalArgumentProblem = NomicProblemDetails(true, "gameId was not a valid integer")
-            return ResponseEntity.badRequest().headers(responseHeader).body(objectMapper.writeValueAsString(illegalArgumentProblem))
+            return ResponseEntity.badRequest().headers(responseHeader).body(illegalArgumentProblem)
         } catch(exception: Exception) {
             val internalError = NomicProblemDetails(true, "Internal server error")
             return ResponseEntity.internalServerError().headers(responseHeader).body(internalError)
         }
 
         // Return the response object
-        return ResponseEntity.ok().headers(responseHeader).body(objectMapper.writeValueAsString(rules))
+        return ResponseEntity.ok().headers(responseHeader).body(rules)
     }
 }
