@@ -9,6 +9,13 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      # Sets up JDK for JVM
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
       # Updates wrapper permissions
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
