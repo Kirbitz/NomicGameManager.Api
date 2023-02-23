@@ -9,6 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      # Updates wrapper permissions
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
+
       # Generates KDocs through Dokka
       - name: Generate KDocs
         run: ./gradlew Dokkahtml
