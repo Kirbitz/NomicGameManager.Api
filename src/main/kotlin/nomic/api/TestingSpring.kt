@@ -1,4 +1,4 @@
-package game.manager.nomic.api
+package nomic.api
 
 import game.manager.nomic.api.config.NomicConfigProperties
 import org.springframework.web.bind.annotation.GetMapping
@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("api/hello")
 class TestingSpring {
     // Path to this is BASEURL/api/hello/springboot
-    private val nomicConfig: NomicConfigProperties
-
-    constructor(nomicConfig: NomicConfigProperties) {
-        this.nomicConfig = nomicConfig
-    }
 
     @GetMapping("springboot")
     fun helloWorld(): String {
