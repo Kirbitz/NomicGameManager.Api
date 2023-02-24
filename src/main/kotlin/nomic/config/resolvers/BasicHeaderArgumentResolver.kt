@@ -9,6 +9,16 @@ import org.springframework.web.context.request.NativeWebRequest
 import org.springframework.web.method.support.HandlerMethodArgumentResolver
 import org.springframework.web.method.support.ModelAndViewContainer
 
+/**
+ * This argument resolver resolves a [BasicAuthenticationHeader] parameters by loading
+ * the current [org.springframework.security.core.context.SecurityContext][SecurityContext] and parsing the authentication token into a
+ * [BasicAuthenticationHeader]
+ *
+ * @see[org.springframework.web.method.support.HandlerMethodArgumentResolver]
+ * @see[BasicAuthenticationHeader]
+ * @see[org.springframework.security.core.context.SecurityContext]
+ * @see[nomic.config.security.filters.BasicAuthenticationSecurityFilter]
+ */
 class BasicHeaderArgumentResolver : HandlerMethodArgumentResolver {
     override fun supportsParameter(methodParameter: MethodParameter): Boolean {
         return methodParameter.parameterType.equals(BasicAuthenticationHeader::class.java)
