@@ -8,6 +8,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 class ArgumentResolverConfig : WebMvcConfigurer {
     override fun addArgumentResolvers(resolvers: MutableList<HandlerMethodArgumentResolver>) {
         super.addArgumentResolvers(resolvers)
-        resolvers.add(HeaderVersionArgumentResolver())
+        resolvers.add(BasicHeaderArgumentResolver())
     }
 }
