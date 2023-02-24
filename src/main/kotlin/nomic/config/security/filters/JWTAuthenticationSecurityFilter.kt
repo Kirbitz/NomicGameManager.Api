@@ -21,7 +21,7 @@ import java.util.*
  * @see[org.springframework.web.filter.GenericFilterBean]
  * @see[jakarta.servlet.FilterChain]
  */
-class AuthenticationSecurityFilter(
+class JWTAuthenticationSecurityFilter(
     private val tokenRegistry: TokenRegistry
 ) : GenericFilterBean() {
 
