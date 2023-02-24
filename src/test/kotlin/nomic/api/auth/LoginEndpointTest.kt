@@ -66,7 +66,6 @@ class LoginEndpointTest(@Autowired val client: TestRestTemplate) {
 
     @Test
     fun test_loginSucceeds() {
-        // TODO Add credentials
         val creds = Base64.getEncoder().encodeToString("TestUser:password".toByteArray())
         val headers = HttpHeaders()
         headers.set("Authorization", "Basic $creds")
