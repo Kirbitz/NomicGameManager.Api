@@ -13,6 +13,12 @@ import org.springframework.http.HttpStatus
 )
 class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) {
     @Test
+    fun `Found Rule And Amendment Data`() {
+        val entity = client.getForEntity<String>("/api/rules_amendments/1")
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
+        Assertions.assertThat(entity.body).contains("MyRule1").contains("MyAmendment1")
+    }
+    @Test
     fun `Bad Game ID`() {
         val entity = client.getForEntity<String>("/api/rules_amendments/apple")
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
@@ -20,7 +26,24 @@ class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) {
     }
 
     @Test
-    fun `Internal Server Error`() {
-
+    fun `Game Not Found`() {
+        val entity = client.getForEntity<String>("/api/rules_amendments/9999")
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.NOT_FOUND)
+        Assertions.assertThat(entity.body).contains("No rules were found for that gameId")
     }
+//
+//    @Test
+//    fun `Internal Server Error`() {
+//        val ruleAmendmentRepositoryMock = mockk<RuleAmendmentRepository>(relaxed = true)
+//        every { ruleAmendmentRepositoryMock.getRulesAmendments(anyInt()) }.throws(Exception("Internal Server Error"))
+//
+//        val ruleAmendmentDomainSpyk = spyk(RuleAmendmentDomain(ruleAmendmentRepositoryMock))
+//        every { ruleAmendmentDomainSpyk.getRulesAmendments(anyString()) } answers { callOriginal() }
+//
+//        val entity = client.getForEntity<String>("/api/rules_amendments/9999")
+//        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR)
+//        Assertions.assertThat(entity.body).contains("No rules were found for that gameId")
+//
+//        verify (exactly = 1) { ruleAmendmentRepositoryMock.getRulesAmendments(9999) }
+//    }
 }
