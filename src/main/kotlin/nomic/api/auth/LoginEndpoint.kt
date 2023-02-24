@@ -1,12 +1,9 @@
 package nomic.api.auth
 
 import nomic.domain.auth.UserAuthenticator
-import nomic.domain.entities.LoginName
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -30,12 +27,9 @@ class LoginEndpoint(private val userAuthenticator: UserAuthenticator) {
      * @return A Spring entity representing the response that gets serialized into JSON
      */
     @PostMapping("login")
-    fun loginRequest(
-        @RequestHeader(HttpHeaders.AUTHORIZATION)
-        authorization: BasicAuthenticationHeader
-    ): ResponseEntity<LoginResponseModel> {
+    fun loginRequest(authorization: BasicAuthenticationHeader): ResponseEntity<LoginResponseModel> {
         val userAuthentication = userAuthenticator.authenticateUserWithCredentials(
-            LoginName(authorization.username),
+            authorization.username,
             authorization.password
         )
 
