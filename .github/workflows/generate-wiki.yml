@@ -26,9 +26,9 @@ jobs:
         run: ./gradlew dokkaGfm
 
       # Collects and Posts Generated Docs To GitHub Wiki
-      - - name: Push Wiki Changes
-          uses: Andrew-Chen-Wang/github-wiki-action@v3
-          env:
-            # Make sure you have that / at the end. We use rsync
-            # WIKI_DIR's default is wiki/
-            WIKI_DIR: build/dokka/gfm/
+      - name: Push Wiki Changes
+        uses: Andrew-Chen-Wang/github-wiki-action@v3
+        env:
+          # Make sure you have that / at the end. We use rsync
+          # WIKI_DIR's default is wiki/
+          WIKI_DIR: build/dokka/gfm/
