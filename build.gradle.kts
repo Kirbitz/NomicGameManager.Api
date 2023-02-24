@@ -46,6 +46,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("org.mockito:mockito-junit-jupiter:5.1.1")
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
+    testImplementation("org.apache.httpcomponents.client5:httpclient5:5.2.1")
 
     // Authentication libraries
     implementation("com.auth0:java-jwt:4.2.2")
