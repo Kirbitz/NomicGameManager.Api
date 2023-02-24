@@ -1,6 +1,6 @@
 # Get Rules and Amendments Data
 
-Returns json data about the account creation.
+Returns json data of rules and amendments connected to a specific game.
 
 - **URL:**
 
