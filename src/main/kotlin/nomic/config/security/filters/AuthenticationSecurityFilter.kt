@@ -1,12 +1,14 @@
-package nomic.domain.auth
+package nomic.config.security.filters
 
 import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletRequest
 import jakarta.servlet.ServletResponse
 import jakarta.servlet.http.HttpServletRequest
+import nomic.domain.auth.TokenRegistry
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.GenericFilterBean
+import java.util.*
 
 /**
  * This security filter checks incoming HTTP requests for the authorization header, parses it, and validates the JWT Token if present. Upon validation,

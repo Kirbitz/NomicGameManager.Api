@@ -1,5 +1,8 @@
-package nomic.domain.auth
+package nomic.config.security
 
+import nomic.config.security.filters.AuthenticationSecurityFilter
+import nomic.config.security.filters.BasicAuthenticationSecurityFilter
+import nomic.domain.auth.TokenRegistry
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -19,16 +22,18 @@ class RoutingSecurityConfig {
 
     @Bean
     fun filterChain(http: HttpSecurity, tokenRegistry: TokenRegistry): SecurityFilterChain {
-        val filter = AuthenticationSecurityFilter(tokenRegistry)
-        http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter::class.java)
+        val jwtFilter = AuthenticationSecurityFilter(tokenRegistry)
+        val basicFilter = BasicAuthenticationSecurityFilter()
+
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)
+        http.addFilterBefore(basicFilter, AuthenticationSecurityFilter::class.java)
 
         http.httpBasic().disable()
             .csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeHttpRequests {
-                it.requestMatchers("/api/auth/**").permitAll()
-                    .anyRequest().authenticated()
+                it.anyRequest().authenticated()
             }
         return http.build()
     }
