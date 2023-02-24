@@ -3,9 +3,14 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "3.0.2"
 	id("io.spring.dependency-management") version "1.1.0"
+	id("org.jetbrains.dokka") version "1.7.20"
 	kotlin("jvm") version "1.7.22"
 	kotlin("plugin.spring") version "1.7.22"
 	jacoco
+}
+
+subprojects {
+	apply(plugin = "org.jetbrains.dokka")
 }
 
 jacoco {
@@ -29,6 +34,7 @@ dependencies {
 	implementation("mysql:mysql-connector-java:8.0.25")
 	implementation("org.ktorm:ktorm-support-mysql:3.6.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("com.h2database:h2")
 }
 
 tasks.withType<KotlinCompile> {
