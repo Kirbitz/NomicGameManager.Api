@@ -34,7 +34,12 @@ class LoginEndpoint(private val userAuthenticator: UserAuthenticator) {
         )
 
         val responseModel = LoginResponseModel(userAuthentication.isSuccess, userAuthentication.token)
-        return ResponseEntity(responseModel, HttpStatus.OK)
+
+        if (userAuthentication.isSuccess) {
+            return ResponseEntity(responseModel, HttpStatus.OK)
+        } else {
+            return ResponseEntity(responseModel, HttpStatus.UNAUTHORIZED)
+        }
     }
 }
 

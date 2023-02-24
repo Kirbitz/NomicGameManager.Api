@@ -60,7 +60,7 @@ class LoginEndpointTest(@Autowired val client: TestRestTemplate) {
         val request = HttpEntity<Any>(headers)
         val entity = client.postForEntity("/api/auth/login", request, LoginResponseModel::class.java)
 
-        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.UNAUTHORIZED)
         Assertions.assertThat(entity.body).isNotNull().isNot(hasToken)
     }
 
