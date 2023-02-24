@@ -2,7 +2,6 @@ package nomic.data.repositories.rulesamendments
 
 import org.ktorm.dsl.Query
 
-
 /**
  * Interface returns the obtained query when prompting the DB for Rules and Amendments
  *

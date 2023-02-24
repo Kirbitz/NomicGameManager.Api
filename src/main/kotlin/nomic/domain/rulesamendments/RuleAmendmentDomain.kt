@@ -21,9 +21,8 @@ import org.springframework.stereotype.Service
 @Service
 class RuleAmendmentDomain(
     private val ruleAmendmentRepository: RuleAmendmentRepository
-): IRuleAmendmentDomain {
-    override fun getRulesAmendments(gameId: String) : MutableList<RulesAmendmentsModel> {
-
+) : IRuleAmendmentDomain {
+    override fun getRulesAmendments(gameId: String): MutableList<RulesAmendmentsModel> {
         val gameIdInt: Int = gameId.toIntOrNull() ?: throw IllegalArgumentException("Please enter a valid GameId!")
 
         val result: Query = ruleAmendmentRepository.getRulesAmendments(gameIdInt)

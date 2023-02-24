@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 class RulesAmendments(val ruleAmendmentDomain: RuleAmendmentDomain) {
     // Path to endpoint is api/rules_amendments/ExistingGameId
     @GetMapping("rules_amendments/{gameid}")
-    fun getRulesAmendments(@PathVariable(value="gameid") gameId : String): ResponseEntity<Any> {
+    fun getRulesAmendments(@PathVariable(value = "gameid") gameId: String): ResponseEntity<Any> {
         val responseHeader = HttpHeaders()
         responseHeader.set("Content-Type", "application/json")
         responseHeader.set("charset", "UTF-8")
@@ -25,13 +25,13 @@ class RulesAmendments(val ruleAmendmentDomain: RuleAmendmentDomain) {
 
         try {
             rulesAmendments = ruleAmendmentDomain.getRulesAmendments(gameId)
-        } catch(exception: IllegalArgumentException) {
+        } catch (exception: IllegalArgumentException) {
             val illegalArgumentProblem = NomicProblemDetails(true, "gameId was not a valid integer")
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(responseHeader).body(illegalArgumentProblem)
-        } catch(exception: EntityNotFoundException) {
+        } catch (exception: EntityNotFoundException) {
             val notFoundException = NomicProblemDetails(true, "No rules were found for that gameId")
             return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(responseHeader).body(notFoundException)
-        } catch(exception: Exception) {
+        } catch (exception: Exception) {
             val internalError = NomicProblemDetails(true, "Internal server error")
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(responseHeader).body(internalError)
         }

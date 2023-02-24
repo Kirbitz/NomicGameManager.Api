@@ -18,6 +18,7 @@ class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) {
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(entity.body).contains("MyRule1").contains("MyAmendment1")
     }
+
     @Test
     fun `Bad Game ID`() {
         val entity = client.getForEntity<String>("/api/rules_amendments/apple")
