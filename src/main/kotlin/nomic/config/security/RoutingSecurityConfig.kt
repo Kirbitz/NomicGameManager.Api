@@ -1,7 +1,7 @@
 package nomic.config.security
 
-import nomic.config.security.filters.JWTAuthenticationSecurityFilter
 import nomic.config.security.filters.BasicAuthenticationSecurityFilter
+import nomic.config.security.filters.JWTAuthenticationSecurityFilter
 import nomic.domain.auth.TokenRegistry
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
