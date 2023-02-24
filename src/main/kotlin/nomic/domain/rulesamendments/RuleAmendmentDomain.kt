@@ -32,7 +32,6 @@ class RuleAmendmentDomain(
         var currId: Int? = -1
         result.forEach { row ->
             if (currId != row[Rules.ruleId]) {
-                // If we get here, the row contains a new rule + amendment
                 currId = row[Rules.ruleId]
                 rules += RulesAmendmentsModel(
                     row[Rules.ruleId],

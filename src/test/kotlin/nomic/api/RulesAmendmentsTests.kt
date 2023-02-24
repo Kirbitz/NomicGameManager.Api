@@ -20,16 +20,16 @@ class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) {
     }
 
     @Test
-    fun `Bad Game ID`() {
-        val entity = client.getForEntity<String>("/api/rules_amendments/apple")
-        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
-        Assertions.assertThat(entity.body).contains("gameId was not a valid integer")
+    fun `Found Game With No Rules and Amendments`() {
+        val entity = client.getForEntity<String>("/api/rules_amendments/2")
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
+        Assertions.assertThat(entity.body).contains("[]").doesNotContain("amendId").doesNotContain("ruleId")
     }
 
     @Test
-    fun `Game Not Found`() {
-        val entity = client.getForEntity<String>("/api/rules_amendments/9999")
-        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.NOT_FOUND)
-        Assertions.assertThat(entity.body).contains("No rules were found for that gameId")
+    fun `Bad Game ID`() {
+        val entity = client.getForEntity<String>("/api/rules_amendments/apple")
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
+        Assertions.assertThat(entity.body).contains("Please enter a valid GameId!")
     }
 }

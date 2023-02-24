@@ -26,6 +26,18 @@ interface AmendmentDTO : Entity<AmendmentDTO> {
     val active: Boolean
 }
 
+
+/**
+ * This object represents the credentials table in the database, employing KTorm's framework.
+ *
+ * @see[org.ktorm.schema.Table]
+ * @property amendId The primary key for the [Amendments] table
+ * @property index The position of an amendment attached to a rule
+ * @property description The specific details of an amendment
+ * @property title What the amendment is called
+ * @property ruleId The foreign key to the [Rules] table
+ * @property active flag to determine amendment visibility to the user
+ */
 object Amendments : Table<AmendmentDTO>("Amendment") {
     val amendId = int("amendId").primaryKey().bindTo { it.amendId }
     val index = int("index").bindTo { it.index }

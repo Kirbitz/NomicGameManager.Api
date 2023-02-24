@@ -3,40 +3,49 @@ package nomic.api
 import nomic.data.EntityNotFoundException
 import nomic.domain.entities.RulesAmendmentsModel
 import nomic.domain.rulesamendments.RuleAmendmentDomain
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.RequestMapping
+
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/rules_amendments")
 class RulesAmendments(val ruleAmendmentDomain: RuleAmendmentDomain) {
     // Path to endpoint is api/rules_amendments/ExistingGameId
-    @GetMapping("rules_amendments/{gameid}")
+    @GetMapping("{gameid}", produces = ["application/json;charset=UTF-8"])
     fun getRulesAmendments(@PathVariable(value = "gameid") gameId: String): ResponseEntity<Any> {
-        val responseHeader = HttpHeaders()
-        responseHeader.set("Content-Type", "application/json")
-        responseHeader.set("charset", "UTF-8")
-
-        val rulesAmendments: MutableList<RulesAmendmentsModel>
-
-        try {
-            rulesAmendments = ruleAmendmentDomain.getRulesAmendments(gameId)
-        } catch (exception: IllegalArgumentException) {
-            val illegalArgumentProblem = NomicProblemDetails(true, "gameId was not a valid integer")
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(responseHeader).body(illegalArgumentProblem)
-        } catch (exception: EntityNotFoundException) {
-            val notFoundException = NomicProblemDetails(true, "No rules were found for that gameId")
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(responseHeader).body(notFoundException)
-        } catch (exception: Exception) {
-            val internalError = NomicProblemDetails(true, "Internal server error")
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(responseHeader).body(internalError)
-        }
+        val rulesAmendments: MutableList<RulesAmendmentsModel> =  ruleAmendmentDomain.getRulesAmendments(gameId)
 
         // Return the response object
-        return ResponseEntity.status(HttpStatus.OK).headers(responseHeader).body(rulesAmendments)
+        return ResponseEntity(rulesAmendments, HttpStatus.OK)
+    }
+
+    @ExceptionHandler(IllegalArgumentException::class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun handleIllegalArgumentException(
+        exception: IllegalArgumentException
+    ): ResponseEntity<Any> {
+        return ResponseEntity(ExceptionResponseFormat(true, exception.message), HttpStatus.BAD_REQUEST)
+    }
+
+    @ExceptionHandler(EntityNotFoundException::class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun handleEntityNotFoundException(
+        exception: EntityNotFoundException
+    ): ResponseEntity<Any> {
+        return ResponseEntity(ExceptionResponseFormat(true, exception.message), HttpStatus.NOT_FOUND)
+    }
+
+    @ExceptionHandler(Exception::class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun handleAllUncaughtException(
+        exception: IllegalArgumentException
+    ): ResponseEntity<Any> {
+        return ResponseEntity(ExceptionResponseFormat(true, "Internal server error"), HttpStatus.INTERNAL_SERVER_ERROR)
     }
 }

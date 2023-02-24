@@ -42,8 +42,6 @@ dependencies {
     implementation("org.ktorm:ktorm-support-mysql:3.6.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("com.h2database:h2")
-    testImplementation("io.mockk:mockk:1.13.4")
-    testImplementation("org.mockito:mockito-core:5.1.1")
 }
 
 tasks.withType<KotlinCompile> {
