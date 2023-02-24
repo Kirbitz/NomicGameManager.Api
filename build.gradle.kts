@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URL
 
 plugins {
+    id("com.diffplug.spotless") version "6.15.0"
     id("org.springframework.boot") version "3.0.2"
     id("io.spring.dependency-management") version "1.1.0"
     id("org.jetbrains.dokka") version "1.7.20"
@@ -18,6 +19,12 @@ subprojects {
 jacoco {
     toolVersion = "0.8.8"
     reportsDirectory.set(layout.buildDirectory.dir("$buildDir/jacoco"))
+}
+
+spotless {
+    kotlin {
+        ktlint("0.46.1") // Same version that CI uses
+    }
 }
 
 group = "game.manager.nomic"
@@ -94,3 +101,23 @@ tasks.withType<DokkaTask>().configureEach {
         }
     }
 }
+
+// This disables the extraneous jar of just this application's classes with none of the dependencies
+// necessary to run. The bootJar task is still enabled, and that task produces the jar with all the
+// dependencies bundled, creating a one file executable essentially.
+tasks.jar {
+	enabled = false
+}
+
+// This task dynamically adds the dependency to enable hot reload to the bootRun task.
+// It will automatically reboot the server if the built jar changes. If used alongside
+// build --continuous, this implements a full hot reload feature that could be useful
+// for many scenarios. The dependency is not always added to ensure that when we want
+// the server to run normally, it does not automatically reboot for whatever reason.
+task("addHotReload") {
+	doLast {
+		project.dependencies.add("implementation",
+			"org.springframework.boot:spring-boot-devtools")
+	}
+}
+

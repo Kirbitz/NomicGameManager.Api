@@ -1,0 +1,44 @@
+name: Generate KDocs Wiki
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      # Sets up JDK for JVM
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      # Updates wrapper permissions
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
+
+      # Generates KDocs through Dokka
+      - name: Generate KDocs
+        run: ./gradlew Dokkahtml
+
+      # Collects and Posts Generated Docs To GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          publish_dir: ./build/dokka/html
+          
+      # Collects and Posts Endpoint Documentation To GitHub Wiki
+      - name: Push Wiki Changes
+        uses: Andrew-Chen-Wang/github-wiki-action@v3
+        env:
+          WIKI_DIR: documentation/
+          GH_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          GH_MAIL: ${{ secrets.EMAIL }}
+          GH_NAME: ${{ github.repository_owner }}
