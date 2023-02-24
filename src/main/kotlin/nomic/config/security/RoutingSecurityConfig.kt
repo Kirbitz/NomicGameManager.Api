@@ -11,8 +11,10 @@ import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 /**
- * This Spring [Configuration] configures the filter chain to add in [JWTAuthenticationSecurityFilter] and configures Spring Security to require
- * authentication to all endpoints other than the /api/auth endpoints.
+ * This Spring [Configuration] configures the filter chain to add in [JWTAuthenticationSecurityFilter] and
+ * [BasicAuthenticationSecurityFilter] and configures Spring Security to require authentication to all endpoints,
+ * with the effect that legitimate JWT authentication is performed on all endpoints other than the auth endpoints,
+ * while the `api/auth` endpoints require a basic auth header.
  *
  * @see[org.springframework.context.annotation.Configuration]
  * @see[org.springframework.security.web.SecurityFilterChain]
