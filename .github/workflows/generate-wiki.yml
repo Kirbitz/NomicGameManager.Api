@@ -2,8 +2,7 @@ name: Generate KDocs Wiki
 
 on:
   push:
-    branches:
-      [ "master" ]
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -26,12 +25,11 @@ jobs:
 
       # Generates KDocs through Dokka
       - name: Generate KDocs
-        run: ./gradlew dokkaGfm
+        run: ./gradlew Dokkahtml
 
-      # Collects and Posts Generated Docs To GitHub Wiki
-      - name: Upload Documentation to Wiki
-        uses: SwiftDocOrg/github-wiki-publish-action@v1
+      # Collects and Posts Generated Docs To GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: "build/dokka/gfm/"
-        env:
-          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          publish_dir: ./build/dokka/html
