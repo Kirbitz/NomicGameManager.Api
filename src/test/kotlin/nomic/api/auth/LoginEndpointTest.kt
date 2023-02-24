@@ -22,7 +22,8 @@ class LoginEndpointTest(@Autowired val client: TestRestTemplate) {
 
     @Test
     fun test_loginFails_noCredentials() {
-        val entity = client.getForEntity<LoginResponseModel>("/api/auth/login")
+        val request = HttpEntity<Any>(HttpHeaders())
+        val entity = client.postForEntity("/api/auth/login", request, String::class.java)
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.FORBIDDEN)
         Assertions.assertThat(entity.body).isNull()
     }
