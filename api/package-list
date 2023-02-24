@@ -1,0 +1,96 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:nomic.api////PointingToDeclaration/api/nomic.api/index.html
+$dokka.location:nomic.api/NomicProblemDetails///PointingToDeclaration/api/nomic.api/-nomic-problem-details/index.html
+$dokka.location:nomic.api/NomicProblemDetails/NomicProblemDetails/#kotlin.Boolean#kotlin.String/PointingToDeclaration/api/nomic.api/-nomic-problem-details/-nomic-problem-details.html
+$dokka.location:nomic.api/NomicProblemDetails/error/#/PointingToDeclaration/api/nomic.api/-nomic-problem-details/error.html
+$dokka.location:nomic.api/NomicProblemDetails/msg/#/PointingToDeclaration/api/nomic.api/-nomic-problem-details/msg.html
+$dokka.location:nomic.api/RulesAmendments///PointingToDeclaration/api/nomic.api/-rules-amendments/index.html
+$dokka.location:nomic.api/RulesAmendments/RulesAmendments/#nomic.domain.rulesamendments.RuleAmendmentDomain/PointingToDeclaration/api/nomic.api/-rules-amendments/-rules-amendments.html
+$dokka.location:nomic.api/RulesAmendments/getRulesAmendments/#kotlin.String/PointingToDeclaration/api/nomic.api/-rules-amendments/get-rules-amendments.html
+$dokka.location:nomic.api/RulesAmendments/ruleAmendmentDomain/#/PointingToDeclaration/api/nomic.api/-rules-amendments/rule-amendment-domain.html
+$dokka.location:nomic.api/TestingSpring///PointingToDeclaration/api/nomic.api/-testing-spring/index.html
+$dokka.location:nomic.api/TestingSpring/TestingSpring/#/PointingToDeclaration/api/nomic.api/-testing-spring/-testing-spring.html
+$dokka.location:nomic.api/TestingSpring/helloWorld/#/PointingToDeclaration/api/nomic.api/-testing-spring/hello-world.html
+$dokka.location:nomic.data.dtos////PointingToDeclaration/api/nomic.data.dtos/index.html
+$dokka.location:nomic.data.dtos/AmendmentDTO.Companion///PointingToDeclaration/api/nomic.data.dtos/-amendment-d-t-o/-companion/index.html
+$dokka.location:nomic.data.dtos/AmendmentDTO///PointingToDeclaration/api/nomic.data.dtos/-amendment-d-t-o/index.html
+$dokka.location:nomic.data.dtos/AmendmentDTO/active/#/PointingToDeclaration/api/nomic.data.dtos/-amendment-d-t-o/active.html
+$dokka.location:nomic.data.dtos/AmendmentDTO/amendId/#/PointingToDeclaration/api/nomic.data.dtos/-amendment-d-t-o/amend-id.html
+$dokka.location:nomic.data.dtos/AmendmentDTO/description/#/PointingToDeclaration/api/nomic.data.dtos/-amendment-d-t-o/description.html
+$dokka.location:nomic.data.dtos/AmendmentDTO/index/#/PointingToDeclaration/api/nomic.data.dtos/-amendment-d-t-o/--index--.html
+$dokka.location:nomic.data.dtos/AmendmentDTO/ruleId/#/PointingToDeclaration/api/nomic.data.dtos/-amendment-d-t-o/rule-id.html
+$dokka.location:nomic.data.dtos/AmendmentDTO/title/#/PointingToDeclaration/api/nomic.data.dtos/-amendment-d-t-o/title.html
+$dokka.location:nomic.data.dtos/Amendments///PointingToDeclaration/api/nomic.data.dtos/-amendments/index.html
+$dokka.location:nomic.data.dtos/Amendments/active/#/PointingToDeclaration/api/nomic.data.dtos/-amendments/active.html
+$dokka.location:nomic.data.dtos/Amendments/amendId/#/PointingToDeclaration/api/nomic.data.dtos/-amendments/amend-id.html
+$dokka.location:nomic.data.dtos/Amendments/description/#/PointingToDeclaration/api/nomic.data.dtos/-amendments/description.html
+$dokka.location:nomic.data.dtos/Amendments/index/#/PointingToDeclaration/api/nomic.data.dtos/-amendments/--index--.html
+$dokka.location:nomic.data.dtos/Amendments/ruleId/#/PointingToDeclaration/api/nomic.data.dtos/-amendments/rule-id.html
+$dokka.location:nomic.data.dtos/Amendments/title/#/PointingToDeclaration/api/nomic.data.dtos/-amendments/title.html
+$dokka.location:nomic.data.dtos/RuleDTO.Companion///PointingToDeclaration/api/nomic.data.dtos/-rule-d-t-o/-companion/index.html
+$dokka.location:nomic.data.dtos/RuleDTO///PointingToDeclaration/api/nomic.data.dtos/-rule-d-t-o/index.html
+$dokka.location:nomic.data.dtos/RuleDTO/description/#/PointingToDeclaration/api/nomic.data.dtos/-rule-d-t-o/description.html
+$dokka.location:nomic.data.dtos/RuleDTO/gameId/#/PointingToDeclaration/api/nomic.data.dtos/-rule-d-t-o/game-id.html
+$dokka.location:nomic.data.dtos/RuleDTO/index/#/PointingToDeclaration/api/nomic.data.dtos/-rule-d-t-o/--index--.html
+$dokka.location:nomic.data.dtos/RuleDTO/mutable/#/PointingToDeclaration/api/nomic.data.dtos/-rule-d-t-o/mutable.html
+$dokka.location:nomic.data.dtos/RuleDTO/ruleId/#/PointingToDeclaration/api/nomic.data.dtos/-rule-d-t-o/rule-id.html
+$dokka.location:nomic.data.dtos/RuleDTO/title/#/PointingToDeclaration/api/nomic.data.dtos/-rule-d-t-o/title.html
+$dokka.location:nomic.data.dtos/Rules///PointingToDeclaration/api/nomic.data.dtos/-rules/index.html
+$dokka.location:nomic.data.dtos/Rules/description/#/PointingToDeclaration/api/nomic.data.dtos/-rules/description.html
+$dokka.location:nomic.data.dtos/Rules/gameId/#/PointingToDeclaration/api/nomic.data.dtos/-rules/game-id.html
+$dokka.location:nomic.data.dtos/Rules/index/#/PointingToDeclaration/api/nomic.data.dtos/-rules/--index--.html
+$dokka.location:nomic.data.dtos/Rules/mutable/#/PointingToDeclaration/api/nomic.data.dtos/-rules/mutable.html
+$dokka.location:nomic.data.dtos/Rules/ruleId/#/PointingToDeclaration/api/nomic.data.dtos/-rules/rule-id.html
+$dokka.location:nomic.data.dtos/Rules/title/#/PointingToDeclaration/api/nomic.data.dtos/-rules/title.html
+$dokka.location:nomic.data.repositories.rulesamendments////PointingToDeclaration/api/nomic.data.repositories.rulesamendments/index.html
+$dokka.location:nomic.data.repositories.rulesamendments/IRuleAmendmentRepository///PointingToDeclaration/api/nomic.data.repositories.rulesamendments/-i-rule-amendment-repository/index.html
+$dokka.location:nomic.data.repositories.rulesamendments/IRuleAmendmentRepository/getRulesAmendments/#kotlin.Int/PointingToDeclaration/api/nomic.data.repositories.rulesamendments/-i-rule-amendment-repository/get-rules-amendments.html
+$dokka.location:nomic.data.repositories.rulesamendments/RuleAmendmentRepository///PointingToDeclaration/api/nomic.data.repositories.rulesamendments/-rule-amendment-repository/index.html
+$dokka.location:nomic.data.repositories.rulesamendments/RuleAmendmentRepository/RuleAmendmentRepository/#org.ktorm.database.Database/PointingToDeclaration/api/nomic.data.repositories.rulesamendments/-rule-amendment-repository/-rule-amendment-repository.html
+$dokka.location:nomic.data.repositories.rulesamendments/RuleAmendmentRepository/getRulesAmendments/#kotlin.Int/PointingToDeclaration/api/nomic.data.repositories.rulesamendments/-rule-amendment-repository/get-rules-amendments.html
+$dokka.location:nomic.data////PointingToDeclaration/api/nomic.data/index.html
+$dokka.location:nomic.data/DatabaseConfigProperties///PointingToDeclaration/api/nomic.data/-database-config-properties/index.html
+$dokka.location:nomic.data/DatabaseConfigProperties/DatabaseConfigProperties/#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/api/nomic.data/-database-config-properties/-database-config-properties.html
+$dokka.location:nomic.data/DatabaseConfigProperties/connectionString/#/PointingToDeclaration/api/nomic.data/-database-config-properties/connection-string.html
+$dokka.location:nomic.data/DatabaseConfigProperties/password/#/PointingToDeclaration/api/nomic.data/-database-config-properties/password.html
+$dokka.location:nomic.data/DatabaseConfigProperties/username/#/PointingToDeclaration/api/nomic.data/-database-config-properties/username.html
+$dokka.location:nomic.data/DatabaseProvider///PointingToDeclaration/api/nomic.data/-database-provider/index.html
+$dokka.location:nomic.data/DatabaseProvider/DatabaseProvider/#/PointingToDeclaration/api/nomic.data/-database-provider/-database-provider.html
+$dokka.location:nomic.data/DatabaseProvider/getDatabase/#nomic.data.DatabaseConfigProperties/PointingToDeclaration/api/nomic.data/-database-provider/get-database.html
+$dokka.location:nomic.data/EntityNotFoundException///PointingToDeclaration/api/nomic.data/-entity-not-found-exception/index.html
+$dokka.location:nomic.data/EntityNotFoundException/EntityNotFoundException/#kotlin.Int/PointingToDeclaration/api/nomic.data/-entity-not-found-exception/-entity-not-found-exception.html
+$dokka.location:nomic.domain.entities////PointingToDeclaration/api/nomic.domain.entities/index.html
+$dokka.location:nomic.domain.entities/AmendmentModel///PointingToDeclaration/api/nomic.domain.entities/-amendment-model/index.html
+$dokka.location:nomic.domain.entities/AmendmentModel/AmendmentModel/#kotlin.Int?#kotlin.Int?#kotlin.String?#kotlin.String?#kotlin.Boolean?/PointingToDeclaration/api/nomic.domain.entities/-amendment-model/-amendment-model.html
+$dokka.location:nomic.domain.entities/AmendmentModel/active/#/PointingToDeclaration/api/nomic.domain.entities/-amendment-model/active.html
+$dokka.location:nomic.domain.entities/AmendmentModel/amendId/#/PointingToDeclaration/api/nomic.domain.entities/-amendment-model/amend-id.html
+$dokka.location:nomic.domain.entities/AmendmentModel/description/#/PointingToDeclaration/api/nomic.domain.entities/-amendment-model/description.html
+$dokka.location:nomic.domain.entities/AmendmentModel/index/#/PointingToDeclaration/api/nomic.domain.entities/-amendment-model/--index--.html
+$dokka.location:nomic.domain.entities/AmendmentModel/title/#/PointingToDeclaration/api/nomic.domain.entities/-amendment-model/title.html
+$dokka.location:nomic.domain.entities/RulesAmendmentsModel///PointingToDeclaration/api/nomic.domain.entities/-rules-amendments-model/index.html
+$dokka.location:nomic.domain.entities/RulesAmendmentsModel/RulesAmendmentsModel/#kotlin.Int?#kotlin.Int?#kotlin.String?#kotlin.String?#kotlin.Boolean?#kotlin.collections.MutableList[nomic.domain.entities.AmendmentModel]?/PointingToDeclaration/api/nomic.domain.entities/-rules-amendments-model/-rules-amendments-model.html
+$dokka.location:nomic.domain.entities/RulesAmendmentsModel/amendments/#/PointingToDeclaration/api/nomic.domain.entities/-rules-amendments-model/amendments.html
+$dokka.location:nomic.domain.entities/RulesAmendmentsModel/description/#/PointingToDeclaration/api/nomic.domain.entities/-rules-amendments-model/description.html
+$dokka.location:nomic.domain.entities/RulesAmendmentsModel/index/#/PointingToDeclaration/api/nomic.domain.entities/-rules-amendments-model/--index--.html
+$dokka.location:nomic.domain.entities/RulesAmendmentsModel/mutable/#/PointingToDeclaration/api/nomic.domain.entities/-rules-amendments-model/mutable.html
+$dokka.location:nomic.domain.entities/RulesAmendmentsModel/ruleId/#/PointingToDeclaration/api/nomic.domain.entities/-rules-amendments-model/rule-id.html
+$dokka.location:nomic.domain.entities/RulesAmendmentsModel/title/#/PointingToDeclaration/api/nomic.domain.entities/-rules-amendments-model/title.html
+$dokka.location:nomic.domain.rulesamendments////PointingToDeclaration/api/nomic.domain.rulesamendments/index.html
+$dokka.location:nomic.domain.rulesamendments/IRuleAmendmentDomain///PointingToDeclaration/api/nomic.domain.rulesamendments/-i-rule-amendment-domain/index.html
+$dokka.location:nomic.domain.rulesamendments/IRuleAmendmentDomain/getRulesAmendments/#kotlin.String/PointingToDeclaration/api/nomic.domain.rulesamendments/-i-rule-amendment-domain/get-rules-amendments.html
+$dokka.location:nomic.domain.rulesamendments/RuleAmendmentDomain///PointingToDeclaration/api/nomic.domain.rulesamendments/-rule-amendment-domain/index.html
+$dokka.location:nomic.domain.rulesamendments/RuleAmendmentDomain/RuleAmendmentDomain/#nomic.data.repositories.rulesamendments.RuleAmendmentRepository/PointingToDeclaration/api/nomic.domain.rulesamendments/-rule-amendment-domain/-rule-amendment-domain.html
+$dokka.location:nomic.domain.rulesamendments/RuleAmendmentDomain/getRulesAmendments/#kotlin.String/PointingToDeclaration/api/nomic.domain.rulesamendments/-rule-amendment-domain/get-rules-amendments.html
+$dokka.location:nomic////PointingToDeclaration/api/nomic/index.html
+$dokka.location:nomic//main/#kotlin.Array[kotlin.String]/PointingToDeclaration/api/nomic/main.html
+$dokka.location:nomic/ApiApplication///PointingToDeclaration/api/nomic/-api-application/index.html
+$dokka.location:nomic/ApiApplication/ApiApplication/#/PointingToDeclaration/api/nomic/-api-application/-api-application.html
+nomic
+nomic.api
+nomic.data
+nomic.data.dtos
+nomic.data.repositories.rulesamendments
+nomic.domain.entities
+nomic.domain.rulesamendments
+
