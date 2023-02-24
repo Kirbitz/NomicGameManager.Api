@@ -32,6 +32,6 @@ jobs:
           # Make sure you have that / at the end. We use rsync
           # WIKI_DIR's default is wiki/
           WIKI_DIR: build/dokka/gfm/
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           GH_MAIL: ${{ secrets.EMAIL }}
           GH_NAME: ${{ github.repository_owner }}
