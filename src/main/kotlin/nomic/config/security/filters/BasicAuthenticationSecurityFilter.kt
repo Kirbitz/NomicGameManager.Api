@@ -66,9 +66,9 @@ class BasicAuthenticationSecurityFilter : GenericFilterBean() {
 
         val credentials = decodedHeader.split(':', limit = 2)
 
-        val username = LoginName(credentials[0])
+        val loginName = LoginName(credentials[0])
         val password = credentials[1]
 
-        return Optional.of(UsernamePasswordAuthenticationToken(username, password, listOf()))
+        return Optional.of(UsernamePasswordAuthenticationToken(loginName, password, listOf()))
     }
 }

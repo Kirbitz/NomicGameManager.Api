@@ -29,7 +29,7 @@ class LoginEndpoint(private val userAuthenticator: UserAuthenticator) {
     @PostMapping("login")
     fun loginRequest(authorization: BasicAuthenticationHeader): ResponseEntity<LoginResponseModel> {
         val userAuthentication = userAuthenticator.authenticateUserWithCredentials(
-            authorization.username,
+            authorization.loginName,
             authorization.password
         )
 
