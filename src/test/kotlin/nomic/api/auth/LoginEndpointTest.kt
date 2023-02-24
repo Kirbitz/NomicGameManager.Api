@@ -29,6 +29,30 @@ class LoginEndpointTest(@Autowired val client: TestRestTemplate) {
     }
 
     @Test
+    fun test_loginFails_wrongAuth() {
+        val headers = HttpHeaders()
+        var creds = Base64.getEncoder().encodeToString("FakeUser:Real*Password".toByteArray())
+        headers.set("Authorization", "Bearer $creds")
+
+        val request = HttpEntity<Any>(headers)
+        val entity = client.postForEntity("/api/auth/login", request, String::class.java)
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.FORBIDDEN)
+        Assertions.assertThat(entity.body).isNull()
+    }
+
+    @Test
+    fun test_loginFails_malformedAuth() {
+        val headers = HttpHeaders()
+        var creds = Base64.getEncoder().encodeToString("FakeUser@Real*Password".toByteArray())
+        headers.set("Authorization", "Basic $creds")
+
+        val request = HttpEntity<Any>(headers)
+        val entity = client.postForEntity("/api/auth/login", request, String::class.java)
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.FORBIDDEN)
+        Assertions.assertThat(entity.body).isNull()
+    }
+
+    @Test
     fun test_loginFails_badCredentials() {
         val headers = HttpHeaders()
         val creds = Base64.getEncoder().encodeToString("FakeUser:Real*Password".toByteArray())
