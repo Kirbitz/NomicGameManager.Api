@@ -26,7 +26,6 @@ interface AmendmentDTO : Entity<AmendmentDTO> {
     val active: Boolean
 }
 
-
 /**
  * This object represents the credentials table in the database, employing KTorm's framework.
  *
