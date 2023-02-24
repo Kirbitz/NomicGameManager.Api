@@ -32,19 +32,4 @@ class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) {
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.NOT_FOUND)
         Assertions.assertThat(entity.body).contains("No rules were found for that gameId")
     }
-//
-//    @Test
-//    fun `Internal Server Error`() {
-//        val ruleAmendmentRepositoryMock = mockk<RuleAmendmentRepository>(relaxed = true)
-//        every { ruleAmendmentRepositoryMock.getRulesAmendments(anyInt()) }.throws(Exception("Internal Server Error"))
-//
-//        val ruleAmendmentDomainSpyk = spyk(RuleAmendmentDomain(ruleAmendmentRepositoryMock))
-//        every { ruleAmendmentDomainSpyk.getRulesAmendments(anyString()) } answers { callOriginal() }
-//
-//        val entity = client.getForEntity<String>("/api/rules_amendments/9999")
-//        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR)
-//        Assertions.assertThat(entity.body).contains("No rules were found for that gameId")
-//
-//        verify (exactly = 1) { ruleAmendmentRepositoryMock.getRulesAmendments(9999) }
-//    }
 }
