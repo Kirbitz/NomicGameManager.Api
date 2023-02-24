@@ -23,16 +23,11 @@ jobs:
 
       # Generates KDocs through Dokka
       - name: Generate KDocs
-        run: ./gradlew dokkaGfm
+        run: ./gradlew Dokkahtml
 
-      # Collects and Posts Generated Docs To GitHub Wiki
-      - name: Push Wiki Changes
-        uses: Andrew-Chen-Wang/github-wiki-action@v3
-        env:
-          # Make sure you have that / at the end. We use rsync
-          # WIKI_DIR's default is wiki/
-          WIKI_DIR: build/dokka/gfm/
-          GH_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          GH_MAIL: ${{ secrets.EMAIL }}
-          GH_NAME: ${{ github.repository_owner }}
-          EXCLUDED_FILES: "dokka/ **/ index.md"
+      # Collects and Posts Generated Docs To GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          publish_dir: ./build/dokka/gfm
