@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 class ArgumentResolverConfig : WebMvcConfigurer {
     override fun addArgumentResolvers(resolvers: MutableList<HandlerMethodArgumentResolver>) {
         super.addArgumentResolvers(resolvers)
+        // TODO Consider refactoring this (based on need) to dynamically add resolver
         resolvers.add(BasicHeaderArgumentResolver())
     }
 }
