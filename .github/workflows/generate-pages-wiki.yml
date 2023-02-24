@@ -33,3 +33,12 @@ jobs:
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           publish_dir: ./build/dokka/html
+          
+      # Collects and Posts Endpoint Documentation To GitHub Wiki
+      - name: Push Wiki Changes
+        uses: Andrew-Chen-Wang/github-wiki-action@v3
+        env:
+          WIKI_DIR: documentation/
+          GH_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          GH_MAIL: ${{ secrets.EMAIL }}
+          GH_NAME: ${{ github.repository_owner }}
