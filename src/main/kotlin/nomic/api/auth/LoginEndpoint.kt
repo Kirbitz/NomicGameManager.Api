@@ -26,7 +26,7 @@ class LoginEndpoint(private val userAuthenticator: UserAuthenticator) {
      * @param[authorization] The HTTP Basic Authorization Header
      * @return A Spring entity representing the response that gets serialized into JSON
      */
-    @PostMapping("login")
+    @PostMapping("login", produces = ["application/json;charset=UTF-8"])
     fun loginRequest(authorization: BasicAuthenticationHeader): ResponseEntity<LoginResponseModel> {
         val userAuthentication = userAuthenticator.authenticateUserWithCredentials(
             authorization.loginName,
