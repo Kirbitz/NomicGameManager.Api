@@ -10,6 +10,16 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.GenericFilterBean
 import java.util.*
 
+/**
+ * This security filter checks incoming HTTP requests for the BASIC authorization header  and parses it. If it successfully
+ * parses, it constructs and adds a [UsernamePasswordAuthenticationToken] with the credentials to the
+ * current [SecurityContext] Regardless of validation success, it continues the filter chain.
+ *
+ * @see[org.springframework.security.core.context.SecurityContext]
+ * @see[org.springframework.security.authentication.UsernamePasswordAuthenticationToken]
+ * @see[org.springframework.web.filter.GenericFilterBean]
+ * @see[jakarta.servlet.FilterChain]
+ */
 class BasicAuthenticationSecurityFilter : GenericFilterBean() {
 
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
@@ -25,6 +35,13 @@ class BasicAuthenticationSecurityFilter : GenericFilterBean() {
         chain?.doFilter(request, response)
     }
 
+    /**
+     * Parses HTTP Basic authorization header, and if valid, constructs an authentication token
+     * with it.
+     *
+     * @param[authorizationHeader] The HTTP Authorization header which is expected to be Basic
+     * @return An Authentication Token containing the [LoginName] as the principal and the password as the credentials
+     */
     private fun tryParse(authorizationHeader: String?): Optional<UsernamePasswordAuthenticationToken> {
         if (authorizationHeader == null) {
             return Optional.empty()
