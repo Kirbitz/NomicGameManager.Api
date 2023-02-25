@@ -16,7 +16,7 @@ import java.security.spec.X509EncodedKeySpec
  * @param[tokenConfig] This dependency is the configuration parsed by Spring with the various properties needed for the JWT Token RSA keys
  */
 @Component
-class FileKeyProvider(private val tokenConfig: JWTTokenConfigurationProperties) : KeyProvider {
+class FileKeyProvider(private val tokenConfig: JWTTokenConfigurationProperties) : IKeyProvider {
 
     private var keyPair: RSAKeyPair? = null
 

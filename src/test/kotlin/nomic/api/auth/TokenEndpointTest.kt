@@ -1,6 +1,6 @@
 package nomic.api.auth
 
-import nomic.domain.auth.TokenRegistry
+import nomic.domain.auth.ITokenRegistry
 import nomic.domain.entities.User
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Condition
@@ -81,7 +81,7 @@ class TokenEndpointTest(@Autowired val client: TestRestTemplate) {
     }
 
     @Test
-    fun test_tokenSucceeds_refreshToken(@Autowired tokenRegistry: TokenRegistry) {
+    fun test_tokenSucceeds_refreshToken(@Autowired tokenRegistry: ITokenRegistry) {
         val headers = HttpHeaders()
         headers.setBearerAuth(tokenRegistry.issueToken(User(1, "Foo Bar Jr.")))
 

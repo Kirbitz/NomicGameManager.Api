@@ -8,7 +8,7 @@ import java.util.Optional
  *
  * @see[nomic.domain.entities.User]
  */
-interface UserRepository : Repository<User> {
+interface IUserRepository : IRepository<User> {
     /**
      * Creates a new user entity and persists to the data layer.
      *

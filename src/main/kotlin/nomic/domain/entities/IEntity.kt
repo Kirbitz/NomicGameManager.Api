@@ -5,6 +5,6 @@ package nomic.domain.entities
  *
  * @property[id] The unique integer id of this entity
  */
-interface Entity {
+interface IEntity {
     val id: Int
 }

@@ -4,7 +4,7 @@ import nomic.data.EntityNotFoundException
 import nomic.data.dtos.CredentialDTO
 import nomic.data.dtos.credentials
 import nomic.data.dtos.users
-import nomic.data.repositories.CredentialRepository
+import nomic.data.repositories.ICredentialRepository
 import nomic.domain.entities.Credential
 import nomic.domain.entities.LoginName
 import nomic.domain.entities.PasswordHash
@@ -17,15 +17,15 @@ import org.springframework.stereotype.Component
 import java.util.Optional
 
 /**
- * This implementation of [nomic.data.repositories.CredentialRepository][CredentialRepository] uses a
+ * This implementation of [nomic.data.repositories.ICredentialRepository][ICredentialRepository] uses a
  * KTorm [org.ktorm.database.Database][Database] as the data access layer.
  *
- * @see[nomic.data.repositories.CredentialRepository]
+ * @see[nomic.data.repositories.ICredentialRepository]
  * @see[org.ktorm.database.Database]
  * @param[db] A connected instance of [org.ktorm.database.Database][Database] to use as the database
  */
 @Component
-class CredentialRepositoryImpl(private val db: Database) : CredentialRepository {
+class CredentialRepository(private val db: Database) : ICredentialRepository {
 
     override fun create(user: User, loginName: LoginName, passwordHash: PasswordHash): Credential {
         var userDto = db.users.find { it.id eq user.id } ?: throw EntityNotFoundException(user.id)

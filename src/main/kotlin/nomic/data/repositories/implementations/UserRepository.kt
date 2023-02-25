@@ -3,7 +3,7 @@ package nomic.data.repositories.implementations
 import nomic.data.EntityNotFoundException
 import nomic.data.dtos.UserDTO
 import nomic.data.dtos.users
-import nomic.data.repositories.UserRepository
+import nomic.data.repositories.IUserRepository
 import nomic.domain.entities.User
 import org.ktorm.database.Database
 import org.ktorm.dsl.eq
@@ -13,15 +13,15 @@ import org.springframework.stereotype.Component
 import java.util.Optional
 
 /**
- * This implementation of [nomic.data.repositories.UserRepository][UserRepository] uses a
+ * This implementation of [nomic.data.repositories.IUserRepository][IUserRepository] uses a
  * KTorm [org.ktorm.database.Database][Database] as the data access layer.
  *
- * @see[nomic.data.repositories.UserRepository]
+ * @see[nomic.data.repositories.IUserRepository]
  * @see[org.ktorm.database.Database]
  * @param[db] A connected instance of [org.ktorm.database.Database][Database] to use as the database
  */
 @Component
-class UserRepositoryImpl(private val db: Database) : UserRepository {
+class UserRepository(private val db: Database) : IUserRepository {
     override fun create(name: String): User {
         val userDTO = UserDTO {
             this.name = name

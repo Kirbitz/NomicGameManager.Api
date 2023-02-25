@@ -1,6 +1,6 @@
 package nomic.api
 
-import nomic.domain.auth.TokenRegistry
+import nomic.domain.auth.ITokenRegistry
 import nomic.domain.entities.User
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus
 
 class TestingSpringTests(
     @Autowired val client: TestRestTemplate,
-    @Autowired tokenRegistry: TokenRegistry
+    @Autowired tokenRegistry: ITokenRegistry
 ) : BaseEndToEndTest(tokenRegistry) {
 
     private val request = createRequest<Any>(user = User(1, "Foo Bar Jr."))

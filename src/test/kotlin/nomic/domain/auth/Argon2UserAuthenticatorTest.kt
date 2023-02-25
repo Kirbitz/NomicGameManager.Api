@@ -1,7 +1,7 @@
 package nomic.domain.auth
 
-import nomic.data.repositories.CredentialRepository
-import nomic.data.repositories.UserRepository
+import nomic.data.repositories.ICredentialRepository
+import nomic.data.repositories.IUserRepository
 import nomic.domain.entities.Credential
 import nomic.domain.entities.LoginName
 import nomic.domain.entities.PasswordHash
@@ -29,13 +29,13 @@ class Argon2UserAuthenticatorTest {
         val credBob = Credential(User(1, "Bob"), LoginName("alfredo"), passwordPass)
         val credJane = Credential(User(2, "Jane"), LoginName("see_sharp"), passwordFoobar)
 
-        val credsRepo = mock<CredentialRepository>
+        val credsRepo = mock<ICredentialRepository>
         {
             on { getByName(credBob.loginName) } doReturn Optional.of(credBob)
             on { getByName(credJane.loginName) } doReturn Optional.of(credJane)
         }
 
-        val userRepo = mock<UserRepository>
+        val userRepo = mock<IUserRepository>
         {
             on { getById(credBob.id) } doReturn Optional.of(credBob.user)
             on { getById(credJane.id) } doReturn Optional.of(credJane.user)

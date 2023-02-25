@@ -4,14 +4,14 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.JWTVerificationException
-import nomic.data.repositories.UserRepository
+import nomic.data.repositories.IUserRepository
 import nomic.domain.entities.User
 import org.springframework.stereotype.Component
 import java.time.Duration
 import java.time.Instant
 
 /**
- * This implementation of TokenRegistry offers a straightforward implementation using RSA for token signing.
+ * This implementation of ITokenRegistry offers a straightforward implementation using RSA for token signing.
  *
  * @see[TokenRegistry]
  * @param[keyProvider] This dependency is used to retrieve the RSA keys used to sign all JWT Tokens to validate authenticity and integrity
@@ -19,9 +19,9 @@ import java.time.Instant
  */
 @Component
 class DefaultTokenRegistry(
-    private val keyProvider: KeyProvider,
-    private val usersRepo: UserRepository
-) : TokenRegistry {
+    private val keyProvider: IKeyProvider,
+    private val usersRepo: IUserRepository
+) : ITokenRegistry {
     private val algorithm: Algorithm
     private val verifier: JWTVerifier
 

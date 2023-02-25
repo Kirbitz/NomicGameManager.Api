@@ -11,7 +11,7 @@ import java.util.Optional
  *
  * @see[nomic.domain.entities.Credential]
  */
-interface CredentialRepository : Repository<Credential> {
+interface ICredentialRepository : IRepository<Credential> {
     /**
      * Creates a new credential entity and persists to the data layer.
      *

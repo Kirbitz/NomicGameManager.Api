@@ -4,7 +4,7 @@ import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletRequest
 import jakarta.servlet.ServletResponse
 import jakarta.servlet.http.HttpServletRequest
-import nomic.domain.auth.UserAuthenticator
+import nomic.domain.auth.IUserAuthenticator
 import nomic.domain.entities.LoginName
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
@@ -23,7 +23,7 @@ import java.util.*
  * @see[jakarta.servlet.FilterChain]
  */
 class BasicAuthenticationSecurityFilter(
-    private val userAuthenticator: UserAuthenticator
+    private val userAuthenticator: IUserAuthenticator
 ) : GenericFilterBean() {
 
     /**

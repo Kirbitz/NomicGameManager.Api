@@ -1,13 +1,13 @@
 package nomic.data.repositories
 
-import nomic.domain.entities.Entity
+import nomic.domain.entities.IEntity
 import java.util.Optional
 
 /**
  * This interface specifies the generic repository pattern for domain entities on top of the data access layer
  * @param[TEntity] A generic type accepting any domain [nomic.domain.entities.Entity][Entity]
  */
-interface Repository<TEntity> where TEntity : Entity {
+interface IRepository<TEntity> where TEntity : IEntity {
     /**
      * Persists all changes to the provided entity to the underlying data layer
      *

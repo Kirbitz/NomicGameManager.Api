@@ -1,6 +1,6 @@
 package nomic.api.auth
 
-import nomic.domain.auth.TokenRegistry
+import nomic.domain.auth.ITokenRegistry
 import nomic.domain.entities.User
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping("api/auth")
-class TokenEndpoint(private val tokenRegistry: TokenRegistry) {
+class TokenEndpoint(private val tokenRegistry: ITokenRegistry) {
 
     /**
      * This endpoint is the core of the controller. It accepts the authenticated user, which is the principal of the context,

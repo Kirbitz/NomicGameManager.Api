@@ -1,6 +1,6 @@
 package nomic.api
 
-import nomic.domain.auth.TokenRegistry
+import nomic.domain.auth.ITokenRegistry
 import nomic.domain.entities.User
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -11,7 +11,7 @@ import org.springframework.http.MediaType
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
-abstract class BaseEndToEndTest(@Autowired val tokenRegistry: TokenRegistry) {
+abstract class BaseEndToEndTest(@Autowired val tokenRegistry: ITokenRegistry) {
 
     protected fun <T> createRequest(body: T? = null, user: User? = null): HttpEntity<T> {
         var headers: HttpHeaders = HttpHeaders()

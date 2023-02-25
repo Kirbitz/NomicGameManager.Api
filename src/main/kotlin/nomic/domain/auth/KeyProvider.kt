@@ -6,7 +6,7 @@ import java.security.interfaces.RSAPublicKey
 /**
  * This service provides an abstraction for retrieving a RSA Key Pair for signing JWT Tokens
  */
-interface KeyProvider {
+interface IKeyProvider {
     /**
      * Provides a RSA key pair
      *

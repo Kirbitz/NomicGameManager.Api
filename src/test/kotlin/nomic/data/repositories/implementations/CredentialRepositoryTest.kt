@@ -14,7 +14,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder
 
-class CredentialRepositoryImplTest {
+class CredentialRepositoryTest {
 
     private val db: Database
     private val password: PasswordHash
@@ -70,7 +70,7 @@ class CredentialRepositoryImplTest {
 
     // @Test
     fun create() {
-        val repo = CredentialRepositoryImpl(db)
+        val repo = CredentialRepository(db)
 
         repo.create(User(0, "Cincinnatus"), LoginName("SimpleFarmer"), password)
         val expectedDto = CredentialDTO {

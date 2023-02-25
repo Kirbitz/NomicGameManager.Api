@@ -5,7 +5,7 @@ import nomic.domain.entities.User
 /**
  * This registry service manages the creation, validation, and all other processes necessary for issuing and validating JWT Token.
  */
-interface TokenRegistry {
+interface ITokenRegistry {
 
     /**
      * Issues a JWT Token for a specified user with the specified claims

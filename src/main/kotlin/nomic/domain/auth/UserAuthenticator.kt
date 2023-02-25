@@ -6,7 +6,7 @@ import nomic.domain.entities.User
 /**
  * A domain service that provides functions for authenticating user accounts
  */
-interface UserAuthenticator {
+interface IUserAuthenticator {
 
     /**
      * Authenticates a user's credentials provided the login name and plain text password.
