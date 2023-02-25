@@ -27,12 +27,10 @@ data class RulesAmendmentsModel(
  * @property index the position of an amendment under a rule
  * @property description the context of an amendment
  * @property title what an amendment is called
- * @property active flag for whether an amendment is still in effect
  */
 data class AmendmentModel(
     val amendId: Int,
     val index: Int,
     val description: String,
-    val title: String,
-    val active: Boolean
+    val title: String
 )

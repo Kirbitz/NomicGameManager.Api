@@ -1,5 +1,6 @@
 package nomic.data.dtos
 
+import nomic.data.dtos.Rules.gameId
 import org.ktorm.entity.Entity
 import org.ktorm.schema.Table
 import org.ktorm.schema.boolean
@@ -14,6 +15,8 @@ import org.ktorm.schema.varchar
  * @property title the name of this rule
  * @property description the clarifying text for the rule
  * @property mutable flag for mutable/immutable rules
+ * @property active flag to determine amendment visibility to the user
+ * @property gameId The foreign key to the Games table
  */
 interface RuleDTO : Entity<RuleDTO> {
     companion object : Entity.Factory<RuleDTO>()
@@ -22,6 +25,7 @@ interface RuleDTO : Entity<RuleDTO> {
     val title: String
     val description: String
     val mutable: Boolean
+    val active: Boolean
     val gameId: Int
 }
 
@@ -34,6 +38,7 @@ interface RuleDTO : Entity<RuleDTO> {
  * @property title What the rule is called
  * @property description The specific details of a rule
  * @property mutable flag to determine whether a rule can be amended or deleted
+ * @property active flag to determine rule visibility to the user
  * @property gameId The foreign key to the Games table
  */
 object Rules : Table<RuleDTO>("Rule") {
@@ -42,5 +47,6 @@ object Rules : Table<RuleDTO>("Rule") {
     val title = varchar("title").bindTo { it.title }
     val description = varchar("description").bindTo { it.description }
     val mutable = boolean("mutable").bindTo { it.mutable }
+    val active = boolean("active").bindTo { it.active }
     val gameId = int("gameId").bindTo { it.gameId }
 }

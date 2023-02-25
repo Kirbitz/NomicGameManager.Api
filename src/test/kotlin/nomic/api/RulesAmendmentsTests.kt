@@ -37,11 +37,26 @@ class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) {
     }
 
     @Test
+    fun `Found Game With Rules Activity Equals False and Amendments Activity Equals True`() {
+        val entity = client.getForEntity<List<RulesAmendmentsModel>>("/api/rules_amendments/3")
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
+        Assertions.assertThat(entity.body?.size).isEqualTo(0)
+    }
+
+    @Test
     fun `Found Game With Rules and Multiple Amendments`() {
         val entity = client.getForEntity<List<LinkedHashMap<String, List<AmendmentModel>>>>("/api/rules_amendments/1")
         val result = entity.body?.get(2)?.get("amendments")
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(result?.size).isGreaterThan(1)
+    }
+
+    @Test
+    fun `Found Game With Rules and Amendment Activity Equals False`() {
+        val entity = client.getForEntity<List<LinkedHashMap<String, List<AmendmentModel>>>>("/api/rules_amendments/1")
+        val result = entity.body?.get(3)?.get("amendments")
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
+        Assertions.assertThat(result?.size).isEqualTo(0)
     }
 
     @Test

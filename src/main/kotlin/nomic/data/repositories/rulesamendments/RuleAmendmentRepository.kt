@@ -29,10 +29,10 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
 
         db.from(Rules)
             .leftJoin(Amendments, on = Amendments.ruleId eq Rules.ruleId)
-            .select(Rules.ruleId, Rules.index, Rules.description, Rules.title, Rules.mutable, Amendments.amendId, Amendments.index, Amendments.description, Amendments.title, Amendments.active)
+            .select(Rules.ruleId, Rules.index, Rules.description, Rules.title, Rules.mutable, Rules.active, Amendments.amendId, Amendments.index, Amendments.description, Amendments.title, Amendments.active)
             .where(Rules.gameId eq gameId)
             .forEach { row ->
-                if (currId != row[Rules.ruleId]) {
+                if (currId != row[Rules.ruleId] && row[Rules.active]!!) {
                     currId = row[Rules.ruleId]!!
                     rules += RulesAmendmentsModel(
                         row[Rules.ruleId]!!,
@@ -42,14 +42,13 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
                         row[Rules.mutable]!!
                     )
                 }
-                if (row[Amendments.amendId] != null) {
+                if (row[Amendments.amendId] != null && row[Amendments.active]!! && row[Rules.active]!!) {
                     rules.last().amendments?.add(
                         AmendmentModel(
                             row[Amendments.amendId]!!,
                             row[Amendments.index]!!,
                             row[Amendments.description]!!,
-                            row[Amendments.title]!!,
-                            row[Amendments.active]!!
+                            row[Amendments.title]!!
                         )
                     )
                 }
