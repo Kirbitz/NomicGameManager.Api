@@ -26,7 +26,7 @@ interface RuleDTO : Entity<RuleDTO> {
 }
 
 /**
- * This object represents the credentials table in the database, employing KTorm's framework.
+ * This object represents the rules table in the database, employing KTorm's framework.
  *
  * @see[org.ktorm.schema.Table]
  * @property ruleId The primary key for the [Rules] table
@@ -34,7 +34,7 @@ interface RuleDTO : Entity<RuleDTO> {
  * @property title What the rule is called
  * @property description The specific details of a rule
  * @property mutable flag to determine whether a rule can be amended or deleted
- * @property gameId The foreign key to the Games table
+ * @property gameId The foreign key to the [Games] table
  */
 object Rules : Table<RuleDTO>("Rule") {
     val ruleId = int("ruleId").primaryKey().bindTo { it.ruleId }
