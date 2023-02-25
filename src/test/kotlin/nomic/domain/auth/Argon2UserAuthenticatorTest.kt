@@ -41,9 +41,7 @@ class Argon2UserAuthenticatorTest {
             on { getById(credJane.id) } doReturn Optional.of(credJane.user)
         }
 
-        val tokenRepo = mock<TokenRegistry>()
-
-        auth = Argon2UserAuthenticator(credsRepo, userRepo, tokenRepo)
+        auth = Argon2UserAuthenticator(credsRepo, userRepo)
     }
 
     @Test

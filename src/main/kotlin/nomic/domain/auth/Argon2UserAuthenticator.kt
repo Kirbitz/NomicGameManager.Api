@@ -14,13 +14,11 @@ import org.springframework.stereotype.Component
  *
  * @param[creds] This dependency is used to retrieve and create all necessary credential data objects
  * @param[users] This dependency is user to retrieve and create user entities
- * @param[tokenRegistry] This dependency is used to issue JWT Tokens upon authentication
  */
 @Component
 class Argon2UserAuthenticator(
     private val creds: CredentialRepository,
-    private val users: UserRepository,
-    private val tokenRegistry: TokenRegistry
+    private val users: UserRepository
 ) : UserAuthenticator {
 
     override fun authenticateUserWithCredentials(loginName: LoginName, password: String): AuthenticationResult {
@@ -30,8 +28,7 @@ class Argon2UserAuthenticator(
         }
 
         if (checkUserCredentials(credential.get(), password)) {
-            val token = tokenRegistry.issueToken(credential.get().user)
-            return AuthenticationResult(true, token)
+            return AuthenticationResult(true, credential.get().user)
         } else {
             return AuthenticationResult(false)
         }
