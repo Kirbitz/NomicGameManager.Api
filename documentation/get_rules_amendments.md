@@ -92,19 +92,6 @@ Returns json data of rules and amendments connected to a specific game.
   }
   ```
 
-  **Code:** `404 DATA NOT FOUND`
-  
-  **Content:**
-
-  ```json
-  {
-    "error": {
-      "status": 404,
-      "message": "Data not found"
-    }
-  }
-  ```
-
   **Code:** `500 INTERNAL SERVER ERROR`
 
   **Content:**

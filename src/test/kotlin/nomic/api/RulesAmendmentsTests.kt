@@ -1,5 +1,6 @@
 package nomic.api
 
+import nomic.domain.entities.RulesAmendmentsModel
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,9 +22,9 @@ class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) {
 
     @Test
     fun `Found Game With No Rules and Amendments`() {
-        val entity = client.getForEntity<String>("/api/rules_amendments/2")
+        val entity = client.getForEntity<MutableList<RulesAmendmentsModel>>("/api/rules_amendments/2")
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
-        Assertions.assertThat(entity.body).contains("[]").doesNotContain("amendId").doesNotContain("ruleId")
+        Assertions.assertThat(entity.body?.size).isEqualTo(0)
     }
 
     @Test
