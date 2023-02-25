@@ -4,6 +4,7 @@ import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletRequest
 import jakarta.servlet.ServletResponse
 import jakarta.servlet.http.HttpServletRequest
+import nomic.domain.auth.UserAuthenticator
 import nomic.domain.entities.LoginName
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
@@ -11,16 +12,27 @@ import org.springframework.web.filter.GenericFilterBean
 import java.util.*
 
 /**
- * This security filter checks incoming HTTP requests for the BASIC authorization header  and parses it. If it successfully
- * parses, it constructs and adds a [UsernamePasswordAuthenticationToken] with the credentials to the
- * current [SecurityContext] Regardless of validation success, it continues the filter chain.
+ * This security filter checks incoming HTTP requests for the BASIC authorization header, parses it and authenticates the credentials.
+ * Upon authentication, it constructs and adds a [UsernamePasswordAuthenticationToken] to the current [SecurityContext]. Regardless of
+ * validation success, it continues the filter chain.
  *
+ * @see[nomic.domain.auth.UserAuthenticator]
  * @see[org.springframework.security.core.context.SecurityContext]
  * @see[org.springframework.security.authentication.UsernamePasswordAuthenticationToken]
  * @see[org.springframework.web.filter.GenericFilterBean]
  * @see[jakarta.servlet.FilterChain]
  */
-class BasicAuthenticationSecurityFilter : GenericFilterBean() {
+class BasicAuthenticationSecurityFilter(
+    private val userAuthenticator: UserAuthenticator
+) : GenericFilterBean() {
+
+    /**
+     * A wrapper object around the [LoginName] and password contained inside the Basic Authorization header
+     *
+     * @prop[loginName] The [LoginName] of the user credentials in the HTTP Basic Authorization
+     * @prop[password] The [password] of the user credentials in the HTTP Basic Authorization
+     */
+    private data class Credentials(val loginName: LoginName, val password: String)
 
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
         val httpRequest = request as HttpServletRequest
@@ -28,21 +40,27 @@ class BasicAuthenticationSecurityFilter : GenericFilterBean() {
 
         val authToken = tryParse(authorizationHeader)
         if (authToken.isPresent) {
-            val context = SecurityContextHolder.getContext()
-            context.authentication = authToken.get()
+            val creds = authToken.get()
+            val authResult = userAuthenticator.authenticateUserWithCredentials(creds.loginName, creds.password)
+
+            if (authResult.isSuccess) {
+                val context = SecurityContextHolder.getContext()
+
+                // TODO Could setting the `credentials` to null cause issues? Bad practice within Spring Security?
+                context.authentication = UsernamePasswordAuthenticationToken(authResult.user, null, listOf())
+            }
         }
 
         chain?.doFilter(request, response)
     }
 
     /**
-     * Parses HTTP Basic authorization header, and if valid, constructs an authentication token
-     * with it.
+     * Parses HTTP Basic authorization header, and if valid, constructs a wrapper object around the credentials
      *
      * @param[authorizationHeader] The HTTP Authorization header which is expected to be Basic
-     * @return An Authentication Token containing the [LoginName] as the principal and the password as the credentials
+     * @return A [Credentials] wrapper object around the [LoginName] and password in the header
      */
-    private fun tryParse(authorizationHeader: String?): Optional<UsernamePasswordAuthenticationToken> {
+    private fun tryParse(authorizationHeader: String?): Optional<Credentials> {
         if (authorizationHeader == null) {
             return Optional.empty()
         }
@@ -73,6 +91,6 @@ class BasicAuthenticationSecurityFilter : GenericFilterBean() {
         val loginName = LoginName(credentials[0])
         val password = credentials[1]
 
-        return Optional.of(UsernamePasswordAuthenticationToken(loginName, password, listOf()))
+        return Optional.of(Credentials(loginName, password))
     }
 }

@@ -3,6 +3,7 @@ package nomic.config.security
 import nomic.config.security.filters.BasicAuthenticationSecurityFilter
 import nomic.config.security.filters.JWTAuthenticationSecurityFilter
 import nomic.domain.auth.TokenRegistry
+import nomic.domain.auth.UserAuthenticator
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -23,9 +24,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 class RoutingSecurityConfig {
 
     @Bean
-    fun filterChain(http: HttpSecurity, tokenRegistry: TokenRegistry): SecurityFilterChain {
+    fun filterChain(http: HttpSecurity, tokenRegistry: TokenRegistry, userAuthenticator: UserAuthenticator): SecurityFilterChain {
         val jwtFilter = JWTAuthenticationSecurityFilter(tokenRegistry)
-        val basicFilter = BasicAuthenticationSecurityFilter()
+        val basicFilter = BasicAuthenticationSecurityFilter(userAuthenticator)
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)
         http.addFilterBefore(basicFilter, JWTAuthenticationSecurityFilter::class.java)
