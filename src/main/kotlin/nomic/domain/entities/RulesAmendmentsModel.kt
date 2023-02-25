@@ -12,11 +12,11 @@ package nomic.domain.entities
  * @see[nomic.domain.entities.AmendmentModel]
  */
 data class RulesAmendmentsModel(
-    val ruleId: Int? = null,
-    val index: Int? = null,
-    val title: String? = null,
+    val ruleId: Int,
+    val index: Int,
+    val title: String,
     val description: String? = null,
-    val mutable: Boolean? = null,
+    val mutable: Boolean,
     var amendments: MutableList<AmendmentModel>? = mutableListOf()
 )
 
@@ -30,9 +30,9 @@ data class RulesAmendmentsModel(
  * @property active flag for whether an amendment is still in effect
  */
 data class AmendmentModel(
-    val amendId: Int?,
-    val index: Int?,
-    val description: String?,
-    val title: String?,
-    val active: Boolean?
+    val amendId: Int,
+    val index: Int,
+    val description: String,
+    val title: String,
+    val active: Boolean
 )
