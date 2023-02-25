@@ -25,7 +25,7 @@ CREATE TABLE `Game` (
   UNIQUE KEY `gameId_UNIQUE` (`gameId`),
   KEY `playerId_idx` (`currentPlayer`),
   KEY `userId_idx` (`userId`),
-  CONSTRAINT `userId` FOREIGN KEY (`userId`) REFERENCES `User` (`userId`) 
+  CONSTRAINT `userId` FOREIGN KEY (`userId`) REFERENCES `User` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
