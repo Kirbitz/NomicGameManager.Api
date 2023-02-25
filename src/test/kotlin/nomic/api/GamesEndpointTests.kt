@@ -10,7 +10,7 @@ import org.springframework.http.*
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
-class GamesTests(@Autowired val client: TestRestTemplate) {
+class GamesEndpointTests(@Autowired val client: TestRestTemplate) {
     @Test
     fun `Game Successfully Deleted`() {
         val httpEntity = HttpEntity<String>("Game Deleted")

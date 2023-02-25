@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
-class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) {
+class RulesAmendmentsEndpointTests(@Autowired val client: TestRestTemplate) {
     @Test
     fun `Found Rule And Amendment Data`() {
         val entity = client.getForEntity<String>("/api/rules_amendments/1")
