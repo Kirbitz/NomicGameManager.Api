@@ -5,7 +5,12 @@ import nomic.data.dtos.Rules
 import nomic.domain.entities.AmendmentModel
 import nomic.domain.entities.RulesAmendmentsModel
 import org.ktorm.database.Database
-import org.ktorm.dsl.*
+import org.ktorm.dsl.eq
+import org.ktorm.dsl.forEach
+import org.ktorm.dsl.from
+import org.ktorm.dsl.leftJoin
+import org.ktorm.dsl.select
+import org.ktorm.dsl.where
 import org.springframework.stereotype.Repository
 
 /**
@@ -19,17 +24,16 @@ import org.springframework.stereotype.Repository
 @Repository
 class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentRepository {
     override fun getRulesAmendments(gameId: Int): MutableList<RulesAmendmentsModel> {
-        var currId: Int? = -1
+        var currId: Int = -1
         val rules: MutableList<RulesAmendmentsModel> = mutableListOf()
 
         db.from(Rules)
             .leftJoin(Amendments, on = Amendments.ruleId eq Rules.ruleId)
-            .select(Rules.ruleId, Rules.index, Rules.description, Rules.title, Rules.mutable,
-                Amendments.amendId, Amendments.index, Amendments.description, Amendments.title, Amendments.active)
+            .select(Rules.ruleId, Rules.index, Rules.description, Rules.title, Rules.mutable, Amendments.amendId, Amendments.index, Amendments.description, Amendments.title, Amendments.active)
             .where(Rules.gameId eq gameId)
             .forEach { row ->
                 if (currId != row[Rules.ruleId]) {
-                    currId = row[Rules.ruleId]
+                    currId = row[Rules.ruleId]!!
                     rules += RulesAmendmentsModel(
                         row[Rules.ruleId]!!,
                         row[Rules.index]!!,
