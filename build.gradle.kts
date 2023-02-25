@@ -107,7 +107,7 @@ tasks.withType<DokkaTask>().configureEach {
 // necessary to run. The bootJar task is still enabled, and that task produces the jar with all the
 // dependencies bundled, creating a one file executable essentially.
 tasks.jar {
-	enabled = false
+    enabled = false
 }
 
 // This task dynamically adds the dependency to enable hot reload to the bootRun task.
@@ -116,9 +116,10 @@ tasks.jar {
 // for many scenarios. The dependency is not always added to ensure that when we want
 // the server to run normally, it does not automatically reboot for whatever reason.
 task("addHotReload") {
-	doLast {
-		project.dependencies.add("implementation",
-			"org.springframework.boot:spring-boot-devtools")
-	}
+    doLast {
+        project.dependencies.add(
+            "implementation",
+            "org.springframework.boot:spring-boot-devtools"
+        )
+    }
 }
-
