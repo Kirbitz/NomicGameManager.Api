@@ -8,6 +8,7 @@ import nomic.domain.auth.IUserAuthenticator
 import nomic.domain.entities.LoginName
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import org.springframework.web.filter.GenericFilterBean
 import java.util.*
 
@@ -26,6 +27,8 @@ class BasicAuthenticationSecurityFilter(
     private val userAuthenticator: IUserAuthenticator
 ) : GenericFilterBean() {
 
+    val customUrlFilter = AntPathRequestMatcher("/api/auth/token")
+
     /**
      * A wrapper object around the [LoginName] and password contained inside the Basic Authorization header
      *
@@ -36,6 +39,14 @@ class BasicAuthenticationSecurityFilter(
 
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
         val httpRequest = request as HttpServletRequest
+
+        // This filter is only allowed to run on the token endpoint. Otherwise, API consumers can disregard
+        // using JWT tokens and use Basic auth exclusively.
+        if (!customUrlFilter.matches(httpRequest)) {
+            chain?.doFilter(request, response)
+            return
+        }
+
         val authorizationHeader = httpRequest.getHeader("Authorization")
 
         val authToken = tryParse(authorizationHeader)
