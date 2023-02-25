@@ -6,4 +6,4 @@ Just click a link and away you go!
 
 __Example__
 
-[api/collect_rules_amendments](https://github.com/Kirbitz/NomicGameManager.Api/wiki/get_rules_amendments)
+[api/rules_amendments](https://github.com/Kirbitz/NomicGameManager.Api/wiki/get_rules_amendments)
