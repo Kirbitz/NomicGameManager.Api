@@ -50,12 +50,11 @@ class CredentialRepositoryImpl(private val db: Database) : CredentialRepository 
     }
 
     override fun getById(id: Int): Optional<Credential> {
-        val userDto = db.users.find { it.id eq id } ?: return Optional.empty()
         val credDto = db.credentials.find { it.userId eq id } ?: return Optional.empty()
 
         return Optional.of(
             Credential(
-                User(id, userDto.name),
+                User(id, credDto.user.name),
                 LoginName(credDto.loginName),
                 PasswordHash(credDto.passwordHash)
             )
