@@ -14,11 +14,21 @@ Returns a JWT access token that can be used to authenticate on other endpoints
 
 - **Header Params:**
 
-  __Required:__ Authorization Basic Header
+  __Required:__  *Either*
+  
+  Authorization Basic Header
 
   `Authorization: Basic [credentials]`
 
   `credentials`: Base 64 encoded `username:password`
+
+  *or*
+
+  Authorization JWT Bearer Header
+
+  `Authorization: Bearer [token]`
+
+  `token`: JWT access token
 
 
 - **URL Params:**
@@ -48,17 +58,6 @@ Returns a JWT access token that can be used to authenticate on other endpoints
   ```
 
 - **Error Response**
-
-  **Code:** `401 UNAUTHORIZED`
-
-  **Content:**
-
-  ```json
-  {
-    "isSuccess": false,
-    "token": null
-  }
-  ```
   
   **Code:** `403 UNAUTHENTICATED`
   
@@ -75,7 +74,7 @@ Returns a JWT access token that can be used to authenticate on other endpoints
     "timestamp": "2023-02-24T21:29:15.137+00:00",
     "status": 500,
     "error": "Internal Server Error",
-    "path": "/api/auth/login"
+    "path": "/api/auth/token"
   }
   ```
 
@@ -84,7 +83,7 @@ Returns a JWT access token that can be used to authenticate on other endpoints
 ```javascript
 {
   method: 'POST',
-  url: '/api/auth/login',
+  url: '/api/auth/token',
   responseType: 'json',
   data: {
     gameId: 1234
