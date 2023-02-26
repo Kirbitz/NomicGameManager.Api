@@ -26,7 +26,7 @@ class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) : BaseEndToE
         val entity = client.exchange<List<RulesAmendmentsModel>>("/api/rules_amendments/1", HttpMethod.GET, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
-        Assertions.assertThat(entity.body).anyMatch { it.amendments!!.size == 0}
+        Assertions.assertThat(entity.body).anyMatch { it.amendments!!.size == 0 }
     }
 
     @Test
