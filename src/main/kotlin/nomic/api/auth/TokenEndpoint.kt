@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController
  * @see[nomic.domain.auth.ITokenRegistry]
  * @see[nomic.config.security.filters.BasicAuthenticationSecurityFilter]
  * @see[nomic.config.security.filters.JWTAuthenticationSecurityFilter]
- * @param[TokenRegistry] This dependency is a domain service used by the endpoint to generate the JWT Token for the authenticated user.
+ * @param[tokenRegistry] This dependency is a domain service used by the endpoint to generate the JWT Token for the authenticated user.
  */
 @RestController
 @RequestMapping("api/auth")
