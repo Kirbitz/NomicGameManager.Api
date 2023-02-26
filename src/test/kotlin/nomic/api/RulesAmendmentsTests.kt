@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus
 )
 class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) {
     val gson = Gson()
+
     @Test
     fun `Found Rule And Amendment Data`() {
         val entity = client.getForEntity<String>("/api/rules_amendments/1")

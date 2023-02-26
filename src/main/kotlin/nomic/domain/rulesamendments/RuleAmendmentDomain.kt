@@ -26,7 +26,7 @@ class RuleAmendmentDomain(
         val rules: MutableList<RulesAmendmentsModel> = mutableListOf()
         var currId: Int = -1
 
-        rulesRaw.forEach{ row ->
+        rulesRaw.forEach { row ->
             if (currId != row.ruleId && row.ruleActive) {
                 currId = row.ruleId
                 rules += RulesAmendmentsModel(
