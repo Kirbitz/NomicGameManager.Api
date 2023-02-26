@@ -17,7 +17,7 @@ import java.util.*
  * Upon authentication, it constructs and adds a [UsernamePasswordAuthenticationToken] to the current [SecurityContext]. Regardless of
  * validation success, it continues the filter chain.
  *
- * @see[nomic.domain.auth.UserAuthenticator]
+ * @see[nomic.domain.auth.IUserAuthenticator]
  * @see[org.springframework.security.core.context.SecurityContext]
  * @see[org.springframework.security.authentication.UsernamePasswordAuthenticationToken]
  * @see[org.springframework.web.filter.GenericFilterBean]

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
  * via HTTP Bearer authentication with an old token. It then provides a JWT Token to access other endpoints, effectively allowing the initial token
  * to act as a refresh token for previously authenticated users.
  *
- * @see[nomic.domain.auth.TokenRegistry]
+ * @see[nomic.domain.auth.ITokenRegistry]
  * @see[nomic.config.security.filters.BasicAuthenticationSecurityFilter]
  * @see[nomic.config.security.filters.JWTAuthenticationSecurityFilter]
  * @param[TokenRegistry] This dependency is a domain service used by the endpoint to generate the JWT Token for the authenticated user.

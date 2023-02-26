@@ -10,7 +10,7 @@ import java.security.spec.PKCS8EncodedKeySpec
 import java.security.spec.X509EncodedKeySpec
 
 /**
- * This implementation of [KeyProvider] generates, persists, and loads RSA keys on the filesystem in the locations specified by [tokenConfig]
+ * This implementation of [IKeyProvider] generates, persists, and loads RSA keys on the filesystem in the locations specified by [tokenConfig]
  *
  * @see[JWTTokenConfigurationProperties]
  * @param[tokenConfig] This dependency is the configuration parsed by Spring with the various properties needed for the JWT Token RSA keys
