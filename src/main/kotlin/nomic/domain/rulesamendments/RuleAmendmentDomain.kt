@@ -1,9 +1,9 @@
 package nomic.domain.rulesamendments
 
+import nomic.data.dtos.RulesAmendmentsDTO
 import nomic.data.repositories.rulesamendments.RuleAmendmentRepository
 import nomic.domain.entities.AmendmentModel
 import nomic.domain.entities.RulesAmendmentsModel
-import nomic.data.dtos.RulesAmendmentsDTO
 import org.springframework.stereotype.Service
 
 /**
