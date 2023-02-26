@@ -1,4 +1,4 @@
-package nomic.domain.entities
+package nomic.data.dtos
 
 /**
  * Raw representation of data from the repository layer
@@ -16,7 +16,7 @@ package nomic.domain.entities
  * @property amendActive flag for whether an amendment is still in effect
  * @see[nomic.domain.entities.RulesAmendmentsModel]
  */
-data class RulesAmendmentsRaw(
+data class RulesAmendmentsDTO(
     val ruleId: Int,
     val ruleIndex: Int,
     val ruleTitle: String,

@@ -3,7 +3,7 @@ package nomic.domain.rulesamendments
 import nomic.data.repositories.rulesamendments.RuleAmendmentRepository
 import nomic.domain.entities.AmendmentModel
 import nomic.domain.entities.RulesAmendmentsModel
-import nomic.domain.entities.RulesAmendmentsRaw
+import nomic.data.dtos.RulesAmendmentsDTO
 import org.springframework.stereotype.Service
 
 /**
@@ -22,7 +22,7 @@ class RuleAmendmentDomain(
     override fun getRulesAmendments(gameId: String): MutableList<RulesAmendmentsModel> {
         val gameIdInt: Int = gameId.toIntOrNull() ?: throw IllegalArgumentException("Please enter a valid GameId!")
 
-        val rulesRaw: List<RulesAmendmentsRaw> = ruleAmendmentRepository.getRulesAmendments(gameIdInt)
+        val rulesRaw: List<RulesAmendmentsDTO> = ruleAmendmentRepository.getRulesAmendments(gameIdInt)
         val rules: MutableList<RulesAmendmentsModel> = mutableListOf()
         var currId: Int = -1
 

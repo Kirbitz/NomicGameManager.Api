@@ -2,7 +2,7 @@ package nomic.data.repositories.rulesamendments
 
 import nomic.data.dtos.Amendments
 import nomic.data.dtos.Rules
-import nomic.domain.entities.RulesAmendmentsRaw
+import nomic.data.dtos.RulesAmendmentsDTO
 import org.ktorm.database.Database
 import org.ktorm.dsl.eq
 import org.ktorm.dsl.forEach
@@ -22,15 +22,15 @@ import org.springframework.stereotype.Repository
  */
 @Repository
 class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentRepository {
-    override fun getRulesAmendments(gameId: Int): MutableList<RulesAmendmentsRaw> {
-        val rules: MutableList<RulesAmendmentsRaw> = mutableListOf()
+    override fun getRulesAmendments(gameId: Int): MutableList<RulesAmendmentsDTO> {
+        val rules: MutableList<RulesAmendmentsDTO> = mutableListOf()
 
         db.from(Rules)
             .leftJoin(Amendments, on = Amendments.ruleId eq Rules.ruleId)
             .select(Rules.ruleId, Rules.index, Rules.description, Rules.title, Rules.mutable, Rules.active, Amendments.amendId, Amendments.index, Amendments.description, Amendments.title, Amendments.active)
             .where(Rules.gameId eq gameId)
             .forEach { row ->
-                rules += RulesAmendmentsRaw(
+                rules += RulesAmendmentsDTO(
                     row[Rules.ruleId]!!,
                     row[Rules.index]!!,
                     row[Rules.title]!!,
