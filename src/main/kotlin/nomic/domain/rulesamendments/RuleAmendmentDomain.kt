@@ -1,7 +1,9 @@
 package nomic.domain.rulesamendments
 
 import nomic.data.repositories.rulesamendments.RuleAmendmentRepository
+import nomic.domain.entities.AmendmentModel
 import nomic.domain.entities.RulesAmendmentsModel
+import nomic.domain.entities.RulesAmendmentsRaw
 import org.springframework.stereotype.Service
 
 /**
@@ -20,6 +22,33 @@ class RuleAmendmentDomain(
     override fun getRulesAmendments(gameId: String): MutableList<RulesAmendmentsModel> {
         val gameIdInt: Int = gameId.toIntOrNull() ?: throw IllegalArgumentException("Please enter a valid GameId!")
 
-        return ruleAmendmentRepository.getRulesAmendments(gameIdInt)
+        val rulesRaw: List<RulesAmendmentsRaw> = ruleAmendmentRepository.getRulesAmendments(gameIdInt)
+        val rules: MutableList<RulesAmendmentsModel> = mutableListOf()
+        var currId: Int = -1
+
+        rulesRaw.forEach{ row ->
+            if (currId != row.ruleId && row.ruleActive) {
+                currId = row.ruleId
+                rules += RulesAmendmentsModel(
+                    row.ruleId,
+                    row.ruleIndex,
+                    row.ruleTitle,
+                    row.ruleDescription,
+                    row.ruleMutable
+                )
+            }
+            if (row.amendId != null && row.ruleActive && row.amendActive!!) {
+                rules.last().amendments?.add(
+                    AmendmentModel(
+                        row.amendId,
+                        row.amendIndex!!,
+                        row.amendDescription!!,
+                        row.amendTitle!!
+                    )
+                )
+            }
+        }
+
+        return rules
     }
 }
