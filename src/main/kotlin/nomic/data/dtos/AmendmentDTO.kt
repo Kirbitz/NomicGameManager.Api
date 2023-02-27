@@ -22,7 +22,7 @@ interface AmendmentDTO : Entity<AmendmentDTO> {
     val index: Int
     val description: String
     val title: String
-    val ruleId: Int
+    val rule: RuleDTO
     val active: Boolean
 }
 
@@ -42,6 +42,6 @@ object Amendments : Table<AmendmentDTO>("Amendment") {
     val index = int("index").bindTo { it.index }
     val description = varchar("description").bindTo { it.description }
     val title = varchar("title").bindTo { it.title }
-    val ruleId = int("ruleId").bindTo { it.ruleId }
+    val ruleId = int("ruleId").references(Rules) { it.rule }
     val active = boolean("active").bindTo { it.active }
 }
