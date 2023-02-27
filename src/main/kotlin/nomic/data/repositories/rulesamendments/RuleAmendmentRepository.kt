@@ -1,15 +1,14 @@
 package nomic.data.repositories.rulesamendments
 
-import nomic.data.dtos.Amendments
-import nomic.data.dtos.Rules
-import nomic.data.dtos.RulesAmendmentsDTO
+import nomic.data.dtos.amendments
+import nomic.data.dtos.rules
+import nomic.domain.entities.AmendmentModel
+import nomic.domain.entities.RulesAmendmentsModel
 import org.ktorm.database.Database
+import org.ktorm.dsl.and
 import org.ktorm.dsl.eq
-import org.ktorm.dsl.forEach
-import org.ktorm.dsl.from
-import org.ktorm.dsl.leftJoin
-import org.ktorm.dsl.select
-import org.ktorm.dsl.where
+import org.ktorm.entity.filter
+import org.ktorm.entity.toCollection
 import org.springframework.stereotype.Repository
 
 /**
@@ -22,29 +21,41 @@ import org.springframework.stereotype.Repository
  */
 @Repository
 class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentRepository {
-    override fun getRulesAmendments(gameId: Int): MutableList<RulesAmendmentsDTO> {
-        val rules: MutableList<RulesAmendmentsDTO> = mutableListOf()
+    override fun getRulesAmendments(gameId: Int): MutableList<RulesAmendmentsModel> {
+        val rulesDict = mutableMapOf<Int, RulesAmendmentsModel>()
 
-        db.from(Rules)
-            .leftJoin(Amendments, on = Amendments.ruleId eq Rules.ruleId)
-            .select(Rules.ruleId, Rules.index, Rules.description, Rules.title, Rules.mutable, Rules.active, Amendments.amendId, Amendments.index, Amendments.description, Amendments.title, Amendments.active)
-            .where(Rules.gameId eq gameId)
-            .forEach { row ->
-                rules += RulesAmendmentsDTO(
-                    row[Rules.ruleId]!!,
-                    row[Rules.index]!!,
-                    row[Rules.title]!!,
-                    row[Rules.description],
-                    row[Rules.mutable]!!,
-                    row[Rules.active]!!,
-                    row[Amendments.amendId],
-                    row[Amendments.index],
-                    row[Amendments.title],
-                    row[Amendments.description],
-                    row[Amendments.active]
+        val rules = db.rules.filter {
+            (it.gameId eq gameId) and (it.active eq true)
+        }.toCollection(mutableListOf())
+
+        val amendments = db.amendments.filter {
+            (it.rule.gameId eq gameId) and (it.rule.active eq true) and (it.active eq true)
+        }.toCollection(mutableListOf())
+
+        for (rule in rules) {
+            rulesDict.put(
+                rule.ruleId,
+                RulesAmendmentsModel(
+                    rule.ruleId,
+                    rule.index,
+                    rule.title,
+                    rule.description,
+                    rule.mutable
                 )
-            }
+            )
+        }
 
-        return rules
+        for (amendment in amendments) {
+            rulesDict[amendment.rule.ruleId]!!.amendments.add(
+                AmendmentModel(
+                    amendment.amendId,
+                    amendment.index,
+                    amendment.description,
+                    amendment.title
+                )
+            )
+        }
+
+        return rulesDict.values.toMutableList()
     }
 }
