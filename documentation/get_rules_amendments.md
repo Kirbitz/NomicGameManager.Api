@@ -1,10 +1,10 @@
 # Get Rules and Amendments Data
 
-Returns json data about the account creation.
+Returns json data of rules and amendments connected to a specific game.
 
 - **URL:**
 
-  /api/collect_rules_amendments/:gameId
+  /api/rules_amendments/{gameId}
 
 
 - **Method:**
@@ -92,12 +92,6 @@ Returns json data about the account creation.
   }
   ```
 
-  **Code:** `429 TOO MANY REQUESTS`
-
-  **Content:**
-
-  None
-
   **Code:** `500 INTERNAL SERVER ERROR`
 
   **Content:**
@@ -116,7 +110,7 @@ Returns json data about the account creation.
 ```javascript
 {
   method: 'GET',
-  url: '/api/collect_rules_amendments/:gameId',
+  url: '/api/rules_amendments/{gameId}',
   responseType: 'json',
   data: {
     gameId: 1234
