@@ -42,8 +42,7 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
                         row[Rules.mutable]!!
                     )
                 }
-                if (row[Amendments.amendId] != null) {
-                    rules.last().amendments?.add(
+                if (row[Amendments.amendId] != null) {                    rules.last().amendments?.add(
                         AmendmentModel(
                             row[Amendments.amendId]!!,
                             row[Amendments.index]!!,
