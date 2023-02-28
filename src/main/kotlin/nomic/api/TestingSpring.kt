@@ -1,6 +1,5 @@
 package nomic.api
 
-import game.manager.nomic.api.config.NomicConfigProperties
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
