@@ -40,7 +40,7 @@ interface RuleDTO : Entity<RuleDTO> {
  * @property active flag to determine rule visibility to the user
  * @property gameId The foreign key to the Games table
  */
-open class Rules : Table<RuleDTO>("Rule") {
+object Rules : Table<RuleDTO>("Rule") {
     val ruleId = int("ruleId").primaryKey().bindTo { it.ruleId }
     val index = int("index").bindTo { it.index }
     val title = varchar("title").bindTo { it.title }
