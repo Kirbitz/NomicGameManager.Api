@@ -20,6 +20,16 @@ data class RulesAmendmentsModel(
     var amendments: MutableList<AmendmentModel>? = mutableListOf()
 )
 
+
+data class RulesModel(
+    val ruleId: Int,
+    val index: Int,
+    val title: String,
+    val description: String? = null,
+    val mutable: Boolean,
+    val gameID: Int
+)
+
 /**
  * The amendments object to be passed back to the caller of the endpoint
  *

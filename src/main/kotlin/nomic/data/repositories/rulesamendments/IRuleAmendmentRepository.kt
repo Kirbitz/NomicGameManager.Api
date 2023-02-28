@@ -1,6 +1,7 @@
 package nomic.data.repositories.rulesamendments
 
 import nomic.domain.entities.RulesAmendmentsModel
+import nomic.domain.entities.RulesModel
 
 /**
  * Interface returns the obtained query when prompting the DB for Rules and Amendments
@@ -15,4 +16,6 @@ interface IRuleAmendmentRepository {
      * @return Raw rule and amendment data for a specific game
      */
     fun getRulesAmendments(gameId: Int): MutableList<RulesAmendmentsModel>
+
+    fun enactRule(inputRule: RulesModel)
 }

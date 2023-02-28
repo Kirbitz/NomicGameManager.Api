@@ -4,13 +4,9 @@ import nomic.data.dtos.Amendments
 import nomic.data.dtos.Rules
 import nomic.domain.entities.AmendmentModel
 import nomic.domain.entities.RulesAmendmentsModel
+import nomic.domain.entities.RulesModel
 import org.ktorm.database.Database
-import org.ktorm.dsl.eq
-import org.ktorm.dsl.forEach
-import org.ktorm.dsl.from
-import org.ktorm.dsl.leftJoin
-import org.ktorm.dsl.select
-import org.ktorm.dsl.where
+import org.ktorm.dsl.*
 import org.springframework.stereotype.Repository
 
 /**
@@ -56,5 +52,14 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
             }
 
         return rules
+    }
+    override fun enactRule(inputRule: RulesModel) {
+        db.insert(Rules){
+            set(it.gameId, inputRule.gameID)
+            set(it.mutable, inputRule.mutable)
+            set(it.index, inputRule.index)
+            set(it.title, inputRule.title)
+            set(it.description, inputRule.description)
+        }
     }
 }

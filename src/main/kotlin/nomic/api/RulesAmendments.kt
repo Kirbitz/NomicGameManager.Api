@@ -5,12 +5,8 @@ import nomic.domain.entities.RulesAmendmentsModel
 import nomic.domain.rulesamendments.RuleAmendmentDomain
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.ExceptionHandler
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.bind.annotation.RestController
+import nomic.domain.entities.RulesModel
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("api/rules_amendments")
@@ -22,6 +18,11 @@ class RulesAmendments(val ruleAmendmentDomain: RuleAmendmentDomain) {
 
         // Return the response object
         return ResponseEntity(rulesAmendments, HttpStatus.OK)
+    }
+
+    @PostMapping("enactRule")
+    fun enactRule(@RequestBody inputRule:RulesModel) {
+        return enactRule(inputRule)
     }
 
     @ExceptionHandler(IllegalArgumentException::class)
