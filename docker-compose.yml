@@ -15,5 +15,7 @@ services:
     ports:
       - '3306:3306'
     command: --init-file /data/application/init.sql
+    expose:
+      - '3306'
     volumes:
       - ./src/integrations/resources/init.sql:/data/application/init.sql
