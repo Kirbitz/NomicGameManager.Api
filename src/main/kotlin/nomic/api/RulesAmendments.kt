@@ -21,8 +21,9 @@ class RulesAmendments(val ruleAmendmentDomain: RuleAmendmentDomain) {
     }
 
     @PostMapping("enactRule")
-    fun enactRule(@RequestBody inputRule:RulesModel) {
-        return enactRule(inputRule)
+    fun enactRule(@RequestBody inputRule:RulesModel): ResponseEntity<Any> {
+        ruleAmendmentDomain.enactingRule(inputRule)
+        return ResponseEntity("Rule Created", HttpStatus.CREATED)
     }
 
     @ExceptionHandler(IllegalArgumentException::class)

@@ -54,6 +54,7 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
         return rules
     }
     override fun enactRule(inputRule: RulesModel) {
+        //Check to see if game exists
         db.insert(Rules){
             set(it.gameId, inputRule.gameID)
             set(it.mutable, inputRule.mutable)

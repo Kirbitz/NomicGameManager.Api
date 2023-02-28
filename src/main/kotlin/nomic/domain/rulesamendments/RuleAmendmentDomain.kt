@@ -24,7 +24,7 @@ class RuleAmendmentDomain(
         return ruleAmendmentRepository.getRulesAmendments(gameIdInt)
     }
     override fun enactingRule(input: RulesModel) {
-        val regex = "^[A-Za-z0-9 .!?]$".toRegex()
+        val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
 
         if(!regex.matches(input.description!!)) {
             throw IllegalArgumentException("Has Special Characters")
