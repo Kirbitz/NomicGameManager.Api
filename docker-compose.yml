@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  database:
+    # The version is explicitly set so that there are no surprise versions that suddenly break the image
+    image: mysql/mysql-server:8.0.32
+
+    restart: 'no'
+    environment:
+    # TODO: Finalize this environment variables (Probably at least partially dependent
+    # on the database schema being finalized)
+      MYSQL_DATABASE: 'Nomic'
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'rootpassword'
+    ports:
+      - '3306:3306'
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./src/integrations/resources/init.sql:/data/application/init.sql

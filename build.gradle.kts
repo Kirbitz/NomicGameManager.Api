@@ -5,6 +5,7 @@ plugins {
     id("org.springframework.boot") version "3.0.2"
     id("io.spring.dependency-management") version "1.1.0"
     id("org.jetbrains.dokka") version "1.7.20"
+    id("com.avast.gradle.docker-compose") version "0.16.11"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
     jacoco
@@ -55,7 +56,6 @@ dependencies {
     implementation("org.ktorm:ktorm-support-mysql:3.6.0")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("com.h2database:h2")
     integrationsImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
@@ -113,4 +113,13 @@ val integrationTests : Test = task<Test>("integrationTests") {
     testLogging {
         events("passed")
     }
+}
+
+integrationTests.doFirst {
+    dockerCompose.exposeAsEnvironment(integrationTests)
+}
+
+dockerCompose {
+    this.useComposeFiles.add("docker-compose.yml")
+    this.isRequiredBy(project.tasks.findByName("integrationTests"))
 }
