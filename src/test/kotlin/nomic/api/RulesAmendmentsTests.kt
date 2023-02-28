@@ -1,6 +1,6 @@
 package nomic.api
 
-import nomic.domain.entities.RulesAmendmentsModel
+import nomic.api.models.RulesAmendmentsApiModel
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,7 +14,7 @@ class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) : BaseEndToE
 
     @Test
     fun `Found Rule And Amendment Data`() {
-        val entity = client.exchange<List<RulesAmendmentsModel>>("/api/rules_amendments/1", HttpMethod.GET, request)
+        val entity = client.exchange<List<RulesAmendmentsApiModel>>("/api/rules_amendments/1", HttpMethod.GET, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(entity.body!!.size).isGreaterThan(0)
@@ -23,7 +23,7 @@ class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) : BaseEndToE
 
     @Test
     fun `Found Game With Rules That Has No Amendments`() {
-        val entity = client.exchange<List<RulesAmendmentsModel>>("/api/rules_amendments/1", HttpMethod.GET, request)
+        val entity = client.exchange<List<RulesAmendmentsApiModel>>("/api/rules_amendments/1", HttpMethod.GET, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(entity.body).anyMatch { it.amendments!!.size == 0 }
@@ -31,7 +31,7 @@ class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) : BaseEndToE
 
     @Test
     fun `Found Game With No Rules and Amendments`() {
-        val entity = client.exchange<List<RulesAmendmentsModel>>("/api/rules_amendments/2", HttpMethod.GET, request)
+        val entity = client.exchange<List<RulesAmendmentsApiModel>>("/api/rules_amendments/2", HttpMethod.GET, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(entity.body!!.size).isEqualTo(0)
@@ -39,7 +39,7 @@ class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) : BaseEndToE
 
     @Test
     fun `Found Game With Rules Activity Equals False and Amendments Activity Equals True`() {
-        val entity = client.exchange<List<RulesAmendmentsModel>>("/api/rules_amendments/3", HttpMethod.GET, request)
+        val entity = client.exchange<List<RulesAmendmentsApiModel>>("/api/rules_amendments/3", HttpMethod.GET, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(entity.body!!.size).isEqualTo(0)
@@ -47,7 +47,7 @@ class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) : BaseEndToE
 
     @Test
     fun `Found Game With Rules and Multiple Amendments`() {
-        val entity = client.exchange<List<RulesAmendmentsModel>>("/api/rules_amendments/1", HttpMethod.GET, request)
+        val entity = client.exchange<List<RulesAmendmentsApiModel>>("/api/rules_amendments/1", HttpMethod.GET, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(entity.body!![2].amendments!!.size).isGreaterThan(1)
@@ -55,7 +55,7 @@ class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) : BaseEndToE
 
     @Test
     fun `Found Game With Rules and Amendment Activity Equals False`() {
-        val entity = client.exchange<List<RulesAmendmentsModel>>("/api/rules_amendments/1", HttpMethod.GET, request)
+        val entity = client.exchange<List<RulesAmendmentsApiModel>>("/api/rules_amendments/1", HttpMethod.GET, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(entity.body!![3].amendments!!.size).isEqualTo(0)
