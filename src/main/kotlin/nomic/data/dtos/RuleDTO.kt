@@ -1,8 +1,6 @@
 package nomic.data.dtos
 
-import org.ktorm.database.Database
 import org.ktorm.entity.Entity
-import org.ktorm.entity.sequenceOf
 import org.ktorm.schema.Table
 import org.ktorm.schema.boolean
 import org.ktorm.schema.int
@@ -42,10 +40,7 @@ interface RuleDTO : Entity<RuleDTO> {
  * @property active flag to determine rule visibility to the user
  * @property gameId The foreign key to the Games table
  */
-open class Rules(alias: String?) : Table<RuleDTO>("Rule", alias) {
-    companion object : Rules(null)
-    override fun aliased(alias: String) = Rules(alias)
-
+open class Rules : Table<RuleDTO>("Rule") {
     val ruleId = int("ruleId").primaryKey().bindTo { it.ruleId }
     val index = int("index").bindTo { it.index }
     val title = varchar("title").bindTo { it.title }
@@ -54,5 +49,3 @@ open class Rules(alias: String?) : Table<RuleDTO>("Rule", alias) {
     val active = boolean("active").bindTo { it.active }
     val gameId = int("gameId").bindTo { it.gameId }
 }
-
-val Database.rules get() = this.sequenceOf(Rules)
