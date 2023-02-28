@@ -16,6 +16,6 @@ data class GameModel(
     val gameId: Int,
     val title: String,
     val createDate: LocalDate,
-    val currentPlayer: Int,
+    val currentPlayer: Int? = null,
     val userId: Int,
 )
