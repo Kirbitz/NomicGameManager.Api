@@ -20,7 +20,6 @@ class RuleAmendmentDomain(
     override fun getRulesAmendments(gameId: String): MutableList<RulesAmendmentsModel> {
         val gameIdInt: Int = gameId.toIntOrNull() ?: throw IllegalArgumentException("Please enter a valid GameId!")
 
-        val rules = ruleAmendmentRepository.getRulesAmendments(gameIdInt)
-        return rules
+        return ruleAmendmentRepository.getRulesAmendments(gameIdInt)
     }
 }
