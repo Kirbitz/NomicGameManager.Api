@@ -80,6 +80,7 @@ tasks.jacocoTestReport {
 	reports {
 		xml.required.set(true)
 	}
+    executionData(fileTree(buildDir).include("/jacoco/*.exec"))
 }
 
 // This disables the extraneous jar of just this application's classes with none of the dependencies
