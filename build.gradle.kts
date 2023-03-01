@@ -75,6 +75,7 @@ tasks.test {
 }
 
 tasks.jacocoTestReport {
+    sourceSets(sourceSets.getByName("integrations"))
 	dependsOn(tasks.test)
 	reports {
 		xml.required.set(true)
