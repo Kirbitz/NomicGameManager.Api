@@ -15,6 +15,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
     /**
      * Handles the Illegal Argument Exceptions that are thrown
+     *
+     * @return The response entity with error code and message
      */
     @ExceptionHandler(IllegalArgumentException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -23,8 +25,11 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
     ): ResponseEntity<Any> {
         return ResponseEntity(ExceptionResponseFormat(true, exception.message), HttpStatus.BAD_REQUEST)
     }
+
     /**
      * Handles the Not Found Exceptions that are thrown
+     *
+     * @return The response entity with error code and message
      */
     @ExceptionHandler(EntityNotFoundException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -36,6 +41,8 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
 
     /**
      * Handles any generic Exceptions that are thrown
+     *
+     * @return The response entity with error code and message
      */
     @ExceptionHandler(Exception::class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
