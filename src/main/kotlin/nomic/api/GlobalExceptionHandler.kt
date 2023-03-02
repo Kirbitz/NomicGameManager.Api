@@ -8,9 +8,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 
-
+/**
+ * This handles all exceptions that could occur within an API endpoint
+ */
 @ControllerAdvice
 class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
+    /**
+     * Handles the Illegal Argument Exceptions that are thrown
+     *
+     * @return The response entity with error code and message
+     */
     @ExceptionHandler(IllegalArgumentException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleIllegalArgumentException(
@@ -19,6 +26,11 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
         return ResponseEntity(ExceptionResponseFormat(true, exception.message), HttpStatus.BAD_REQUEST)
     }
 
+    /**
+     * Handles the Not Found Exceptions that are thrown
+     *
+     * @return The response entity with error code and message
+     */
     @ExceptionHandler(EntityNotFoundException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleEntityNotFoundException(
@@ -27,10 +39,15 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
         return ResponseEntity(ExceptionResponseFormat(true, exception.message), HttpStatus.NOT_FOUND)
     }
 
+    /**
+     * Handles any generic Exceptions that are thrown
+     *
+     * @return The response entity with error code and message
+     */
     @ExceptionHandler(Exception::class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     fun handleAllUncaughtException(
-        exception: IllegalArgumentException
+        exception: Exception
     ): ResponseEntity<Any> {
         return ResponseEntity(ExceptionResponseFormat(true, "Internal server error"), HttpStatus.INTERNAL_SERVER_ERROR)
     }
