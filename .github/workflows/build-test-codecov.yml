@@ -4,7 +4,9 @@ name: Build, Test, and Coverage Report
 on:
   # Triggers the workflow on push or pull request events
   pull_request:
-    types: [opened, synchronize, closed]
+    types: [opened, synchronize]
+  push:
+    branches: [ "master" ]
     
 jobs:
   build:
