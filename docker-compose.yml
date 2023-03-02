@@ -6,8 +6,6 @@ services:
 
     restart: 'no'
     environment:
-    # TODO: Finalize this environment variables (Probably at least partially dependent
-    # on the database schema being finalized)
       MYSQL_DATABASE: 'Nomic'
       MYSQL_USER: 'admin'
       MYSQL_PASSWORD: 'password'
