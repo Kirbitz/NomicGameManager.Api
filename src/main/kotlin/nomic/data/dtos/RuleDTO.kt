@@ -22,6 +22,7 @@ interface RuleDTO : Entity<RuleDTO> {
     val title: String
     val description: String
     val mutable: Boolean
+    val active: Boolean
     val gameId: Int
 }
 
@@ -42,5 +43,6 @@ object Rules : Table<RuleDTO>("Rule") {
     val title = varchar("title").bindTo { it.title }
     val description = varchar("description").bindTo { it.description }
     val mutable = boolean("mutable").bindTo { it.mutable }
+    val active = boolean("active").bindTo { it.active }
     val gameId = int("gameId").bindTo { it.gameId }
 }
