@@ -7,16 +7,21 @@ import nomic.domain.entities.Credential
 import nomic.domain.entities.LoginName
 import nomic.domain.entities.PasswordHash
 import nomic.domain.entities.User
-import org.junit.jupiter.api.Assertions
+import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.Test
 import org.ktorm.database.Database
-import org.ktorm.entity.add
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.verify
+import org.ktorm.dsl.*
+import org.ktorm.dsl.eq
+import org.ktorm.entity.*
+import org.ktorm.entity.find
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder
 
-class CredentialRepositoryTest {
-
-    private val db: Database
+@SpringBootTest(
+    webEnvironment = SpringBootTest.WebEnvironment.MOCK
+)
+class CredentialRepositoryTest(@Autowired private val db: Database) {
     private val password: PasswordHash
 
     private val testCreds1: Credential
@@ -46,7 +51,7 @@ class CredentialRepositoryTest {
         }
 
         testCreds2 = Credential(
-            User(2, "Alcibiades"),
+            User(3, "Alcibiades"),
             LoginName("StrongDoWhatTheyCan"),
             password
         )
@@ -60,30 +65,16 @@ class CredentialRepositoryTest {
             this.loginName = testCreds2.loginName.rawName
             this.passwordHash = testCreds2.passwordHash.rawHash
         }
-
-        db = mock<Database>
-        {
-            on { it.credentials.add(testCredsDto1) }
-            on { it.credentials.add(testCredsDto2) }
-        }
     }
 
-    // @Test
+    @Test
     fun create() {
         val repo = CredentialRepository(db)
 
-        repo.create(User(0, "Cincinnatus"), LoginName("SimpleFarmer"), password)
-        val expectedDto = CredentialDTO {
-            this.user = UserDTO {
-                this.id = 0
-                this.name = "Cincinnatus"
-            }
+        val creds = repo.create(testCreds1.user, testCreds1.loginName, testCreds1.passwordHash)
 
-            this.loginName = "SimpleFarmer"
-            this.passwordHash = password.rawHash
-        }
-
-        verify(db).credentials.add(expectedDto)
+        Assertions.assertThat(creds).usingRecursiveComparison().isEqualTo(testCreds1)
+        Assertions.assertThat(db.credentials.find { it.userId eq testCredsDto1.user.id }).usingRecursiveComparison().isEqualTo(testCredsDto1)
     }
 
     // @Test
