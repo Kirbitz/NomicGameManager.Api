@@ -13,9 +13,9 @@ import java.time.LocalDate
  */
 
 data class GameModel(
-    val gameId: Int,
+    val gameId: Int? = null,
     val title: String,
-    val createDate: LocalDate,
+    val createDate: LocalDate? = null,
     val currentPlayer: Int? = null,
     val userId: Int,
 )

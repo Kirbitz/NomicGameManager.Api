@@ -22,12 +22,6 @@ Returns json data about the game creation.
 
   `New Nomic Game`
 
-  **Required:** Create Date
-
-  `createDate: [date]`
-
-  `2023-02-09`
-
   **Required:** User ID - ID from user to get the user
 
   `userId: [int]`
@@ -68,12 +62,6 @@ Returns json data about the game creation.
   }
   ```
 
-  **Code:** `429 TOO MANY REQUESTS`
-
-  **Content:**
-
-  None
-
   **Code:** `500 INTERNAL SERVER ERROR`
 
   **Content:**
@@ -92,11 +80,10 @@ Returns json data about the game creation.
 ```javascript
 axios({
   method: "POST",
-  url: "/api/create_game",
+  url: "/api/game/create",
   responseType: "json",
   data: {
     title: "New Nomic Game",
-    createDate: 2023 - 02 - 09,
     userId: 2,
   },
 });

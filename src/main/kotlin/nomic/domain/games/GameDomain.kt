@@ -15,12 +15,15 @@ import org.springframework.stereotype.Service
  */
 @Service
 class GameDomain(
-        private val gameRepository: GameRepository
+    private val gameRepository: GameRepository
 ) : IGameDomain {
-    override fun createGame(title: String, currentPlayer: String) {
-        val titleString: String = title.toString() ?: throw IllegalArgumentException("Please enter a valid name!")
-        val currentPlayerInt: Int = currentPlayer.isNull() ?: throw illegalArgumentException("Please enter a valid currentPlayer!")
+    override fun createGame(input: GameModel) {
+        val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
 
-        return gameRepository.createGame(titleString, currentPlayerInt)
+        if(!regex.matches(input.title!!)) {
+            throw IllegalArgumentException("Has Special Characters")
+        }
+
+        gameRepository.createGame(input)
     }
 }
