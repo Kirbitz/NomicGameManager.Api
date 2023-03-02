@@ -20,7 +20,7 @@ data class RulesAmendmentsModel(
     val ruleId: Int,
     val ruleIndex: Int,
     val ruleTitle: String,
-    val ruleDescription: String?,
+    val ruleDescription: String,
     val ruleMutable: Boolean,
     val ruleActive: Boolean,
     val amendId: Int?,

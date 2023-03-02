@@ -34,7 +34,7 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
                     row[Rules.ruleId]!!,
                     row[Rules.index]!!,
                     row[Rules.title]!!,
-                    row[Rules.description],
+                    row[Rules.description]!!,
                     row[Rules.mutable]!!,
                     row[Rules.active]!!,
                     row[Amendments.amendId],

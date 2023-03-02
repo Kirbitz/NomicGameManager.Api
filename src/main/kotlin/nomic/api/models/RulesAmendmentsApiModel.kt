@@ -15,9 +15,9 @@ data class RulesAmendmentsApiModel(
     val ruleId: Int,
     val index: Int,
     val title: String,
-    val description: String? = null,
+    val description: String,
     val mutable: Boolean,
-    var amendments: MutableList<AmendmentModel>? = mutableListOf()
+    var amendments: MutableList<AmendmentModel> = mutableListOf()
 )
 
 /**
