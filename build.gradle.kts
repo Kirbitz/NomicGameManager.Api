@@ -77,6 +77,7 @@ tasks.test {
 tasks.jacocoTestReport {
     sourceSets(sourceSets.getByName("integrations"))
 	dependsOn(tasks.test)
+    dependsOn(integrationTests)
 	reports {
 		xml.required.set(true)
 	}
@@ -109,6 +110,7 @@ val integrationTests : Test = task<Test>("integrationTests") {
     testClassesDirs = sourceSets["integrations"].output.classesDirs
     classpath = sourceSets["integrations"].runtimeClasspath
     shouldRunAfter("test")
+    finalizedBy(tasks.jacocoTestReport)
 
     useJUnitPlatform()
 
