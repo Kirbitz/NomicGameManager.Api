@@ -1,7 +1,6 @@
 package nomic.domain.entities
 
 /**
-
  * Raw representation of data from the repository layer
  *
  * @property ruleId the unique if for the rule

@@ -15,10 +15,9 @@ class RulesAmendments(val ruleAmendmentDomain: RuleAmendmentDomain) {
     // Path to endpoint is api/rules_amendments/ExistingGameId
     @GetMapping("{gameid}", produces = ["application/json;charset=UTF-8"])
     fun getRulesAmendments(@PathVariable(value = "gameid") gameId: String): ResponseEntity<Any> {
-
         val rulesAmendments: List<RulesAmendmentsApiModel> = ruleAmendmentDomain.getRulesAmendments(gameId)
+
         // Return the response object
         return ResponseEntity(rulesAmendments, HttpStatus.OK)
     }
-
 }

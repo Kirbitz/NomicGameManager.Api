@@ -24,6 +24,7 @@ import org.springframework.stereotype.Repository
 class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentRepository {
     override fun getRulesAmendments(gameId: Int): MutableList<RulesAmendmentsModel> {
         val rules: MutableList<RulesAmendmentsModel> = mutableListOf()
+
         db.from(Rules)
             .leftJoin(Amendments, on = Amendments.ruleId eq Rules.ruleId)
             .select(Rules.ruleId, Rules.index, Rules.description, Rules.title, Rules.mutable, Rules.active, Amendments.amendId, Amendments.index, Amendments.description, Amendments.title, Amendments.active)
