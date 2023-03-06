@@ -82,17 +82,17 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
         Assertions.fail<String>("")
     }
 
-    // @Test
+    @Test
     fun getById() {
         Assertions.fail<String>("")
     }
 
-    // @Test
+    @Test
     fun delete() {
         Assertions.fail<String>("")
     }
 
-    // @Test
+    @Test
     fun getByName() {
         Assertions.fail<String>("")
     }
