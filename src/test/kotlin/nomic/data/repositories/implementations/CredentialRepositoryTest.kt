@@ -8,6 +8,7 @@ import nomic.domain.entities.LoginName
 import nomic.domain.entities.PasswordHash
 import nomic.domain.entities.User
 import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.ktorm.database.Database
 import org.ktorm.dsl.*
@@ -30,9 +31,10 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
     private val testCreds2: Credential
     private val testCredsDto2: CredentialDTO
 
+    private val passwordHasher = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8()
+
     init {
-        val encoder = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8()
-        password = PasswordHash(encoder.encode("password"))
+        password = PasswordHash(passwordHasher.encode("password"))
 
         testCreds1 = Credential(
             User(0, "Cincinnatus"),
@@ -67,7 +69,12 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
         }
     }
 
+    private fun hashPassword(password : String) : PasswordHash {
+        return PasswordHash(passwordHasher.encode(password))
+    }
+
     @Test
+    @Order(1)
     fun create() {
         val repo = CredentialRepository(db)
 
@@ -77,9 +84,68 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
         Assertions.assertThat(db.credentials.find { it.userId eq testCredsDto1.user.id }).usingRecursiveComparison().isEqualTo(testCredsDto1)
     }
 
-    // @Test
-    fun update() {
-        Assertions.fail<String>("")
+    @Test
+    fun test_update_succeeds_username() {
+        val repo = CredentialRepository(db)
+        val login1 = LoginName("SupermanTheProgrammer")
+        val login2 = LoginName("Darth_Vader")
+
+        testCreds1.loginName = login1
+        repo.update(testCreds1)
+
+        testCreds2.loginName = login2
+        repo.update(testCreds2)
+
+        val testCredsResult1 = db.credentials.find { it.userId eq testCreds1.id }!!
+        val testCredsResult2 = db.credentials.find { it.userId eq testCreds2.id }!!
+
+        Assertions.assertThat(testCredsResult1.loginName).isEqualTo(login1.rawName)
+        Assertions.assertThat(testCredsResult2.loginName).isEqualTo(login2.rawName)
+
+        Assertions.assertThat(testCreds1.loginName).isEqualTo(login1.rawName)
+        Assertions.assertThat(testCreds2.loginName).isEqualTo(login2.rawName)
+    }
+
+    @Test
+    fun test_update_password() {
+        val repo = CredentialRepository(db)
+        val password1 = hashPassword("aBC*er2iauerhggkjrfbkj")
+        val password2 = hashPassword("alpha_zeta_gamma123748159841365y")
+
+        testCreds1.passwordHash = password1
+        repo.update(testCreds1)
+
+        testCreds2.passwordHash = password2
+        repo.update(testCreds2)
+
+        val testCredsResult1 = db.credentials.find { it.userId eq testCreds1.id }!!
+        val testCredsResult2 = db.credentials.find { it.userId eq testCreds2.id }!!
+
+        Assertions.assertThat(testCredsResult1.passwordHash).isEqualTo(password1.rawHash)
+        Assertions.assertThat(testCredsResult2.passwordHash).isEqualTo(password2.rawHash)
+
+        Assertions.assertThat(testCreds1.passwordHash).isEqualTo(password1.rawHash)
+        Assertions.assertThat(testCreds2.passwordHash).isEqualTo(password2.rawHash)
+    }
+
+    @Test
+    fun test_update_usernameAndPassword() {
+        val repo = CredentialRepository(db)
+
+        val login = LoginName("JoeSmith")
+        val password = hashPassword("qwertyasdf")
+
+        testCreds1.loginName = login
+        testCreds1.passwordHash = password
+        repo.update(testCreds1)
+
+        val testCredsResult = db.credentials.find { it.userId eq testCreds1.id }!!
+
+        Assertions.assertThat(testCredsResult.passwordHash).isEqualTo(password.rawHash)
+        Assertions.assertThat(testCredsResult.loginName).isEqualTo(login.rawName)
+
+        Assertions.assertThat(testCreds1.passwordHash).isEqualTo(password.rawHash)
+        Assertions.assertThat(testCreds1.loginName).isEqualTo(login.rawName)
     }
 
     @Test
