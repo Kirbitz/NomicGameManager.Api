@@ -11,9 +11,7 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.ktorm.database.Database
-import org.ktorm.dsl.*
 import org.ktorm.dsl.eq
-import org.ktorm.entity.*
 import org.ktorm.entity.find
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -69,7 +67,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
         }
     }
 
-    private fun hashPassword(password : String) : PasswordHash {
+    private fun hashPassword(password: String): PasswordHash {
         return PasswordHash(passwordHasher.encode(password))
     }
 
