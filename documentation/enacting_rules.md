@@ -4,7 +4,7 @@ Returns json data about the account creation.
 
 - **URL:**
 
-  /api/enacting_rules
+  /api/rules_amendments/enactRule
 
 - **Method:**
 
