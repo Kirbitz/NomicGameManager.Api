@@ -1,5 +1,6 @@
 package nomic.domain.auth
 
+import com.auth0.jwt.RegisteredClaims
 import nomic.data.repositories.IUserRepository
 import nomic.domain.entities.User
 import org.assertj.core.api.Assertions
@@ -17,8 +18,6 @@ class TokenRegistryTest {
 
     private val keyProvider: IKeyProvider
     private val usersRepo: IUserRepository
-
-    private val tokenRegistry: TokenRegistry
 
     companion object {
         const val PUBLIC_KEY = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAI6jowrmGDTzQg7YQIyEoxQbvB16efH1EsEHj6yE58mIxXNi95ZEO5u7/loWmd1a1eWGI2dIu2dkDyYTVx8YDfUCAwEAAQ=="
@@ -50,20 +49,22 @@ class TokenRegistryTest {
             on { it.getById(testUser1.id) } doReturn Optional.of(testUser1)
             on { it.getById(testUser2.id) } doReturn Optional.of(testUser2)
         }
-
-        tokenRegistry = TokenRegistry(keyProvider, usersRepo)
     }
 
     @Test
     fun test_issueToken_hasSubjectId() {
+        val tokenRegistry = TokenRegistry(keyProvider, usersRepo)
+
         val token1 = tokenRegistry.issueToken(testUser1)
         val token2 = tokenRegistry.issueToken(testUser2)
 
         val tokenBody1 = String(Base64.getDecoder().decode(token1.split('.')[1]))
         val tokenBody2 = String(Base64.getDecoder().decode(token2.split('.')[1]))
 
-        Assertions.assertThat(tokenBody1).contains("\"sub\":\"${testUser1.id}\"")
-        Assertions.assertThat(tokenBody2).contains("\"sub\":\"${testUser2.id}\"")
+        val subject = RegisteredClaims.SUBJECT
+
+        Assertions.assertThat(tokenBody1).contains("\"$subject\":\"${testUser1.id}\"")
+        Assertions.assertThat(tokenBody2).contains("\"$subject\":\"${testUser2.id}\"")
     }
 
     @Test
