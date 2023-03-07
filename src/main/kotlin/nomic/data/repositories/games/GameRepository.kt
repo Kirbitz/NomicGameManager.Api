@@ -2,12 +2,12 @@ package nomic.data.repositories.games
 
 import nomic.data.EntityNotFoundException
 import nomic.data.dtos.Games
+import nomic.domain.entities.GameModel
 import org.ktorm.database.Database
 import org.ktorm.dsl.delete
 import org.ktorm.dsl.eq
-import org.springframework.stereotype.Repository
-import nomic.domain.entities.GameModel
 import org.ktorm.dsl.insert
+import org.springframework.stereotype.Repository
 import java.time.LocalDate
 
 /**
@@ -33,7 +33,7 @@ class GameRepository(private val db: Database) : IGameRepository {
 
     override fun deleteGame(gameId: Int) {
         val result = db.delete(Games) { Games.gameId eq gameId }
-        if(result < 1) {
+        if (result < 1) {
             throw EntityNotFoundException(gameId)
         }
     }

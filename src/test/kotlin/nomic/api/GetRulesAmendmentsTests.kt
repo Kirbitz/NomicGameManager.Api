@@ -9,7 +9,7 @@ import org.springframework.boot.test.web.client.exchange
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 
-class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTest() {
+class GetRulesAmendmentsTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTest() {
     private val request = createRequest<Any>()
 
     @Test
