@@ -20,7 +20,7 @@ class GameDomain(
     override fun createGame(input: GameModel) {
         val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
 
-        if (!regex.matches(input.title!!)) {
+        if (!regex.matches(input.title)) {
             throw IllegalArgumentException("Has Special Characters")
         }
 
