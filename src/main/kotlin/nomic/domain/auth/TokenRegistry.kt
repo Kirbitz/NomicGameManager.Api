@@ -30,8 +30,8 @@ class TokenRegistry(
         val keyPair = keyProvider.getKeyPair()
         algorithm = Algorithm.RSA256(keyPair.publicKey, keyPair.privateKey)
         verifier = JWT.require(algorithm)
-            .withIssuer(JWT_SERVER)
-            .withAudience(JWT_SERVER)
+            .withIssuer(JWT_ISSUER)
+            .withAudience(JWT_ISSUER)
             .withClaimPresence(RegisteredClaims.SUBJECT)
             .acceptLeeway(10) // Issued at, Expires at, and not before as a 10 second window of leeway
             .build()
@@ -40,8 +40,8 @@ class TokenRegistry(
     override fun issueToken(user: User, claims: Map<String, String>): String {
         val tokenBuilder = JWT.create()
             .withSubject(user.id.toString())
-            .withIssuer(JWT_SERVER)
-            .withAudience(JWT_SERVER)
+            .withIssuer(JWT_ISSUER)
+            .withAudience(JWT_ISSUER)
             .withIssuedAt(Instant.now())
             .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
             .withNotBefore(Instant.now())
@@ -69,6 +69,6 @@ class TokenRegistry(
     }
 
     companion object {
-        private const val JWT_SERVER = "NomicGameManager.Api"
+        internal const val JWT_ISSUER = "NomicGameManager.Api"
     }
 }
