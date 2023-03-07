@@ -1,6 +1,7 @@
 package nomic.domain.games
 
 import nomic.data.repositories.games.GameRepository
+import nomic.domain.entities.GameModel
 import org.springframework.stereotype.Service
 
 /**
@@ -14,6 +15,16 @@ import org.springframework.stereotype.Service
  */
 @Service
 class GameDomain(private val gameRepository: GameRepository) : IGameDomain {
+    override fun createGame(input: GameModel) {
+        val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
+
+        if (!regex.matches(input.title)) {
+            throw IllegalArgumentException("Has Special Characters")
+        }
+
+        gameRepository.createGame(input)
+    }
+
     override fun deleteGame(gameId: String) {
         val gameIdInt: Int = gameId.toIntOrNull() ?: throw IllegalArgumentException("Please enter a valid GameId!")
 

@@ -6,6 +6,9 @@ import org.ktorm.database.Database
 import org.ktorm.dsl.delete
 import org.ktorm.dsl.eq
 import org.springframework.stereotype.Repository
+import nomic.domain.entities.GameModel
+import org.ktorm.dsl.insert
+import java.time.LocalDate
 
 /**
  * Implementation of the [IGameRepository][nomic.data.repositories.games.IGameRepository] uses
@@ -16,7 +19,18 @@ import org.springframework.stereotype.Repository
  * @param db the connected instance of [org.ktorm.database.Database] to use as the database
  */
 @Repository
-class GameRepository(private val db: Database): IGameRepository {
+class GameRepository(private val db: Database) : IGameRepository {
+    override fun createGame(input: GameModel) {
+        // Check to see if game exists
+        db.insert(Games) {
+            set(it.title, input.title)
+            set(it.createDate, LocalDate.now())
+            set(it.currentPlayer, null)
+            // userId will need to be changed to use the token value
+            set(it.userId, input.userId)
+        }
+    }
+
     override fun deleteGame(gameId: Int) {
         val result = db.delete(Games) { Games.gameId eq gameId }
         if(result < 1) {
