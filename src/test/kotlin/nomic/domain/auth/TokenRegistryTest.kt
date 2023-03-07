@@ -121,4 +121,13 @@ class TokenRegistryTest {
         Assertions.assertThat(result.subject).isNull()
         Assertions.assertThat(result.validClaims).isEmpty()
     }
+
+    @Test
+    fun test_validateToken_badToken() {
+        val tokenRegistry = TokenRegistry(keyProvider, usersRepo)
+        val result = tokenRegistry.validateToken("Blah.Foo.Bar")
+        Assertions.assertThat(result.isSuccess).isFalse
+        Assertions.assertThat(result.subject).isNull()
+        Assertions.assertThat(result.validClaims).isEmpty()
+    }
 }
