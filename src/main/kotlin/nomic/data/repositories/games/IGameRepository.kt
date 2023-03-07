@@ -13,5 +13,4 @@ interface IGameRepository {
      * Creates a game
      */
     fun createGame(input: GameModel)
-
 }

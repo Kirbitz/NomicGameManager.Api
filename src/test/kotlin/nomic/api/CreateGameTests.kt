@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus
 class CreateGameTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTest() {
     private val game = GamesApiModel("New Game", 2)
     private val request = createRequest<GamesApiModel>(game)
+
     @Test
     fun `Create Game on existing userId`() {
         val entity = client.exchange<String>("/api/game/create", HttpMethod.POST, request)
@@ -21,6 +22,7 @@ class CreateGameTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTes
 
     private val game2 = GamesApiModel("###BAD###", 2)
     private val request2 = createRequest<GamesApiModel>(game2)
+
     @Test
     fun `Create Game with Bad Title (#)`() {
         val entity = client.exchange<String>("/api/game/create", HttpMethod.POST, request2)
@@ -30,6 +32,7 @@ class CreateGameTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTes
 
     private val game3 = GamesApiModel("&&&BAD&&&", 2)
     private val request3 = createRequest<GamesApiModel>(game3)
+
     @Test
     fun `Create Game with Bad Title (&)`() {
         val entity = client.exchange<String>("/api/game/create", HttpMethod.POST, request3)
@@ -39,6 +42,7 @@ class CreateGameTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTes
 
     private val game4 = GamesApiModel("@@@BAD@@@", 2)
     private val request4 = createRequest<GamesApiModel>(game4)
+
     @Test
     fun `Create Game with Bad Title (@)`() {
         val entity = client.exchange<String>("/api/game/create", HttpMethod.POST, request4)
