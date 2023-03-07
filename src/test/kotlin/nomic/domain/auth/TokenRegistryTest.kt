@@ -112,7 +112,13 @@ class TokenRegistryTest {
     }
 
     @Test
-    fun validateToken() {
-        Assertions.fail<String>("Not yet implemented")
+    fun test_validateToken_expiredToken() {
+        val tokenRegistry = TokenRegistry(keyProvider, usersRepo)
+        val badToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI1MTIiLCJhdWQiOiJOb21pY0dhbWVNYW5hZ2VyLkFwaSIsIm5iZiI6MTY3ODIyNDYyMCwiaXNzIjoiTm9taWNHYW1lTWFuYWdlci5BcGkiLCJleHAiOjE2NzgyMzE4MjAsImlhdCI6MTY3ODIyNDYyMH0.AzP26ODJH-QEUcaZnRTlIaNMjzIzltOaKPqWf4xW9mSpkJBYCbyoCJGdvU_0kw3E9Ydn9IX_X6ezD29KPmuC8Q"
+
+        val result = tokenRegistry.validateToken(badToken)
+        Assertions.assertThat(result.isSuccess).isFalse
+        Assertions.assertThat(result.subject).isNull()
+        Assertions.assertThat(result.validClaims).isEmpty()
     }
 }
