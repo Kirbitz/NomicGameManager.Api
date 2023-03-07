@@ -8,7 +8,7 @@ import org.ktorm.dsl.update
 import org.springframework.stereotype.Service
 
 @Service
-class RepealRuleRepository(private val db: Database) : IRepealRuleRepository{
+class RepealRuleRepository(private val db: Database) : IRepealRuleRepository {
     override fun repealRule(ruleId: Int): Int {
         db.update(Amendments) {
             set(it.active, false)
@@ -22,6 +22,5 @@ class RepealRuleRepository(private val db: Database) : IRepealRuleRepository{
                 it.ruleId eq ruleId
             }
         }
-
     }
 }

@@ -1,18 +1,17 @@
 package nomic.api
 
-import nomic.api.models.RulesAmendmentsApiModel
-import nomic.domain.entities.RepealRuleResponse
 import org.assertj.core.api.Assertions
-import org.springframework.beans.factory.annotation.Autowired
 import org.junit.jupiter.api.Test
-
-import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.web.client.exchange
+import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
+import nomic.domain.entities.RepealRuleResponse
 
 class RepealingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTest() {
     private val request = createRequest<Any>()
+
     @Test
     fun `Successfully Repealed a Rule`() {
         val entity = client.exchange<RepealRuleResponse>("/api/repeal_rule/6", HttpMethod.GET, request)

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("api/repeal_rule")
-class RepealRule (val repealRuleDomain: RepealRuleDomain){
+class RepealRule(val repealRuleDomain: RepealRuleDomain) {
     // Path to endpoint is api/rules_amendments/ExistingGameId
     @GetMapping("{ruleid}", produces = ["application/json;charset=UTF-8"])
     fun repealRule(@PathVariable(value = "ruleid") ruleId: String): ResponseEntity<Any> {
