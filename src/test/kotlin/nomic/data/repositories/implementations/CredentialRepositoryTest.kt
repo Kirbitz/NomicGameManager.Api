@@ -72,7 +72,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
     }
 
     @Test
-    @Order(1)
+    @Order(-1)
     fun create() {
         val repo = CredentialRepository(db)
 
@@ -83,6 +83,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
     }
 
     @Test
+    @Order(0)
     fun test_update_succeeds_username() {
         val repo = CredentialRepository(db)
         val login1 = LoginName("SupermanTheProgrammer")
@@ -105,6 +106,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
     }
 
     @Test
+    @Order(0)
     fun test_update_password() {
         val repo = CredentialRepository(db)
         val password1 = hashPassword("aBC*er2iauerhggkjrfbkj")
@@ -127,6 +129,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
     }
 
     @Test
+    @Order(0)
     fun test_update_usernameAndPassword() {
         val repo = CredentialRepository(db)
 
@@ -147,17 +150,20 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
     }
 
     @Test
+    @Order(0)
     fun getById() {
         Assertions.fail<String>("")
     }
 
     @Test
-    fun delete() {
+    @Order(0)
+    fun getByName() {
         Assertions.fail<String>("")
     }
 
     @Test
-    fun getByName() {
+    @Order(1)
+    fun delete() {
         Assertions.fail<String>("")
     }
 }
