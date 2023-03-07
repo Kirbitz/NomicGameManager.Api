@@ -4,7 +4,7 @@ Changes the active flag of a specified rule and any amendments that depend on it
 
 - **URL:**
 
-  /api/repeal_rules/{ruleId}
+  /api/repeal_rule/{ruleId}
 
 
 - **Method:**
@@ -14,7 +14,7 @@ Changes the active flag of a specified rule and any amendments that depend on it
 
 - **URL Params:**
 
-  __Required:__ GameId
+  __Required:__ RuleId
 
   `ruleId: [int]`
 
