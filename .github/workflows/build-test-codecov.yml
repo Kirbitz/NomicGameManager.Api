@@ -33,7 +33,7 @@ jobs:
 
       # Install dependencies, run tests, and collect coverage
       - name: Build Gradle
-        run: gradle build
+        run: ./gradlew build
     
       # Upload Code Coverage to Codecov
       - name: Upload coverage to Codecov

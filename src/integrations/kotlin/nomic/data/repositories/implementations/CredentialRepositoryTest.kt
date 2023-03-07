@@ -8,8 +8,10 @@ import nomic.domain.entities.LoginName
 import nomic.domain.entities.PasswordHash
 import nomic.domain.entities.User
 import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestMethodOrder
 import org.ktorm.database.Database
 import org.ktorm.dsl.eq
 import org.ktorm.entity.find
@@ -17,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.MOCK
 )
@@ -35,7 +38,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
         password = PasswordHash(passwordHasher.encode("password"))
 
         testCreds1 = Credential(
-            User(0, "Cincinnatus"),
+            User(5, "Cincinnatus"),
             LoginName("SimpleFarmer"),
             password
         )
@@ -72,7 +75,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
     }
 
     @Test
-    @Order(-1)
+    @Order(1)
     fun test_create() {
         val repo = CredentialRepository(db)
 
@@ -90,8 +93,62 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
     }
 
     @Test
-    @Order(0)
-    fun test_update_succeeds_username() {
+    @Order(2)
+    fun test_getById_badId_emptyOptional() {
+        val repo = CredentialRepository(db)
+
+        val cred1 = repo.getById(-100)
+        val cred2 = repo.getById(100)
+
+        Assertions.assertThat(cred1).isEmpty
+        Assertions.assertThat(cred2).isEmpty
+    }
+
+    @Test
+    @Order(2)
+    fun test_getById_goodId() {
+        val repo = CredentialRepository(db)
+
+        val cred1 = repo.getById(testCreds1.id)
+        val cred2 = repo.getById(testCreds2.id)
+
+        Assertions.assertThat(cred1).isPresent
+        Assertions.assertThat(cred2).isPresent
+
+        Assertions.assertThat(cred1.get().user.name).isEqualTo(testCreds1.user.name)
+        Assertions.assertThat(cred2.get().user.name).isEqualTo(testCreds2.user.name)
+    }
+
+    @Test
+    @Order(2)
+    fun test_getByName_badLoginName_emptyOptional() {
+        val repo = CredentialRepository(db)
+
+        val cred1 = repo.getByName(LoginName("Supercalifragilisticexpialidocious"))
+        val cred2 = repo.getByName(LoginName("GeorgeWashington32"))
+
+        Assertions.assertThat(cred1).isEmpty
+        Assertions.assertThat(cred2).isEmpty
+    }
+
+    @Test
+    @Order(2)
+    fun test_getByName_goodLoginName() {
+        val repo = CredentialRepository(db)
+
+        val cred1 = repo.getByName(testCreds1.loginName)
+        val cred2 = repo.getByName(testCreds2.loginName)
+
+        Assertions.assertThat(cred1).isPresent
+        Assertions.assertThat(cred2).isPresent
+
+        Assertions.assertThat(cred1.get().id).isEqualTo(testCreds1.id)
+        Assertions.assertThat(cred2.get().id).isEqualTo(testCreds2.id)
+    }
+
+    @Test
+    @Order(3)
+    fun test_update_username() {
         val repo = CredentialRepository(db)
         val login1 = LoginName("SupermanTheProgrammer")
         val login2 = LoginName("Darth_Vader")
@@ -108,12 +165,12 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
         Assertions.assertThat(testCredsResult1.loginName).isEqualTo(login1.rawName)
         Assertions.assertThat(testCredsResult2.loginName).isEqualTo(login2.rawName)
 
-        Assertions.assertThat(testCreds1.loginName).isEqualTo(login1.rawName)
-        Assertions.assertThat(testCreds2.loginName).isEqualTo(login2.rawName)
+        Assertions.assertThat(testCreds1.loginName).isEqualTo(login1)
+        Assertions.assertThat(testCreds2.loginName).isEqualTo(login2)
     }
 
     @Test
-    @Order(0)
+    @Order(3)
     fun test_update_password() {
         val repo = CredentialRepository(db)
         val password1 = hashPassword("aBC*er2iauerhggkjrfbkj")
@@ -131,12 +188,12 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
         Assertions.assertThat(testCredsResult1.passwordHash).isEqualTo(password1.rawHash)
         Assertions.assertThat(testCredsResult2.passwordHash).isEqualTo(password2.rawHash)
 
-        Assertions.assertThat(testCreds1.passwordHash).isEqualTo(password1.rawHash)
-        Assertions.assertThat(testCreds2.passwordHash).isEqualTo(password2.rawHash)
+        Assertions.assertThat(testCreds1.passwordHash).isEqualTo(password1)
+        Assertions.assertThat(testCreds2.passwordHash).isEqualTo(password2)
     }
 
     @Test
-    @Order(0)
+    @Order(3)
     fun test_update_usernameAndPassword() {
         val repo = CredentialRepository(db)
 
@@ -152,12 +209,12 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
         Assertions.assertThat(testCredsResult.passwordHash).isEqualTo(password.rawHash)
         Assertions.assertThat(testCredsResult.loginName).isEqualTo(login.rawName)
 
-        Assertions.assertThat(testCreds1.passwordHash).isEqualTo(password.rawHash)
-        Assertions.assertThat(testCreds1.loginName).isEqualTo(login.rawName)
+        Assertions.assertThat(testCreds1.passwordHash).isEqualTo(password)
+        Assertions.assertThat(testCreds1.loginName).isEqualTo(login)
     }
 
     @Test
-    @Order(0)
+    @Order(3)
     fun test_update_invalidCred() {
         val repo = CredentialRepository(db)
 
@@ -167,61 +224,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
     }
 
     @Test
-    @Order(0)
-    fun test_getById_badId_emptyOptional() {
-        val repo = CredentialRepository(db)
-
-        val cred1 = repo.getById(-100)
-        val cred2 = repo.getById(100)
-
-        Assertions.assertThat(cred1).isEmpty
-        Assertions.assertThat(cred2).isEmpty
-    }
-
-    @Test
-    @Order(0)
-    fun test_getById_goodId() {
-        val repo = CredentialRepository(db)
-
-        val cred1 = repo.getById(testCreds1.id)
-        val cred2 = repo.getById(testCreds2.id)
-
-        Assertions.assertThat(cred1).isPresent
-        Assertions.assertThat(cred2).isPresent
-
-        Assertions.assertThat(cred1.get().user.name).isEqualTo(testCreds1.user.name)
-        Assertions.assertThat(cred2.get().user.name).isEqualTo(testCreds2.user.name)
-    }
-
-    @Test
-    @Order(0)
-    fun test_getByName_badLoginName_emptyOptional() {
-        val repo = CredentialRepository(db)
-
-        val cred1 = repo.getByName(LoginName("Supercalifragilisticexpialidocious"))
-        val cred2 = repo.getByName(LoginName("GeorgeWashington32"))
-
-        Assertions.assertThat(cred1).isEmpty
-        Assertions.assertThat(cred2).isEmpty
-    }
-
-    @Test
-    @Order(0)
-    fun test_getByName_goodLoginName() {
-        val repo = CredentialRepository(db)
-
-        val cred1 = repo.getByName(testCreds1.loginName)
-        val cred2 = repo.getByName(testCreds2.loginName)
-
-        Assertions.assertThat(cred1).isPresent
-        Assertions.assertThat(cred2).isPresent
-
-        Assertions.assertThat(cred1.get().id).isEqualTo(testCreds1.id)
-        Assertions.assertThat(cred2.get().id).isEqualTo(testCreds2.id)
-    }
-
-    @Test
-    @Order(1)
+    @Order(4)
     fun test_delete_goodId() {
         val repo = CredentialRepository(db)
 
@@ -236,7 +239,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
     }
 
     @Test
-    @Order(1)
+    @Order(4)
     fun test_delete_badId() {
         val repo = CredentialRepository(db)
 
