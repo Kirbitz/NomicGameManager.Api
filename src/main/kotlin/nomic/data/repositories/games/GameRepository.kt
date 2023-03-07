@@ -7,6 +7,14 @@ import org.ktorm.dsl.insert
 import org.springframework.stereotype.Repository
 import java.time.LocalDate
 
+/**
+ * Implementation of the [IGameRepository][nomic.data.repositories.games.IGameRepository] uses
+ * Ktorm [Database][org.ktorm.database.Database] as the data access layer
+ *
+ * @see [nomic.data.repositories.games.IGameRepository]
+ * @see [org.ktorm.database.Database]
+ * @param db the connected instance of [org.ktorm.database.Database] to use as the database
+ */
 @Repository
 class GameRepository(private val db: Database) : IGameRepository {
     override fun createGame(input: GameModel) {

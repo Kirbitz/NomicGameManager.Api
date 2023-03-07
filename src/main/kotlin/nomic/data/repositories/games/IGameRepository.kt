@@ -11,6 +11,7 @@ import nomic.domain.entities.GameModel
 interface IGameRepository {
     /**
      * Creates a game
+     * @param input Model of the game to be made
      */
     fun createGame(input: GameModel)
 }

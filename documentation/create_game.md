@@ -4,7 +4,7 @@ Returns json data about the game creation.
 
 - **URL:**
 
-  /api/create_game
+  /api/game/create
 
 - **Method:**
 
