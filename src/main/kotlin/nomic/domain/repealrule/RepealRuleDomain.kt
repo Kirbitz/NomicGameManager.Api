@@ -5,6 +5,15 @@ import nomic.data.repositories.repealrule.RepealRuleRepository
 import nomic.domain.entities.RepealRuleResponse
 import org.springframework.stereotype.Service
 
+/**
+ * Implementation of the [IRepealRuleResponse][nomic.domain.repealrule.IRepealRuleDomain] uses
+ * [RepealRuleRepository][nomic.data.repositories.repealrule.RepealRuleRepository] as a data layer
+ *
+ * @see [nomic.domain.repealrule.IRepealRuleDomain]
+ * @see [nomic.data.repositories.repealrule.RepealRuleRepository]
+ * @param repealRuleRepository the instance of [RepealRuleRepository][nomic.data.repositories.repealrule.RepealRuleRepository]
+ * to use as a data collector
+ */
 @Service
 class RepealRuleDomain(private val repealRuleRepository: RepealRuleRepository) : IRepealRuleDomain {
 

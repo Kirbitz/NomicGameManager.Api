@@ -7,6 +7,14 @@ import org.ktorm.dsl.eq
 import org.ktorm.dsl.update
 import org.springframework.stereotype.Service
 
+/**
+ * Implementation of the [IRepealRuleRepository][nomic.data.repositories.repealrule.IRepealRuleRepository] uses
+ * Ktorm [Database][org.ktorm.database.Database] as the data access layer
+ *
+ * @see [nomic.data.repositories.repealrule.IRepealRuleRepository]
+ * @see [org.ktorm.database.Database]
+ * @param db the connected instance of [org.ktorm.database.Database] to use as the database
+ */
 @Service
 class RepealRuleRepository(private val db: Database) : IRepealRuleRepository {
     override fun repealRule(ruleId: Int): Int {
