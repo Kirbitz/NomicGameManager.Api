@@ -17,3 +17,10 @@ INSERT INTO `Game` VALUES (2, 'MyGame2', '2015-12-18', NULL, 2);
 INSERT INTO `Game` VALUES (3, 'MyGame3', '2015-12-18', NULL, 2);
 INSERT INTO `Rule` VALUES (4, 4, 'Run in circles', 'MyInactiveRule1', 3, 0, 0);
 INSERT INTO `Amendment` VALUES (4, 4, 'Run slowly', 'MyAmendment4', 4, 1);
+
+
+-- Repealing Rules Tests
+INSERT INTO `Game` VALUES (4, 'MyGame', '2015-12-17', NULL, 2);
+INSERT INTO `Rule` VALUES (6, 6, 'Look at the wall The Sequel', 'MyRule1', 4, 1, 0);
+INSERT INTO `Amendment` VALUES (6, 6, 'Or look at the ground again', 'MyAmendment1', 6, 1);
+INSERT INTO `Amendment` VALUES (7, 7, 'Or look at the ground again part two', 'MyAmendment1', 6, 1);
