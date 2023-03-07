@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository
 import java.time.LocalDate
 
 @Repository
-class GameRepository(private val db: Database) : IGameRepository{
+class GameRepository(private val db: Database) : IGameRepository {
     override fun createGame(input: GameModel) {
-        //Check to see if game exists
+        // Check to see if game exists
         db.insert(Games) {
             set(it.title, input.title)
             set(it.createDate, LocalDate.now())

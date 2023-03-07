@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("api/game")
 class Games(val gameDomain: GameDomain) {
     @PostMapping("create")
-    fun createGame(@RequestBody input:GameModel): ResponseEntity<Any> {
+    fun createGame(@RequestBody input: GameModel): ResponseEntity<Any> {
         gameDomain.createGame(input)
         return ResponseEntity("Game Created", HttpStatus.CREATED)
     }
