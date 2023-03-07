@@ -10,7 +10,7 @@ interface IRepealRuleDomain {
      * Collects the response from the database for repealing a rule
      *
      * @param ruleId the id of the rule to be repealed
-     * @return A RepealRuleResponse [nomic.domain.entities.RepealRuleResponse] object to pass back the status
+     * @return A [RepealRuleResponse][nomic.domain.entities.RepealRuleResponse] object to pass back the status
      */
     fun repealRule(ruleId: String): RepealRuleResponse
 }

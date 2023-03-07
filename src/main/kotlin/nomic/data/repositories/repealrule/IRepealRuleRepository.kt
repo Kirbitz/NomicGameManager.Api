@@ -10,7 +10,7 @@ interface IRepealRuleRepository {
      * Changes active flag and returns success or fail
      *
      * @param ruleId The id of the rule to be repealed
-     * @return Success or fail
+     * @return Returns the number of rows affected
      */
     fun repealRule(ruleId: Int): Int
 }
