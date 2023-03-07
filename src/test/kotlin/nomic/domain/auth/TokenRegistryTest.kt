@@ -83,6 +83,18 @@ class TokenRegistryTest {
     }
 
     @Test
+    fun test_issueToken_has_issuedAt_expires_notBefore() {
+        val tokenRegistry = TokenRegistry(keyProvider, usersRepo)
+
+        val token = tokenRegistry.issueToken(testUser1)
+        val tokenBody = String(Base64.getDecoder().decode(token.split('.')[1]))
+
+        Assertions.assertThat(tokenBody).contains(RegisteredClaims.ISSUED_AT)
+        Assertions.assertThat(tokenBody).contains(RegisteredClaims.EXPIRES_AT)
+        Assertions.assertThat(tokenBody).contains(RegisteredClaims.NOT_BEFORE)
+    }
+
+    @Test
     fun test_issueToken_validates() {
         val tokenRegistry = TokenRegistry(keyProvider, usersRepo)
 
