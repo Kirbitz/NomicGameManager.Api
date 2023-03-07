@@ -1,5 +1,7 @@
 package nomic.data.repositories.games
 
+import nomic.domain.entities.GameModel
+
 /**
  * Interface creates the game within the DB
  *

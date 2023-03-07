@@ -4,7 +4,7 @@ Returns json data of the removal of a game.
 
 - **URL:**
 
-  /api/games/remove/{gameId}
+  /api/game/remove/{gameId}
 
 
 - **Method:**
@@ -103,7 +103,7 @@ Returns json data of the removal of a game.
 ```javascript
 {
   method: 'DELETE',
-  url: '/api/games/remove/{gameId}',
+  url: '/api/game/remove/{gameId}',
   responseType: 'json',
   data: {
     gameId: 1234

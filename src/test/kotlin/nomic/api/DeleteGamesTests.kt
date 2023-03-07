@@ -11,12 +11,12 @@ import org.springframework.http.*
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
-class GamesEndpointTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTest() {
+class DeleteGamesTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTest() {
     private val request = createRequest<Any>()
 
     @Test
     fun `Game Successfully Deleted`() {
-        val entity = client.exchange<String>("/api/games/remove/42", HttpMethod.DELETE, request)
+        val entity = client.exchange<String>("/api/game/remove/42", HttpMethod.DELETE, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.ACCEPTED)
         Assertions.assertThat(entity.body).isEqualTo("Game Deleted")
@@ -24,7 +24,7 @@ class GamesEndpointTests(@Autowired val client: TestRestTemplate) : BaseEndToEnd
 
     @Test
     fun `Game Not Deleted Invalid GameId`() {
-        val entity = client.exchange<String>("/api/games/remove/penpineappleapplepen", HttpMethod.DELETE, request)
+        val entity = client.exchange<String>("/api/game/remove/penpineappleapplepen", HttpMethod.DELETE, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
         Assertions.assertThat(entity.body).contains("Please enter a valid GameId")
@@ -32,7 +32,7 @@ class GamesEndpointTests(@Autowired val client: TestRestTemplate) : BaseEndToEnd
 
     @Test
     fun `Game Not Deleted Game Not Found`() {
-        val entity = client.exchange<String>("/api/games/remove/404", HttpMethod.DELETE, request)
+        val entity = client.exchange<String>("/api/game/remove/404", HttpMethod.DELETE, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.NOT_FOUND)
         Assertions.assertThat(entity.body).contains("not found")
