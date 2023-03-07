@@ -73,13 +73,20 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
 
     @Test
     @Order(-1)
-    fun create() {
+    fun test_create() {
         val repo = CredentialRepository(db)
 
-        val creds = repo.create(testCreds1.user, testCreds1.loginName, testCreds1.passwordHash)
+        val creds1 = repo.create(testCreds1.user, testCreds1.loginName, testCreds1.passwordHash)
+        val creds2 = repo.create(testCreds2.user, testCreds2.loginName, testCreds2.passwordHash)
 
-        Assertions.assertThat(creds).usingRecursiveComparison().isEqualTo(testCreds1)
-        Assertions.assertThat(db.credentials.find { it.userId eq testCredsDto1.user.id }).usingRecursiveComparison().isEqualTo(testCredsDto1)
+        val dbCreds1 = db.credentials.find { it.userId eq testCredsDto1.user.id }
+        val dbCreds2 = db.credentials.find { it.userId eq testCredsDto2.user.id }
+
+        Assertions.assertThat(creds1).usingRecursiveComparison().isEqualTo(testCreds1)
+        Assertions.assertThat(dbCreds1).usingRecursiveComparison().isEqualTo(testCredsDto1)
+
+        Assertions.assertThat(creds2).usingRecursiveComparison().isEqualTo(testCreds2)
+        Assertions.assertThat(dbCreds2).usingRecursiveComparison().isEqualTo(testCredsDto2)
     }
 
     @Test
