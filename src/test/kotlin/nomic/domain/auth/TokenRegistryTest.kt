@@ -68,6 +68,21 @@ class TokenRegistryTest {
     }
 
     @Test
+    fun test_issueToken_hasIssuerAndAudience() {
+        val tokenRegistry = TokenRegistry(keyProvider, usersRepo)
+
+        val token = tokenRegistry.issueToken(testUser1)
+
+        val tokenBody = String(Base64.getDecoder().decode(token.split('.')[1]))
+
+        Assertions.assertThat(tokenBody)
+            .contains("\"${RegisteredClaims.ISSUER}\":\"${TokenRegistry.JWT_ISSUER}\"")
+
+        Assertions.assertThat(tokenBody)
+            .contains("\"${RegisteredClaims.AUDIENCE}\":\"${TokenRegistry.JWT_ISSUER}\"")
+    }
+
+    @Test
     fun test_issueToken_validates() {
         val token1 = tokenRegistry.issueToken(testUser1)
         val token2 = tokenRegistry.issueToken(testUser2)
