@@ -84,6 +84,8 @@ class TokenRegistryTest {
 
     @Test
     fun test_issueToken_validates() {
+        val tokenRegistry = TokenRegistry(keyProvider, usersRepo)
+
         val token1 = tokenRegistry.issueToken(testUser1)
         val token2 = tokenRegistry.issueToken(testUser2)
 
