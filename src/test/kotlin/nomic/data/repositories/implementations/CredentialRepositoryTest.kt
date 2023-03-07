@@ -222,7 +222,34 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
 
     @Test
     @Order(1)
-    fun delete() {
-        Assertions.fail<String>("")
+    fun test_delete_goodId() {
+        val repo = CredentialRepository(db)
+
+        repo.delete(testCreds1)
+        repo.delete(testCreds2)
+
+        val dbCreds1 = db.credentials.find { it.userId eq testCredsDto1.user.id }
+        val dbCreds2 = db.credentials.find { it.userId eq testCredsDto2.user.id }
+
+        Assertions.assertThat(dbCreds1).isNull()
+        Assertions.assertThat(dbCreds2).isNull()
+    }
+
+    @Test
+    @Order(1)
+    fun test_delete_badId() {
+        val repo = CredentialRepository(db)
+
+        val creds = Credential(
+            User(1234, "Foo bar"),
+            LoginName("FooBar145"),
+            hashPassword("pass")
+        )
+
+        repo.delete(creds)
+
+        val dbCreds = db.credentials.find { it.userId eq creds.user.id }
+
+        Assertions.assertThat(dbCreds).isNull()
     }
 }
