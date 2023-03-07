@@ -7,6 +7,10 @@ $dokka.location:nomic.api.models/AmendmentModel/amendId/#/PointingToDeclaration/
 $dokka.location:nomic.api.models/AmendmentModel/description/#/PointingToDeclaration/api/nomic.api.models/-amendment-model/description.html
 $dokka.location:nomic.api.models/AmendmentModel/index/#/PointingToDeclaration/api/nomic.api.models/-amendment-model/--index--.html
 $dokka.location:nomic.api.models/AmendmentModel/title/#/PointingToDeclaration/api/nomic.api.models/-amendment-model/title.html
+$dokka.location:nomic.api.models/GamesApiModel///PointingToDeclaration/api/nomic.api.models/-games-api-model/index.html
+$dokka.location:nomic.api.models/GamesApiModel/GamesApiModel/#kotlin.String#kotlin.Int/PointingToDeclaration/api/nomic.api.models/-games-api-model/-games-api-model.html
+$dokka.location:nomic.api.models/GamesApiModel/title/#/PointingToDeclaration/api/nomic.api.models/-games-api-model/title.html
+$dokka.location:nomic.api.models/GamesApiModel/userId/#/PointingToDeclaration/api/nomic.api.models/-games-api-model/user-id.html
 $dokka.location:nomic.api.models/RulesAmendmentsApiModel///PointingToDeclaration/api/nomic.api.models/-rules-amendments-api-model/index.html
 $dokka.location:nomic.api.models/RulesAmendmentsApiModel/RulesAmendmentsApiModel/#kotlin.Int#kotlin.Int#kotlin.String#kotlin.String#kotlin.Boolean#kotlin.collections.MutableList[nomic.api.models.AmendmentModel]/PointingToDeclaration/api/nomic.api.models/-rules-amendments-api-model/-rules-amendments-api-model.html
 $dokka.location:nomic.api.models/RulesAmendmentsApiModel/amendments/#/PointingToDeclaration/api/nomic.api.models/-rules-amendments-api-model/amendments.html
@@ -20,6 +24,10 @@ $dokka.location:nomic.api/ExceptionResponseFormat///PointingToDeclaration/api/n
 $dokka.location:nomic.api/ExceptionResponseFormat/ExceptionResponseFormat/#kotlin.Boolean#kotlin.String?/PointingToDeclaration/api/nomic.api/-exception-response-format/-exception-response-format.html
 $dokka.location:nomic.api/ExceptionResponseFormat/error/#/PointingToDeclaration/api/nomic.api/-exception-response-format/error.html
 $dokka.location:nomic.api/ExceptionResponseFormat/msg/#/PointingToDeclaration/api/nomic.api/-exception-response-format/msg.html
+$dokka.location:nomic.api/Games///PointingToDeclaration/api/nomic.api/-games/index.html
+$dokka.location:nomic.api/Games/Games/#nomic.domain.games.GameDomain/PointingToDeclaration/api/nomic.api/-games/-games.html
+$dokka.location:nomic.api/Games/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/api/nomic.api/-games/create-game.html
+$dokka.location:nomic.api/Games/gameDomain/#/PointingToDeclaration/api/nomic.api/-games/game-domain.html
 $dokka.location:nomic.api/GlobalExceptionHandler///PointingToDeclaration/api/nomic.api/-global-exception-handler/index.html
 $dokka.location:nomic.api/GlobalExceptionHandler/GlobalExceptionHandler/#/PointingToDeclaration/api/nomic.api/-global-exception-handler/-global-exception-handler.html
 $dokka.location:nomic.api/GlobalExceptionHandler/handleAllUncaughtException/#java.lang.Exception/PointingToDeclaration/api/nomic.api/-global-exception-handler/handle-all-uncaught-exception.html
@@ -29,9 +37,6 @@ $dokka.location:nomic.api/RulesAmendments///PointingToDeclaration/api/nomic.api
 $dokka.location:nomic.api/RulesAmendments/RulesAmendments/#nomic.domain.rulesamendments.RuleAmendmentDomain/PointingToDeclaration/api/nomic.api/-rules-amendments/-rules-amendments.html
 $dokka.location:nomic.api/RulesAmendments/getRulesAmendments/#kotlin.String/PointingToDeclaration/api/nomic.api/-rules-amendments/get-rules-amendments.html
 $dokka.location:nomic.api/RulesAmendments/ruleAmendmentDomain/#/PointingToDeclaration/api/nomic.api/-rules-amendments/rule-amendment-domain.html
-$dokka.location:nomic.api/TestingSpring///PointingToDeclaration/api/nomic.api/-testing-spring/index.html
-$dokka.location:nomic.api/TestingSpring/TestingSpring/#/PointingToDeclaration/api/nomic.api/-testing-spring/-testing-spring.html
-$dokka.location:nomic.api/TestingSpring/helloWorld/#/PointingToDeclaration/api/nomic.api/-testing-spring/hello-world.html
 $dokka.location:nomic.data.dtos////PointingToDeclaration/api/nomic.data.dtos/index.html
 $dokka.location:nomic.data.dtos//amendments/org.ktorm.database.Database#/PointingToDeclaration/api/nomic.data.dtos/amendments.html
 $dokka.location:nomic.data.dtos/AmendmentDTO.Companion///PointingToDeclaration/api/nomic.data.dtos/-amendment-d-t-o/-companion/index.html
@@ -50,6 +55,19 @@ $dokka.location:nomic.data.dtos/Amendments/index/#/PointingToDeclaration/api/no
 $dokka.location:nomic.data.dtos/Amendments/rule/#/PointingToDeclaration/api/nomic.data.dtos/-amendments/rule.html
 $dokka.location:nomic.data.dtos/Amendments/ruleId/#/PointingToDeclaration/api/nomic.data.dtos/-amendments/rule-id.html
 $dokka.location:nomic.data.dtos/Amendments/title/#/PointingToDeclaration/api/nomic.data.dtos/-amendments/title.html
+$dokka.location:nomic.data.dtos/GameDTO.Companion///PointingToDeclaration/api/nomic.data.dtos/-game-d-t-o/-companion/index.html
+$dokka.location:nomic.data.dtos/GameDTO///PointingToDeclaration/api/nomic.data.dtos/-game-d-t-o/index.html
+$dokka.location:nomic.data.dtos/GameDTO/createDate/#/PointingToDeclaration/api/nomic.data.dtos/-game-d-t-o/create-date.html
+$dokka.location:nomic.data.dtos/GameDTO/currentPlayer/#/PointingToDeclaration/api/nomic.data.dtos/-game-d-t-o/current-player.html
+$dokka.location:nomic.data.dtos/GameDTO/gameId/#/PointingToDeclaration/api/nomic.data.dtos/-game-d-t-o/game-id.html
+$dokka.location:nomic.data.dtos/GameDTO/title/#/PointingToDeclaration/api/nomic.data.dtos/-game-d-t-o/title.html
+$dokka.location:nomic.data.dtos/GameDTO/userId/#/PointingToDeclaration/api/nomic.data.dtos/-game-d-t-o/user-id.html
+$dokka.location:nomic.data.dtos/Games///PointingToDeclaration/api/nomic.data.dtos/-games/index.html
+$dokka.location:nomic.data.dtos/Games/createDate/#/PointingToDeclaration/api/nomic.data.dtos/-games/create-date.html
+$dokka.location:nomic.data.dtos/Games/currentPlayer/#/PointingToDeclaration/api/nomic.data.dtos/-games/current-player.html
+$dokka.location:nomic.data.dtos/Games/gameId/#/PointingToDeclaration/api/nomic.data.dtos/-games/game-id.html
+$dokka.location:nomic.data.dtos/Games/title/#/PointingToDeclaration/api/nomic.data.dtos/-games/title.html
+$dokka.location:nomic.data.dtos/Games/userId/#/PointingToDeclaration/api/nomic.data.dtos/-games/user-id.html
 $dokka.location:nomic.data.dtos/RuleDTO.Companion///PointingToDeclaration/api/nomic.data.dtos/-rule-d-t-o/-companion/index.html
 $dokka.location:nomic.data.dtos/RuleDTO///PointingToDeclaration/api/nomic.data.dtos/-rule-d-t-o/index.html
 $dokka.location:nomic.data.dtos/RuleDTO/active/#/PointingToDeclaration/api/nomic.data.dtos/-rule-d-t-o/active.html
@@ -67,6 +85,12 @@ $dokka.location:nomic.data.dtos/Rules/index/#/PointingToDeclaration/api/nomic.d
 $dokka.location:nomic.data.dtos/Rules/mutable/#/PointingToDeclaration/api/nomic.data.dtos/-rules/mutable.html
 $dokka.location:nomic.data.dtos/Rules/ruleId/#/PointingToDeclaration/api/nomic.data.dtos/-rules/rule-id.html
 $dokka.location:nomic.data.dtos/Rules/title/#/PointingToDeclaration/api/nomic.data.dtos/-rules/title.html
+$dokka.location:nomic.data.repositories.games////PointingToDeclaration/api/nomic.data.repositories.games/index.html
+$dokka.location:nomic.data.repositories.games/GameRepository///PointingToDeclaration/api/nomic.data.repositories.games/-game-repository/index.html
+$dokka.location:nomic.data.repositories.games/GameRepository/GameRepository/#org.ktorm.database.Database/PointingToDeclaration/api/nomic.data.repositories.games/-game-repository/-game-repository.html
+$dokka.location:nomic.data.repositories.games/GameRepository/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/api/nomic.data.repositories.games/-game-repository/create-game.html
+$dokka.location:nomic.data.repositories.games/IGameRepository///PointingToDeclaration/api/nomic.data.repositories.games/-i-game-repository/index.html
+$dokka.location:nomic.data.repositories.games/IGameRepository/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/api/nomic.data.repositories.games/-i-game-repository/create-game.html
 $dokka.location:nomic.data.repositories.rulesamendments////PointingToDeclaration/api/nomic.data.repositories.rulesamendments/index.html
 $dokka.location:nomic.data.repositories.rulesamendments/IRuleAmendmentRepository///PointingToDeclaration/api/nomic.data.repositories.rulesamendments/-i-rule-amendment-repository/index.html
 $dokka.location:nomic.data.repositories.rulesamendments/IRuleAmendmentRepository/getRulesAmendments/#kotlin.Int/PointingToDeclaration/api/nomic.data.repositories.rulesamendments/-i-rule-amendment-repository/get-rules-amendments.html
@@ -85,6 +109,13 @@ $dokka.location:nomic.data/DatabaseProvider/getDatabase/#nomic.data.DatabaseConf
 $dokka.location:nomic.data/EntityNotFoundException///PointingToDeclaration/api/nomic.data/-entity-not-found-exception/index.html
 $dokka.location:nomic.data/EntityNotFoundException/EntityNotFoundException/#kotlin.Int/PointingToDeclaration/api/nomic.data/-entity-not-found-exception/-entity-not-found-exception.html
 $dokka.location:nomic.domain.entities////PointingToDeclaration/api/nomic.domain.entities/index.html
+$dokka.location:nomic.domain.entities/GameModel///PointingToDeclaration/api/nomic.domain.entities/-game-model/index.html
+$dokka.location:nomic.domain.entities/GameModel/GameModel/#kotlin.Int?#kotlin.String#java.time.LocalDate?#kotlin.Int?#kotlin.Int/PointingToDeclaration/api/nomic.domain.entities/-game-model/-game-model.html
+$dokka.location:nomic.domain.entities/GameModel/createDate/#/PointingToDeclaration/api/nomic.domain.entities/-game-model/create-date.html
+$dokka.location:nomic.domain.entities/GameModel/currentPlayer/#/PointingToDeclaration/api/nomic.domain.entities/-game-model/current-player.html
+$dokka.location:nomic.domain.entities/GameModel/gameId/#/PointingToDeclaration/api/nomic.domain.entities/-game-model/game-id.html
+$dokka.location:nomic.domain.entities/GameModel/title/#/PointingToDeclaration/api/nomic.domain.entities/-game-model/title.html
+$dokka.location:nomic.domain.entities/GameModel/userId/#/PointingToDeclaration/api/nomic.domain.entities/-game-model/user-id.html
 $dokka.location:nomic.domain.entities/RulesAmendmentsModel///PointingToDeclaration/api/nomic.domain.entities/-rules-amendments-model/index.html
 $dokka.location:nomic.domain.entities/RulesAmendmentsModel/RulesAmendmentsModel/#kotlin.Int#kotlin.Int#kotlin.String#kotlin.String#kotlin.Boolean#kotlin.Boolean#kotlin.Int?#kotlin.Int?#kotlin.String?#kotlin.String?#kotlin.Boolean?/PointingToDeclaration/api/nomic.domain.entities/-rules-amendments-model/-rules-amendments-model.html
 $dokka.location:nomic.domain.entities/RulesAmendmentsModel/amendActive/#/PointingToDeclaration/api/nomic.domain.entities/-rules-amendments-model/amend-active.html
@@ -98,6 +129,12 @@ $dokka.location:nomic.domain.entities/RulesAmendmentsModel/ruleId/#/PointingToDe
 $dokka.location:nomic.domain.entities/RulesAmendmentsModel/ruleIndex/#/PointingToDeclaration/api/nomic.domain.entities/-rules-amendments-model/rule-index.html
 $dokka.location:nomic.domain.entities/RulesAmendmentsModel/ruleMutable/#/PointingToDeclaration/api/nomic.domain.entities/-rules-amendments-model/rule-mutable.html
 $dokka.location:nomic.domain.entities/RulesAmendmentsModel/ruleTitle/#/PointingToDeclaration/api/nomic.domain.entities/-rules-amendments-model/rule-title.html
+$dokka.location:nomic.domain.games////PointingToDeclaration/api/nomic.domain.games/index.html
+$dokka.location:nomic.domain.games/GameDomain///PointingToDeclaration/api/nomic.domain.games/-game-domain/index.html
+$dokka.location:nomic.domain.games/GameDomain/GameDomain/#nomic.data.repositories.games.GameRepository/PointingToDeclaration/api/nomic.domain.games/-game-domain/-game-domain.html
+$dokka.location:nomic.domain.games/GameDomain/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/api/nomic.domain.games/-game-domain/create-game.html
+$dokka.location:nomic.domain.games/IGameDomain///PointingToDeclaration/api/nomic.domain.games/-i-game-domain/index.html
+$dokka.location:nomic.domain.games/IGameDomain/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/api/nomic.domain.games/-i-game-domain/create-game.html
 $dokka.location:nomic.domain.rulesamendments////PointingToDeclaration/api/nomic.domain.rulesamendments/index.html
 $dokka.location:nomic.domain.rulesamendments/IRuleAmendmentDomain///PointingToDeclaration/api/nomic.domain.rulesamendments/-i-rule-amendment-domain/index.html
 $dokka.location:nomic.domain.rulesamendments/IRuleAmendmentDomain/getRulesAmendments/#kotlin.String/PointingToDeclaration/api/nomic.domain.rulesamendments/-i-rule-amendment-domain/get-rules-amendments.html
@@ -113,7 +150,9 @@ nomic.api
 nomic.api.models
 nomic.data
 nomic.data.dtos
+nomic.data.repositories.games
 nomic.data.repositories.rulesamendments
 nomic.domain.entities
+nomic.domain.games
 nomic.domain.rulesamendments
 
