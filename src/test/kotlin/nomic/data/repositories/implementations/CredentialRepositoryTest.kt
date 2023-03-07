@@ -151,6 +151,16 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
 
     @Test
     @Order(0)
+    fun test_update_invalidCred() {
+        val repo = CredentialRepository(db)
+
+        val testCred = Credential(User(23, "Gandalf"), LoginName("GrayWizard"), hashPassword("Istari"))
+
+        Assertions.assertThatThrownBy { repo.update(testCred) }
+    }
+
+    @Test
+    @Order(0)
     fun getById() {
         Assertions.fail<String>("")
     }
