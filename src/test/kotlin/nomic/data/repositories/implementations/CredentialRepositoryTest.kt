@@ -161,8 +161,29 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
 
     @Test
     @Order(0)
-    fun getById() {
-        Assertions.fail<String>("")
+    fun test_getById_badId_emptyOptional() {
+        val repo = CredentialRepository(db)
+
+        val cred1 = repo.getById(-100)
+        val cred2 = repo.getById(100)
+
+        Assertions.assertThat(cred1).isEmpty()
+        Assertions.assertThat(cred2).isEmpty()
+    }
+
+    @Test
+    @Order(0)
+    fun test_getById_goodId() {
+        val repo = CredentialRepository(db)
+
+        val cred1 = repo.getById(testCreds1.id)
+        val cred2 = repo.getById(testCreds2.id)
+
+        Assertions.assertThat(cred1).isPresent()
+        Assertions.assertThat(cred2).isPresent()
+
+        Assertions.assertThat(cred1.get().user.name).isEqualTo(testCreds1.user.name)
+        Assertions.assertThat(cred2.get().user.name).isEqualTo(testCreds2.user.name)
     }
 
     @Test
