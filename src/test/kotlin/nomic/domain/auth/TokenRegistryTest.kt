@@ -101,8 +101,14 @@ class TokenRegistryTest {
         val token1 = tokenRegistry.issueToken(testUser1)
         val token2 = tokenRegistry.issueToken(testUser2)
 
-        Assertions.assertThat(tokenRegistry.validateToken(token1).isSuccess).isTrue
-        Assertions.assertThat(tokenRegistry.validateToken(token2).isSuccess).isTrue
+        val validation1 = tokenRegistry.validateToken(token1)
+        val validation2 = tokenRegistry.validateToken(token2)
+
+        Assertions.assertThat(validation1.isSuccess).isTrue
+        Assertions.assertThat(validation2.isSuccess).isTrue
+
+        Assertions.assertThat(validation1.subject?.id).isEqualTo(testUser1.id)
+        Assertions.assertThat(validation2.subject?.id).isEqualTo(testUser2.id)
     }
 
     @Test
