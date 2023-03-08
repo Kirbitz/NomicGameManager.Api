@@ -1,1 +1,1 @@
-rootProject.name = "api"
+rootProject.name = "nomic.game.manager.api"

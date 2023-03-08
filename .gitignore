@@ -36,3 +36,7 @@ out/
 .vscode/
 
 secrets.properties
+
+# Potential RSA key files
+*.key
+*.pem

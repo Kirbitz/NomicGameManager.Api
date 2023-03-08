@@ -1,10 +1,13 @@
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.net.URL
 
 plugins {
     id("com.diffplug.spotless") version "6.15.0"
     id("org.springframework.boot") version "3.0.2"
     id("io.spring.dependency-management") version "1.1.0"
     id("org.jetbrains.dokka") version "1.7.20"
+    id("com.avast.gradle.docker-compose") version "0.16.11"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
     jacoco
@@ -25,7 +28,7 @@ spotless {
     }
 }
 
-group = "game.manager.nomic"
+group = "nomic"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
@@ -33,15 +36,47 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    create("integrations") {
+        compileClasspath += sourceSets.main.get().output
+        runtimeClasspath += sourceSets.main.get().output
+    }
+}
+
+val integrationsImplementation: Configuration by configurations.getting {
+    extendsFrom(configurations.implementation.get())
+}
+
+configurations["integrationsRuntimeOnly"].extendsFrom(configurations.runtimeOnly.get())
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("mysql:mysql-connector-java:8.0.25")
-    implementation("org.ktorm:ktorm-support-mysql:3.6.0")
+
+    // Testing
+    integrationsImplementation("org.apache.httpcomponents.client5:httpclient5:5.2.1")
+    integrationsImplementation("org.springframework.boot:spring-boot-starter-test")
+    integrationsImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    integrationsImplementation("org.mockito:mockito-junit-jupiter:5.1.1")
+    integrationsImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
+
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.1.1")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("com.h2database:h2")
+
+
+    // Authentication libraries
+    implementation("com.auth0:java-jwt:4.2.2")
+    implementation("org.springframework.security:spring-security-crypto:6.0.1")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.bouncycastle:bcprov-jdk18on:1.72")
+
+    // Database libraries
+    implementation("org.ktorm:ktorm-support-mysql:3.6.0")
+    implementation("mysql:mysql-connector-java:8.0.25")
 }
 
 tasks.withType<KotlinCompile> {
@@ -60,9 +95,33 @@ tasks.test {
 }
 
 tasks.jacocoTestReport {
-    dependsOn(tasks.test)
-    reports {
-        xml.required.set(true)
+    sourceSets(sourceSets.getByName("integrations"))
+	dependsOn(tasks.test)
+    dependsOn(integrationTests)
+	reports {
+		xml.required.set(true)
+	}
+    executionData(fileTree(buildDir).include("/jacoco/*.exec"))
+}
+
+tasks.withType<DokkaTask>().configureEach {
+    suppressInheritedMembers.set(true)
+    dokkaSourceSets.configureEach {
+        externalDocumentationLink {
+            url.set(URL("https://docs.spring.io/spring-framework/docs/current/kdoc-api/"))
+            packageListUrl.set(URL("https://docs.spring.io/spring-framework/docs/current/kdoc-api/package-list"))
+        }
+
+        // TODO Revisit and track down package list for spring security
+        /*externalDocumentationLink {
+            url.set(URL("https://docs.spring.io/spring-security/site/docs/current/kdoc-api/"))
+            packageListUrl.set(URL("https://docs.spring.io/spring-security/site/docs/current/kdoc-api/package-list"))
+        }*/
+
+        externalDocumentationLink {
+            url.set(URL("https://www.ktorm.org/api-docs/"))
+            packageListUrl.set(URL("https://www.ktorm.org/api-docs/package-list"))
+        }
     }
 }
 
@@ -85,4 +144,29 @@ task("addHotReload") {
             "org.springframework.boot:spring-boot-devtools"
         )
     }
+}
+
+val integrationTests : Test = task<Test>("integrationTests") {
+    description = "Runs integration tests."
+    group = "verification"
+
+    testClassesDirs = sourceSets["integrations"].output.classesDirs
+    classpath = sourceSets["integrations"].runtimeClasspath
+    shouldRunAfter("test")
+    finalizedBy(tasks.jacocoTestReport)
+
+    useJUnitPlatform()
+
+    testLogging {
+        events("passed")
+    }
+}
+
+integrationTests.doFirst {
+    dockerCompose.exposeAsEnvironment(integrationTests)
+}
+
+dockerCompose {
+    this.useComposeFiles.add("docker-compose.yml")
+    this.isRequiredBy(project.tasks.findByName("integrationTests"))
 }

@@ -38,7 +38,7 @@ class RuleAmendmentDomain(
                 )
             }
             if (row.amendId != null && row.ruleActive && row.amendActive!!) {
-                rules.last().amendments?.add(
+                rules.last().amendments.add(
                     AmendmentModel(
                         row.amendId,
                         row.amendIndex!!,
