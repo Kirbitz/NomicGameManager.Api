@@ -15,7 +15,7 @@ class RepealingRulesTests(
     @Autowired val client: TestRestTemplate,
     @Autowired tokenRegistry: TokenRegistry
 ) : BaseEndToEndTest(tokenRegistry) {
-    private val request = createRequest<Any>(User(2, "Master Tester"))
+    private val request = createRequest<Any>(user = User(2, "Master Tester"))
 
     @Test
     fun `Successfully Repealed a Rule`() {

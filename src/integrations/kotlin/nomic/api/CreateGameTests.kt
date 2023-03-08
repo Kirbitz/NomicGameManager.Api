@@ -26,7 +26,7 @@ class CreateGameTests(
     }
 
     private val game2 = GamesApiModel("###BAD###", 2)
-    private val request2 = createRequest<GamesApiModel>(game2)
+    private val request2 = createRequest<GamesApiModel>(game2, User(2, "Master Tester"))
 
     @Test
     fun `Create Game with Bad Title (#)`() {
@@ -36,7 +36,7 @@ class CreateGameTests(
     }
 
     private val game3 = GamesApiModel("&&&BAD&&&", 2)
-    private val request3 = createRequest<GamesApiModel>(game3)
+    private val request3 = createRequest<GamesApiModel>(game3, User(2, "Master Tester"))
 
     @Test
     fun `Create Game with Bad Title (&)`() {
@@ -46,7 +46,7 @@ class CreateGameTests(
     }
 
     private val game4 = GamesApiModel("@@@BAD@@@", 2)
-    private val request4 = createRequest<GamesApiModel>(game4)
+    private val request4 = createRequest<GamesApiModel>(game4, User(2, "Master Tester"))
 
     @Test
     fun `Create Game with Bad Title (@)`() {
