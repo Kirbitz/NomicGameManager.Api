@@ -1,5 +1,6 @@
 package nomic.data.repositories.rulesamendments
 
+import nomic.data.EntityNotFoundException
 import nomic.data.dtos.Amendments
 import nomic.data.dtos.Rules
 import nomic.domain.entities.RulesAmendmentsModel
@@ -9,6 +10,7 @@ import org.ktorm.dsl.forEach
 import org.ktorm.dsl.from
 import org.ktorm.dsl.leftJoin
 import org.ktorm.dsl.select
+import org.ktorm.dsl.update
 import org.ktorm.dsl.where
 import org.springframework.stereotype.Repository
 
@@ -46,5 +48,24 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
             }
 
         return rules
+    }
+
+    override fun repealRule(ruleId: Int) {
+        db.update(Amendments) {
+            set(it.active, false)
+            where {
+                it.ruleId eq ruleId
+            }
+        }
+        val result = db.update(Rules) {
+            set(it.active, false)
+            where {
+                it.ruleId eq ruleId
+            }
+        }
+
+        if (result < 1) {
+            throw EntityNotFoundException(ruleId)
+        }
     }
 }

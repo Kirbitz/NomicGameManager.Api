@@ -1,21 +1,21 @@
 # Get Rules and Amendments Data
 
-Returns json data of rules and amendments connected to a specific game.
+Returns json data of the removal of a game.
 
 - **URL:**
 
-  /api/rules_amendments/collect/{gameId}
+  /api/game/remove/{gameId}
 
 
 - **Method:**
 
-  `GET`
+  `DELETE`
 
 
 - **URL Params:**
 
   __Required:__ GameId
-  
+
   `gameId: [int]`
 
   4321
@@ -31,35 +31,15 @@ Returns json data of rules and amendments connected to a specific game.
 
 - **Success Response:**
 
-  **Code:** `200 CREATED`
+  **Code:** `202 ACCEPTED`
 
   **Content:**
 
   ```json
   {
     "success": {
-      "status": 200,
-      "rules": [
-        {
-          "ruleId": 1234,
-          "index": 35,
-          "title": "My Awesome Rule",
-          "description": "No one can win the game",
-          "amendments": [
-            {
-              "amendId": 2345,
-              "index": 2,
-              "description": "A player may only win if they blow up the DB"
-            },
-            {
-              "...": "As many as found"
-            }
-          ]
-        },
-        {
-          "...": "As many as found"
-        }
-      ]
+      "status": 202,
+      "message": "Game Deleted"
     }
   }
   ```
@@ -92,6 +72,19 @@ Returns json data of rules and amendments connected to a specific game.
   }
   ```
 
+    **Code:** `404 NOT FOUND`
+    
+    **Content:**
+    
+      ```json
+      {
+        "error": {
+          "status": 404,
+          "message": "Game Not Found"
+        }
+      }
+      ```
+
   **Code:** `500 INTERNAL SERVER ERROR`
 
   **Content:**
@@ -109,8 +102,8 @@ Returns json data of rules and amendments connected to a specific game.
 
 ```javascript
 {
-  method: 'GET',
-  url: '/api/rules_amendments/collect/{gameId}',
+  method: 'DELETE',
+  url: '/api/game/remove/{gameId}',
   responseType: 'json',
   data: {
     gameId: 1234

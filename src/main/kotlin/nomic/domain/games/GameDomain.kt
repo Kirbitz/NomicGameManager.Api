@@ -10,13 +10,11 @@ import org.springframework.stereotype.Service
  *
  * @see [nomic.domain.games.IGameDomain]
  * @see [nomic.data.repositories.games.GameRepository]
- * @param GameRepository the instance of [GameRepository][nomic.data.repositories.games.GameRepository]
+ * @param gameRepository the instance of [GameRepository][nomic.data.repositories.games.GameRepository]
  * to use as a data collector
  */
 @Service
-class GameDomain(
-    private val gameRepository: GameRepository
-) : IGameDomain {
+class GameDomain(private val gameRepository: GameRepository) : IGameDomain {
     override fun createGame(input: GameModel) {
         val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
 
@@ -25,5 +23,11 @@ class GameDomain(
         }
 
         gameRepository.createGame(input)
+    }
+
+    override fun deleteGame(gameId: String) {
+        val gameIdInt: Int = gameId.toIntOrNull() ?: throw IllegalArgumentException("Please enter a valid GameId!")
+
+        gameRepository.deleteGame(gameIdInt)
     }
 }

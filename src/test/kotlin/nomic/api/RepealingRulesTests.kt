@@ -14,7 +14,7 @@ class RepealingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEn
 
     @Test
     fun `Successfully Repealed a Rule`() {
-        val entity = client.exchange<RepealRuleResponse>("/api/repeal_rule/6", HttpMethod.GET, request)
+        val entity = client.exchange<RepealRuleResponse>("/api/rules_amendments/repeal_rule/6", HttpMethod.GET, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(entity.body.toString()).contains("Updated Successfully")
@@ -22,7 +22,7 @@ class RepealingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEn
 
     @Test
     fun `Bad ID`() {
-        val entity = client.exchange<String>("/api/repeal_rule/p", HttpMethod.GET, request)
+        val entity = client.exchange<String>("/api/rules_amendments/repeal_rule/p", HttpMethod.GET, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
         Assertions.assertThat(entity.body.toString()).contains("Please enter a valid ruleId!")
@@ -30,7 +30,7 @@ class RepealingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEn
 
     @Test
     fun `Rule ID not found`() {
-        val entity = client.exchange<String>("/api/repeal_rule/1224339", HttpMethod.GET, request)
+        val entity = client.exchange<String>("/api/rules_amendments/repeal_rule/1224339", HttpMethod.GET, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.NOT_FOUND)
         Assertions.assertThat(entity.body.toString()).contains("The entity with id 1224339 was not found on the database.")
