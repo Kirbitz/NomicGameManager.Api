@@ -4,7 +4,7 @@ Changes the active flag of a specified rule and any amendments that depend on it
 
 - **URL:**
 
-  /api/repeal_rule/{ruleId}
+  /api/rules_amendments/repeal_rule/{ruleId}
 
 
 - **Method:**
@@ -101,7 +101,7 @@ Changes the active flag of a specified rule and any amendments that depend on it
 ```javascript
 {
   method: 'GET',
-  url: '/api/repeal_rule/{ruleId}',
+  url: '/api/rules_amendments/repeal_rule/{ruleId}',
   responseType: 'json',
   data: {
     gameId: 1234

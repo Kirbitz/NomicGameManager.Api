@@ -15,4 +15,11 @@ interface IRuleAmendmentRepository {
      * @return MutableList<RulesAmendmentsModel> rules and amendments data for a specific game
      */
     fun getRulesAmendments(gameId: Int): MutableList<RulesAmendmentsModel>
+
+    /**
+     * Changes active flag and returns success or fail
+     *
+     * @param ruleId The id of the rule to be repealed
+     */
+    fun repealRule(ruleId: Int)
 }

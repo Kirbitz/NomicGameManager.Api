@@ -3,14 +3,15 @@ package nomic.data.repositories.games
 import nomic.domain.entities.GameModel
 
 /**
- * Interface creates the game within the DB
+ * Interface manipulates game data in the DB
  *
  * @see [nomic.domain.entities.GameModel]
  */
 
 interface IGameRepository {
     /**
-     * Creates a game
+     * Creates a new game
+     *
      * @param input Model of the [GameModel][nomic.domain.entities.GameModel] to be made
      */
     fun createGame(input: GameModel)

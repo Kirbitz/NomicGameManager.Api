@@ -4,7 +4,7 @@ Returns json data of rules and amendments connected to a specific game.
 
 - **URL:**
 
-  /api/rules_amendments/{gameId}
+  /api/rules_amendments/collect/{gameId}
 
 
 - **Method:**
@@ -110,7 +110,7 @@ Returns json data of rules and amendments connected to a specific game.
 ```javascript
 {
   method: 'GET',
-  url: '/api/rules_amendments/{gameId}',
+  url: '/api/rules_amendments/collect/{gameId}',
   responseType: 'json',
   data: {
     gameId: 1234
