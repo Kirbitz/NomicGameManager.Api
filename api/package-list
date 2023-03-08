@@ -24,23 +24,21 @@ $dokka.location:nomic.api/ExceptionResponseFormat///PointingToDeclaration/api/n
 $dokka.location:nomic.api/ExceptionResponseFormat/ExceptionResponseFormat/#kotlin.Boolean#kotlin.String?/PointingToDeclaration/api/nomic.api/-exception-response-format/-exception-response-format.html
 $dokka.location:nomic.api/ExceptionResponseFormat/error/#/PointingToDeclaration/api/nomic.api/-exception-response-format/error.html
 $dokka.location:nomic.api/ExceptionResponseFormat/msg/#/PointingToDeclaration/api/nomic.api/-exception-response-format/msg.html
-$dokka.location:nomic.api/Games///PointingToDeclaration/api/nomic.api/-games/index.html
-$dokka.location:nomic.api/Games/Games/#nomic.domain.games.GameDomain/PointingToDeclaration/api/nomic.api/-games/-games.html
-$dokka.location:nomic.api/Games/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/api/nomic.api/-games/create-game.html
-$dokka.location:nomic.api/Games/gameDomain/#/PointingToDeclaration/api/nomic.api/-games/game-domain.html
+$dokka.location:nomic.api/GamesEndpoint///PointingToDeclaration/api/nomic.api/-games-endpoint/index.html
+$dokka.location:nomic.api/GamesEndpoint/GamesEndpoint/#nomic.domain.games.GameDomain/PointingToDeclaration/api/nomic.api/-games-endpoint/-games-endpoint.html
+$dokka.location:nomic.api/GamesEndpoint/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/api/nomic.api/-games-endpoint/create-game.html
+$dokka.location:nomic.api/GamesEndpoint/deleteGame/#kotlin.String/PointingToDeclaration/api/nomic.api/-games-endpoint/delete-game.html
+$dokka.location:nomic.api/GamesEndpoint/gameDomain/#/PointingToDeclaration/api/nomic.api/-games-endpoint/game-domain.html
 $dokka.location:nomic.api/GlobalExceptionHandler///PointingToDeclaration/api/nomic.api/-global-exception-handler/index.html
 $dokka.location:nomic.api/GlobalExceptionHandler/GlobalExceptionHandler/#/PointingToDeclaration/api/nomic.api/-global-exception-handler/-global-exception-handler.html
 $dokka.location:nomic.api/GlobalExceptionHandler/handleAllUncaughtException/#java.lang.Exception/PointingToDeclaration/api/nomic.api/-global-exception-handler/handle-all-uncaught-exception.html
 $dokka.location:nomic.api/GlobalExceptionHandler/handleEntityNotFoundException/#nomic.data.EntityNotFoundException/PointingToDeclaration/api/nomic.api/-global-exception-handler/handle-entity-not-found-exception.html
 $dokka.location:nomic.api/GlobalExceptionHandler/handleIllegalArgumentException/#java.lang.IllegalArgumentException/PointingToDeclaration/api/nomic.api/-global-exception-handler/handle-illegal-argument-exception.html
-$dokka.location:nomic.api/RepealRule///PointingToDeclaration/api/nomic.api/-repeal-rule/index.html
-$dokka.location:nomic.api/RepealRule/RepealRule/#nomic.domain.repealrule.RepealRuleDomain/PointingToDeclaration/api/nomic.api/-repeal-rule/-repeal-rule.html
-$dokka.location:nomic.api/RepealRule/repealRule/#kotlin.String/PointingToDeclaration/api/nomic.api/-repeal-rule/repeal-rule.html
-$dokka.location:nomic.api/RepealRule/repealRuleDomain/#/PointingToDeclaration/api/nomic.api/-repeal-rule/repeal-rule-domain.html
-$dokka.location:nomic.api/RulesAmendments///PointingToDeclaration/api/nomic.api/-rules-amendments/index.html
-$dokka.location:nomic.api/RulesAmendments/RulesAmendments/#nomic.domain.rulesamendments.RuleAmendmentDomain/PointingToDeclaration/api/nomic.api/-rules-amendments/-rules-amendments.html
-$dokka.location:nomic.api/RulesAmendments/getRulesAmendments/#kotlin.String/PointingToDeclaration/api/nomic.api/-rules-amendments/get-rules-amendments.html
-$dokka.location:nomic.api/RulesAmendments/ruleAmendmentDomain/#/PointingToDeclaration/api/nomic.api/-rules-amendments/rule-amendment-domain.html
+$dokka.location:nomic.api/RulesAmendmentsEndpoint///PointingToDeclaration/api/nomic.api/-rules-amendments-endpoint/index.html
+$dokka.location:nomic.api/RulesAmendmentsEndpoint/RulesAmendmentsEndpoint/#nomic.domain.rulesamendments.RuleAmendmentDomain/PointingToDeclaration/api/nomic.api/-rules-amendments-endpoint/-rules-amendments-endpoint.html
+$dokka.location:nomic.api/RulesAmendmentsEndpoint/getRulesAmendments/#kotlin.String/PointingToDeclaration/api/nomic.api/-rules-amendments-endpoint/get-rules-amendments.html
+$dokka.location:nomic.api/RulesAmendmentsEndpoint/repealRule/#kotlin.String/PointingToDeclaration/api/nomic.api/-rules-amendments-endpoint/repeal-rule.html
+$dokka.location:nomic.api/RulesAmendmentsEndpoint/ruleAmendmentDomain/#/PointingToDeclaration/api/nomic.api/-rules-amendments-endpoint/rule-amendment-domain.html
 $dokka.location:nomic.data.dtos////PointingToDeclaration/api/nomic.data.dtos/index.html
 $dokka.location:nomic.data.dtos//amendments/org.ktorm.database.Database#/PointingToDeclaration/api/nomic.data.dtos/amendments.html
 $dokka.location:nomic.data.dtos/AmendmentDTO.Companion///PointingToDeclaration/api/nomic.data.dtos/-amendment-d-t-o/-companion/index.html
@@ -93,20 +91,18 @@ $dokka.location:nomic.data.repositories.games////PointingToDeclaration/api/nomi
 $dokka.location:nomic.data.repositories.games/GameRepository///PointingToDeclaration/api/nomic.data.repositories.games/-game-repository/index.html
 $dokka.location:nomic.data.repositories.games/GameRepository/GameRepository/#org.ktorm.database.Database/PointingToDeclaration/api/nomic.data.repositories.games/-game-repository/-game-repository.html
 $dokka.location:nomic.data.repositories.games/GameRepository/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/api/nomic.data.repositories.games/-game-repository/create-game.html
+$dokka.location:nomic.data.repositories.games/GameRepository/deleteGame/#kotlin.Int/PointingToDeclaration/api/nomic.data.repositories.games/-game-repository/delete-game.html
 $dokka.location:nomic.data.repositories.games/IGameRepository///PointingToDeclaration/api/nomic.data.repositories.games/-i-game-repository/index.html
 $dokka.location:nomic.data.repositories.games/IGameRepository/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/api/nomic.data.repositories.games/-i-game-repository/create-game.html
-$dokka.location:nomic.data.repositories.repealrule////PointingToDeclaration/api/nomic.data.repositories.repealrule/index.html
-$dokka.location:nomic.data.repositories.repealrule/IRepealRuleRepository///PointingToDeclaration/api/nomic.data.repositories.repealrule/-i-repeal-rule-repository/index.html
-$dokka.location:nomic.data.repositories.repealrule/IRepealRuleRepository/repealRule/#kotlin.Int/PointingToDeclaration/api/nomic.data.repositories.repealrule/-i-repeal-rule-repository/repeal-rule.html
-$dokka.location:nomic.data.repositories.repealrule/RepealRuleRepository///PointingToDeclaration/api/nomic.data.repositories.repealrule/-repeal-rule-repository/index.html
-$dokka.location:nomic.data.repositories.repealrule/RepealRuleRepository/RepealRuleRepository/#org.ktorm.database.Database/PointingToDeclaration/api/nomic.data.repositories.repealrule/-repeal-rule-repository/-repeal-rule-repository.html
-$dokka.location:nomic.data.repositories.repealrule/RepealRuleRepository/repealRule/#kotlin.Int/PointingToDeclaration/api/nomic.data.repositories.repealrule/-repeal-rule-repository/repeal-rule.html
+$dokka.location:nomic.data.repositories.games/IGameRepository/deleteGame/#kotlin.Int/PointingToDeclaration/api/nomic.data.repositories.games/-i-game-repository/delete-game.html
 $dokka.location:nomic.data.repositories.rulesamendments////PointingToDeclaration/api/nomic.data.repositories.rulesamendments/index.html
 $dokka.location:nomic.data.repositories.rulesamendments/IRuleAmendmentRepository///PointingToDeclaration/api/nomic.data.repositories.rulesamendments/-i-rule-amendment-repository/index.html
 $dokka.location:nomic.data.repositories.rulesamendments/IRuleAmendmentRepository/getRulesAmendments/#kotlin.Int/PointingToDeclaration/api/nomic.data.repositories.rulesamendments/-i-rule-amendment-repository/get-rules-amendments.html
+$dokka.location:nomic.data.repositories.rulesamendments/IRuleAmendmentRepository/repealRule/#kotlin.Int/PointingToDeclaration/api/nomic.data.repositories.rulesamendments/-i-rule-amendment-repository/repeal-rule.html
 $dokka.location:nomic.data.repositories.rulesamendments/RuleAmendmentRepository///PointingToDeclaration/api/nomic.data.repositories.rulesamendments/-rule-amendment-repository/index.html
 $dokka.location:nomic.data.repositories.rulesamendments/RuleAmendmentRepository/RuleAmendmentRepository/#org.ktorm.database.Database/PointingToDeclaration/api/nomic.data.repositories.rulesamendments/-rule-amendment-repository/-rule-amendment-repository.html
 $dokka.location:nomic.data.repositories.rulesamendments/RuleAmendmentRepository/getRulesAmendments/#kotlin.Int/PointingToDeclaration/api/nomic.data.repositories.rulesamendments/-rule-amendment-repository/get-rules-amendments.html
+$dokka.location:nomic.data.repositories.rulesamendments/RuleAmendmentRepository/repealRule/#kotlin.Int/PointingToDeclaration/api/nomic.data.repositories.rulesamendments/-rule-amendment-repository/repeal-rule.html
 $dokka.location:nomic.data////PointingToDeclaration/api/nomic.data/index.html
 $dokka.location:nomic.data/DatabaseConfigProperties///PointingToDeclaration/api/nomic.data/-database-config-properties/index.html
 $dokka.location:nomic.data/DatabaseConfigProperties/DatabaseConfigProperties/#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/api/nomic.data/-database-config-properties/-database-config-properties.html
@@ -148,20 +144,18 @@ $dokka.location:nomic.domain.games////PointingToDeclaration/api/nomic.domain.ga
 $dokka.location:nomic.domain.games/GameDomain///PointingToDeclaration/api/nomic.domain.games/-game-domain/index.html
 $dokka.location:nomic.domain.games/GameDomain/GameDomain/#nomic.data.repositories.games.GameRepository/PointingToDeclaration/api/nomic.domain.games/-game-domain/-game-domain.html
 $dokka.location:nomic.domain.games/GameDomain/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/api/nomic.domain.games/-game-domain/create-game.html
+$dokka.location:nomic.domain.games/GameDomain/deleteGame/#kotlin.String/PointingToDeclaration/api/nomic.domain.games/-game-domain/delete-game.html
 $dokka.location:nomic.domain.games/IGameDomain///PointingToDeclaration/api/nomic.domain.games/-i-game-domain/index.html
 $dokka.location:nomic.domain.games/IGameDomain/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/api/nomic.domain.games/-i-game-domain/create-game.html
-$dokka.location:nomic.domain.repealrule////PointingToDeclaration/api/nomic.domain.repealrule/index.html
-$dokka.location:nomic.domain.repealrule/IRepealRuleDomain///PointingToDeclaration/api/nomic.domain.repealrule/-i-repeal-rule-domain/index.html
-$dokka.location:nomic.domain.repealrule/IRepealRuleDomain/repealRule/#kotlin.String/PointingToDeclaration/api/nomic.domain.repealrule/-i-repeal-rule-domain/repeal-rule.html
-$dokka.location:nomic.domain.repealrule/RepealRuleDomain///PointingToDeclaration/api/nomic.domain.repealrule/-repeal-rule-domain/index.html
-$dokka.location:nomic.domain.repealrule/RepealRuleDomain/RepealRuleDomain/#nomic.data.repositories.repealrule.RepealRuleRepository/PointingToDeclaration/api/nomic.domain.repealrule/-repeal-rule-domain/-repeal-rule-domain.html
-$dokka.location:nomic.domain.repealrule/RepealRuleDomain/repealRule/#kotlin.String/PointingToDeclaration/api/nomic.domain.repealrule/-repeal-rule-domain/repeal-rule.html
+$dokka.location:nomic.domain.games/IGameDomain/deleteGame/#kotlin.String/PointingToDeclaration/api/nomic.domain.games/-i-game-domain/delete-game.html
 $dokka.location:nomic.domain.rulesamendments////PointingToDeclaration/api/nomic.domain.rulesamendments/index.html
 $dokka.location:nomic.domain.rulesamendments/IRuleAmendmentDomain///PointingToDeclaration/api/nomic.domain.rulesamendments/-i-rule-amendment-domain/index.html
 $dokka.location:nomic.domain.rulesamendments/IRuleAmendmentDomain/getRulesAmendments/#kotlin.String/PointingToDeclaration/api/nomic.domain.rulesamendments/-i-rule-amendment-domain/get-rules-amendments.html
+$dokka.location:nomic.domain.rulesamendments/IRuleAmendmentDomain/repealRule/#kotlin.String/PointingToDeclaration/api/nomic.domain.rulesamendments/-i-rule-amendment-domain/repeal-rule.html
 $dokka.location:nomic.domain.rulesamendments/RuleAmendmentDomain///PointingToDeclaration/api/nomic.domain.rulesamendments/-rule-amendment-domain/index.html
 $dokka.location:nomic.domain.rulesamendments/RuleAmendmentDomain/RuleAmendmentDomain/#nomic.data.repositories.rulesamendments.RuleAmendmentRepository/PointingToDeclaration/api/nomic.domain.rulesamendments/-rule-amendment-domain/-rule-amendment-domain.html
 $dokka.location:nomic.domain.rulesamendments/RuleAmendmentDomain/getRulesAmendments/#kotlin.String/PointingToDeclaration/api/nomic.domain.rulesamendments/-rule-amendment-domain/get-rules-amendments.html
+$dokka.location:nomic.domain.rulesamendments/RuleAmendmentDomain/repealRule/#kotlin.String/PointingToDeclaration/api/nomic.domain.rulesamendments/-rule-amendment-domain/repeal-rule.html
 $dokka.location:nomic////PointingToDeclaration/api/nomic/index.html
 $dokka.location:nomic//main/#kotlin.Array[kotlin.String]/PointingToDeclaration/api/nomic/main.html
 $dokka.location:nomic/ApiApplication///PointingToDeclaration/api/nomic/-api-application/index.html
@@ -172,10 +166,8 @@ nomic.api.models
 nomic.data
 nomic.data.dtos
 nomic.data.repositories.games
-nomic.data.repositories.repealrule
 nomic.data.repositories.rulesamendments
 nomic.domain.entities
 nomic.domain.games
-nomic.domain.repealrule
 nomic.domain.rulesamendments
 
