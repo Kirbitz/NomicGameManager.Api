@@ -1,4 +1,4 @@
-# Get Rules and Amendments Data
+# Remove A Game
 
 Returns json data of the removal of a game.
 
