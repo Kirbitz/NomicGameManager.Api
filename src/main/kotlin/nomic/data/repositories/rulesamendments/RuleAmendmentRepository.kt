@@ -5,7 +5,13 @@ import nomic.data.dtos.Amendments
 import nomic.data.dtos.Rules
 import nomic.domain.entities.RulesAmendmentsModel
 import org.ktorm.database.Database
-import org.ktorm.dsl.*
+import org.ktorm.dsl.eq
+import org.ktorm.dsl.forEach
+import org.ktorm.dsl.from
+import org.ktorm.dsl.leftJoin
+import org.ktorm.dsl.select
+import org.ktorm.dsl.update
+import org.ktorm.dsl.where
 import org.springframework.stereotype.Repository
 
 /**
