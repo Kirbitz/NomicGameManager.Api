@@ -1,6 +1,7 @@
 package nomic.domain.rulesamendments
 
 import nomic.api.models.RulesAmendmentsApiModel
+import nomic.domain.entities.RepealRuleResponse
 import nomic.domain.entities.RulesModel
 
 /**
