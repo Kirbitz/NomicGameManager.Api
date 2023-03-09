@@ -14,6 +14,10 @@ interface IRuleAmendmentDomain {
      * @return The list of [RulesAmendmentsModel][nomic.domain.entities.RulesAmendmentsModel] objects to pass back to the API layer
      */
     fun getRulesAmendments(gameId: String): MutableList<RulesAmendmentsApiModel>
-
+    /**
+     * Collects and formats the rules data
+     *
+     * @param input Model of the [RulesModel][nomic.domain.entities.RulesModel] to be made
+     */
     fun enactingRule(input: RulesModel)
 }

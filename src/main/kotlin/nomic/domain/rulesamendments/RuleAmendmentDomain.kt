@@ -52,6 +52,12 @@ class RuleAmendmentDomain(
 
         return rules
     }
+
+    /**
+     * Implementation of the regex to find special characters [RulesModel][nomic.domain.entities.RulesModel]
+     *
+     * @see [nomic.domain.entities.RulesModel]
+     */
     override fun enactingRule(input: RulesModel) {
         val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
 

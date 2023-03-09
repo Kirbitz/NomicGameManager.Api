@@ -16,6 +16,9 @@ interface IRuleAmendmentRepository {
      * @return Raw rule and amendment data for a specific game
      */
     fun getRulesAmendments(gameId: Int): MutableList<RulesAmendmentsModel>
-
+    /**
+     * Creates a rule
+     * @param inputRule Model of the [RulesModel][nomic.domain.entities.RulesModel] rule to be made
+     */
     fun enactRule(inputRule: RulesModel)
 }

@@ -2,12 +2,17 @@ package nomic.api
 
 import nomic.api.models.RulesAmendmentsApiModel
 import org.assertj.core.api.Assertions
+import org.h2.bnf.Rule
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.boot.test.web.client.exchange
+import org.springframework.http.HttpEntity
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import java.net.URISyntaxException
+
 
 class RulesAmendmentsTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTest() {
     private val request = createRequest<Any>()

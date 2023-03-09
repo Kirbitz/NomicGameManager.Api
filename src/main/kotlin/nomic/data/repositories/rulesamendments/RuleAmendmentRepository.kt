@@ -43,6 +43,14 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
 
         return rules
     }
+
+    /**
+     * Implementation of the [RulesModel][nomic.domain.entities.RulesModel] uses
+     * Ktorm [Database][org.ktorm.database.Database] as the data access layer
+     *
+     * @see [nomic.domain.entities.RulesModel]
+     * @see [org.ktorm.database.Database]
+     */
     override fun enactRule(inputRule: RulesModel) {
         //Check to see if game exists
         db.insert(Rules){
