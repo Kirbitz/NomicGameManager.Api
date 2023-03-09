@@ -3,7 +3,9 @@ package nomic.domain.rulesamendments
 import nomic.api.models.AmendmentModel
 import nomic.api.models.RulesAmendmentsApiModel
 import nomic.data.repositories.rulesamendments.RuleAmendmentRepository
+import nomic.domain.entities.RepealRuleResponse
 import nomic.domain.entities.RulesAmendmentsModel
+import nomic.domain.entities.RulesModel
 import org.springframework.stereotype.Service
 
 /**
@@ -38,7 +40,7 @@ class RuleAmendmentDomain(
                 )
             }
             if (row.amendId != null && row.ruleActive && row.amendActive!!) {
-                rules.last().amendments?.add(
+                rules.last().amendments.add(
                     AmendmentModel(
                         row.amendId,
                         row.amendIndex!!,
@@ -50,5 +52,25 @@ class RuleAmendmentDomain(
         }
 
         return rules
+    }
+
+    override fun repealRule(ruleId: String): RepealRuleResponse {
+        val ruleIdInt: Int = ruleId.toIntOrNull() ?: throw IllegalArgumentException("Please enter a valid ruleId!")
+        ruleAmendmentRepository.repealRule(ruleIdInt)
+
+        return RepealRuleResponse(true, "Updated Successfully", ruleIdInt)
+    }
+
+    override fun enactingRule(input: RulesModel) {
+        val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
+
+        if (!regex.matches(input.description!!)) {
+            throw IllegalArgumentException("Has Special Characters")
+        }
+        if (!regex.matches(input.title)) {
+            throw IllegalArgumentException("Has Special Characters")
+        }
+
+        ruleAmendmentRepository.enactRule(input)
     }
 }

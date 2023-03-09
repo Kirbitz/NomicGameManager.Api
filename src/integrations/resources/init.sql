@@ -150,6 +150,11 @@ INSERT INTO `Game` VALUES (3, 'MyGame3', '2015-12-18', NULL, 2);
 INSERT INTO `Rule` VALUES (4, 4, 'Run in circles', 'MyInactiveRule1', 3, 0, 0);
 INSERT INTO `Amendment` VALUES (4, 4, 'Run slowly', 'MyAmendment4', 4, 1);
 
+-- Games Tests
+
+INSERT INTO `User` VALUES (3, 'Game Master');
+INSERT INTO `Game` VALUES (42, 'The Journey', '2015-03-14', NULL, 3);
+
 -- Repealing Rules Tests
 
 INSERT INTO `Game` VALUES (4, 'MyGame', '2015-12-17', NULL, 2);

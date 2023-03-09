@@ -5,7 +5,6 @@ package nomic.api.models
  *
  * @property title the name of this game
  * @property userId the id of the user the game is linked to
- * @see[nomic.api.models.GameModel]
  */
 data class GamesApiModel(
     val title: String,
