@@ -9,7 +9,7 @@ import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 class EnactingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTest() {
 
-    private val rule = RulesModel(77, 50,"Title","Description",false,2)
+    private val rule = RulesModel(77, 50, "Title", "Description", false, 2)
     private val request = createRequest(rule)
 
     @Test
@@ -19,7 +19,7 @@ class EnactingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEnd
         Assertions.assertThat(entity.body).isEqualTo("Rule Created")
     }
 
-    private val rule1 = RulesModel(72, 51,"Title2","",false,2)
+    private val rule1 = RulesModel(72, 51, "Title2", "", false, 2)
     private val request1 = createRequest(rule1)
 
     @Test
@@ -29,7 +29,7 @@ class EnactingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEnd
         Assertions.assertThat(entity.body).isEqualTo("Rule Created")
     }
 
-    private val rule2 = RulesModel(73, 52,"","Description",false,2)
+    private val rule2 = RulesModel(73, 52, "", "Description", false, 2)
     private val request2 = createRequest(rule2)
 
     @Test
@@ -39,7 +39,7 @@ class EnactingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEnd
         Assertions.assertThat(entity.body).isEqualTo("Rule Created")
     }
 
-    private val rule3 = RulesModel(74, 54,":::","Description",false,2)
+    private val rule3 = RulesModel(74, 54, ":::", "Description", false, 2)
     private val request3 = createRequest(rule3)
 
     @Test
@@ -49,7 +49,7 @@ class EnactingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEnd
         Assertions.assertThat(entity.body).contains("Has Special Characters")
     }
 
-    private val rule4 = RulesModel(75, 56,"Title","Descri:::::ption",false,2)
+    private val rule4 = RulesModel(75, 56, "Title", "Descri:::::ption", false, 2)
     private val request4 = createRequest(rule4)
 
     @Test
@@ -59,7 +59,7 @@ class EnactingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEnd
         Assertions.assertThat(entity.body).contains("Has Special Characters")
     }
 
-    private val rule5 = RulesModel(76, 57,"Title","Description",false,5)
+    private val rule5 = RulesModel(76, 57, "Title", "Description", false, 5)
     private val request5 = createRequest(rule5)
 
     @Test

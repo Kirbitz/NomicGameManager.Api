@@ -64,10 +64,10 @@ class RuleAmendmentDomain(
     override fun enactingRule(input: RulesModel) {
         val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
 
-        if(!regex.matches(input.description!!)) {
+        if (!regex.matches(input.description!!)) {
             throw IllegalArgumentException("Has Special Characters")
         }
-        if(!regex.matches(input.title)) {
+        if (!regex.matches(input.title)) {
             throw IllegalArgumentException("Has Special Characters")
         }
 

@@ -6,7 +6,12 @@ import nomic.domain.entities.RulesModel
 import nomic.domain.rulesamendments.RuleAmendmentDomain
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
 /**
  * This controller listens on `api/rules_amendments` and works to provide, remove, or manipulate data related to games in the database
@@ -31,6 +36,7 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
         // Return the response object
         return ResponseEntity(rulesAmendments, HttpStatus.OK)
     }
+
     @PostMapping("enactRule")
     fun enactRule(@RequestBody inputRule: RulesModel): ResponseEntity<Any> {
         ruleAmendmentDomain.enactingRule(inputRule)

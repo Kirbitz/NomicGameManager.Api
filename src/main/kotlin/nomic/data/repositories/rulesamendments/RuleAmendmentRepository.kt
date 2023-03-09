@@ -6,14 +6,14 @@ import nomic.data.dtos.Rules
 import nomic.domain.entities.RulesAmendmentsModel
 import nomic.domain.entities.RulesModel
 import org.ktorm.database.Database
+import org.ktorm.dsl.eq
+import org.ktorm.dsl.forEach
 import org.ktorm.dsl.from
+import org.ktorm.dsl.insert
 import org.ktorm.dsl.leftJoin
 import org.ktorm.dsl.select
-import org.ktorm.dsl.where
-import org.ktorm.dsl.forEach
 import org.ktorm.dsl.update
-import org.ktorm.dsl.insert
-import org.ktorm.dsl.eq
+import org.ktorm.dsl.where
 import org.springframework.stereotype.Repository
 
 /**
@@ -72,7 +72,7 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
     }
 
     override fun enactRule(inputRule: RulesModel) {
-        //Check to see if game exists
+        // Check to see if game exists
         db.insert(Rules) {
             set(it.gameId, inputRule.gameID)
             set(it.mutable, inputRule.mutable)
