@@ -36,6 +36,7 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
         // Return the response object
         return ResponseEntity(rulesAmendments, HttpStatus.OK)
     }
+
     /**
      * This endpoint listens on `api/rules_amendments/enactRule` and takes a gameId to collect the associated rules and amendments
      *
