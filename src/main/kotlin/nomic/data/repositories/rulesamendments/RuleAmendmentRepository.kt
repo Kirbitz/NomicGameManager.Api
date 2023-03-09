@@ -4,10 +4,12 @@ import nomic.data.EntityNotFoundException
 import nomic.data.dtos.Amendments
 import nomic.data.dtos.Rules
 import nomic.domain.entities.RulesAmendmentsModel
+import nomic.domain.entities.RulesModel
 import org.ktorm.database.Database
 import org.ktorm.dsl.eq
 import org.ktorm.dsl.forEach
 import org.ktorm.dsl.from
+import org.ktorm.dsl.insert
 import org.ktorm.dsl.leftJoin
 import org.ktorm.dsl.select
 import org.ktorm.dsl.update
@@ -66,6 +68,17 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
 
         if (result < 1) {
             throw EntityNotFoundException(ruleId)
+        }
+    }
+
+    override fun enactRule(inputRule: RulesModel) {
+        // Check to see if game exists
+        db.insert(Rules) {
+            set(it.gameId, inputRule.gameID)
+            set(it.mutable, inputRule.mutable)
+            set(it.index, inputRule.index)
+            set(it.title, inputRule.title)
+            set(it.description, inputRule.description)
         }
     }
 }
