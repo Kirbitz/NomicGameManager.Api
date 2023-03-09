@@ -51,23 +51,25 @@ class RuleAmendmentDomain(
         }
 
         return rules
-    }
 
-    /**
-     * Implementation of the regex to find special characters [RulesModel][nomic.domain.entities.RulesModel]
-     *
-     * @see [nomic.domain.entities.RulesModel]
-     */
-    override fun enactingRule(input: RulesModel) {
-        val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
+        override fun repealRule(ruleId: String): RepealRuleResponse {
+            val ruleIdInt: Int = ruleId.toIntOrNull() ?: throw IllegalArgumentException("Please enter a valid ruleId!")
+            ruleAmendmentRepository.repealRule(ruleIdInt)
 
-        if(!regex.matches(input.description!!)) {
-            throw IllegalArgumentException("Has Special Characters")
-        }
-        if(!regex.matches(input.title)) {
-            throw IllegalArgumentException("Has Special Characters")
+            return RepealRuleResponse(true, "Updated Successfully", ruleIdInt)
         }
 
-        ruleAmendmentRepository.enactRule(input)
+        override fun enactingRule(input: RulesModel) {
+            val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
+
+            if(!regex.matches(input.description!!)) {
+                throw IllegalArgumentException("Has Special Characters")
+            }
+            if(!regex.matches(input.title)) {
+                throw IllegalArgumentException("Has Special Characters")
+            }
+
+            ruleAmendmentRepository.enactRule(input)
+        }
     }
 }

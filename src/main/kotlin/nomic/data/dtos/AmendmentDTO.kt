@@ -29,7 +29,7 @@ interface AmendmentDTO : Entity<AmendmentDTO> {
 }
 
 /**
- * This object represents the credentials table in the database, employing KTorm's framework.
+ * This object represents the amendments table in the database, employing KTorm's framework.
  *
  * @see[org.ktorm.schema.Table]
  * @property amendId The primary key for the [Amendments] table

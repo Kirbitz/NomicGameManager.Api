@@ -1,5 +1,6 @@
 package nomic.data.repositories.rulesamendments
 
+import nomic.data.EntityNotFoundException
 import nomic.data.dtos.Amendments
 import nomic.data.dtos.Rules
 import nomic.domain.entities.RulesAmendmentsModel
@@ -44,16 +45,28 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
         return rules
     }
 
-    /**
-     * Implementation of the [RulesModel][nomic.domain.entities.RulesModel] uses
-     * Ktorm [Database][org.ktorm.database.Database] as the data access layer
-     *
-     * @see [nomic.domain.entities.RulesModel]
-     * @see [org.ktorm.database.Database]
-     */
+    override fun repealRule(ruleId: Int) {
+        db.update(Amendments) {
+            set(it.active, false)
+            where {
+                it.ruleId eq ruleId
+            }
+        }
+        val result = db.update(Rules) {
+            set(it.active, false)
+            where {
+                it.ruleId eq ruleId
+            }
+        }
+
+        if (result < 1) {
+            throw EntityNotFoundException(ruleId)
+        }
+    }
+
     override fun enactRule(inputRule: RulesModel) {
         //Check to see if game exists
-        db.insert(Rules){
+        db.insert(Rules) {
             set(it.gameId, inputRule.gameID)
             set(it.mutable, inputRule.mutable)
             set(it.index, inputRule.index)
