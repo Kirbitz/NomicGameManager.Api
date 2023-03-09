@@ -134,7 +134,7 @@ None
 ```json
 axios({
   method: 'POST',
-  url: '/api/enacting_rules',
+  url: '/api/rules_amendments/enactRule',
   responseType: 'json',
   data: {
     ruleId: 1,

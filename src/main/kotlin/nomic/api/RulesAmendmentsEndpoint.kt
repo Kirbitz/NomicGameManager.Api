@@ -36,7 +36,12 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
         // Return the response object
         return ResponseEntity(rulesAmendments, HttpStatus.OK)
     }
-
+    /**
+     * This endpoint listens on `api/rules_amendments/enactRule` and takes a gameId to collect the associated rules and amendments
+     *
+     * @param[inputRule] Rule data to get inserted into the database
+     * @return A spring entity representing the response that gets serialized into JSON
+     */
     @PostMapping("enactRule")
     fun enactRule(@RequestBody inputRule: RulesModel): ResponseEntity<Any> {
         ruleAmendmentDomain.enactingRule(inputRule)
