@@ -41,6 +41,9 @@ dependencies {
     implementation("mysql:mysql-connector-java:8.0.25")
     implementation("org.ktorm:ktorm-support-mysql:3.6.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.1.1")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
     testImplementation("com.h2database:h2")
 }
 
