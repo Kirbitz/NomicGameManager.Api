@@ -1,4 +1,4 @@
-package nomic.api
+package nomic.integration.api
 
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpEntity

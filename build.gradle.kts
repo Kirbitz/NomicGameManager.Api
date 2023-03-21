@@ -34,19 +34,6 @@ repositories {
     mavenCentral()
 }
 
-sourceSets {
-    create("integrations") {
-        compileClasspath += sourceSets.main.get().output
-        runtimeClasspath += sourceSets.main.get().output
-    }
-}
-
-val integrationsImplementation: Configuration by configurations.getting {
-    extendsFrom(configurations.implementation.get())
-}
-
-configurations["integrationsRuntimeOnly"].extendsFrom(configurations.runtimeOnly.get())
-
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -58,7 +45,6 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("org.mockito:mockito-junit-jupiter:5.1.1")
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
-    integrationsImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.withType<KotlinCompile> {
@@ -77,9 +63,7 @@ tasks.test {
 }
 
 tasks.jacocoTestReport {
-    sourceSets(sourceSets.getByName("integrations"))
     dependsOn(tasks.test)
-    dependsOn(integrationTests)
     reports {
         xml.required.set(true)
     }
@@ -107,27 +91,7 @@ task("addHotReload") {
     }
 }
 
-val integrationTests: Test = task<Test>("integrationTests") {
-    description = "Runs integration tests."
-    group = "verification"
-
-    testClassesDirs = sourceSets["integrations"].output.classesDirs
-    classpath = sourceSets["integrations"].runtimeClasspath
-    shouldRunAfter("test")
-    finalizedBy(tasks.jacocoTestReport)
-
-    useJUnitPlatform()
-
-    testLogging {
-        events("passed")
-    }
-}
-
-integrationTests.doFirst {
-    dockerCompose.exposeAsEnvironment(integrationTests)
-}
-
 dockerCompose {
     this.useComposeFiles.add("docker-compose.yml")
-    this.isRequiredBy(project.tasks.findByName("integrationTests"))
+    this.isRequiredBy(project.tasks.test)
 }

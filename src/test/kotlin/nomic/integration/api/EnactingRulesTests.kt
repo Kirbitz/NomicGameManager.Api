@@ -1,4 +1,4 @@
-package nomic.api
+package nomic.integration.api
 import nomic.domain.entities.RulesModel
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
