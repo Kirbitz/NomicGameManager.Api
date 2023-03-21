@@ -155,6 +155,11 @@ INSERT INTO `Amendment` VALUES (4, 4, 'Run slowly', 'MyAmendment4', 4, 1);
 INSERT INTO `User` VALUES (3, 'Game Master');
 INSERT INTO `Game` VALUES (42, 'The Journey', '2015-03-14', NULL, 3);
 
+-- Enacting Rules Tests
+
+-- Do not create a game with value 5.
+INSERT INTO `Game` VALUES (6, 'The Fifth Game', '2023-03-20', NULL, 2);
+
 -- Repealing Rules Tests
 
 INSERT INTO `Game` VALUES (4, 'MyGame', '2015-12-17', NULL, 2);
