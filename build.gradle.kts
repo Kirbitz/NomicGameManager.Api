@@ -76,11 +76,11 @@ tasks.test {
 
 tasks.jacocoTestReport {
     sourceSets(sourceSets.getByName("integrations"))
-	dependsOn(tasks.test)
+    dependsOn(tasks.test)
     dependsOn(integrationTests)
-	reports {
-		xml.required.set(true)
-	}
+    reports {
+        xml.required.set(true)
+    }
     executionData(fileTree(buildDir).include("/jacoco/*.exec"))
 }
 
@@ -105,7 +105,7 @@ task("addHotReload") {
     }
 }
 
-val integrationTests : Test = task<Test>("integrationTests") {
+val integrationTests: Test = task<Test>("integrationTests") {
     description = "Runs integration tests."
     group = "verification"
 
