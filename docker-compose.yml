@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  database:
+    # The version is explicitly set so that there are no surprise versions that suddenly break the image
+    image: mysql/mysql-server:8.0.32
+
+    restart: 'no'
+    environment:
+      MYSQL_DATABASE: 'Nomic'
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'rootpassword'
+    ports:
+      - '41590:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./src/integrations/resources/init.sql:/docker-entrypoint-initdb.d/setup.sql
