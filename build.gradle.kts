@@ -73,13 +73,13 @@ tasks.withType<Test> {
 }
 
 tasks.test {
-    finalizedBy(tasks.jacocoTestReport)
+    if(project.hasProperty("inGitHub")) {
+        finalizedBy(tasks.jacocoTestReport)
+    }
 }
 
 tasks.jacocoTestReport {
-    sourceSets(sourceSets.getByName("integrations"))
-    dependsOn(tasks.test)
-    dependsOn(integrationTests)
+    dependsOn(tasks.test, integrationTests)
     reports {
         xml.required.set(true)
     }
@@ -119,8 +119,10 @@ val integrationTests: Test = task<Test>("integrationTests") {
 
     testClassesDirs = sourceSets["integrations"].output.classesDirs
     classpath = sourceSets["integrations"].runtimeClasspath
-    shouldRunAfter(tasks.test)
-    finalizedBy(tasks.jacocoTestReport)
+
+    if(project.hasProperty("inGitHub")) {
+        finalizedBy(tasks.jacocoTestReport)
+    }
 
     useJUnitPlatform()
 
