@@ -56,6 +56,13 @@ class BasicAuthenticationFilterTest {
     }
 
     @Test
+    fun filter_validEndpoint_noLogin_fails() {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/auth/token"))
+            .andExpect(content().string("null"))
+            .andExpect(status().isOk)
+    }
+
+    @Test
     fun filter_validEndpoint_validLogin_succeeds() {
         val request1 = MockMvcRequestBuilders.get("/api/auth/token")
             .header(HttpHeaders.AUTHORIZATION, "Basic ${encode(login1)}")
@@ -80,6 +87,13 @@ class BasicAuthenticationFilterTest {
         mockMvc.perform(request)
             .andExpect(status().isOk)
             .andExpect(content().string("null"))
+    }
+
+    @Test
+    fun filter_invalidEndpoint_noLogin_fails() {
+        mockMvc.perform(MockMvcRequestBuilders.get("/test"))
+            .andExpect(content().string("null"))
+            .andExpect(status().isOk)
     }
 
     @Test
