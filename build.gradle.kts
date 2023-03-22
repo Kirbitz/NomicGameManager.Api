@@ -146,7 +146,7 @@ task("addHotReload") {
     }
 }
 
-val integrationTests : Test = task<Test>("integrationTests") {
+val integrationTests: Test = task<Test>("integrationTests") {
     description = "Runs integration tests."
     group = "verification"
 

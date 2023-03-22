@@ -135,7 +135,6 @@ CREATE TABLE `Credential` (
 INSERT INTO `User` VALUES (5, 'Cincinnatus'), (1, 'Foo Bar Jr.'), (3, 'Alcibiades'), (100, 'Samwise Gamgee');
 INSERT INTO `Credential` VALUES ('TestUser', '$argon2id$v=19$m=16384,t=2,p=1$UUtqVlF6Wk1adkxmaXdKQQ$/6PJsEAGnyNRx1/b9/q7OWBp6SvKXIajQVRuswKQIFA', 1);
 
-
 -- Rules and Amendments Tests
 
 INSERT INTO `User` VALUES (2, 'Master Tester');
