@@ -82,6 +82,20 @@ class JWTAuthenticationFilterTest {
             .andExpect(content().string("null"))
     }
 
+    @Test
+    fun filter_noToken_fails() {
+        val tokenRegistry = mock<ITokenRegistry> { }
+
+        val mockMvc = MockMvcBuilders
+            .standaloneSetup(TestController())
+            .addFilter<StandaloneMockMvcBuilder>(JWTAuthenticationSecurityFilter(tokenRegistry))
+            .build()
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/test"))
+            .andExpect(status().isOk)
+            .andExpect(content().string("null"))
+    }
+
     @RestController
     private class TestController {
 
