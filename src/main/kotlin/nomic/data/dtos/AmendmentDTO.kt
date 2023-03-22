@@ -15,7 +15,7 @@ import org.ktorm.schema.varchar
  * @property index the position of an amendment under a rule
  * @property description the context of an amendment
  * @property title what an amendment is called
- * @property ruleId the foreign key back to a rule
+ * @property rule the foreign key back to a [RuleDTO]
  * @property active flag for whether an amendment is still in effect
  */
 interface AmendmentDTO : Entity<AmendmentDTO> {
@@ -46,8 +46,4 @@ object Amendments : Table<AmendmentDTO>("Amendment") {
     val title = varchar("title").bindTo { it.title }
     val ruleId = int("ruleId").references(Rules) { it.rule }
     val active = boolean("active").bindTo { it.active }
-
-    val rule get() = ruleId.referenceTable as Rules
 }
-
-val Database.amendments get() = this.sequenceOf(Amendments)
