@@ -1,8 +1,6 @@
 package nomic.data.dtos
 
-import org.ktorm.database.Database
 import org.ktorm.entity.Entity
-import org.ktorm.entity.sequenceOf
 import org.ktorm.schema.Table
 import org.ktorm.schema.boolean
 import org.ktorm.schema.int
