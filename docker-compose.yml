@@ -15,4 +15,4 @@ services:
     expose:
       - '3306'
     volumes:
-      - ./src/test/resources/init.sql:/docker-entrypoint-initdb.d/setup.sql
+      - ./src/integrations/resources/init.sql:/docker-entrypoint-initdb.d/setup.sql

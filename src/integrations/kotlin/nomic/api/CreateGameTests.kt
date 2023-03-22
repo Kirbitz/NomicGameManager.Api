@@ -1,4 +1,4 @@
-package nomic.integration.api
+package nomic.api
 
 import nomic.api.models.GamesApiModel
 import org.assertj.core.api.Assertions

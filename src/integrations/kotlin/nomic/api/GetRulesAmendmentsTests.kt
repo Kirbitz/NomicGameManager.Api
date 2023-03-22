@@ -1,4 +1,4 @@
-package nomic.integration.api
+package nomic.api
 
 import nomic.api.models.RulesAmendmentsApiModel
 import org.assertj.core.api.Assertions

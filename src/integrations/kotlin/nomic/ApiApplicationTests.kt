@@ -1,6 +1,5 @@
-package nomic.integration
+package nomic
 
-import nomic.main
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
