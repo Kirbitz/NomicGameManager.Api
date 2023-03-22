@@ -1,4 +1,4 @@
-package nomic.api
+package nomic.integration.api
 
 import nomic.domain.entities.RepealRuleResponse
 import org.assertj.core.api.Assertions
