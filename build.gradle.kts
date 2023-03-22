@@ -82,6 +82,12 @@ tasks.jacocoTestReport {
         xml.required.set(true)
     }
     executionData(fileTree(buildDir).include("/jacoco/*.exec"))
+
+    classDirectories.setFrom(
+        sourceSets.main.get().output.asFileTree.matching {
+            exclude("integrations/**")
+        }
+    )
 }
 
 // This disables the extraneous jar of just this application's classes with none of the dependencies
@@ -111,7 +117,7 @@ val integrationTests: Test = task<Test>("integrationTests") {
 
     testClassesDirs = sourceSets["integrations"].output.classesDirs
     classpath = sourceSets["integrations"].runtimeClasspath
-    shouldRunAfter("test")
+    shouldRunAfter(tasks.test)
     finalizedBy(tasks.jacocoTestReport)
 
     useJUnitPlatform()
