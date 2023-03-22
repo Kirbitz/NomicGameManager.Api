@@ -26,6 +26,8 @@ class UserRepositoryTest(@Autowired private val db: Database) {
     private val testUser2: User
     private val testUserDto2: UserDTO
 
+    private val existingUser = User(10, "Agamemnon")
+
     init {
         testUser1 = User(57, "Marcus Aurelius")
         testUserDto1 = UserDTO {
@@ -56,5 +58,117 @@ class UserRepositoryTest(@Autowired private val db: Database) {
 
         Assertions.assertThat(user2.name).isEqualTo(testUser2.name)
         Assertions.assertThat(dbUser2?.name).isEqualTo(testUserDto2.name)
+    }
+
+    @Order(2)
+    @Test
+    fun test_getById_goodId() {
+        val repo = UserRepository(db)
+
+        val dbUser = repo.getById(existingUser.id)
+
+        Assertions.assertThat(dbUser).isPresent
+        Assertions.assertThat(dbUser.get().id).isEqualTo(existingUser.id)
+        Assertions.assertThat(dbUser.get().name).isEqualTo(existingUser.name)
+    }
+
+    @Order(2)
+    @Test
+    fun test_getById_badId_emptyOptional() {
+        val repo = UserRepository(db)
+
+        val user = repo.getById(-100)
+
+        Assertions.assertThat(user).isEmpty
+    }
+
+    @Order(2)
+    @Test
+    fun test_findByName_goodName() {
+        val repo = UserRepository(db)
+
+        val dbUser1 = repo.findUserByName(existingUser.name)
+        val dbUser2 = repo.findUserByName(testUser1.name)
+
+        Assertions.assertThat(dbUser1).isPresent
+        Assertions.assertThat(dbUser1.get().id).isEqualTo(existingUser.id)
+        Assertions.assertThat(dbUser1.get().name).isEqualTo(existingUser.name)
+
+        Assertions.assertThat(dbUser2).isPresent
+        Assertions.assertThat(dbUser2.get().name).isEqualTo(testUser1.name)
+    }
+
+    @Order(2)
+    @Test
+    fun test_findByName_badName_emptyOptional() {
+        val repo = UserRepository(db)
+
+        val user = repo.findUserByName("Zeus")
+
+        Assertions.assertThat(user).isEmpty
+    }
+
+    @Order(3)
+    @Test
+    fun test_update_name() {
+        val repo = UserRepository(db)
+
+        val actualTestUser2 = repo.findUserByName(testUser2.name).get()
+        actualTestUser2.name = "Plato"
+
+        existingUser.name = "Menelaus"
+
+        repo.update(actualTestUser2)
+        repo.update(existingUser)
+
+        val dbTestUser2 = db.users.find { it.id eq actualTestUser2.id }!!
+        val dbExistingUser = db.users.find { it.id eq existingUser.id }!!
+
+        Assertions.assertThat(dbTestUser2.name).isEqualTo(actualTestUser2.name)
+        Assertions.assertThat(existingUser.name).isEqualTo(dbExistingUser.name)
+    }
+
+    @Order(3)
+    @Test
+    fun test_update_invalidUser() {
+        val repo = UserRepository(db)
+
+        // The entity in the database that was created with testUser1
+        // will not share the same id as testUser1, due to primary key increments and such.
+        testUser1.name = "Commodus"
+
+        Assertions.assertThatThrownBy { repo.update(testUser1) }
+    }
+
+    @Order(4)
+    @Test
+    fun test_delete_badUser() {
+        val repo = UserRepository(db)
+
+        repo.delete(testUser1)
+        repo.delete(testUser2)
+
+        val dbTestUser1 = db.users.find { it.id eq testUser1.id }
+        val dbTestUser2 = db.users.find { it.id eq testUser2.id }
+
+        Assertions.assertThat(dbTestUser1).isNull()
+        Assertions.assertThat(dbTestUser2).isNull()
+    }
+
+    @Order(5)
+    @Test
+    fun test_delete_goodUser() {
+        val repo = UserRepository(db)
+
+        val actualTestUser1 = repo.findUserByName(testUser1.name).get()
+
+        repo.delete(actualTestUser1)
+        repo.delete(existingUser)
+
+        val dbTestUser1 = db.users.find { it.id eq actualTestUser1.id }
+        val dbExistingUser = db.users.find { it.id eq existingUser.id }
+
+        Assertions.assertThat(dbTestUser1).isNull()
+        Assertions.assertThat(dbExistingUser).isNull()
     }
 }
