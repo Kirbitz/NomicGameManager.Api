@@ -5,4 +5,4 @@ package nomic.domain.entities
  *
  * @property[name] The name of the user - has no business rules regarding valid names
  */
-class User(override val id: Int, val name: String) : IEntity
+class User(override val id: Int, var name: String) : IEntity
