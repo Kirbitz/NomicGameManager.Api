@@ -51,7 +51,7 @@ class GetRulesAmendmentsTests(
         Assertions.assertThat(entity.body!!.size).isEqualTo(0)
     }
 
-    // @Test
+    @Test
     fun `Found Game With Rules and Multiple Amendments`() {
         val entity = client.exchange<List<RulesAmendmentsApiModel>>("/api/rules_amendments/collect/1", HttpMethod.GET, request)
 
