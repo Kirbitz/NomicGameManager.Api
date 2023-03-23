@@ -1,7 +1,6 @@
 package nomic.data
 
 /**
-<<<<<<< HEAD
  * This exception is thrown when an id for an invalid [nomic.domain.entities.Entity][Entity] is provided to a [Repository]
  * to act upon but does not exist in the database.
  *
