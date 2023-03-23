@@ -5,7 +5,7 @@ import nomic.data.repositories.IUserRepository
 import nomic.domain.entities.Credential
 import nomic.domain.entities.LoginName
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 
 /**
  * This implementation of [IUserAuthenticator] hashes passwords using the Argon2id algorithm with the defaults for Spring Security v5.8
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component
  * @param[creds] This dependency is used to retrieve and create all necessary credential data objects
  * @param[users] This dependency is user to retrieve and create user entities
  */
-@Component
+@Service
 class Argon2UserAuthenticator(
     private val creds: ICredentialRepository,
     private val users: IUserRepository

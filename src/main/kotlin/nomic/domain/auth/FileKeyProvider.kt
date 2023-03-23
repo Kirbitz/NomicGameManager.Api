@@ -1,6 +1,6 @@
 package nomic.domain.auth
 
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import java.io.File
 import java.security.KeyFactory
 import java.security.KeyPairGenerator
@@ -15,7 +15,7 @@ import java.security.spec.X509EncodedKeySpec
  * @see[JWTTokenConfigurationProperties]
  * @param[tokenConfig] This dependency is the configuration parsed by Spring with the various properties needed for the JWT Token RSA keys
  */
-@Component
+@Service
 class FileKeyProvider(private val tokenConfig: JWTTokenConfigurationProperties) : IKeyProvider {
 
     private var keyPair: RSAKeyPair? = null

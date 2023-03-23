@@ -9,7 +9,7 @@ import org.ktorm.database.Database
 import org.ktorm.dsl.eq
 import org.ktorm.entity.add
 import org.ktorm.entity.find
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Repository
 import java.util.Optional
 
 /**
@@ -20,7 +20,7 @@ import java.util.Optional
  * @see[org.ktorm.database.Database]
  * @param[db] A connected instance of [org.ktorm.database.Database][Database] to use as the database
  */
-@Component
+@Repository
 class UserRepository(private val db: Database) : IUserRepository {
     override fun create(name: String): User {
         val userDTO = UserDTO {

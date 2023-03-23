@@ -7,7 +7,7 @@ import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.JWTVerificationException
 import nomic.data.repositories.IUserRepository
 import nomic.domain.entities.User
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import java.time.Duration
 import java.time.Instant
 
@@ -18,7 +18,7 @@ import java.time.Instant
  * @param[keyProvider] This dependency is used to retrieve the RSA keys used to sign all JWT Tokens to validate authenticity and integrity
  * @param[usersRepo] This dependency is used to retrieve the user entity that is the subject of valid JWT Tokens
  */
-@Component
+@Service
 class TokenRegistry(
     private val keyProvider: IKeyProvider,
     private val usersRepo: IUserRepository
