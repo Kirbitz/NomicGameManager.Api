@@ -17,6 +17,18 @@ class LoginNameTest {
     }
 
     @Test
+    fun test_loginName_minLength() {
+        val name = "a"
+        Assertions.assertThat(LoginName(name).rawName).isEqualTo(name)
+    }
+
+    @Test
+    fun test_loginName_maxLength() {
+        val name = "abcdefghjiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS"
+        Assertions.assertThat(LoginName(name).rawName).isEqualTo(name)
+    }
+
+    @Test
     fun test_loginName_invalidCharacters() {
         Assertions.assertThatThrownBy { LoginName("x=(-b+-@(b^2-4ac))/2a") }
         Assertions.assertThatThrownBy { LoginName("E = mc^2") }
