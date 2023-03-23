@@ -1,4 +1,4 @@
-package nomic.api
+package nomic.api.models
 
 /**
  * Response format for exception that are thrown

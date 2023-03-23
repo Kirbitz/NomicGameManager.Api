@@ -111,9 +111,9 @@ class RuleAmendmentDomainTests {
 
     @Test
     fun `Repeal Rule Valid Rule Id`() {
-        val result = ruleAmendmentDomain.repealRule("1234")
+        ruleAmendmentDomain.repealRule("1234")
 
-        Assertions.assertThat(result.message).isEqualTo("Updated Successfully")
+        verify(ruleAmendmentRepoMock, times(1)).repealRule(1234)
     }
 
     @Test

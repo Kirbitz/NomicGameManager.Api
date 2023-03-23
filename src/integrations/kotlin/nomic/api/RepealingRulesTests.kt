@@ -1,6 +1,6 @@
 package nomic.api
 
-import nomic.domain.entities.RepealRuleResponse
+import nomic.api.models.ResponseFormat
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,25 +14,34 @@ class RepealingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEn
 
     @Test
     fun `Successfully Repealed a Rule`() {
-        val entity = client.exchange<RepealRuleResponse>("/api/rules_amendments/repeal_rule/6", HttpMethod.GET, request)
+        val entity = client.exchange<ResponseFormat>("/api/rules_amendments/repeal_rule/6", HttpMethod.GET, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
-        Assertions.assertThat(entity.body.toString()).contains("Updated Successfully")
+
+        Assertions.assertThat(entity.body?.success).isTrue
+        Assertions.assertThat(entity.body?.status).isEqualTo(HttpStatus.OK)
+        Assertions.assertThat(entity.body?.data.toString()).contains("Rule Repealed")
     }
 
     @Test
     fun `Bad ID`() {
-        val entity = client.exchange<String>("/api/rules_amendments/repeal_rule/p", HttpMethod.GET, request)
+        val entity = client.exchange<ResponseFormat>("/api/rules_amendments/repeal_rule/p", HttpMethod.GET, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
-        Assertions.assertThat(entity.body.toString()).contains("Please enter a valid ruleId!")
+
+        Assertions.assertThat(entity.body?.success).isFalse
+        Assertions.assertThat(entity.body?.status).isEqualTo(HttpStatus.BAD_REQUEST)
+        Assertions.assertThat(entity.body?.data.toString()).contains("Please enter a valid ruleId!")
     }
 
     @Test
     fun `Rule ID not found`() {
-        val entity = client.exchange<String>("/api/rules_amendments/repeal_rule/1224339", HttpMethod.GET, request)
+        val entity = client.exchange<ResponseFormat>("/api/rules_amendments/repeal_rule/1224339", HttpMethod.GET, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.NOT_FOUND)
-        Assertions.assertThat(entity.body.toString()).contains("The entity with id 1224339 was not found on the database.")
+
+        Assertions.assertThat(entity.body?.success).isFalse
+        Assertions.assertThat(entity.body?.status).isEqualTo(HttpStatus.NOT_FOUND)
+        Assertions.assertThat(entity.body?.data.toString()).contains("The entity with id 1224339 was not found on the database.")
     }
 }

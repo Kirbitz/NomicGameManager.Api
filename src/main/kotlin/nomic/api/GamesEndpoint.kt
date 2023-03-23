@@ -1,5 +1,6 @@
 package nomic.api
 
+import nomic.api.models.ResponseFormat
 import nomic.domain.entities.GameModel
 import nomic.domain.games.GameDomain
 import org.springframework.http.HttpStatus
@@ -30,7 +31,7 @@ class GamesEndpoint(val gameDomain: GameDomain) {
     @PostMapping("create")
     fun createGame(@RequestBody input: GameModel): ResponseEntity<Any> {
         gameDomain.createGame(input)
-        return ResponseEntity("Game Created", HttpStatus.CREATED)
+        return ResponseEntity(ResponseFormat(true, HttpStatus.CREATED, "Game Created"), HttpStatus.CREATED)
     }
 
     /**
@@ -44,6 +45,6 @@ class GamesEndpoint(val gameDomain: GameDomain) {
         gameDomain.deleteGame(gameId)
 
         // Return the response object
-        return ResponseEntity("Game Deleted", HttpStatus.ACCEPTED)
+        return ResponseEntity(ResponseFormat(true, HttpStatus.ACCEPTED, "Game Deleted"), HttpStatus.ACCEPTED)
     }
 }
