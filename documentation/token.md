@@ -4,7 +4,7 @@ Returns a JWT access token that can be used to authenticate on other endpoints
 
 - **URL:**
 
-  /api/auth/login
+  /api/auth/token
 
 
 - **Method:**
@@ -85,8 +85,21 @@ Returns a JWT access token that can be used to authenticate on other endpoints
   method: 'POST',
   url: '/api/auth/token',
   responseType: 'json',
-  data: {
-    gameId: 1234
+  header: {
+    Authorization: Basic VGVzdFVzZXI6cGFzc3dvcmQ=
+  }
+}
+```
+
+or
+
+```javascript
+{
+  method: 'POST',
+  url: '/api/auth/token',
+  responseType: 'json',
+  header: {
+    Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTm9taWNHYW1lTWFuYWdlci5BcGkiLCJleHAiOjE2NzcyODE4NjEsImlhdCI6MTY3NzI3NDY2MX0.vewwb46Ac1q_QNp3cdJ4Ot2n8PLsIl-YzhSMYi4N97P4AhFeTNg5L4ldocxiWNm2mk1q_neekP0iBnHS44w_E95st3PKKKWqavG9cc3Xgbq8O4pHU2fvarYmChfQUAA2V-XM9a7m11nvnYhkBVXdAetk_q2r1dJbBnMZv2iApChxQ5w6WvgtCOnQDLniOm-fzTLRyf9-DgzBqDn28CWR3m-PsmYcZ2omUqzAS8z10Qbmbrej3wSd6tAAcAK0Fruw4BzpAQ8vaVbWMCmNwNiOL6Ozxm-XmjsCAjU6bbbuE2nTWdq2STsu3diZMK5onjuD-ZQnwzs3y5v-wlXMHp5A4g
   }
 }
 ```
