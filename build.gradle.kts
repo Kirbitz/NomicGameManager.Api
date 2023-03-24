@@ -67,7 +67,6 @@ dependencies {
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-
     // Authentication libraries
     implementation("com.auth0:java-jwt:4.2.2")
     implementation("org.springframework.security:spring-security-crypto:6.0.1")
@@ -91,17 +90,23 @@ tasks.withType<Test> {
 }
 
 tasks.test {
-    finalizedBy(tasks.jacocoTestReport)
+    if (project.hasProperty("inGitHub")) {
+        finalizedBy(tasks.jacocoTestReport)
+    }
 }
 
 tasks.jacocoTestReport {
-    sourceSets(sourceSets.getByName("integrations"))
-	dependsOn(tasks.test)
-    dependsOn(integrationTests)
-	reports {
-		xml.required.set(true)
-	}
+    dependsOn(tasks.test, integrationTests)
+    reports {
+        xml.required.set(true)
+    }
     executionData(fileTree(buildDir).include("/jacoco/*.exec"))
+
+    classDirectories.setFrom(
+        sourceSets.main.get().output.asFileTree.matching {
+            exclude("integrations/**")
+        }
+    )
 }
 
 tasks.withType<DokkaTask>().configureEach {
@@ -152,8 +157,10 @@ val integrationTests: Test = task<Test>("integrationTests") {
 
     testClassesDirs = sourceSets["integrations"].output.classesDirs
     classpath = sourceSets["integrations"].runtimeClasspath
-    shouldRunAfter("test")
-    finalizedBy(tasks.jacocoTestReport)
+
+    if (project.hasProperty("inGitHub")) {
+        finalizedBy(tasks.jacocoTestReport)
+    }
 
     useJUnitPlatform()
 

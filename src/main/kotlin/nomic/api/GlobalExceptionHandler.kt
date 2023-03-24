@@ -1,5 +1,6 @@
 package nomic.api
 
+import nomic.api.models.ResponseFormat
 import nomic.data.EntityNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -23,7 +24,7 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
     fun handleIllegalArgumentException(
         exception: IllegalArgumentException
     ): ResponseEntity<Any> {
-        return ResponseEntity(ExceptionResponseFormat(true, exception.message), HttpStatus.BAD_REQUEST)
+        return ResponseEntity(ResponseFormat(false, HttpStatus.BAD_REQUEST, exception.message!!), HttpStatus.BAD_REQUEST)
     }
 
     /**
@@ -36,7 +37,7 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
     fun handleEntityNotFoundException(
         exception: EntityNotFoundException
     ): ResponseEntity<Any> {
-        return ResponseEntity(ExceptionResponseFormat(true, exception.message), HttpStatus.NOT_FOUND)
+        return ResponseEntity(ResponseFormat(false, HttpStatus.NOT_FOUND, exception.message!!), HttpStatus.NOT_FOUND)
     }
 
     /**
@@ -49,6 +50,6 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
     fun handleAllUncaughtException(
         exception: Exception
     ): ResponseEntity<Any> {
-        return ResponseEntity(ExceptionResponseFormat(true, "Internal server error"), HttpStatus.INTERNAL_SERVER_ERROR)
+        return ResponseEntity(ResponseFormat(false, HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error"), HttpStatus.INTERNAL_SERVER_ERROR)
     }
 }

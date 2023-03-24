@@ -37,10 +37,9 @@ Returns json data of the removal of a game.
 
   ```json
   {
-    "success": {
-      "status": 202,
-      "message": "Game Deleted"
-    }
+    "success": true,
+    "status": 202,
+    "data": "Game Deleted"
   }
   ```
 
@@ -52,10 +51,9 @@ Returns json data of the removal of a game.
 
   ```json
   {
-    "error": {
-      "status": 400,
-      "message": "Bad Request"
-    }
+    "success": false,
+    "status": 400,
+    "data": "Bad Request"
   }
   ```
 
@@ -65,25 +63,23 @@ Returns json data of the removal of a game.
 
   ```json
   {
-    "error": {
-      "status": 401,
-      "message": "Unauthorized"
-    }
+    "success": false,
+    "status": 401,
+    "data": "Unauthorized"
   }
   ```
 
-    **Code:** `404 NOT FOUND`
-    
-    **Content:**
-    
-      ```json
-      {
-        "error": {
-          "status": 404,
-          "message": "Game Not Found"
-        }
-      }
-      ```
+  **Code:** `404 NOT FOUND`
+  
+  **Content:**
+  
+  ```json
+  {
+    "success": false,
+    "status": 404,
+    "data": "Game Not Found"
+  }
+  ```
 
   **Code:** `500 INTERNAL SERVER ERROR`
 
@@ -91,10 +87,9 @@ Returns json data of the removal of a game.
 
   ```json
   {
-    "error": {
-      "status": 500,
-      "message": "Internal Server Error"
-    }
+    "success": false,
+    "status": 500,
+    "data": "Internal Server Error"
   }
   ```
 
