@@ -29,6 +29,14 @@ class LoginNameTest {
     }
 
     @Test
+    fun test_loginName_throwsException_if_canParse_false() {
+        val name = "Hello, World!"
+        Assertions.assertThat(LoginName.canParse(name)).isFalse
+        Assertions.assertThatThrownBy {
+            LoginName(name)
+        }.isInstanceOf(InvalidLoginNameException::class.java)
+    }
+
     @Test
     fun test_loginName_canParse_invalidCharacters() {
         Assertions.assertThat(LoginName.canParse("x=(-b+-@(b^2-4ac))/2a")).isFalse
