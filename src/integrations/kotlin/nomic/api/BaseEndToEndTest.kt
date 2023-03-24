@@ -14,7 +14,7 @@ import org.springframework.http.MediaType
 abstract class BaseEndToEndTest(@Autowired val tokenRegistry: ITokenRegistry) {
 
     protected fun <T> createRequest(body: T? = null, user: User? = null): HttpEntity<T> {
-        var headers = HttpHeaders()
+        val headers = HttpHeaders()
 
         headers.setContentType(MediaType.APPLICATION_JSON)
 
