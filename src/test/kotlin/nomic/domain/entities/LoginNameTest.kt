@@ -7,13 +7,13 @@ class LoginNameTest {
 
     @Test
     fun test_loginName_tooLong() {
-        Assertions.assertThatThrownBy { LoginName("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") }
-        Assertions.assertThatThrownBy { LoginName("OneRingToRuleThemAll_OneRingToFindThem_OneRingToBringThemAll_AndInTheDarknessBindThem") }
+        Assertions.assertThat(LoginName.canParse("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")).isFalse
+        Assertions.assertThat(LoginName.canParse("OneRingToRuleThemAll_OneRingToFindThem_OneRingToBringThemAll_AndInTheDarknessBindThem")).isFalse
     }
 
     @Test
     fun test_loginName_tooShort() {
-        Assertions.assertThatThrownBy { LoginName("") }
+        Assertions.assertThat(LoginName.canParse("")).isFalse
     }
 
     @Test
@@ -29,12 +29,13 @@ class LoginNameTest {
     }
 
     @Test
-    fun test_loginName_invalidCharacters() {
-        Assertions.assertThatThrownBy { LoginName("x=(-b+-@(b^2-4ac))/2a") }
-        Assertions.assertThatThrownBy { LoginName("E = mc^2") }
-        Assertions.assertThatThrownBy { LoginName("Why hello there!") }
-        Assertions.assertThatThrownBy { LoginName("I forget what text like Z̷͙̗̻͖̣̹͉̫̬̪̖̤͆ͤ̓ͫͭ̀̐͜͞ͅͅαлγo is") }
-        Assertions.assertThatThrownBy { LoginName("Hello\nThere") }
+    @Test
+    fun test_loginName_canParse_invalidCharacters() {
+        Assertions.assertThat(LoginName.canParse("x=(-b+-@(b^2-4ac))/2a")).isFalse
+        Assertions.assertThat(LoginName.canParse("E = mc^2")).isFalse
+        Assertions.assertThat(LoginName.canParse("Why hello there!")).isFalse
+        Assertions.assertThat(LoginName.canParse("I forget what text like Z̷͙̗̻͖̣̹͉̫̬̪̖̤͆ͤ̓ͫͭ̀̐͜͞ͅͅαлγo is")).isFalse
+        Assertions.assertThat(LoginName.canParse("Hello\nThere")).isFalse
     }
 
     @Test
