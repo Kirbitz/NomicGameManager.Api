@@ -18,7 +18,7 @@ class DeleteGamesTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTe
 
     @Test
     fun `Game Successfully Deleted`() {
-        val entity = client.exchange<ResponseFormat>("/api/game/remove/42", HttpMethod.DELETE, request)
+        val entity = client.exchange<ResponseFormat<String>>("/api/game/remove/42", HttpMethod.DELETE, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.ACCEPTED)
 
@@ -29,7 +29,7 @@ class DeleteGamesTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTe
 
     @Test
     fun `Game Not Deleted Invalid GameId`() {
-        val entity = client.exchange<ResponseFormat>("/api/game/remove/penpineappleapplepen", HttpMethod.DELETE, request)
+        val entity = client.exchange<ResponseFormat<String>>("/api/game/remove/penpineappleapplepen", HttpMethod.DELETE, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
 
@@ -40,7 +40,7 @@ class DeleteGamesTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTe
 
     @Test
     fun `Game Not Deleted Game Not Found`() {
-        val entity = client.exchange<ResponseFormat>("/api/game/remove/404", HttpMethod.DELETE, request)
+        val entity = client.exchange<ResponseFormat<String>>("/api/game/remove/404", HttpMethod.DELETE, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.NOT_FOUND)
 

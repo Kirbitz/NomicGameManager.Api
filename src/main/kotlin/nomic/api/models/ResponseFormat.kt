@@ -9,8 +9,8 @@ import org.springframework.http.HttpStatus
  * @property status the http status code for the request
  * @property data information related to the request
  */
-data class ResponseFormat(
+data class ResponseFormat<T>(
     val success: Boolean,
     val status: HttpStatus,
-    val data: Any
+    val data: T
 )

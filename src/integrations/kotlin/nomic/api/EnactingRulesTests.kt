@@ -15,7 +15,7 @@ class EnactingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEnd
 
     @Test
     fun `Create Rule in an existing game`() {
-        val entity = client.exchange<ResponseFormat>("/api/rules_amendments/enactRule", HttpMethod.POST, request)
+        val entity = client.exchange<ResponseFormat<String>>("/api/rules_amendments/enactRule", HttpMethod.POST, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.CREATED)
 
@@ -29,7 +29,7 @@ class EnactingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEnd
 
     @Test
     fun `Create Rule with no description`() {
-        val entity = client.exchange<ResponseFormat>("/api/rules_amendments/enactRule", HttpMethod.POST, request1)
+        val entity = client.exchange<ResponseFormat<String>>("/api/rules_amendments/enactRule", HttpMethod.POST, request1)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.CREATED)
 
@@ -43,7 +43,7 @@ class EnactingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEnd
 
     @Test
     fun `Create Rule with no Title`() {
-        val entity = client.exchange<ResponseFormat>("/api/rules_amendments/enactRule", HttpMethod.POST, request2)
+        val entity = client.exchange<ResponseFormat<String>>("/api/rules_amendments/enactRule", HttpMethod.POST, request2)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.CREATED)
 
@@ -57,7 +57,7 @@ class EnactingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEnd
 
     @Test
     fun `Create Rule with illegal characters in Title`() {
-        val entity = client.exchange<ResponseFormat>("/api/rules_amendments/enactRule", HttpMethod.POST, request3)
+        val entity = client.exchange<ResponseFormat<String>>("/api/rules_amendments/enactRule", HttpMethod.POST, request3)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
 
@@ -71,7 +71,7 @@ class EnactingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEnd
 
     @Test
     fun `Create Rule with illegal characters in Description`() {
-        val entity = client.exchange<ResponseFormat>("/api/rules_amendments/enactRule", HttpMethod.POST, request4)
+        val entity = client.exchange<ResponseFormat<String>>("/api/rules_amendments/enactRule", HttpMethod.POST, request4)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
 
@@ -85,7 +85,7 @@ class EnactingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEnd
 
     @Test
     fun `Create rule in a game that does not exist`() {
-        val entity = client.exchange<ResponseFormat>("/api/rules_amendments/enactRule", HttpMethod.POST, request5)
+        val entity = client.exchange<ResponseFormat<String>>("/api/rules_amendments/enactRule", HttpMethod.POST, request5)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR)
 

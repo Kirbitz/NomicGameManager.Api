@@ -16,7 +16,7 @@ class CreateGameTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTes
 
     @Test
     fun `Create Game on existing userId`() {
-        val entity = client.exchange<ResponseFormat>("/api/game/create", HttpMethod.POST, request)
+        val entity = client.exchange<ResponseFormat<String>>("/api/game/create", HttpMethod.POST, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.CREATED)
 
@@ -30,7 +30,7 @@ class CreateGameTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTes
 
     @Test
     fun `Create Game with Bad Title (#)`() {
-        val entity = client.exchange<ResponseFormat>("/api/game/create", HttpMethod.POST, request2)
+        val entity = client.exchange<ResponseFormat<String>>("/api/game/create", HttpMethod.POST, request2)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
 
@@ -44,7 +44,7 @@ class CreateGameTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTes
 
     @Test
     fun `Create Game with Bad Title (&)`() {
-        val entity = client.exchange<ResponseFormat>("/api/game/create", HttpMethod.POST, request3)
+        val entity = client.exchange<ResponseFormat<String>>("/api/game/create", HttpMethod.POST, request3)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
 
@@ -58,7 +58,7 @@ class CreateGameTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTes
 
     @Test
     fun `Create Game with Bad Title (@)`() {
-        val entity = client.exchange<ResponseFormat>("/api/game/create", HttpMethod.POST, request4)
+        val entity = client.exchange<ResponseFormat<String>>("/api/game/create", HttpMethod.POST, request4)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
 
