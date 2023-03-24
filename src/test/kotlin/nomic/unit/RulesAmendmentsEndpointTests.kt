@@ -44,29 +44,30 @@ class RulesAmendmentsEndpointTests {
 
     @Test
     fun `Get Rule and Amendments with Game Id Provided and Proper Response Object Returned`() {
-        val result = rulesAmendmentsEndpoint.getRulesAmendments("2134").body as ResponseFormat
+        val result = rulesAmendmentsEndpoint.getRulesAmendments("2134").body as ResponseFormat<List<RulesAmendmentsApiModel>>
 
         Assertions.assertThat(result.success).isTrue
         Assertions.assertThat(result.status).isEqualTo(HttpStatus.OK)
-        Assertions.assertThat(result.data.toString()).contains("My Awesome Rule")
+        Assertions.assertThat(result.data.size).isEqualTo(1)
+        Assertions.assertThat(result.data[0].amendments.size).isEqualTo(1)
     }
 
     @Test
     fun `Enact Rule with Rule Object Provided and Proper Response Object Returned`() {
         val ruleInput = RulesModel(1234, 666, "Wow", "Cool Description", false, 202)
-        val result = rulesAmendmentsEndpoint.enactRule(ruleInput).body as ResponseFormat
+        val result = rulesAmendmentsEndpoint.enactRule(ruleInput).body as ResponseFormat<String>
 
         Assertions.assertThat(result.success).isTrue
         Assertions.assertThat(result.status).isEqualTo(HttpStatus.CREATED)
-        Assertions.assertThat(result.data.toString()).contains("Rule Created")
+        Assertions.assertThat(result.data).contains("Rule Created")
     }
 
     @Test
     fun `Repeal Rule with Rule Id Provided and Proper Response Object Returned`() {
-        val result = rulesAmendmentsEndpoint.repealRule("4321").body as ResponseFormat
+        val result = rulesAmendmentsEndpoint.repealRule("4321").body as ResponseFormat<String>
 
         Assertions.assertThat(result.success).isTrue
         Assertions.assertThat(result.status).isEqualTo(HttpStatus.OK)
-        Assertions.assertThat(result.data.toString()).contains("Rule Repealed")
+        Assertions.assertThat(result.data).contains("Rule Repealed")
     }
 }

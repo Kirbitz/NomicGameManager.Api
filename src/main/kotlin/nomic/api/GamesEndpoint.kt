@@ -29,7 +29,7 @@ class GamesEndpoint(val gameDomain: GameDomain) {
      * @return A spring entity representing the response that gets serialized into JSON
      */
     @PostMapping("create")
-    fun createGame(@RequestBody input: GameModel): ResponseEntity<Any> {
+    fun createGame(@RequestBody input: GameModel): ResponseEntity<ResponseFormat<String>> {
         gameDomain.createGame(input)
         return ResponseEntity(ResponseFormat(true, HttpStatus.CREATED, "Game Created"), HttpStatus.CREATED)
     }
@@ -41,7 +41,7 @@ class GamesEndpoint(val gameDomain: GameDomain) {
      * @return A spring entity representing the response that gets serialized into JSON
      */
     @DeleteMapping("remove/{gameid}", produces = ["application/json;charset=UTF-8"])
-    fun deleteGame(@PathVariable(value = "gameid") gameId: String): ResponseEntity<Any> {
+    fun deleteGame(@PathVariable(value = "gameid") gameId: String): ResponseEntity<ResponseFormat<String>> {
         gameDomain.deleteGame(gameId)
 
         // Return the response object

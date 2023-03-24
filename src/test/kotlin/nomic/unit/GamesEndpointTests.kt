@@ -22,19 +22,19 @@ class GamesEndpointTests {
     fun `Create Game with Game Object Provided and Proper Response Object Returned`() {
         val gameInput = GameModel(13, "Cool Title Bro", LocalDate.now(), null, 42)
 
-        val result = gameEndpoint.createGame(gameInput).body as ResponseFormat
+        val result = gameEndpoint.createGame(gameInput).body as ResponseFormat<String>
 
         Assertions.assertThat(result.success).isTrue
         Assertions.assertThat(result.status).isEqualTo(HttpStatus.CREATED)
-        Assertions.assertThat(result.data.toString()).contains("Game Created")
+        Assertions.assertThat(result.data).contains("Game Created")
     }
 
     @Test
     fun `Delete Game with Id Provided and Proper Response Object Returned`() {
-        val result = gameEndpoint.deleteGame("1234").body as ResponseFormat
+        val result = gameEndpoint.deleteGame("1234").body as ResponseFormat<String>
 
         Assertions.assertThat(result.success).isTrue
         Assertions.assertThat(result.status).isEqualTo(HttpStatus.ACCEPTED)
-        Assertions.assertThat(result.data.toString()).contains("Game Deleted")
+        Assertions.assertThat(result.data).contains("Game Deleted")
     }
 }
