@@ -33,7 +33,10 @@ value class LoginName(@JsonValue val rawName: String) {
     companion object {
         private val regex = Regex("^[a-zA-Z0-9\\-\\_]{1,45}\$")
 
-        fun canParse(rawName: String) = regex.matches(rawName)
+        fun canParse(rawName: String?): Boolean {
+            if (rawName == null) return false
+            return regex.matches(rawName)
+        }
     }
 }
 

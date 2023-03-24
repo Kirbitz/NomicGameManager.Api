@@ -49,4 +49,9 @@ class LoginNameTest {
         Assertions.assertThat(user3.rawName).isEqualTo("__SomeUsername__")
         Assertions.assertThat(user4.rawName).isEqualTo("the-apple-tree")
     }
+
+    @Test
+    fun test_loginName_canParse_null_fails() {
+        Assertions.assertThat(LoginName.canParse(null)).isFalse
+    }
 }
