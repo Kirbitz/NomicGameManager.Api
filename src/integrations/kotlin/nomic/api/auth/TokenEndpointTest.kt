@@ -1,6 +1,6 @@
 package nomic.api.auth
 
-import nomic.api.models.TokenResponseModel
+import nomic.api.models.ResponseFormat
 import nomic.domain.auth.ITokenRegistry
 import nomic.domain.entities.User
 import org.assertj.core.api.Assertions
@@ -21,7 +21,7 @@ import java.util.function.Predicate
 )
 class TokenEndpointTest(@Autowired val client: TestRestTemplate) {
 
-    private val hasToken = Condition<TokenResponseModel?>(Predicate { it.token != null }, "Login Response has Token")
+    private val hasToken = Condition<ResponseFormat<String>?>(Predicate { it.data != "" }, "Login Response has Token")
 
     @Test
     fun test_tokenFails_noCredentials() {
@@ -62,7 +62,7 @@ class TokenEndpointTest(@Autowired val client: TestRestTemplate) {
         headers.set("Authorization", "Basic $creds")
 
         val request = HttpEntity<Any>(headers)
-        val entity = client.postForEntity<TokenResponseModel>("/api/auth/token", request)
+        val entity = client.postForEntity<ResponseFormat<String>>("/api/auth/token", request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.FORBIDDEN)
         Assertions.assertThat(entity.body).isNull()
@@ -75,7 +75,7 @@ class TokenEndpointTest(@Autowired val client: TestRestTemplate) {
         headers.set("Authorization", "Basic $creds")
 
         val request = HttpEntity<Any>(headers)
-        val entity = client.postForEntity<TokenResponseModel>("/api/auth/token", request)
+        val entity = client.postForEntity<ResponseFormat<String>>("/api/auth/token", request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(entity.body).isNotNull().has(hasToken)
@@ -87,7 +87,7 @@ class TokenEndpointTest(@Autowired val client: TestRestTemplate) {
         headers.setBearerAuth(tokenRegistry.issueToken(User(1, "Foo Bar Jr.")))
 
         val request = HttpEntity<Any>(headers)
-        val entity = client.postForEntity("/api/auth/token", request, TokenResponseModel::class.java)
+        val entity = client.postForEntity<ResponseFormat<String>>("/api/auth/token", request)
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(entity.body).isNotNull().has(hasToken)
     }
