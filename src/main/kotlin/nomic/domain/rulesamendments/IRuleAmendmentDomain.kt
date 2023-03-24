@@ -1,7 +1,6 @@
 package nomic.domain.rulesamendments
 
 import nomic.api.models.RulesAmendmentsApiModel
-import nomic.domain.entities.RepealRuleResponse
 import nomic.domain.entities.RulesModel
 
 /**
@@ -27,7 +26,6 @@ interface IRuleAmendmentDomain {
      * Collects the response from the database for repealing a rule
      *
      * @param ruleId the id of the rule to be repealed
-     * @return A [RepealRuleResponse][nomic.domain.entities.RepealRuleResponse] object to pass back the status
      */
-    fun repealRule(ruleId: String): RepealRuleResponse
+    fun repealRule(ruleId: String)
 }

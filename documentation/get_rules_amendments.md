@@ -37,9 +37,9 @@ Returns json data of rules and amendments connected to a specific game.
 
   ```json
   {
-    "success": {
-      "status": 200,
-      "rules": [
+    "success": true,
+    "status": 200,
+    "data": [
         {
           "ruleId": 1234,
           "index": 35,
@@ -60,7 +60,6 @@ Returns json data of rules and amendments connected to a specific game.
           "...": "As many as found"
         }
       ]
-    }
   }
   ```
 
@@ -72,10 +71,9 @@ Returns json data of rules and amendments connected to a specific game.
 
   ```json
   {
-    "error": {
-      "status": 400,
-      "message": "Bad Request"
-    }
+    "success": false,
+    "status": 400,
+    "data": "Bad Request"
   }
   ```
 
@@ -85,10 +83,9 @@ Returns json data of rules and amendments connected to a specific game.
 
   ```json
   {
-    "error": {
-      "status": 401,
-      "message": "Unauthorized"
-    }
+    "success": false,
+    "status": 401,
+    "data": "Unauthorized"
   }
   ```
 
@@ -98,10 +95,9 @@ Returns json data of rules and amendments connected to a specific game.
 
   ```json
   {
-    "error": {
-      "status": 500,
-      "message": "Internal Server Error"
-    }
+    "success": false,
+    "status": 500,
+    "data": "Internal Server Error"
   }
   ```
 

@@ -70,10 +70,9 @@ Returns json data about the account creation.
 
   ```json
   {
-    "success": {
-      "status": 201,
-      "message": "Rule Enacted"
-    }
+    "success": true,
+    "status": 201,
+    "data": "Rule Created"
   }
   ```
 
@@ -85,28 +84,21 @@ Returns json data about the account creation.
 
   ```json
   {
-    "error": {
-      "status": 400,
-      "message": "Bad Request - Non-Unique Fields",
-      "fields": ["field1", "field2"]
-    }
+    "success": false,
+    "status": 400,
+    "data": "Invalid Data"
   }
   ```
 
-
 **Code:** `401 UNAUTHORIZED`
-
-
-
 
 **Content:**
 
   ```json
   {
-    "error": {
-      "status": 401,
-      "message": "Unauthorized"
-    }
+    "success": false,
+    "status": 401,
+    "data": "Unauthorized"
   }
   ```
 
@@ -122,10 +114,9 @@ None
 
   ```json
   {
-    "error": {
-      "status": 500,
-      "message": "Internal Server Error"
-    }
+    "success": false,
+    "status":500,
+    "data": "Internal Server Error"
   }
   ```
 

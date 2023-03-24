@@ -37,9 +37,9 @@ Changes the active flag of a specified rule and any amendments that depend on it
 
   ```json
   {
-        "success": "True",
-        "message": "Updated Successfully",
-        "ruleId": "Whichever Id was Submitted"
+    "success": true,
+    "status": 200,
+    "data": "Rule Repealed"
   }
   ```
 
@@ -51,10 +51,9 @@ Changes the active flag of a specified rule and any amendments that depend on it
 
   ```json
   {
-    "error": {
-      "status": 400,
-      "message": "Bad Request"
-    }
+    "success": false,
+    "status": 400,
+    "data": "Bad Request"
   }
   ```
 
@@ -64,10 +63,9 @@ Changes the active flag of a specified rule and any amendments that depend on it
 
   ```json
   {
-    "error": {
-      "status": 401,
-      "message": "Unauthorized"
-    }
+    "success": false,
+    "status": 401,
+    "data": "Unauthorized"
   }
   ```
   **Code:** `404 Not Found`
@@ -76,10 +74,9 @@ Changes the active flag of a specified rule and any amendments that depend on it
 
   ```json
   {
-    "error": {
-      "status": 404,
-      "message": "The entity with id 'ID' was not found on the database."
-    }
+    "success": false,
+    "status": 404,
+    "data": "The entity with id 'ID' was not found on the database."
   }
   ```
 
@@ -89,10 +86,9 @@ Changes the active flag of a specified rule and any amendments that depend on it
 
   ```json
   {
-    "error": {
-      "status": 500,
-      "message": "Internal Server Error"
-    }
+    "success": false,
+    "status": 500,
+    "data": "Internal Server Error"
   }
   ```
 

@@ -40,10 +40,9 @@ Returns json data about the game creation.
 
   ```json
   {
-    "success": {
-      "status": 201,
-      "message": "Created new game"
-    }
+    "success": true,
+    "status": 201,
+    "data": "Game Created"
   }
   ```
 
@@ -55,10 +54,9 @@ Returns json data about the game creation.
 
   ```json
   {
-    "error": {
-      "status": 401,
-      "message": "Unauthorized"
-    }
+    "success": false,
+    "status": 401,
+    "data": "Unauthorized"
   }
   ```
 
@@ -68,10 +66,9 @@ Returns json data about the game creation.
 
   ```json
   {
-    "error": {
-      "status": 500,
-      "message": "Internal Server Error"
-    }
+    "success": false,
+    "status": 500,
+    "data": "Internal Server Error"
   }
   ```
 

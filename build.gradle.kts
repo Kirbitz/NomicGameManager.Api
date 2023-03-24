@@ -54,7 +54,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("mysql:mysql-connector-java:8.0.25")
     implementation("org.ktorm:ktorm-support-mysql:3.6.0")
-
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.1.1")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     integrationsImplementation("org.springframework.boot:spring-boot-starter-test")
 }
@@ -71,17 +73,23 @@ tasks.withType<Test> {
 }
 
 tasks.test {
-    finalizedBy(tasks.jacocoTestReport)
+    if(project.hasProperty("inGitHub")) {
+        finalizedBy(tasks.jacocoTestReport)
+    }
 }
 
 tasks.jacocoTestReport {
-    sourceSets(sourceSets.getByName("integrations"))
-    dependsOn(tasks.test)
-    dependsOn(integrationTests)
+    dependsOn(tasks.test, integrationTests)
     reports {
         xml.required.set(true)
     }
     executionData(fileTree(buildDir).include("/jacoco/*.exec"))
+
+    classDirectories.setFrom(
+        sourceSets.main.get().output.asFileTree.matching {
+            exclude("integrations/**")
+        }
+    )
 }
 
 // This disables the extraneous jar of just this application's classes with none of the dependencies
@@ -111,8 +119,10 @@ val integrationTests: Test = task<Test>("integrationTests") {
 
     testClassesDirs = sourceSets["integrations"].output.classesDirs
     classpath = sourceSets["integrations"].runtimeClasspath
-    shouldRunAfter("test")
-    finalizedBy(tasks.jacocoTestReport)
+
+    if(project.hasProperty("inGitHub")) {
+        finalizedBy(tasks.jacocoTestReport)
+    }
 
     useJUnitPlatform()
 

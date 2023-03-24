@@ -3,7 +3,6 @@ package nomic.domain.rulesamendments
 import nomic.api.models.AmendmentModel
 import nomic.api.models.RulesAmendmentsApiModel
 import nomic.data.repositories.rulesamendments.RuleAmendmentRepository
-import nomic.domain.entities.RepealRuleResponse
 import nomic.domain.entities.RulesAmendmentsModel
 import nomic.domain.entities.RulesModel
 import org.springframework.stereotype.Service
@@ -54,11 +53,10 @@ class RuleAmendmentDomain(
         return rules
     }
 
-    override fun repealRule(ruleId: String): RepealRuleResponse {
+    override fun repealRule(ruleId: String) {
         val ruleIdInt: Int = ruleId.toIntOrNull() ?: throw IllegalArgumentException("Please enter a valid ruleId!")
-        ruleAmendmentRepository.repealRule(ruleIdInt)
 
-        return RepealRuleResponse(true, "Updated Successfully", ruleIdInt)
+        ruleAmendmentRepository.repealRule(ruleIdInt)
     }
 
     override fun enactingRule(input: RulesModel) {

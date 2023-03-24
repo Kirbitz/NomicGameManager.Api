@@ -1,7 +1,7 @@
 package nomic.api
 
+import nomic.api.models.ResponseFormat
 import nomic.api.models.RulesAmendmentsApiModel
-import nomic.domain.entities.RepealRuleResponse
 import nomic.domain.entities.RulesModel
 import nomic.domain.rulesamendments.RuleAmendmentDomain
 import org.springframework.http.HttpStatus
@@ -30,11 +30,11 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
      * @return A spring entity representing the response that gets serialized into JSON
      */
     @GetMapping("collect/{gameid}", produces = ["application/json;charset=UTF-8"])
-    fun getRulesAmendments(@PathVariable(value = "gameid") gameId: String): ResponseEntity<Any> {
+    fun getRulesAmendments(@PathVariable(value = "gameid") gameId: String): ResponseEntity<ResponseFormat<List<RulesAmendmentsApiModel>>> {
         val rulesAmendments: List<RulesAmendmentsApiModel> = ruleAmendmentDomain.getRulesAmendments(gameId)
 
         // Return the response object
-        return ResponseEntity(rulesAmendments, HttpStatus.OK)
+        return ResponseEntity(ResponseFormat(true, HttpStatus.OK, rulesAmendments), HttpStatus.OK)
     }
 
     /**
@@ -44,9 +44,9 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
      * @return A spring entity representing the response that gets serialized into JSON
      */
     @PostMapping("enactRule")
-    fun enactRule(@RequestBody inputRule: RulesModel): ResponseEntity<Any> {
+    fun enactRule(@RequestBody inputRule: RulesModel): ResponseEntity<ResponseFormat<String>> {
         ruleAmendmentDomain.enactingRule(inputRule)
-        return ResponseEntity("Rule Created", HttpStatus.CREATED)
+        return ResponseEntity(ResponseFormat(true, HttpStatus.CREATED, "Rule Created"), HttpStatus.CREATED)
     }
 
     /**
@@ -56,10 +56,10 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
      * @return A spring entity representing the response that gets serialized into JSON
      */
     @GetMapping("repeal_rule/{ruleid}", produces = ["application/json;charset=UTF-8"])
-    fun repealRule(@PathVariable(value = "ruleid") ruleId: String): ResponseEntity<Any> {
-        val repealRuleResponse: RepealRuleResponse = ruleAmendmentDomain.repealRule(ruleId)
+    fun repealRule(@PathVariable(value = "ruleid") ruleId: String): ResponseEntity<ResponseFormat<String>> {
+        ruleAmendmentDomain.repealRule(ruleId)
 
         // Return the response object
-        return ResponseEntity(repealRuleResponse, HttpStatus.OK)
+        return ResponseEntity(ResponseFormat(true, HttpStatus.OK, "Rule Repealed"), HttpStatus.OK)
     }
 }
