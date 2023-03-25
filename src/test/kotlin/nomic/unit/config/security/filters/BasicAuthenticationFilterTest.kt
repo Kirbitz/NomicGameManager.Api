@@ -52,8 +52,10 @@ class BasicAuthenticationFilterTest {
         SecurityContextHolder.clearContext()
     }
 
-    private fun encode(pair: Pair<LoginName, String>): String {
-        return String(Base64.getEncoder().encode("${pair.first.rawName}:${pair.second}".toByteArray()))
+    private fun encode(pair: Pair<LoginName, String>) = encode(pair.first.rawName, pair.second)
+
+    private fun encode(loginName: String, password: String): String {
+        return String(Base64.getEncoder().encode("$loginName:$password".toByteArray()))
     }
 
     @Test
@@ -101,6 +103,16 @@ class BasicAuthenticationFilterTest {
     }
 
     @Test
+    fun filter_validEndpoint_badLoginName_fails() {
+        val request = MockMvcRequestBuilders.get("/api/auth/token")
+            .header(HttpHeaders.AUTHORIZATION, "${encode("To be or not to be", "ThatIsTheQuestion")}")
+
+        mockMvc.perform(request)
+            .andExpect(status().isOk)
+            .andExpect(content().string("null"))
+    }
+
+    @Test
     fun filter_invalidEndpoint_noLogin_fails() {
         mockMvc.perform(MockMvcRequestBuilders.get("/test"))
             .andExpect(content().string("null"))
@@ -131,6 +143,16 @@ class BasicAuthenticationFilterTest {
     fun filter_invalidEndpoint_badLogin_noHeader_fails() {
         val request = MockMvcRequestBuilders.get("/test")
             .header(HttpHeaders.AUTHORIZATION, "${encode(invalidLogin)}")
+
+        mockMvc.perform(request)
+            .andExpect(status().isOk)
+            .andExpect(content().string("null"))
+    }
+
+    @Test
+    fun filter_invalidEndpoint_badLoginName_fails() {
+        val request = MockMvcRequestBuilders.get("/test")
+            .header(HttpHeaders.AUTHORIZATION, "${encode("To be or not to be", "ThatIsTheQuestion")}")
 
         mockMvc.perform(request)
             .andExpect(status().isOk)
