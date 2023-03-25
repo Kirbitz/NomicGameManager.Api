@@ -1,5 +1,6 @@
 package nomic.data.repositories.implementations
 
+import nomic.data.EntityNotFoundException
 import nomic.data.dtos.CredentialDTO
 import nomic.data.dtos.UserDTO
 import nomic.data.dtos.credentials
@@ -90,6 +91,16 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
 
         Assertions.assertThat(creds2).usingRecursiveComparison().isEqualTo(testCreds2)
         Assertions.assertThat(dbCreds2).usingRecursiveComparison().isEqualTo(testCredsDto2)
+    }
+
+    @Test
+    @Order(1)
+    fun test_create_badUser() {
+        val repo = CredentialRepository(db)
+
+        Assertions.assertThatThrownBy {
+            repo.create(User(1234, "Dante"), LoginName("Alighieri"), password)
+        }.isInstanceOf(EntityNotFoundException::class.java)
     }
 
     @Test
