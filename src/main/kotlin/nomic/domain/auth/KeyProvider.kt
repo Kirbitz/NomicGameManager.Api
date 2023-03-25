@@ -44,6 +44,10 @@ class FileKeyProvider(private val tokenConfig: JWTTokenConfigurationProperties) 
     private var keyPair: RSAKeyPair? = null
 
     private fun loadKeyFiles(): Boolean {
+        if (keyPair != null) {
+            return true
+        }
+
         val publicKeyFile = File(tokenConfig.publicKeyPath)
         val privateKeyFile = File(tokenConfig.privateKeyPath)
 
