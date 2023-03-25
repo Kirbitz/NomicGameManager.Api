@@ -1,5 +1,6 @@
-package nomic.config.security.filters
+package nomic.unit.config.security.filters
 
+import nomic.config.security.filters.JWTAuthenticationSecurityFilter
 import nomic.domain.auth.ITokenRegistry
 import nomic.domain.auth.TokenValidationResult
 import nomic.domain.entities.User

@@ -1,5 +1,7 @@
-package nomic.domain.entities
+package nomic.unit.domain.entities
 
+import nomic.domain.entities.InvalidLoginNameException
+import nomic.domain.entities.LoginName
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 

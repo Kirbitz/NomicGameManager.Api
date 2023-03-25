@@ -1,7 +1,10 @@
-package nomic.domain.auth
+package nomic.unit.domain.auth
 
 import com.auth0.jwt.RegisteredClaims
 import nomic.data.repositories.IUserRepository
+import nomic.domain.auth.IKeyProvider
+import nomic.domain.auth.RSAKeyPair
+import nomic.domain.auth.TokenRegistry
 import nomic.domain.entities.User
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test

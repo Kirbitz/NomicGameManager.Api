@@ -1,5 +1,6 @@
-package nomic.domain.entities
+package nomic.unit.domain.entities
 
+import nomic.domain.entities.PasswordHash
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Condition
 import org.junit.jupiter.api.Test

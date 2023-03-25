@@ -1,7 +1,9 @@
-package nomic.domain.auth
+package nomic.unit.domain.auth
 
 import nomic.data.repositories.ICredentialRepository
 import nomic.data.repositories.IUserRepository
+import nomic.domain.auth.Argon2UserAuthenticator
+import nomic.domain.auth.AuthenticationResult
 import nomic.domain.entities.Credential
 import nomic.domain.entities.LoginName
 import nomic.domain.entities.PasswordHash

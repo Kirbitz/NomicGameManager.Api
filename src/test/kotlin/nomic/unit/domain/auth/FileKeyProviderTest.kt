@@ -1,5 +1,7 @@
-package nomic.domain.auth
+package nomic.unit.domain.auth
 
+import nomic.domain.auth.FileKeyProvider
+import nomic.domain.auth.JWTTokenConfigurationProperties
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
 import org.junit.jupiter.api.Order

@@ -1,5 +1,6 @@
-package nomic.config.security.filters
+package nomic.unit.config.security.filters
 
+import nomic.config.security.filters.BasicAuthenticationSecurityFilter
 import nomic.domain.auth.AuthenticationResult
 import nomic.domain.auth.IUserAuthenticator
 import nomic.domain.entities.LoginName
