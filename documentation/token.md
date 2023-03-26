@@ -46,7 +46,7 @@ Returns a JWT access token that can be used to authenticate on other endpoints
 
 - **Success Response:**
 
-  **Code:** `200 CREATED`
+  **Code:** `200 OK`
 
   **Content:**
 
