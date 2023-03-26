@@ -16,7 +16,7 @@ abstract class BaseEndToEndTest(@Autowired val tokenRegistry: ITokenRegistry) {
     protected fun <T> createRequest(body: T? = null, user: User? = null): HttpEntity<T> {
         val headers = HttpHeaders()
 
-        headers.setContentType(MediaType.APPLICATION_JSON)
+        headers.contentType = MediaType.APPLICATION_JSON
 
         if (user != null) {
             headers.setBearerAuth(tokenRegistry.issueToken(user))
