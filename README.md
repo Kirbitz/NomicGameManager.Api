@@ -14,4 +14,6 @@ __Example__
 
 [api/game/create](https://github.com/Kirbitz/NomicGameManager.Api/wiki/create_game)
 
+[api/auth/token](https://github.com/Kirbitz/NomicGameManager.Api/wiki/token)
+
 [api/game/remove](https://github.com/Kirbitz/NomicGameManager.Api/wiki/remove_a_game)

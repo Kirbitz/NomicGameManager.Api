@@ -1,6 +1,8 @@
 package nomic.api
 
 import nomic.api.models.ResponseFormat
+import nomic.domain.auth.TokenRegistry
+import nomic.domain.entities.EndUser
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -9,8 +11,11 @@ import org.springframework.boot.test.web.client.exchange
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 
-class RepealingRulesTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTest() {
-    private val request = createRequest<Any>()
+class RepealingRulesTests(
+    @Autowired val client: TestRestTemplate,
+    @Autowired tokenRegistry: TokenRegistry
+) : BaseEndToEndTest(tokenRegistry) {
+    private val request = createRequest<Any>(user = EndUser(2, "Master Tester"))
 
     @Test
     fun `Successfully Repealed a Rule`() {
