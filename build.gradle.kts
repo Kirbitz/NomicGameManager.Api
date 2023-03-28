@@ -5,6 +5,7 @@ plugins {
     id("org.springframework.boot") version "3.0.2"
     id("io.spring.dependency-management") version "1.1.0"
     id("org.jetbrains.dokka") version "1.7.20"
+    id("com.avast.gradle.docker-compose") version "0.16.11"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
     jacoco
@@ -33,6 +34,19 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    create("integrations") {
+        compileClasspath += sourceSets.main.get().output
+        runtimeClasspath += sourceSets.main.get().output
+    }
+}
+
+val integrationsImplementation: Configuration by configurations.getting {
+    extendsFrom(configurations.implementation.get())
+}
+
+configurations["integrationsRuntimeOnly"].extendsFrom(configurations.runtimeOnly.get())
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -40,8 +54,11 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("mysql:mysql-connector-java:8.0.25")
     implementation("org.ktorm:ktorm-support-mysql:3.6.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.1.1")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("com.h2database:h2")
+    integrationsImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.withType<KotlinCompile> {
@@ -56,14 +73,23 @@ tasks.withType<Test> {
 }
 
 tasks.test {
-    finalizedBy(tasks.jacocoTestReport)
+    if(project.hasProperty("inGitHub")) {
+        finalizedBy(tasks.jacocoTestReport)
+    }
 }
 
 tasks.jacocoTestReport {
-    dependsOn(tasks.test)
+    dependsOn(tasks.test, integrationTests)
     reports {
         xml.required.set(true)
     }
+    executionData(fileTree(buildDir).include("/jacoco/*.exec"))
+
+    classDirectories.setFrom(
+        sourceSets.main.get().output.asFileTree.matching {
+            exclude("integrations/**")
+        }
+    )
 }
 
 // This disables the extraneous jar of just this application's classes with none of the dependencies
@@ -85,4 +111,31 @@ task("addHotReload") {
             "org.springframework.boot:spring-boot-devtools"
         )
     }
+}
+
+val integrationTests: Test = task<Test>("integrationTests") {
+    description = "Runs integration tests."
+    group = "verification"
+
+    testClassesDirs = sourceSets["integrations"].output.classesDirs
+    classpath = sourceSets["integrations"].runtimeClasspath
+
+    if(project.hasProperty("inGitHub")) {
+        finalizedBy(tasks.jacocoTestReport)
+    }
+
+    useJUnitPlatform()
+
+    testLogging {
+        events("passed")
+    }
+}
+
+integrationTests.doFirst {
+    dockerCompose.exposeAsEnvironment(integrationTests)
+}
+
+dockerCompose {
+    this.useComposeFiles.add("docker-compose.yml")
+    this.isRequiredBy(project.tasks.findByName("integrationTests"))
 }
