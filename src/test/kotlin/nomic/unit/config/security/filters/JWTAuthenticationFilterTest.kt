@@ -97,6 +97,8 @@ class JWTAuthenticationFilterTest {
             .andExpect(content().string("null"))
     }
 
+    // This controller serves to provide feedback on the internal workings of the filter,
+    // so that the filter are verified in as much isolation as possible.
     @RestController
     private class TestController {
 
