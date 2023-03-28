@@ -164,7 +164,7 @@ INSERT INTO `Game` VALUES (6, 'The Fifth Game', '2023-03-20', NULL, 2);
 
 INSERT INTO `Game` VALUES (4, 'MyGame', '2015-12-17', NULL, 2);
 INSERT INTO `Rule` VALUES (6, 6, 'Look at the wall The Sequel', 'MyRule1', 4, 1, 0);
-INSERT INTO `Rule` VALUES (7, 7, 'Repeal Amendments', 'rule', 4, 1, 0)
+INSERT INTO `Rule` VALUES (7, 7, 'Repeal Amendments', 'rule', 4, 1, 0);
 INSERT INTO `Amendment` VALUES (6, 6, 'Or look at the ground again', 'MyAmendment1', 6, 1);
 INSERT INTO `Amendment` VALUES (7, 7, 'Or look at the ground again part two', 'MyAmendment1', 6, 1);
 INSERT INTO `Amendment` VALUES (8, 8, 'Test for repealing amendments', 'repealAmend', 7, 1);
