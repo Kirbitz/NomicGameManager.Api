@@ -29,7 +29,7 @@ class BasicAuthenticationFilterTest {
 
     private val invalidLogin = Pair(LoginName("Eve"), "evepassword")
 
-    val authenticator = mock<IUserAuthenticator> {
+    private val authenticator = mock<IUserAuthenticator> {
         on {
             authenticateUserWithCredentials(login1.first, login1.second)
         } doReturn AuthenticationResult(true, user1)
@@ -41,7 +41,7 @@ class BasicAuthenticationFilterTest {
         } doReturn AuthenticationResult(false)
     }
 
-    val mockMvc = MockMvcBuilders
+    private val mockMvc = MockMvcBuilders
         .standaloneSetup(TestController())
         .addFilter<StandaloneMockMvcBuilder>(BasicAuthenticationSecurityFilter(authenticator))
         .build()
