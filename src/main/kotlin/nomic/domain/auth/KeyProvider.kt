@@ -43,6 +43,12 @@ class FileKeyProvider(private val tokenConfig: JWTTokenConfigurationProperties) 
 
     private var keyPair: RSAKeyPair? = null
 
+    /**
+     * Loads the public and private key file into memory if it's not already been cached.
+     * If the keys have not been generated, it will fail.
+     *
+     * @return Whether it was successfully loaded
+     */
     private fun loadKeyFiles(): Boolean {
         if (keyPair != null) {
             return true
@@ -66,6 +72,13 @@ class FileKeyProvider(private val tokenConfig: JWTTokenConfigurationProperties) 
         return true
     }
 
+    /**
+     * Generates a RSA key pair, saves them to memory, and persists them to file. They are generated
+     * in accordance with the settings specified by [tokenConfig]
+     *
+     * @see[JWTTokenConfigurationProperties]
+     * @return The newly generated key pair.
+     */
     private fun generateKeyPair(): RSAKeyPair {
         val generator = KeyPairGenerator.getInstance("RSA")
         generator.initialize(tokenConfig.signingKeySize)
