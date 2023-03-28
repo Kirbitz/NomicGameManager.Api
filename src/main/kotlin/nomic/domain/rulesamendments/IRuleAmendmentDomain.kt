@@ -28,4 +28,12 @@ interface IRuleAmendmentDomain {
      * @param ruleId the id of the rule to be repealed
      */
     fun repealRule(ruleId: String)
+
+    /**
+     * Collects the response from the database for changing the mutability of a rule
+     *
+     * @param mutableInput the boolean the rule will be changed to
+     * @param ruleId the id of the rule to be repealed
+     */
+    fun transmuteRule(mutableInput: Boolean, ruleId: String)
 }

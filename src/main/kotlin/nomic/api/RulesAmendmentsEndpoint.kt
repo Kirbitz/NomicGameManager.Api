@@ -29,8 +29,8 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
      * @param[gameId] The game id to collect rules and amendments on
      * @return A spring entity representing the response that gets serialized into JSON
      */
-    @GetMapping("collect/{gameid}", produces = ["application/json;charset=UTF-8"])
-    fun getRulesAmendments(@PathVariable(value = "gameid") gameId: String): ResponseEntity<ResponseFormat<List<RulesAmendmentsApiModel>>> {
+    @GetMapping("collect/{gameId}", produces = ["application/json;charset=UTF-8"])
+    fun getRulesAmendments(@PathVariable(value = "gameId") gameId: String): ResponseEntity<ResponseFormat<List<RulesAmendmentsApiModel>>> {
         val rulesAmendments: List<RulesAmendmentsApiModel> = ruleAmendmentDomain.getRulesAmendments(gameId)
 
         // Return the response object
@@ -55,11 +55,17 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
      * @param[ruleId] The rule id to change to inactive
      * @return A spring entity representing the response that gets serialized into JSON
      */
-    @GetMapping("repeal_rule/{ruleid}", produces = ["application/json;charset=UTF-8"])
+    @GetMapping("repeal_rule/{ruleId}", produces = ["application/json;charset=UTF-8"])
     fun repealRule(@PathVariable(value = "ruleid") ruleId: String): ResponseEntity<ResponseFormat<String>> {
         ruleAmendmentDomain.repealRule(ruleId)
 
         // Return the response object
         return ResponseEntity(ResponseFormat(true, HttpStatus.OK, "Rule Repealed"), HttpStatus.OK)
+    }
+
+    @PostMapping("transmuteRule")
+    fun transmuteRule(@RequestBody mutableInput: Boolean, @PathVariable(value = "ruleId") ruleId: String): ResponseEntity<ResponseFormat<String>> {
+        ruleAmendmentDomain.transmuteRule(mutableInput,ruleId)
+        return ResponseEntity(ResponseFormat(true, HttpStatus.OK, "Rule Transmuted"), HttpStatus.OK)
     }
 }
