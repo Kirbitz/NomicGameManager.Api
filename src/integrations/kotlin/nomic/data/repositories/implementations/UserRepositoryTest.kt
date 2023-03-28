@@ -145,8 +145,8 @@ class UserRepositoryTest(@Autowired private val db: Database) {
     fun test_delete_badUser() {
         val repo = UserRepository(db)
 
-        repo.delete(testUser1)
-        repo.delete(testUser2)
+        Assertions.assertThat(repo.delete(testUser1)).isFalse
+        Assertions.assertThat(repo.delete(testUser2)).isFalse
 
         val dbTestUser1 = db.users.find { it.id eq testUser1.id }
         val dbTestUser2 = db.users.find { it.id eq testUser2.id }
@@ -162,8 +162,8 @@ class UserRepositoryTest(@Autowired private val db: Database) {
 
         val actualTestUser1 = repo.findUserByName(testUser1.name).get()
 
-        repo.delete(actualTestUser1)
-        repo.delete(existingUser)
+        Assertions.assertThat(repo.delete(actualTestUser1)).isTrue
+        Assertions.assertThat(repo.delete(existingUser)).isTrue
 
         val dbTestUser1 = db.users.find { it.id eq actualTestUser1.id }
         val dbExistingUser = db.users.find { it.id eq existingUser.id }

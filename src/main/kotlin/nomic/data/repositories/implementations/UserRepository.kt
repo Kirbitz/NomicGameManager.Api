@@ -47,7 +47,8 @@ class UserRepository(private val db: Database) : IUserRepository {
         return Optional.of(User(userDto.id, userDto.name))
     }
 
-    override fun delete(entity: User) {
-        db.users.find { it.id eq entity.id }?.delete()
+    override fun delete(entity: User): Boolean {
+        val userDto = db.users.find { it.id eq entity.id } ?: return false
+        return userDto.delete() > 0
     }
 }

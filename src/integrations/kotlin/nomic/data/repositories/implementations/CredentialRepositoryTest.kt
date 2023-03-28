@@ -264,8 +264,8 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
     fun test_delete_goodId() {
         val repo = CredentialRepository(db)
 
-        repo.delete(testCreds1)
-        repo.delete(testCreds2)
+        Assertions.assertThat(repo.delete(testCreds1)).isTrue
+        Assertions.assertThat(repo.delete(testCreds2)).isTrue
 
         val dbCreds1 = db.credentials.find { it.userId eq testCredsDto1.user.id }
         val dbCreds2 = db.credentials.find { it.userId eq testCredsDto2.user.id }
@@ -285,7 +285,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
             hashPassword("pass")
         )
 
-        repo.delete(creds)
+        Assertions.assertThat(repo.delete(creds)).isFalse
 
         val dbCreds = db.credentials.find { it.userId eq creds.user.id }
 

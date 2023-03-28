@@ -27,6 +27,7 @@ interface IRepository<TEntity> where TEntity : IEntity {
      * Deletes the provided entity from the underlying data layer
      *
      * @param[entity] The entity which is to be deleted
+     * @return Whether the entity was successfully deleted
      */
-    fun delete(entity: TEntity)
+    fun delete(entity: TEntity): Boolean
 }

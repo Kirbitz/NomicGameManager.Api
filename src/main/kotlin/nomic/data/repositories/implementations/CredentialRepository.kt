@@ -61,8 +61,9 @@ class CredentialRepository(private val db: Database) : ICredentialRepository {
         )
     }
 
-    override fun delete(entity: Credential) {
-        db.credentials.find { it.userId eq entity.id }?.delete()
+    override fun delete(entity: Credential): Boolean {
+        val credDto = db.credentials.find { it.userId eq entity.id } ?: return false
+        return credDto.delete() > 0
     }
 
     override fun getByName(loginName: LoginName): Optional<Credential> {
