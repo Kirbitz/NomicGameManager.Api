@@ -33,6 +33,15 @@ value class LoginName(@JsonValue val rawName: String) {
         // This regex validates that the login name contains only alphanumeric characters or dashes or underscores.
         private val regex = Regex("^[a-zA-Z0-9\\-\\_]{1,45}\$")
 
+        /**
+         * Verifies that the provided string represents a valid login name as specified by
+         * business logic. If this returns false, attempting to construct a login name with the
+         * string will throw an exception.
+         *
+         * @param[rawName] The string representation of the potential login name,
+         * nullable for the sake of conveniency in validation logic
+         * @return Whether the string is a valid login name value object.
+         */
         fun canParse(rawName: String?): Boolean {
             if (rawName == null) return false
             return regex.matches(rawName)
