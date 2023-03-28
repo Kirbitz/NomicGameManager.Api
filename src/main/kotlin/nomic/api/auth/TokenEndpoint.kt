@@ -28,7 +28,7 @@ class TokenEndpoint(private val tokenRegistry: ITokenRegistry) {
      * This endpoint is the core of the controller. It accepts the authenticated user, which is the principal of the context,
      * provided automatically by Spring. It operates over the POST method.
      *
-     * @param[authorization] The authenticated user principal
+     * @param[user] The authenticated user principal
      * @return A Spring entity representing the response that gets serialized into JSON
      */
     @PostMapping("token", produces = ["application/json;charset=UTF-8"])
