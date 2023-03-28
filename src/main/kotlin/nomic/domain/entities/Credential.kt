@@ -59,6 +59,8 @@ value class LoginName(@JsonValue val rawName: String) {
 value class PasswordHash(val rawHash: String) {
     init {
         // This regex validates that the string is an Argon2 hash encoded with the modular PHC format.
+        // The modular PHC format is a format for password hashes which is a string representation of
+        // the password hash, its salt, the hashing algorithm, and other parameters (such as the work factors).
         val regex = Regex("^\\\$argon2(i?d?)\\\$v=(\\d+)\\\$m=(\\d+),t=(\\d+),p=(\\d+)\\\$([a-z0-9A-Z\\-=\\/\\\\+]+)\\\$([a-zA-Z0-9\\-=\\/\\\\+]+)\$")
         if (!regex.matches(rawHash)) {
 
