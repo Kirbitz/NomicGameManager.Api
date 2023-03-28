@@ -78,7 +78,7 @@ class TokenEndpointTest(@Autowired val client: TestRestTemplate) {
         val entity = client.postForEntity<ResponseFormat<String>>("/api/auth/token", request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
-        Assertions.assertThat(entity.body).isNotNull().has(hasToken)
+        Assertions.assertThat(entity.body).isNotNull.has(hasToken)
     }
 
     @Test
@@ -89,6 +89,6 @@ class TokenEndpointTest(@Autowired val client: TestRestTemplate) {
         val request = HttpEntity<Any>(headers)
         val entity = client.postForEntity<ResponseFormat<String>>("/api/auth/token", request)
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
-        Assertions.assertThat(entity.body).isNotNull().has(hasToken)
+        Assertions.assertThat(entity.body).isNotNull.has(hasToken)
     }
 }
