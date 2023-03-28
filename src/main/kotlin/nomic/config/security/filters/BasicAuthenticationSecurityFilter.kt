@@ -57,7 +57,6 @@ class BasicAuthenticationSecurityFilter(
             if (authResult.isSuccess) {
                 val context = SecurityContextHolder.getContext()
 
-                // TODO Could setting the `credentials` to null cause issues? Bad practice within Spring Security?
                 context.authentication = UsernamePasswordAuthenticationToken(authResult.user, null, listOf())
             }
         }

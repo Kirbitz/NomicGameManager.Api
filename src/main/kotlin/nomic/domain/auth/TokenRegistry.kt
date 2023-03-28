@@ -86,7 +86,8 @@ class TokenRegistry(
     }
 
     override fun validateToken(rawToken: String): TokenValidationResult {
-        // TODO Refactor out the exception pattern, possibly swap out jwt libraries
+        // This is a necessary exception-as-logic-control due to the library,
+        // unfortunately necessary for the time being.
         return try {
             val jwt = verifier.verify(rawToken)
 
