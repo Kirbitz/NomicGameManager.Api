@@ -2,6 +2,8 @@ package nomic.api
 
 import nomic.api.models.GamesApiModel
 import nomic.api.models.ResponseFormat
+import nomic.domain.auth.ITokenRegistry
+import nomic.domain.entities.EndUser
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -10,9 +12,12 @@ import org.springframework.boot.test.web.client.exchange
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 
-class CreateGameTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTest() {
+class CreateGameTests(
+    @Autowired val client: TestRestTemplate,
+    @Autowired tokenRegistry: ITokenRegistry
+) : BaseEndToEndTest(tokenRegistry) {
     private val game = GamesApiModel("New Game", 2)
-    private val request = createRequest<GamesApiModel>(game)
+    private val request = createRequest<GamesApiModel>(game, EndUser(2, "Master Tester"))
 
     @Test
     fun `Create Game on existing userId`() {
@@ -26,7 +31,7 @@ class CreateGameTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTes
     }
 
     private val game2 = GamesApiModel("###BAD###", 2)
-    private val request2 = createRequest<GamesApiModel>(game2)
+    private val request2 = createRequest<GamesApiModel>(game2, EndUser(2, "Master Tester"))
 
     @Test
     fun `Create Game with Bad Title (#)`() {
@@ -40,7 +45,7 @@ class CreateGameTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTes
     }
 
     private val game3 = GamesApiModel("&&&BAD&&&", 2)
-    private val request3 = createRequest<GamesApiModel>(game3)
+    private val request3 = createRequest<GamesApiModel>(game3, EndUser(2, "Master Tester"))
 
     @Test
     fun `Create Game with Bad Title (&)`() {
@@ -54,7 +59,7 @@ class CreateGameTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTes
     }
 
     private val game4 = GamesApiModel("@@@BAD@@@", 2)
-    private val request4 = createRequest<GamesApiModel>(game4)
+    private val request4 = createRequest<GamesApiModel>(game4, EndUser(2, "Master Tester"))
 
     @Test
     fun `Create Game with Bad Title (@)`() {

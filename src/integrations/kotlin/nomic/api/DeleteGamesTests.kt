@@ -1,6 +1,8 @@
 package nomic.api
 
 import nomic.api.models.ResponseFormat
+import nomic.domain.auth.ITokenRegistry
+import nomic.domain.entities.EndUser
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,8 +15,11 @@ import org.springframework.http.HttpStatus
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
-class DeleteGamesTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTest() {
-    private val request = createRequest<Any>()
+class DeleteGamesTests(
+    @Autowired val client: TestRestTemplate,
+    @Autowired tokenRegistry: ITokenRegistry
+) : BaseEndToEndTest(tokenRegistry) {
+    private val request = createRequest<Any>(user = EndUser(4, "Game Master"))
 
     @Test
     fun `Game Successfully Deleted`() {

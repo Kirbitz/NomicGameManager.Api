@@ -1,4 +1,6 @@
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.net.URL
 
 plugins {
     id("com.diffplug.spotless") version "6.15.0"
@@ -26,7 +28,7 @@ spotless {
     }
 }
 
-group = "game.manager.nomic"
+group = "nomic"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
@@ -52,13 +54,28 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("mysql:mysql-connector-java:8.0.25")
-    implementation("org.ktorm:ktorm-support-mysql:3.6.0")
+
+    // Testing
+    integrationsImplementation("org.apache.httpcomponents.client5:httpclient5:5.2.1")
+    integrationsImplementation("org.springframework.boot:spring-boot-starter-test")
+    integrationsImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    integrationsImplementation("org.mockito:mockito-junit-jupiter:5.1.1")
+    integrationsImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
+
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("org.mockito:mockito-junit-jupiter:5.1.1")
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    integrationsImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    // Authentication libraries
+    implementation("com.auth0:java-jwt:4.2.2")
+    implementation("org.springframework.security:spring-security-crypto:6.0.1")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.bouncycastle:bcprov-jdk18on:1.72")
+
+    // Database libraries
+    implementation("org.ktorm:ktorm-support-mysql:3.6.0")
+    implementation("mysql:mysql-connector-java:8.0.25")
 }
 
 tasks.withType<KotlinCompile> {
@@ -73,7 +90,7 @@ tasks.withType<Test> {
 }
 
 tasks.test {
-    if(project.hasProperty("inGitHub")) {
+    if (project.hasProperty("inGitHub")) {
         finalizedBy(tasks.jacocoTestReport)
     }
 }
@@ -90,6 +107,21 @@ tasks.jacocoTestReport {
             exclude("integrations/**")
         }
     )
+}
+
+tasks.withType<DokkaTask>().configureEach {
+    suppressInheritedMembers.set(true)
+    dokkaSourceSets.configureEach {
+        externalDocumentationLink {
+            url.set(URL("https://docs.spring.io/spring-framework/docs/current/kdoc-api/"))
+            packageListUrl.set(URL("https://docs.spring.io/spring-framework/docs/current/kdoc-api/package-list"))
+        }
+
+        externalDocumentationLink {
+            url.set(URL("https://www.ktorm.org/api-docs/"))
+            packageListUrl.set(URL("https://www.ktorm.org/api-docs/package-list"))
+        }
+    }
 }
 
 // This disables the extraneous jar of just this application's classes with none of the dependencies
@@ -120,7 +152,7 @@ val integrationTests: Test = task<Test>("integrationTests") {
     testClassesDirs = sourceSets["integrations"].output.classesDirs
     classpath = sourceSets["integrations"].runtimeClasspath
 
-    if(project.hasProperty("inGitHub")) {
+    if (project.hasProperty("inGitHub")) {
         finalizedBy(tasks.jacocoTestReport)
     }
 
