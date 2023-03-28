@@ -71,7 +71,7 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
         }
     }
 
-    override fun repealAmendment(amendId : Int) {
+    override fun repealAmendment(amendId: Int) {
         val result = db.update(Amendments) {
             set(it.active, false)
             where {
