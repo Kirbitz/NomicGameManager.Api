@@ -97,11 +97,6 @@ class FileKeyProvider(private val tokenConfig: JWTTokenConfigurationProperties) 
         return keyPair!!
     }
 
-    /**
-     * Retrieves or generates a RSA key pair
-     *
-     * @return A pairing of RSA public and private keys
-     */
     override fun getKeyPair(): RSAKeyPair {
         if (loadKeyFiles()) {
             return keyPair!!
