@@ -26,8 +26,9 @@ class TokenRegistryTest {
         const val PUBLIC_KEY = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAI6jowrmGDTzQg7YQIyEoxQbvB16efH1EsEHj6yE58mIxXNi95ZEO5u7/loWmd1a1eWGI2dIu2dkDyYTVx8YDfUCAwEAAQ=="
         const val PRIVATE_KEY = "MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAjqOjCuYYNPNCDthAjISjFBu8HXp58fUSwQePrITnyYjFc2L3lkQ7m7v+WhaZ3VrV5YYjZ0i7Z2QPJhNXHxgN9QIDAQABAkAPPnXCSGz127mHlJzxZ4t2LrCgBeLadPKYJpK4QUv0QbzawRQxGJRmV2a+H6Y1oMOXvWhpZXQJIk2ff4EbInnRAiEAxVQdFxWP1QpE03wxeax1ZKHHKZyin+2ucdaue7mDThsCIQC5DMfjo8PX6hI/kl4F0/L+n6ur6Ngzy++OVOiQJwWVLwIgdr1is91Zq4x+VfRJoTnRejiPK88BXNMdQYs5e2HqTTkCIQCtKxGvrCPsXOZAyWblS0edEaykDhystA50gm6z32BxDwIgEaaS6Vy66nFFvX6X79YiZ5++aomx0Tl3d0+L0il2+GQ="
 
-        val publicKeyBytes = Base64.getDecoder().decode(PUBLIC_KEY)
-        val privateKeyBytes = Base64.getDecoder().decode(PRIVATE_KEY)
+        // These are actually null-safe, but the compiler/IDE aren't sure due to the java/kotlin interop.
+        val publicKeyBytes = Base64.getDecoder().decode(PUBLIC_KEY)!!
+        val privateKeyBytes = Base64.getDecoder().decode(PRIVATE_KEY)!!
 
         val testUser1 = User(512, "Titius Livius")
         val testUser2 = User(1024, "Achilleus")
