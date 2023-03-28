@@ -87,16 +87,16 @@ class TokenRegistry(
 
     override fun validateToken(rawToken: String): TokenValidationResult {
         // TODO Refactor out the exception pattern, possibly swap out jwt libraries
-        try {
+        return try {
             val jwt = verifier.verify(rawToken)
 
             // Since the signature has been verified and the token validated, we know that we created the token.
             // Therefore, the subject claim represents a valid user id.
             val user = usersRepo.getById(jwt.subject.toInt()).get()
             val claims = jwt.claims.mapValues { it.value.asString() }
-            return TokenValidationResult(true, user, claims)
+            TokenValidationResult(true, user, claims)
         } catch (e: JWTVerificationException) {
-            return TokenValidationResult(false)
+            TokenValidationResult(false)
         }
     }
 
