@@ -86,8 +86,7 @@ class Argon2UserAuthenticator(
     }
 
     private fun checkUserCredentials(credential: Credential, password: String): Boolean {
-        // Hash and check against DB
-        val encoder = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8()
-        return encoder.matches(password, credential.passwordHash.rawHash)
+        val hasher = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8()
+        return hasher.matches(password, credential.passwordHash.rawHash)
     }
 }
