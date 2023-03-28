@@ -2,8 +2,8 @@ package nomic.api
 
 import nomic.api.models.ResponseFormat
 import nomic.domain.auth.ITokenRegistry
+import nomic.domain.entities.EndUser
 import nomic.domain.entities.RulesModel
-import nomic.domain.entities.User
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,7 +18,7 @@ class EnactingRulesTests(
 ) : BaseEndToEndTest(tokenRegistry) {
 
     private val rule = RulesModel(77, 50, "Title", "Description", false, 6)
-    private val request = createRequest(rule, User(3, "Game Master"))
+    private val request = createRequest(rule, EndUser(3, "Game Master"))
 
     @Test
     fun `Create Rule in an existing game`() {
@@ -32,7 +32,7 @@ class EnactingRulesTests(
     }
 
     private val rule1 = RulesModel(72, 51, "Title2", "", false, 6)
-    private val request1 = createRequest(rule1, User(3, "Game Master"))
+    private val request1 = createRequest(rule1, EndUser(3, "Game Master"))
 
     @Test
     fun `Create Rule with no description`() {
@@ -46,7 +46,7 @@ class EnactingRulesTests(
     }
 
     private val rule2 = RulesModel(73, 52, "", "Description", false, 6)
-    private val request2 = createRequest(rule2, User(3, "Game Master"))
+    private val request2 = createRequest(rule2, EndUser(3, "Game Master"))
 
     @Test
     fun `Create Rule with no Title`() {
@@ -60,7 +60,7 @@ class EnactingRulesTests(
     }
 
     private val rule3 = RulesModel(74, 54, ":::", "Description", false, 6)
-    private val request3 = createRequest(rule3, User(3, "Game Master"))
+    private val request3 = createRequest(rule3, EndUser(3, "Game Master"))
 
     @Test
     fun `Create Rule with illegal characters in Title`() {
@@ -74,7 +74,7 @@ class EnactingRulesTests(
     }
 
     private val rule4 = RulesModel(75, 56, "Title", "Descri:::::ption", false, 6)
-    private val request4 = createRequest(rule4, User(3, "Game Master"))
+    private val request4 = createRequest(rule4, EndUser(3, "Game Master"))
 
     @Test
     fun `Create Rule with illegal characters in Description`() {
@@ -88,7 +88,7 @@ class EnactingRulesTests(
     }
 
     private val rule5 = RulesModel(76, 57, "Title", "Description", false, 5)
-    private val request5 = createRequest(rule5, User(3, "Game Master"))
+    private val request5 = createRequest(rule5, EndUser(3, "Game Master"))
 
     @Test
     fun `Create rule in a game that does not exist`() {

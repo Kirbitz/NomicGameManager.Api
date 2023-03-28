@@ -5,9 +5,9 @@ import nomic.data.dtos.CredentialDTO
 import nomic.data.dtos.UserDTO
 import nomic.data.dtos.credentials
 import nomic.domain.entities.Credential
+import nomic.domain.entities.EndUser
 import nomic.domain.entities.LoginName
 import nomic.domain.entities.PasswordHash
-import nomic.domain.entities.User
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Order
@@ -39,7 +39,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
         password = PasswordHash(passwordHasher.encode("password"))
 
         testCreds1 = Credential(
-            User(5, "Cincinnatus"),
+            EndUser(5, "Cincinnatus"),
             LoginName("SimpleFarmer"),
             password
         )
@@ -55,7 +55,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
         }
 
         testCreds2 = Credential(
-            User(3, "Alcibiades"),
+            EndUser(3, "Alcibiades"),
             LoginName("StrongDoWhatTheyCan"),
             password
         )
@@ -99,7 +99,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
         val repo = CredentialRepository(db)
 
         Assertions.assertThatThrownBy {
-            repo.create(User(1234, "Dante"), LoginName("Alighieri"), password)
+            repo.create(EndUser(1234, "Dante"), LoginName("Alighieri"), password)
         }.isInstanceOf(EntityNotFoundException::class.java)
     }
 
@@ -147,7 +147,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
     fun test_getByUser_invalidUser_emptyOptional() {
         val repo = CredentialRepository(db)
 
-        val cred = repo.getByUser(User(1234, "Dante"))
+        val cred = repo.getByUser(EndUser(1234, "Dante"))
 
         Assertions.assertThat(cred).isEmpty
     }
@@ -254,7 +254,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
     fun test_update_invalidCred() {
         val repo = CredentialRepository(db)
 
-        val testCred = Credential(User(23, "Gandalf"), LoginName("GrayWizard"), hashPassword("Istari"))
+        val testCred = Credential(EndUser(23, "Gandalf"), LoginName("GrayWizard"), hashPassword("Istari"))
 
         Assertions.assertThatThrownBy { repo.update(testCred) }
     }
@@ -280,7 +280,7 @@ class CredentialRepositoryTest(@Autowired private val db: Database) {
         val repo = CredentialRepository(db)
 
         val creds = Credential(
-            User(1234, "Foo bar"),
+            EndUser(1234, "Foo bar"),
             LoginName("FooBar145"),
             hashPassword("pass")
         )

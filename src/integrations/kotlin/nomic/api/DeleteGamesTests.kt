@@ -2,7 +2,7 @@ package nomic.api
 
 import nomic.api.models.ResponseFormat
 import nomic.domain.auth.ITokenRegistry
-import nomic.domain.entities.User
+import nomic.domain.entities.EndUser
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,7 +19,7 @@ class DeleteGamesTests(
     @Autowired val client: TestRestTemplate,
     @Autowired tokenRegistry: ITokenRegistry
 ) : BaseEndToEndTest(tokenRegistry) {
-    private val request = createRequest<Any>(user = User(4, "Game Master"))
+    private val request = createRequest<Any>(user = EndUser(4, "Game Master"))
 
     @Test
     fun `Game Successfully Deleted`() {

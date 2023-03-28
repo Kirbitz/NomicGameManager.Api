@@ -2,7 +2,7 @@ package nomic.data.repositories.implementations
 
 import nomic.data.dtos.UserDTO
 import nomic.data.dtos.users
-import nomic.domain.entities.User
+import nomic.domain.entities.EndUser
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Order
@@ -20,22 +20,22 @@ import org.springframework.boot.test.context.SpringBootTest
 )
 class UserRepositoryTest(@Autowired private val db: Database) {
 
-    private val testUser1: User
+    private val testUser1: EndUser
     private val testUserDto1: UserDTO
 
-    private val testUser2: User
+    private val testUser2: EndUser
     private val testUserDto2: UserDTO
 
-    private val existingUser = User(10, "Agamemnon")
+    private val existingUser = EndUser(10, "Agamemnon")
 
     init {
-        testUser1 = User(57, "Marcus Aurelius")
+        testUser1 = EndUser(57, "Marcus Aurelius")
         testUserDto1 = UserDTO {
             this.id = testUser1.id
             this.name = testUser1.name
         }
 
-        testUser2 = User(58, "Socrates")
+        testUser2 = EndUser(58, "Socrates")
         testUserDto2 = UserDTO {
             this.id = testUser2.id
             this.name = testUser2.name

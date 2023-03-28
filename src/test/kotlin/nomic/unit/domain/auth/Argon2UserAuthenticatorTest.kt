@@ -5,9 +5,9 @@ import nomic.data.repositories.IUserRepository
 import nomic.domain.auth.Argon2UserAuthenticator
 import nomic.domain.auth.AuthenticationResult
 import nomic.domain.entities.Credential
+import nomic.domain.entities.EndUser
 import nomic.domain.entities.LoginName
 import nomic.domain.entities.PasswordHash
-import nomic.domain.entities.User
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Condition
 import org.junit.jupiter.api.Test
@@ -28,8 +28,8 @@ class Argon2UserAuthenticatorTest {
         val passwordPass = PasswordHash(encoder.encode("pass"))
         val passwordFoobar = PasswordHash(encoder.encode("foobar"))
 
-        val credBob = Credential(User(1, "Bob"), LoginName("alfredo"), passwordPass)
-        val credJane = Credential(User(2, "Jane"), LoginName("see_sharp"), passwordFoobar)
+        val credBob = Credential(EndUser(1, "Bob"), LoginName("alfredo"), passwordPass)
+        val credJane = Credential(EndUser(2, "Jane"), LoginName("see_sharp"), passwordFoobar)
 
         val credsRepo = mock<ICredentialRepository>
         {

@@ -11,7 +11,7 @@ import org.ktorm.schema.varchar
  * This DTO represents a user entry in the database and employs KTorm's framework
  *
  * @see[org.ktorm.entity.Entity]
- * @see[nomic.domain.entities.User]
+ * @see[nomic.domain.entities.EndUser]
  * @property[id] Represents the primary key id of the user
  * @property[name] Represents the name of the user
  */

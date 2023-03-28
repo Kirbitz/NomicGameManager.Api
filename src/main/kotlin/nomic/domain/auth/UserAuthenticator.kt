@@ -3,8 +3,8 @@ package nomic.domain.auth
 import nomic.data.repositories.ICredentialRepository
 import nomic.data.repositories.IUserRepository
 import nomic.domain.entities.Credential
+import nomic.domain.entities.EndUser
 import nomic.domain.entities.LoginName
-import nomic.domain.entities.User
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -32,7 +32,7 @@ interface IUserAuthenticator {
  * @property[isSuccess] The success state of the authentication: true only if successful
  * @property[user] If successful, the user entity represented the authenticated user; otherwise null
  */
-data class AuthenticationResult(val isSuccess: Boolean, val user: User? = null)
+data class AuthenticationResult(val isSuccess: Boolean, val user: EndUser? = null)
 
 /**
  * This implementation of [IUserAuthenticator] hashes passwords using the Argon2id algorithm with the defaults for Spring Security v5.8

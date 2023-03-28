@@ -2,7 +2,7 @@ package nomic.api.auth
 
 import nomic.api.models.ResponseFormat
 import nomic.domain.auth.ITokenRegistry
-import nomic.domain.entities.User
+import nomic.domain.entities.EndUser
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -32,7 +32,7 @@ class TokenEndpoint(private val tokenRegistry: ITokenRegistry) {
      * @return A Spring entity representing the response that gets serialized into JSON
      */
     @PostMapping("token", produces = ["application/json;charset=UTF-8"])
-    fun tokenRequest(@AuthenticationPrincipal user: User): ResponseEntity<ResponseFormat<String>> {
+    fun tokenRequest(@AuthenticationPrincipal user: EndUser): ResponseEntity<ResponseFormat<String>> {
         val token = tokenRegistry.issueToken(user)
 
         return ResponseEntity(ResponseFormat(true, HttpStatus.OK, data = token), HttpStatus.OK)

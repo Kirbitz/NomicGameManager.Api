@@ -6,9 +6,9 @@ import nomic.data.dtos.credentials
 import nomic.data.dtos.users
 import nomic.data.repositories.ICredentialRepository
 import nomic.domain.entities.Credential
+import nomic.domain.entities.EndUser
 import nomic.domain.entities.LoginName
 import nomic.domain.entities.PasswordHash
-import nomic.domain.entities.User
 import org.ktorm.database.Database
 import org.ktorm.dsl.eq
 import org.ktorm.entity.add
@@ -27,7 +27,7 @@ import java.util.Optional
 @Repository
 class CredentialRepository(private val db: Database) : ICredentialRepository {
 
-    override fun create(user: User, loginName: LoginName, passwordHash: PasswordHash): Credential {
+    override fun create(user: EndUser, loginName: LoginName, passwordHash: PasswordHash): Credential {
         var userDto = db.users.find { it.id eq user.id } ?: throw EntityNotFoundException(user.id)
 
         val credential = CredentialDTO {
@@ -54,7 +54,7 @@ class CredentialRepository(private val db: Database) : ICredentialRepository {
 
         return Optional.of(
             Credential(
-                User(id, credDto.user.name),
+                EndUser(id, credDto.user.name),
                 LoginName(credDto.loginName),
                 PasswordHash(credDto.passwordHash)
             )
@@ -68,7 +68,7 @@ class CredentialRepository(private val db: Database) : ICredentialRepository {
 
     override fun getByName(loginName: LoginName): Optional<Credential> {
         val credDto = db.credentials.find { it.loginName eq loginName.rawName } ?: return Optional.empty()
-        val user = User(credDto.user.id, credDto.user.name)
+        val user = EndUser(credDto.user.id, credDto.user.name)
         return Optional.of(
             Credential(
                 user,

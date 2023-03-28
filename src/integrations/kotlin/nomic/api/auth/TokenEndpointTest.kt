@@ -2,7 +2,7 @@ package nomic.api.auth
 
 import nomic.api.models.ResponseFormat
 import nomic.domain.auth.ITokenRegistry
-import nomic.domain.entities.User
+import nomic.domain.entities.EndUser
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Condition
 import org.junit.jupiter.api.Test
@@ -84,7 +84,7 @@ class TokenEndpointTest(@Autowired val client: TestRestTemplate) {
     @Test
     fun test_tokenSucceeds_refreshToken(@Autowired tokenRegistry: ITokenRegistry) {
         val headers = HttpHeaders()
-        headers.setBearerAuth(tokenRegistry.issueToken(User(1, "Foo Bar Jr.")))
+        headers.setBearerAuth(tokenRegistry.issueToken(EndUser(1, "Foo Bar Jr.")))
 
         val request = HttpEntity<Any>(headers)
         val entity = client.postForEntity<ResponseFormat<String>>("/api/auth/token", request)

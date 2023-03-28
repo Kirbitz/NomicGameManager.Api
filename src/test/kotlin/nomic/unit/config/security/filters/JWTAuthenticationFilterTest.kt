@@ -3,7 +3,7 @@ package nomic.unit.config.security.filters
 import nomic.config.security.filters.JWTAuthenticationSecurityFilter
 import nomic.domain.auth.ITokenRegistry
 import nomic.domain.auth.TokenValidationResult
-import nomic.domain.entities.User
+import nomic.domain.entities.EndUser
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.doReturn
@@ -31,10 +31,10 @@ class JWTAuthenticationFilterTest {
     fun filter_validToken_succeeds() {
         // Since we mock the token registry, we don't need a legit token.
         val token1 = "LegitToken1"
-        val user1 = User(100, "Frodo Baggins")
+        val user1 = EndUser(100, "Frodo Baggins")
 
         val token2 = "LegitToken2"
-        val user2 = User(12, "Aragorn")
+        val user2 = EndUser(12, "Aragorn")
 
         val tokenRegistry = mock<ITokenRegistry> {
             on { validateToken(token1) } doReturn TokenValidationResult(true, user1)
@@ -105,7 +105,7 @@ class JWTAuthenticationFilterTest {
         @GetMapping("/test")
         fun test(): String {
             val context = SecurityContextHolder.getContext()
-            val user = context.authentication?.principal as User?
+            val user = context.authentication?.principal as EndUser?
             return user?.id.toString()
         }
     }

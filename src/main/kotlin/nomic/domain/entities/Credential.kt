@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonValue
  * @property[loginName] The unique [LoginName] which the user must use to login
  * @property[passwordHash] The hash of the user's password which the user must use to login
  */
-class Credential(val user: User, var loginName: LoginName, var passwordHash: PasswordHash) : IEntity {
+class Credential(val user: EndUser, var loginName: LoginName, var passwordHash: PasswordHash) : IEntity {
     override val id: Int
         get() = user.id
 }

@@ -3,7 +3,7 @@ package nomic.api
 import nomic.api.models.ResponseFormat
 import nomic.api.models.RulesAmendmentsApiModel
 import nomic.domain.auth.ITokenRegistry
-import nomic.domain.entities.User
+import nomic.domain.entities.EndUser
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,7 +17,7 @@ class GetRulesAmendmentsTests(
     @Autowired tokenRegistry: ITokenRegistry
 ) : BaseEndToEndTest(tokenRegistry) {
 
-    private val request = createRequest<Any>(user = User(1, "Foo Bar Jr."))
+    private val request = createRequest<Any>(user = EndUser(1, "Foo Bar Jr."))
 
     @Test
     fun `Found Rule And Amendment Data`() {

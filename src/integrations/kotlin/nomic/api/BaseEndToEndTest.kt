@@ -1,7 +1,7 @@
 package nomic.api
 
 import nomic.domain.auth.ITokenRegistry
-import nomic.domain.entities.User
+import nomic.domain.entities.EndUser
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpEntity
@@ -13,7 +13,7 @@ import org.springframework.http.MediaType
 )
 abstract class BaseEndToEndTest(@Autowired val tokenRegistry: ITokenRegistry) {
 
-    protected fun <T> createRequest(body: T? = null, user: User? = null): HttpEntity<T> {
+    protected fun <T> createRequest(body: T? = null, user: EndUser? = null): HttpEntity<T> {
         val headers = HttpHeaders()
 
         headers.contentType = MediaType.APPLICATION_JSON

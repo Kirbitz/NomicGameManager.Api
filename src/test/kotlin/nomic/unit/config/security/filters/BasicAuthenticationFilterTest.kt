@@ -3,8 +3,8 @@ package nomic.unit.config.security.filters
 import nomic.config.security.filters.BasicAuthenticationSecurityFilter
 import nomic.domain.auth.AuthenticationResult
 import nomic.domain.auth.IUserAuthenticator
+import nomic.domain.entities.EndUser
 import nomic.domain.entities.LoginName
-import nomic.domain.entities.User
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.doReturn
@@ -22,10 +22,10 @@ import java.util.Base64
 
 class BasicAuthenticationFilterTest {
     private val login1 = Pair(LoginName("Alice"), "alicepassword")
-    private val user1 = User(100, "Sauron")
+    private val user1 = EndUser(100, "Sauron")
 
     private val login2 = Pair(LoginName("Bob"), "bobpassword")
-    private val user2 = User(12, "Saruman")
+    private val user2 = EndUser(12, "Saruman")
 
     private val invalidLogin = Pair(LoginName("Eve"), "evepassword")
 
@@ -166,7 +166,7 @@ class BasicAuthenticationFilterTest {
 
         private fun core(): String {
             val context = SecurityContextHolder.getContext()
-            val user = context.authentication?.principal as User?
+            val user = context.authentication?.principal as EndUser?
             return user?.id.toString()
         }
 

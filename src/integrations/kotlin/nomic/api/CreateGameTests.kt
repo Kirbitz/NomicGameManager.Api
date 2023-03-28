@@ -3,7 +3,7 @@ package nomic.api
 import nomic.api.models.GamesApiModel
 import nomic.api.models.ResponseFormat
 import nomic.domain.auth.ITokenRegistry
-import nomic.domain.entities.User
+import nomic.domain.entities.EndUser
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,7 +17,7 @@ class CreateGameTests(
     @Autowired tokenRegistry: ITokenRegistry
 ) : BaseEndToEndTest(tokenRegistry) {
     private val game = GamesApiModel("New Game", 2)
-    private val request = createRequest<GamesApiModel>(game, User(2, "Master Tester"))
+    private val request = createRequest<GamesApiModel>(game, EndUser(2, "Master Tester"))
 
     @Test
     fun `Create Game on existing userId`() {
@@ -31,7 +31,7 @@ class CreateGameTests(
     }
 
     private val game2 = GamesApiModel("###BAD###", 2)
-    private val request2 = createRequest<GamesApiModel>(game2, User(2, "Master Tester"))
+    private val request2 = createRequest<GamesApiModel>(game2, EndUser(2, "Master Tester"))
 
     @Test
     fun `Create Game with Bad Title (#)`() {
@@ -45,7 +45,7 @@ class CreateGameTests(
     }
 
     private val game3 = GamesApiModel("&&&BAD&&&", 2)
-    private val request3 = createRequest<GamesApiModel>(game3, User(2, "Master Tester"))
+    private val request3 = createRequest<GamesApiModel>(game3, EndUser(2, "Master Tester"))
 
     @Test
     fun `Create Game with Bad Title (&)`() {
@@ -59,7 +59,7 @@ class CreateGameTests(
     }
 
     private val game4 = GamesApiModel("@@@BAD@@@", 2)
-    private val request4 = createRequest<GamesApiModel>(game4, User(2, "Master Tester"))
+    private val request4 = createRequest<GamesApiModel>(game4, EndUser(2, "Master Tester"))
 
     @Test
     fun `Create Game with Bad Title (@)`() {

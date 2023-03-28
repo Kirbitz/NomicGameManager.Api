@@ -5,7 +5,7 @@ import nomic.data.repositories.IUserRepository
 import nomic.domain.auth.IKeyProvider
 import nomic.domain.auth.RSAKeyPair
 import nomic.domain.auth.TokenRegistry
-import nomic.domain.entities.User
+import nomic.domain.entities.EndUser
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.doReturn
@@ -30,8 +30,8 @@ class TokenRegistryTest {
         val publicKeyBytes = Base64.getDecoder().decode(PUBLIC_KEY)!!
         val privateKeyBytes = Base64.getDecoder().decode(PRIVATE_KEY)!!
 
-        val testUser1 = User(512, "Titius Livius")
-        val testUser2 = User(1024, "Achilleus")
+        val testUser1 = EndUser(512, "Titius Livius")
+        val testUser2 = EndUser(1024, "Achilleus")
     }
 
     init {
