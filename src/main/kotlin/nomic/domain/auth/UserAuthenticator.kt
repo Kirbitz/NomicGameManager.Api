@@ -78,11 +78,10 @@ class Argon2UserAuthenticator(
         /*val encoder = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8()
         val passwordHash = PasswordHash(encoder.encode(password))
 
-        // TODO Add business rules regarding logins and passwords
         val user = users.create(name)
         creds.create(user, loginName, passwordHash)
         return AuthenticationResult(true, tokenRegistry.issueToken(user))*/
-        TODO("Not yet implemented")
+        TODO("Not yet fully implemented - to be completed in NOM-56")
     }
 
     private fun checkUserCredentials(credential: Credential, password: String): Boolean {
