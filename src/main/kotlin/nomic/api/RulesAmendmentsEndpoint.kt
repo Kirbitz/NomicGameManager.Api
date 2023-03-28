@@ -44,7 +44,7 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
      * @return A spring entity representing the response that gets serialized into JSON
      */
     @PostMapping("enactRule")
-    fun enactRule(@RequestBody inputRule: RulesModel): ResponseEntity<Any> {
+        fun enactRule(@RequestBody inputRule: RulesModel): ResponseEntity<Any> {
         ruleAmendmentDomain.enactingRule(inputRule)
         return ResponseEntity("Rule Created", HttpStatus.CREATED)
     }
@@ -61,5 +61,19 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
 
         // Return the response object
         return ResponseEntity(repealRuleResponse, HttpStatus.OK)
+    }
+
+    /**
+     * This endpoint listens on `api/rules_amendments/repeal_rule/ExistingRuleId` and takes a ruleId to change state to of active to false
+     *
+     * @param[ruleId] The rule id to change to inactive
+     * @return A spring entity representing the response that gets serialized into JSON
+     */
+    @PostMapping("transmute_rule/{ruleid}", produces = ["application/json;charset=UTF-8"])
+    fun transmuteRule(@PathVariable(value = "ruleid") ruleId: String, @RequestBody inputMutable: Boolean): ResponseEntity<Any> {
+        val transmuteRuleResponse: TransmuteRuleResponse = ruleAmendmentDomain.transmuteRule(ruleId)
+
+        // Return the response object
+        return ResponseEntity(transmuteRuleResponse, HttpStatus.OK)
     }
 }

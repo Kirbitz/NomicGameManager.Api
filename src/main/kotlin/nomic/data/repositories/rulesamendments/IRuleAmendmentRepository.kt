@@ -29,4 +29,12 @@ interface IRuleAmendmentRepository {
      * @param ruleId The id of the rule to be repealed
      */
     fun repealRule(ruleId: Int)
+
+    /**
+     * Changes active flag and returns success or fail
+     *
+     * @param mutableInput The boolean that the rule will be set to
+     * @param ruleId The id of the rule to be repealed
+     */
+    fun transmuteRule(mutableInput: Boolean, ruleId: String)
 }

@@ -30,4 +30,12 @@ interface IRuleAmendmentDomain {
      * @return A [RepealRuleResponse][nomic.domain.entities.RepealRuleResponse] object to pass back the status
      */
     fun repealRule(ruleId: String): RepealRuleResponse
+
+    /**
+     * Changes a rule in the database and changes its mutability to the input boolean
+     * @param ruleId the id of the rule being changes
+     * @param mutableInput is what the rule's mutability will be set to
+     * @return A [TransmuteRuleResponse][nomic.domain.entities.RepealRuleResponse] object to pass back the status
+     */
+    fun transmuteRule(mutableInput: Boolean, ruleId: String): TransmuteRuleResponse
 }
