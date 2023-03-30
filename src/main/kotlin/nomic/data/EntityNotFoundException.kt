@@ -1,7 +1,8 @@
 package nomic.data
 
 /**
- * Exception thrown when entity is not found in database
+ * This exception is thrown when an id for an invalid [nomic.domain.entities.Entity][Entity] is provided to a [Repository]
+ * to act upon but does not exist in the database.
  *
  * @param id the id that was not found
  * @return Exception the response for the user to know that the id they were looking for was not found

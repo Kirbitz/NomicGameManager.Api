@@ -130,6 +130,12 @@ CREATE TABLE `Credential` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
+-- Login tests data
+
+INSERT INTO `User` VALUES (10, 'Agamemnon');
+INSERT INTO `User` VALUES (5, 'Cincinnatus'), (1, 'Foo Bar Jr.'), (3, 'Alcibiades'), (100, 'Samwise Gamgee');
+INSERT INTO `Credential` VALUES ('TestUser', '$argon2id$v=19$m=16384,t=2,p=1$UUtqVlF6Wk1adkxmaXdKQQ$/6PJsEAGnyNRx1/b9/q7OWBp6SvKXIajQVRuswKQIFA', 1);
+
 -- Rules and Amendments Tests
 
 INSERT INTO `User` VALUES (2, 'Master Tester');
@@ -150,18 +156,17 @@ INSERT INTO `Game` VALUES (3, 'MyGame3', '2015-12-18', NULL, 2);
 INSERT INTO `Rule` VALUES (4, 4, 'Run in circles', 'MyInactiveRule1', 3, 0, 0);
 INSERT INTO `Amendment` VALUES (4, 4, 'Run slowly', 'MyAmendment4', 4, 1);
 
--- Games Tests
-
-INSERT INTO `User` VALUES (3, 'Game Master');
-INSERT INTO `Game` VALUES (42, 'The Journey', '2015-03-14', NULL, 3);
-
 -- Enacting Rules Tests
 
 -- Do not create a game with value 5.
 INSERT INTO `Game` VALUES (6, 'The Fifth Game', '2023-03-20', NULL, 2);
 
--- Repealing Rules Tests
+-- Games Tests
 
+INSERT INTO `User` VALUES (4, 'Game Master');
+INSERT INTO `Game` VALUES (42, 'The Journey', '2015-03-14', NULL, 3);
+
+-- Repealing Rules Tests
 INSERT INTO `Game` VALUES (4, 'MyGame', '2015-12-17', NULL, 2);
 INSERT INTO `Rule` VALUES (6, 6, 'Look at the wall The Sequel', 'MyRule1', 4, 1, 0);
 INSERT INTO `Amendment` VALUES (6, 6, 'Or look at the ground again', 'MyAmendment1', 6, 1);
