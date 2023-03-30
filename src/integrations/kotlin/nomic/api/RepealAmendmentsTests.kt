@@ -2,6 +2,7 @@ package nomic.api
 
 import nomic.api.models.ResponseFormat
 import nomic.domain.auth.ITokenRegistry
+import nomic.domain.entities.EndUser
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,7 +12,7 @@ import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 
 class RepealAmendmentsTests(@Autowired val client: TestRestTemplate, @Autowired tokenRegistry: ITokenRegistry) : BaseEndToEndTest(tokenRegistry) {
-    private val request = createRequest<Any>()
+    private val request = createRequest<Any>(user = EndUser(2, "Master Tester"))
 
     @Test
     fun `Successfully Repealed an Amendment`() {
