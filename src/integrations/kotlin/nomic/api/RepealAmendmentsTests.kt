@@ -1,6 +1,7 @@
 package nomic.api
 
 import nomic.api.models.ResponseFormat
+import nomic.domain.auth.ITokenRegistry
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -9,7 +10,7 @@ import org.springframework.boot.test.web.client.exchange
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 
-class RepealAmendmentsTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTest() {
+class RepealAmendmentsTests(@Autowired val client: TestRestTemplate, @Autowired tokenRegistry: ITokenRegistry) : BaseEndToEndTest(tokenRegistry) {
     private val request = createRequest<Any>()
 
     @Test
