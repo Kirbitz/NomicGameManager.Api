@@ -65,7 +65,7 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
 
     @PostMapping("transmute_rule/{ruleId}")
     fun transmuteRule(@RequestBody mutableInput: Boolean, @PathVariable(value = "ruleId") ruleId: String): ResponseEntity<ResponseFormat<String>> {
-        ruleAmendmentDomain.transmuteRule(mutableInput,ruleId)
+        ruleAmendmentDomain.transmuteRule(mutableInput, ruleId)
         return ResponseEntity(ResponseFormat(true, HttpStatus.OK, "Rule Transmuted"), HttpStatus.OK)
     }
 }

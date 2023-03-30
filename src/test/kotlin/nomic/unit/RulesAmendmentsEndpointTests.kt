@@ -73,7 +73,7 @@ class RulesAmendmentsEndpointTests {
 
     @Test
     fun `Transmute Rule with Rule Id & Boolean Provided and Proper Response Object Returned`() {
-        val result = rulesAmendmentsEndpoint.transmuteRule(true,"4321").body as ResponseFormat<String>
+        val result = rulesAmendmentsEndpoint.transmuteRule(true, "4321").body as ResponseFormat<String>
 
         Assertions.assertThat(result.success).isTrue
         Assertions.assertThat(result.status).isEqualTo(HttpStatus.OK)

@@ -82,7 +82,7 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
         }
     }
 
-    override fun transmuteRule(mutableInput: Boolean, ruleId: Int){
+    override fun transmuteRule(mutableInput: Boolean, ruleId: Int) {
         val result = db.update(Rules) {
             set(it.mutable, mutableInput)
             where {

@@ -75,6 +75,6 @@ class RuleAmendmentDomain(
     override fun transmuteRule(mutableInput: Boolean, ruleId: String) {
         val ruleIdInt: Int = ruleId.toIntOrNull() ?: throw IllegalArgumentException("Please enter a valid ruleId!")
 
-        ruleAmendmentRepository.transmuteRule(mutableInput,ruleIdInt)
+        ruleAmendmentRepository.transmuteRule(mutableInput, ruleIdInt)
     }
 }
