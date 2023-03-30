@@ -2,6 +2,7 @@ package nomic.data.repositories.rulesamendments
 
 import nomic.domain.entities.RulesAmendmentsModel
 import nomic.domain.entities.RulesModel
+import nomic.domain.entities.AmendmentInputModel
 
 /**
  * Interface returns the obtained and formatted RulesAmendments data from the DB
@@ -29,4 +30,12 @@ interface IRuleAmendmentRepository {
      * @param ruleId The id of the rule to be repealed
      */
     fun repealRule(ruleId: Int)
+
+    /**
+     * Creates and amendment
+     *
+     * @param inputAmend Model of the [AmendmentInputModel][nomic.domain.entities.AmendmentInputModel] amendment to be made
+     *
+     */
+    fun enactingAmendment(inputAmend: AmendmentInputModel)
 }

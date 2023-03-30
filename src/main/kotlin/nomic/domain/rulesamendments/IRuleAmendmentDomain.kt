@@ -2,6 +2,7 @@ package nomic.domain.rulesamendments
 
 import nomic.api.models.RulesAmendmentsApiModel
 import nomic.domain.entities.RulesModel
+import nomic.domain.entities.AmendmentInputModel
 
 /**
  * This manages the call and format of the rules and amendments data
@@ -28,4 +29,11 @@ interface IRuleAmendmentDomain {
      * @param ruleId the id of the rule to be repealed
      */
     fun repealRule(ruleId: String)
+
+    /**
+     * Collects and formats amendment data
+     *
+     * @param amend Model of the [AmendmentInputModel] to be made
+     */
+    fun enactingAmendment(amend: AmendmentInputModel)
 }

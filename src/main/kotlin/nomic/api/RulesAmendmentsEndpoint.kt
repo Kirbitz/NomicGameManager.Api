@@ -3,6 +3,7 @@ package nomic.api
 import nomic.api.models.ResponseFormat
 import nomic.api.models.RulesAmendmentsApiModel
 import nomic.domain.entities.RulesModel
+import nomic.domain.entities.AmendmentInputModel
 import nomic.domain.rulesamendments.RuleAmendmentDomain
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -61,5 +62,15 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
 
         // Return the response object
         return ResponseEntity(ResponseFormat(true, HttpStatus.OK, "Rule Repealed"), HttpStatus.OK)
+    }
+
+    /**
+     * This enpoint listens on api/rules_amendments
+     */
+    @PostMapping("enactAmendment")
+    fun enactAmendment(@RequestBody inputAmend: AmendmentInputModel): ResponseEntity<ResponseFormat<String>> {
+        ruleAmendmentDomain.enactingAmendment(inputAmend)
+
+        return ResponseEntity(ResponseFormat(true, HttpStatus.CREATED, "Amendment Created"), HttpStatus.CREATED)
     }
 }

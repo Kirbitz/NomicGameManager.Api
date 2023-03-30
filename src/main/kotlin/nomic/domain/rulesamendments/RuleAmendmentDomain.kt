@@ -1,6 +1,7 @@
 package nomic.domain.rulesamendments
 
 import nomic.api.models.AmendmentModel
+import nomic.domain.entities.AmendmentInputModel
 import nomic.api.models.RulesAmendmentsApiModel
 import nomic.data.repositories.rulesamendments.RuleAmendmentRepository
 import nomic.domain.entities.RulesAmendmentsModel
@@ -70,5 +71,18 @@ class RuleAmendmentDomain(
         }
 
         ruleAmendmentRepository.enactRule(input)
+    }
+
+    override fun enactingAmendment(amend: AmendmentInputModel) {
+        val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
+
+        if(!regex.matches(amend.description!!)) {
+            throw IllegalArgumentException("Has Special Characters")
+        }
+        if(!regex.matches(amend.title)) {
+            throw IllegalArgumentException("Has Special Characters")
+        }
+
+        ruleAmendmentRepository.enactingAmendment(amend)
     }
 }
