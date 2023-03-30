@@ -56,7 +56,7 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
      * @return A spring entity representing the response that gets serialized into JSON
      */
     @GetMapping("repeal_rule/{ruleId}", produces = ["application/json;charset=UTF-8"])
-    fun repealRule(@PathVariable(value = "ruleid") ruleId: String): ResponseEntity<ResponseFormat<String>> {
+    fun repealRule(@PathVariable(value = "ruleId") ruleId: String): ResponseEntity<ResponseFormat<String>> {
         ruleAmendmentDomain.repealRule(ruleId)
 
         // Return the response object
