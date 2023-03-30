@@ -16,10 +16,22 @@ class TransmutingRulesTests(
     @Autowired tokenRegistry: ITokenRegistry
 ) : BaseEndToEndTest(tokenRegistry) {
     private val request = createRequest<Boolean>(true, user = EndUser(2, "Master Tester"))
+    private val request2 = createRequest<Boolean>(false, user = EndUser(2, "Master Tester"))
 
     @Test
-    fun `Successfully Repealed a Rule`() {
+    fun `Successfully Transmute a Rule to true`() {
         val entity = client.exchange<ResponseFormat<String>>("/api/rules_amendments/transmute_rule/6", HttpMethod.POST, request)
+
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
+
+        Assertions.assertThat(entity.body?.success).isTrue
+        Assertions.assertThat(entity.body?.status).isEqualTo(HttpStatus.OK)
+        Assertions.assertThat(entity.body?.data.toString()).contains("Rule Transmuted")
+    }
+
+    @Test
+    fun `Successfully Transmute a Rule to false`() {
+        val entity = client.exchange<ResponseFormat<String>>("/api/rules_amendments/transmute_rule/6", HttpMethod.POST, request2)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
 
