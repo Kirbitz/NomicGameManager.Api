@@ -59,6 +59,12 @@ class RuleAmendmentDomain(
         ruleAmendmentRepository.repealRule(ruleIdInt)
     }
 
+    override fun repealAmendment(amendId: String) {
+        val amendIdInt: Int = amendId.toIntOrNull() ?: throw IllegalArgumentException("Please enter a valid amendId")
+
+        ruleAmendmentRepository.repealAmendment(amendIdInt)
+    }
+
     override fun enactingRule(input: RulesModel) {
         val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
 

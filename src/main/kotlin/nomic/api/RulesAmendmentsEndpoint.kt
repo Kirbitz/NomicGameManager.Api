@@ -62,4 +62,17 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
         // Return the response object
         return ResponseEntity(ResponseFormat(true, HttpStatus.OK, "Rule Repealed"), HttpStatus.OK)
     }
+
+    /**
+     * This endpoint listens on `api/rules_amendments/repeal_amendment/ExistingAmendmentId` and takes an amendmentId to change state to of active to false
+     *
+     * @param[amendId] The amendment id to change to inactive
+     * @return A spring entity representing the response that gets serialized into JSON
+     */
+    @GetMapping("repeal_amendment/{amendId}", produces = ["application/json;charset=UTF-8"])
+    fun repealAmendment(@PathVariable(value = "amendId") amendId: String): ResponseEntity<ResponseFormat<String>> {
+        ruleAmendmentDomain.repealAmendment(amendId)
+
+        return ResponseEntity(ResponseFormat(true, HttpStatus.OK, "Amendment Repealed"), HttpStatus.OK)
+    }
 }
