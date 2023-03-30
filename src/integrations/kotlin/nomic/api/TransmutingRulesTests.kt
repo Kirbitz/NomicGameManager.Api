@@ -1,7 +1,7 @@
 package nomic.api
 
 import nomic.api.models.ResponseFormat
-import nomic.domain.auth.TokenRegistry
+import nomic.domain.auth.ITokenRegistry
 import nomic.domain.entities.EndUser
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus
 
 class TransmutingRulesTests(
     @Autowired val client: TestRestTemplate,
-    @Autowired tokenRegistry: TokenRegistry
+    @Autowired tokenRegistry: ITokenRegistry
 ) : BaseEndToEndTest(tokenRegistry) {
     private val request = createRequest<Boolean>(true, user = EndUser(2, "Master Tester"))
 
