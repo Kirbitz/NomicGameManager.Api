@@ -66,7 +66,6 @@ CREATE TABLE `Rule` (
   `mutable` tinyint NOT NULL DEFAULT '1',
   PRIMARY KEY (`ruleId`),
   UNIQUE KEY `ruleId_UNIQUE` (`ruleId`),
-  UNIQUE KEY `index_UNIQUE` (`index`),
   KEY `gameIdRule_idx` (`gameId`),
   CONSTRAINT `gameIdRule` FOREIGN KEY (`gameId`) REFERENCES `Game` (`gameId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -85,7 +84,6 @@ CREATE TABLE `Amendment` (
   `active` tinyint NOT NULL DEFAULT '1',
   PRIMARY KEY (`amendId`),
   UNIQUE KEY `amendId_UNIQUE` (`amendId`),
-  UNIQUE KEY `amendIndex_UNIQUE` (`index`),
   KEY `ruleId_idx` (`ruleId`),
   CONSTRAINT `ruleId` FOREIGN KEY (`ruleId`) REFERENCES `Rule` (`ruleId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
