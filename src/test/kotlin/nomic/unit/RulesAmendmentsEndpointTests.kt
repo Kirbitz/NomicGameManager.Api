@@ -70,4 +70,13 @@ class RulesAmendmentsEndpointTests {
         Assertions.assertThat(result.status).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(result.data).contains("Rule Repealed")
     }
+
+    @Test
+    fun `Repeal Amendment with Amend Id Provided and Proper Response Object Returned`() {
+        val result = rulesAmendmentsEndpoint.repealAmendment("4321").body as ResponseFormat<String>
+
+        Assertions.assertThat(result.success).isTrue
+        Assertions.assertThat(result.status).isEqualTo(HttpStatus.OK)
+        Assertions.assertThat(result.data).contains("Amendment Repealed")
+    }
 }

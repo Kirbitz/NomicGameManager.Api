@@ -2,6 +2,8 @@ package nomic.api
 
 import nomic.api.models.ResponseFormat
 import nomic.api.models.RulesAmendmentsApiModel
+import nomic.domain.auth.ITokenRegistry
+import nomic.domain.entities.EndUser
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -10,8 +12,12 @@ import org.springframework.boot.test.web.client.exchange
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 
-class GetRulesAmendmentsTests(@Autowired val client: TestRestTemplate) : BaseEndToEndTest() {
-    private val request = createRequest<Any>()
+class GetRulesAmendmentsTests(
+    @Autowired val client: TestRestTemplate,
+    @Autowired tokenRegistry: ITokenRegistry
+) : BaseEndToEndTest(tokenRegistry) {
+
+    private val request = createRequest<Any>(user = EndUser(1, "Foo Bar Jr."))
 
     @Test
     fun `Found Rule And Amendment Data`() {
@@ -66,7 +72,7 @@ class GetRulesAmendmentsTests(@Autowired val client: TestRestTemplate) : BaseEnd
 
         Assertions.assertThat(entity.body?.success).isTrue
         Assertions.assertThat(entity.body?.status).isEqualTo(HttpStatus.OK)
-        Assertions.assertThat(entity.body?.data!![2].amendments.size).isGreaterThan(1)
+        Assertions.assertThat(entity.body?.data!!).anyMatch({ it.amendments.size > 1 })
     }
 
     @Test

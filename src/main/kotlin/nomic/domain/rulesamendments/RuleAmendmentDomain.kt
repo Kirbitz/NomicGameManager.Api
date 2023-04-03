@@ -1,9 +1,9 @@
 package nomic.domain.rulesamendments
 
 import nomic.api.models.AmendmentModel
-import nomic.domain.entities.AmendmentInputModel
 import nomic.api.models.RulesAmendmentsApiModel
 import nomic.data.repositories.rulesamendments.RuleAmendmentRepository
+import nomic.domain.entities.AmendmentInputModel
 import nomic.domain.entities.RulesAmendmentsModel
 import nomic.domain.entities.RulesModel
 import org.springframework.stereotype.Service
@@ -60,6 +60,12 @@ class RuleAmendmentDomain(
         ruleAmendmentRepository.repealRule(ruleIdInt)
     }
 
+    override fun repealAmendment(amendId: String) {
+        val amendIdInt: Int = amendId.toIntOrNull() ?: throw IllegalArgumentException("Please enter a valid amendId")
+
+        ruleAmendmentRepository.repealAmendment(amendIdInt)
+    }
+
     override fun enactingRule(input: RulesModel) {
         val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
 
@@ -76,10 +82,10 @@ class RuleAmendmentDomain(
     override fun enactingAmendment(amend: AmendmentInputModel) {
         val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
 
-        if(!regex.matches(amend.description!!)) {
+        if (!regex.matches(amend.description!!)) {
             throw IllegalArgumentException("Has Special Characters")
         }
-        if(!regex.matches(amend.title)) {
+        if (!regex.matches(amend.title)) {
             throw IllegalArgumentException("Has Special Characters")
         }
 

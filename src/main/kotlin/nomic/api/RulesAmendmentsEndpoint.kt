@@ -2,8 +2,8 @@ package nomic.api
 
 import nomic.api.models.ResponseFormat
 import nomic.api.models.RulesAmendmentsApiModel
-import nomic.domain.entities.RulesModel
 import nomic.domain.entities.AmendmentInputModel
+import nomic.domain.entities.RulesModel
 import nomic.domain.rulesamendments.RuleAmendmentDomain
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -72,5 +72,18 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
         ruleAmendmentDomain.enactingAmendment(inputAmend)
 
         return ResponseEntity(ResponseFormat(true, HttpStatus.CREATED, "Amendment Created"), HttpStatus.CREATED)
+    }
+
+    /**
+     * This endpoint listens on `api/rules_amendments/repeal_amendment/ExistingAmendmentId` and takes an amendmentId to change state to of active to false
+     *
+     * @param[amendId] The amendment id to change to inactive
+     * @return A spring entity representing the response that gets serialized into JSON
+     */
+    @GetMapping("repeal_amendment/{amendId}", produces = ["application/json;charset=UTF-8"])
+    fun repealAmendment(@PathVariable(value = "amendId") amendId: String): ResponseEntity<ResponseFormat<String>> {
+        ruleAmendmentDomain.repealAmendment(amendId)
+
+        return ResponseEntity(ResponseFormat(true, HttpStatus.OK, "Amendment Repealed"), HttpStatus.OK)
     }
 }

@@ -1,0 +1,94 @@
+package nomic.api.auth
+
+import nomic.api.models.ResponseFormat
+import nomic.domain.auth.ITokenRegistry
+import nomic.domain.entities.EndUser
+import org.assertj.core.api.Assertions
+import org.assertj.core.api.Condition
+import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.boot.test.web.client.postForEntity
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpStatus
+import java.util.*
+import java.util.function.Predicate
+
+@SpringBootTest(
+    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+)
+class TokenEndpointTest(@Autowired val client: TestRestTemplate) {
+
+    private val hasToken = Condition<ResponseFormat<String>?>(Predicate { it.data != "" }, "Login Response has Token")
+
+    @Test
+    fun test_tokenFails_noCredentials() {
+        val request = HttpEntity<Any>(HttpHeaders())
+        val entity = client.postForEntity<String>("/api/auth/token", request)
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.FORBIDDEN)
+        Assertions.assertThat(entity.body).isNull()
+    }
+
+    @Test
+    fun test_loginFails_login_wrongAuth() {
+        val headers = HttpHeaders()
+        var creds = Base64.getEncoder().encodeToString("FakeUser:Real*Password".toByteArray())
+        headers.set("Authorization", "Bearer $creds")
+
+        val request = HttpEntity<Any>(headers)
+        val entity = client.postForEntity<String>("/api/auth/token", request)
+        Assertions.assertThat(entity.body).isNull()
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.FORBIDDEN)
+    }
+
+    @Test
+    fun test_loginFails_login_malformedAuth() {
+        val headers = HttpHeaders()
+        var creds = Base64.getEncoder().encodeToString("FakeUser@Real*Password".toByteArray())
+        headers.set("Authorization", "Basic $creds")
+
+        val request = HttpEntity<Any>(headers)
+        val entity = client.postForEntity<String>("/api/auth/token", request)
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.FORBIDDEN)
+        Assertions.assertThat(entity.body).isNull()
+    }
+
+    @Test
+    fun test_tokenFails_login_badCredentials() {
+        val headers = HttpHeaders()
+        val creds = Base64.getEncoder().encodeToString("FakeUser:Real*Password".toByteArray())
+        headers.set("Authorization", "Basic $creds")
+
+        val request = HttpEntity<Any>(headers)
+        val entity = client.postForEntity<ResponseFormat<String>>("/api/auth/token", request)
+
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.FORBIDDEN)
+        Assertions.assertThat(entity.body).isNull()
+    }
+
+    @Test
+    fun test_tokenSucceeds_login() {
+        val creds = Base64.getEncoder().encodeToString("TestUser:password".toByteArray())
+        val headers = HttpHeaders()
+        headers.set("Authorization", "Basic $creds")
+
+        val request = HttpEntity<Any>(headers)
+        val entity = client.postForEntity<ResponseFormat<String>>("/api/auth/token", request)
+
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
+        Assertions.assertThat(entity.body).isNotNull.has(hasToken)
+    }
+
+    @Test
+    fun test_tokenSucceeds_refreshToken(@Autowired tokenRegistry: ITokenRegistry) {
+        val headers = HttpHeaders()
+        headers.setBearerAuth(tokenRegistry.issueToken(EndUser(1, "Foo Bar Jr.")))
+
+        val request = HttpEntity<Any>(headers)
+        val entity = client.postForEntity<ResponseFormat<String>>("/api/auth/token", request)
+        Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
+        Assertions.assertThat(entity.body).isNotNull.has(hasToken)
+    }
+}

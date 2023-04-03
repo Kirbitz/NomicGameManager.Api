@@ -9,11 +9,10 @@ package nomic.domain.entities
  * @property title the name of the amendment
  * @property description the clarifying text for amendment
  */
-data class AmendmentInputModel (
-        val ruleId: Int,
-        val id: Int,
-        val index: Int,
-        val title: String,
-        val description: String? = null
+data class AmendmentInputModel(
+    val ruleId: Int,
+    val id: Int,
+    val index: Int,
+    val title: String,
+    val description: String? = null
 )
-
