@@ -1,6 +1,7 @@
 package nomic.unit
 
 import nomic.data.repositories.rulesamendments.RuleAmendmentRepository
+import nomic.domain.entities.AmendmentInputModel
 import nomic.domain.entities.RulesAmendmentsModel
 import nomic.domain.entities.RulesModel
 import nomic.domain.rulesamendments.RuleAmendmentDomain
@@ -147,6 +148,33 @@ class RuleAmendmentDomainTests {
 
         assertThrows(IllegalArgumentException::class.java) {
             ruleAmendmentDomain.enactingRule(inputRule)
+        }
+    }
+
+    @Test
+    fun enactingAmendment_validData() {
+        val amendment = AmendmentInputModel(1234, 1, 101, "New Amendment", "Lorem ipsum dolor sit amet consectetur adipiscing elit. Praesent eleifend.")
+
+        ruleAmendmentDomain.enactingAmendment(amendment)
+
+        verify(ruleAmendmentRepoMock, times(1)).enactingAmendment(amendment)
+    }
+
+    @Test
+    fun enactingAmendment_invalidTitle_fails() {
+        val amendment = AmendmentInputModel(1234, 1, 101, "---New Amendment---", "Lorem ipsum dolor sit amet consectetur adipiscing elit. Praesent eleifend.")
+
+        assertThrows(IllegalArgumentException::class.java) {
+            ruleAmendmentDomain.enactingAmendment(amendment)
+        }
+    }
+
+    @Test
+    fun enactingAmendment_invalidDescription_fails() {
+        val amendment = AmendmentInputModel(1234, 1, 101, "New Amendment", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eleifend.")
+
+        assertThrows(IllegalArgumentException::class.java) {
+            ruleAmendmentDomain.enactingAmendment(amendment)
         }
     }
 
