@@ -28,7 +28,7 @@ class EnactingAmendmentTests(
         Assertions.assertThat(entity.body?.status).isEqualTo(HttpStatus.CREATED)
         Assertions.assertThat(entity.body?.data.toString()).contains("Amendment Created")
     }
-    private val amend4 = AmendmentInputModel(2, 8, 11, "amend", "")
+    private val amend4 = AmendmentInputModel(2, 9, 12, "amend", "")
     private val request4 = createRequest(amend4, user = EndUser(2, "Master Tester"))
 
     @Test
