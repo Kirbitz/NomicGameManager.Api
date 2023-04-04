@@ -2,6 +2,7 @@ package nomic.api
 
 import nomic.api.models.ResponseFormat
 import nomic.api.models.RulesAmendmentsApiModel
+import nomic.domain.entities.AmendmentInputModel
 import nomic.domain.entities.RulesModel
 import nomic.domain.rulesamendments.RuleAmendmentDomain
 import org.springframework.http.HttpStatus
@@ -67,6 +68,16 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
     fun transmuteRule(@RequestBody mutableInput: Boolean, @PathVariable(value = "ruleId") ruleId: String): ResponseEntity<ResponseFormat<String>> {
         ruleAmendmentDomain.transmuteRule(mutableInput, ruleId)
         return ResponseEntity(ResponseFormat(true, HttpStatus.OK, "Rule Transmuted"), HttpStatus.OK)
+    }
+
+    /**
+     * This enpoint listens on api/rules_amendments
+     */
+    @PostMapping("enactAmendment")
+    fun enactAmendment(@RequestBody inputAmend: AmendmentInputModel): ResponseEntity<ResponseFormat<String>> {
+        ruleAmendmentDomain.enactAmendment(inputAmend)
+
+        return ResponseEntity(ResponseFormat(true, HttpStatus.CREATED, "Amendment Created"), HttpStatus.CREATED)
     }
 
     /**

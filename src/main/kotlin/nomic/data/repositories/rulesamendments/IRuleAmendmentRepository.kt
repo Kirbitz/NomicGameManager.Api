@@ -1,5 +1,6 @@
 package nomic.data.repositories.rulesamendments
 
+import nomic.domain.entities.AmendmentInputModel
 import nomic.domain.entities.RulesAmendmentsModel
 import nomic.domain.entities.RulesModel
 
@@ -29,6 +30,14 @@ interface IRuleAmendmentRepository {
      * @param ruleId The id of the rule to be repealed
      */
     fun repealRule(ruleId: Int)
+
+    /**
+     * Creates an amendment
+     *
+     * @param inputAmend Model of the [AmendmentInputModel][nomic.domain.entities.AmendmentInputModel] amendment to be made
+     *
+     */
+    fun enactAmendment(inputAmend: AmendmentInputModel)
 
     /**
      * Changes active flag and returns success or fail

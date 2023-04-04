@@ -3,6 +3,7 @@ package nomic.data.repositories.rulesamendments
 import nomic.data.EntityNotFoundException
 import nomic.data.dtos.Amendments
 import nomic.data.dtos.Rules
+import nomic.domain.entities.AmendmentInputModel
 import nomic.domain.entities.RulesAmendmentsModel
 import nomic.domain.entities.RulesModel
 import org.ktorm.database.Database
@@ -14,6 +15,8 @@ import org.ktorm.dsl.leftJoin
 import org.ktorm.dsl.select
 import org.ktorm.dsl.update
 import org.ktorm.dsl.where
+import org.ktorm.entity.find
+import org.ktorm.entity.sequenceOf
 import org.springframework.stereotype.Repository
 
 /**
@@ -92,6 +95,17 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
             set(it.index, inputRule.index)
             set(it.title, inputRule.title)
             set(it.description, inputRule.description)
+        }
+    }
+    override fun enactAmendment(inputAmend: AmendmentInputModel) {
+        if (db.sequenceOf(Rules).find { it.ruleId eq inputAmend.ruleId } == null) {
+            throw EntityNotFoundException(inputAmend.ruleId)
+        }
+        db.insert(Amendments) {
+            set(it.ruleId, inputAmend.ruleId)
+            set(it.index, inputAmend.index)
+            set(it.description, inputAmend.description)
+            set(it.title, inputAmend.title)
         }
     }
 

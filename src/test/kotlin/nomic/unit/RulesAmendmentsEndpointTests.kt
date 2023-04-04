@@ -4,6 +4,7 @@ import nomic.api.RulesAmendmentsEndpoint
 import nomic.api.models.AmendmentModel
 import nomic.api.models.ResponseFormat
 import nomic.api.models.RulesAmendmentsApiModel
+import nomic.domain.entities.AmendmentInputModel
 import nomic.domain.entities.RulesModel
 import nomic.domain.rulesamendments.RuleAmendmentDomain
 import org.assertj.core.api.Assertions
@@ -69,6 +70,16 @@ class RulesAmendmentsEndpointTests {
         Assertions.assertThat(result.success).isTrue
         Assertions.assertThat(result.status).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(result.data).contains("Rule Repealed")
+    }
+
+    @Test
+    fun enactAmendment_validAmendment_properResponse() {
+        val amendment = AmendmentInputModel(1234, 1, 101, "New Amendment", "Lorem ipsum dolor sit amet consectetur adipiscing elit. Praesent eleifend.")
+        val result = rulesAmendmentsEndpoint.enactAmendment(amendment).body as ResponseFormat<String>
+
+        Assertions.assertThat(result.success).isTrue
+        Assertions.assertThat(result.status).isEqualTo(HttpStatus.CREATED)
+        Assertions.assertThat(result.data).contains("Amendment Created")
     }
 
     @Test

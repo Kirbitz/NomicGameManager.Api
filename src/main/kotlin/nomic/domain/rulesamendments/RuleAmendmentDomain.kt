@@ -3,6 +3,7 @@ package nomic.domain.rulesamendments
 import nomic.api.models.AmendmentModel
 import nomic.api.models.RulesAmendmentsApiModel
 import nomic.data.repositories.rulesamendments.RuleAmendmentRepository
+import nomic.domain.entities.AmendmentInputModel
 import nomic.domain.entities.RulesAmendmentsModel
 import nomic.domain.entities.RulesModel
 import org.springframework.stereotype.Service
@@ -66,7 +67,7 @@ class RuleAmendmentDomain(
     }
 
     override fun enactingRule(input: RulesModel) {
-        val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
+        val regex = "^[A-Za-z0-9 ,.!?]*$".toRegex()
 
         if (!regex.matches(input.description!!)) {
             throw IllegalArgumentException("Has Special Characters")
@@ -76,6 +77,19 @@ class RuleAmendmentDomain(
         }
 
         ruleAmendmentRepository.enactRule(input)
+    }
+
+    override fun enactAmendment(amend: AmendmentInputModel) {
+        val regex = "^[A-Za-z0-9 ,.!?]*$".toRegex()
+
+        if (!regex.matches(amend.description!!)) {
+            throw IllegalArgumentException("Has Special Characters")
+        }
+        if (!regex.matches(amend.title)) {
+            throw IllegalArgumentException("Has Special Characters")
+        }
+
+        ruleAmendmentRepository.enactAmendment(amend)
     }
 
     override fun transmuteRule(mutableInput: Boolean, ruleId: String) {
