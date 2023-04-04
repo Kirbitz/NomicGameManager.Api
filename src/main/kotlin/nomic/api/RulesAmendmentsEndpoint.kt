@@ -69,7 +69,7 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
      */
     @PostMapping("enactAmendment")
     fun enactAmendment(@RequestBody inputAmend: AmendmentInputModel): ResponseEntity<ResponseFormat<String>> {
-        ruleAmendmentDomain.enactingAmendment(inputAmend)
+        ruleAmendmentDomain.enactAmendment(inputAmend)
 
         return ResponseEntity(ResponseFormat(true, HttpStatus.CREATED, "Amendment Created"), HttpStatus.CREATED)
     }

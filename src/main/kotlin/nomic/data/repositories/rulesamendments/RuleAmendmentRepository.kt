@@ -97,7 +97,7 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
             set(it.description, inputRule.description)
         }
     }
-    override fun enactingAmendment(inputAmend: AmendmentInputModel) {
+    override fun enactAmendment(inputAmend: AmendmentInputModel) {
         if (db.sequenceOf(Rules).find { it.ruleId eq inputAmend.ruleId } == null) {
             throw EntityNotFoundException(inputAmend.ruleId)
         }
@@ -106,6 +106,7 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
             set(it.index, inputAmend.index)
             set(it.description, inputAmend.description)
             set(it.title, inputAmend.title)
+
         }
     }
 }

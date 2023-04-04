@@ -79,7 +79,7 @@ class RuleAmendmentDomain(
         ruleAmendmentRepository.enactRule(input)
     }
 
-    override fun enactingAmendment(amend: AmendmentInputModel) {
+    override fun enactAmendment(amend: AmendmentInputModel) {
         val regex = "^[A-Za-z0-9 .!?]*$".toRegex()
 
         if (!regex.matches(amend.description!!)) {
@@ -89,6 +89,6 @@ class RuleAmendmentDomain(
             throw IllegalArgumentException("Has Special Characters")
         }
 
-        ruleAmendmentRepository.enactingAmendment(amend)
+        ruleAmendmentRepository.enactAmendment(amend)
     }
 }

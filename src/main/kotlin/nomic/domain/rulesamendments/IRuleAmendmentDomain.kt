@@ -35,7 +35,7 @@ interface IRuleAmendmentDomain {
      *
      * @param amend Model of the [AmendmentInputModel] to be made
      */
-    fun enactingAmendment(amend: AmendmentInputModel)
+    fun enactAmendment(amend: AmendmentInputModel)
 
     /**
      * Colects the response from the database for repealing and amendment

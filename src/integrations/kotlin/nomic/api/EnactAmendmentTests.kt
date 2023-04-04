@@ -11,7 +11,7 @@ import org.springframework.boot.test.web.client.exchange
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 
-class EnactingAmendmentTests(
+class EnactAmendmentTests(
     @Autowired val client: TestRestTemplate,
     @Autowired tokenRegistry: ITokenRegistry
 ) : BaseEndToEndTest(tokenRegistry) {
