@@ -106,7 +106,6 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
             set(it.index, inputAmend.index)
             set(it.description, inputAmend.description)
             set(it.title, inputAmend.title)
-
         }
     }
 
