@@ -171,11 +171,20 @@ class RuleAmendmentDomainTests {
 
     @Test
     fun enactAmendment_invalidDescription_fails() {
-        val amendment = AmendmentInputModel(1234, 1, 101, "New Amendment", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eleifend.")
+        val amendment = AmendmentInputModel(1234, 1, 101, "New Amendment", "Lorem ipsum dolor sit amet consectetur - adipiscing elit Praesent eleifend")
 
         assertThrows(IllegalArgumentException::class.java) {
             ruleAmendmentDomain.enactAmendment(amendment)
         }
+    }
+
+    @Test
+    fun enactAmendment_validDescription_pass() {
+        val amendment = AmendmentInputModel(1234, 1, 101, "New Amendment", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eleifend.")
+
+        ruleAmendmentDomain.enactAmendment(amendment)
+
+        verify(ruleAmendmentRepoMock, times(1)).enactAmendment(amendment)
     }
 
     @Test
