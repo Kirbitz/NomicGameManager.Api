@@ -163,4 +163,18 @@ class RuleAmendmentDomainTests {
             ruleAmendmentDomain.transmuteRule(false, "penpineappleapplepen")
         }
     }
+
+    @Test
+    fun `Repeal Amendment Valid Amend Id`() {
+        ruleAmendmentDomain.repealAmendment("1234")
+
+        verify(ruleAmendmentRepoMock, times(1)).repealAmendment(1234)
+    }
+
+    @Test
+    fun `Repeal Amendment Bad Amend Id`() {
+        assertThrows(IllegalArgumentException::class.java) {
+            ruleAmendmentDomain.repealAmendment("AdamIsBad")
+        }
+    }
 }

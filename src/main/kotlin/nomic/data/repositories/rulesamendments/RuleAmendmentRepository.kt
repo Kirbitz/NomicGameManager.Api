@@ -71,6 +71,19 @@ class RuleAmendmentRepository(private val db: Database) : IRuleAmendmentReposito
         }
     }
 
+    override fun repealAmendment(amendId: Int) {
+        val result = db.update(Amendments) {
+            set(it.active, false)
+            where {
+                it.amendId eq amendId
+            }
+        }
+
+        if (result < 1) {
+            throw EntityNotFoundException(amendId)
+        }
+    }
+
     override fun enactRule(inputRule: RulesModel) {
         // Check to see if game exists
         db.insert(Rules) {
