@@ -38,6 +38,14 @@ interface IRuleAmendmentDomain {
     fun enactAmendment(amend: AmendmentInputModel)
 
     /**
+     * Collects the response from the database for changing the mutability of a rule
+     *
+     * @param mutableInput the boolean the rule will be changed to
+     * @param ruleId the id of the rule to be repealed
+     */
+    fun transmuteRule(mutableInput: Boolean, ruleId: String)
+
+    /**
      * Colects the response from the database for repealing and amendment
      *
      * @param amendId the id of the amendment to be repealed
