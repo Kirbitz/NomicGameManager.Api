@@ -55,12 +55,18 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
      * @param[ruleId] The rule id to change to inactive
      * @return A spring entity representing the response that gets serialized into JSON
      */
-    @GetMapping("repeal_rule/{ruleid}", produces = ["application/json;charset=UTF-8"])
-    fun repealRule(@PathVariable(value = "ruleid") ruleId: String): ResponseEntity<ResponseFormat<String>> {
+    @GetMapping("repeal_rule/{ruleId}", produces = ["application/json;charset=UTF-8"])
+    fun repealRule(@PathVariable(value = "ruleId") ruleId: String): ResponseEntity<ResponseFormat<String>> {
         ruleAmendmentDomain.repealRule(ruleId)
 
         // Return the response object
         return ResponseEntity(ResponseFormat(true, HttpStatus.OK, "Rule Repealed"), HttpStatus.OK)
+    }
+
+    @PostMapping("transmute_rule/{ruleId}")
+    fun transmuteRule(@RequestBody mutableInput: Boolean, @PathVariable(value = "ruleId") ruleId: String): ResponseEntity<ResponseFormat<String>> {
+        ruleAmendmentDomain.transmuteRule(mutableInput, ruleId)
+        return ResponseEntity(ResponseFormat(true, HttpStatus.OK, "Rule Transmuted"), HttpStatus.OK)
     }
 
     /**
