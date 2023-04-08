@@ -64,6 +64,12 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
         return ResponseEntity(ResponseFormat(true, HttpStatus.OK, "Rule Repealed"), HttpStatus.OK)
     }
 
+    /**
+     * This endpoint listens on `api/rules_amendments/transmute_rule/ExistingRuleId` and takes in a rule id to update
+     *
+     * @param[mutableInput] the mutable flag to update to
+     * @return A spring entity representing the response that gets serialized into JSON
+     */
     @PostMapping("transmute_rule/{ruleId}")
     fun transmuteRule(@RequestBody mutableInput: Boolean, @PathVariable(value = "ruleId") ruleId: String): ResponseEntity<ResponseFormat<String>> {
         ruleAmendmentDomain.transmuteRule(mutableInput, ruleId)
@@ -71,7 +77,10 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
     }
 
     /**
-     * This enpoint listens on api/rules_amendments
+     * This endpoint listens on `api/rules_amendments/enactAmendment` and takes in amendment data to be created
+     *
+     * @param[inputAmend] Amendment data to get inserted into the database
+     * @return A spring entity representing the response that gets serialized into JSON
      */
     @PostMapping("enactAmendment")
     fun enactAmendment(@RequestBody inputAmend: AmendmentInputModel): ResponseEntity<ResponseFormat<String>> {

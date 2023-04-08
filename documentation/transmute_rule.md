@@ -1,15 +1,15 @@
 # Repeal Rules
 
-Changes the active flag of a specified rule and any amendments that depend on it
+Changes the mutable flag of a specified rule
 
 - **URL:**
 
-  /api/rules_amendments/repeal_rule/{ruleId}
+  /api/rules_amendments/transmute_rule/{ruleId}
 
 
 - **Method:**
 
-  `GET`
+  `POST`
 
 
 - **URL Params:**
@@ -23,7 +23,11 @@ Changes the active flag of a specified rule and any amendments that depend on it
 
 - **Data Params:**
 
-  None
+  __Required:__ mutableInput
+
+  `mutableInput: [bool]`
+
+  false
 
 - **Auth Required:** Yes, TBD
 
@@ -39,7 +43,7 @@ Changes the active flag of a specified rule and any amendments that depend on it
   {
     "success": true,
     "status": 200,
-    "data": "Rule Repealed"
+    "data": "Rule Transmuted"
   }
   ```
 
@@ -97,7 +101,10 @@ Changes the active flag of a specified rule and any amendments that depend on it
 ```javascript
 {
   method: 'GET',
-  url: '/api/rules_amendments/repeal_rule/{ruleId}',
-  responseType: 'json'
+  url: '/api/rules_amendments/transmute_rule/{ruleId}',
+  responseType: 'json',
+  data: {
+    mutableInput: false
+  }
 }
 ```

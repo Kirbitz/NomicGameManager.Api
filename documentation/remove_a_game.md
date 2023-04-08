@@ -99,9 +99,6 @@ Returns json data of the removal of a game.
 {
   method: 'DELETE',
   url: '/api/game/remove/{gameId}',
-  responseType: 'json',
-  data: {
-    gameId: 1234
-  }
+  responseType: 'json'
 }
 ```
