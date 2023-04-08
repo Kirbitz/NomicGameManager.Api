@@ -1,6 +1,6 @@
 # Enacting Rules
 
-Returns json data about the account creation.
+Returns json data about the amendment creation.
 
 - **URL:**
 
