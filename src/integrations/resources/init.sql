@@ -173,3 +173,15 @@ INSERT INTO `Amendment` VALUES (6, 6, 'Or look at the ground again', 'MyAmendmen
 INSERT INTO `Amendment` VALUES (7, 7, 'Or look at the ground again part two', 'MyAmendment1', 6, 1);
 INSERT INTO `Amendment` VALUES (8, 8, 'Test for repealing amendments', 'repealAmend', 7, 1);
 
+-- List Games
+
+INSERT INTO `User` VALUES(50, 'ListGamesUser1');
+INSERT INTO `Game` VALUES(51, 'Foo1', '2023-01-01', NULL, 50);
+INSERT INTO `Game` VALUES(52, 'Foo2', '2023-01-02', NULL, 50);
+INSERT INTO `Game` VALUES(53, 'Foo3', '2023-01-04', NULL, 50);
+INSERT INTO `Game` VALUES(54, 'Foo4', '2023-01-03', NULL, 50);
+
+INSERT INTO `User` VALUES(55, 'ListGamesUser2');
+INSERT INTO `Game` VALUES(56, 'Bar1', '2023-02-01', NULL, 55);
+INSERT INTO `Game` VALUES(57, 'Bar2', '2023-02-02', NULL, 55);
+INSERT INTO `Game` VALUES(58, 'Bar4', '2023-02-03', NULL, 55);
