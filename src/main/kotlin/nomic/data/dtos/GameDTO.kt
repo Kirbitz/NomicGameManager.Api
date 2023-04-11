@@ -5,7 +5,9 @@ import nomic.data.dtos.Games.currentPlayer
 import nomic.data.dtos.Games.gameId
 import nomic.data.dtos.Games.title
 import nomic.data.dtos.Games.userId
+import org.ktorm.database.Database
 import org.ktorm.entity.Entity
+import org.ktorm.entity.sequenceOf
 import org.ktorm.schema.Table
 import org.ktorm.schema.date
 import org.ktorm.schema.int
@@ -48,3 +50,5 @@ object Games : Table<GameDTO>("Game") {
     val currentPlayer = int("currentPlayer").bindTo { it.currentPlayer }
     val userId = int("userId").bindTo { it.userId }
 }
+
+val Database.games get() = this.sequenceOf(Games)
