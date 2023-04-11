@@ -1,5 +1,6 @@
 package nomic.api
 
+import nomic.api.models.MutableInputModel
 import nomic.api.models.ResponseFormat
 import nomic.domain.auth.ITokenRegistry
 import nomic.domain.entities.EndUser
@@ -15,8 +16,10 @@ class TransmutingRulesTests(
     @Autowired val client: TestRestTemplate,
     @Autowired tokenRegistry: ITokenRegistry
 ) : BaseEndToEndTest(tokenRegistry) {
-    private val request = createRequest<Boolean>(true, user = EndUser(2, "Master Tester"))
-    private val request2 = createRequest<Boolean>(false, user = EndUser(2, "Master Tester"))
+    private val mutableInput = MutableInputModel(true)
+    private val mutableInput2 = MutableInputModel(false)
+    private val request = createRequest<MutableInputModel>(mutableInput, user = EndUser(2, "Master Tester"))
+    private val request2 = createRequest<MutableInputModel>(mutableInput2, user = EndUser(2, "Master Tester"))
 
     @Test
     fun `Successfully Transmute a Rule to true`() {
