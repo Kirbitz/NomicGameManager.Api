@@ -1,5 +1,5 @@
 package nomic.api.models
 
-data class MutableInputModel (
-    val mutableInput: Boolean
+data class MutableInputModel(
+    val mutableInput: Boolean,
 )
