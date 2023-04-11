@@ -6,5 +6,5 @@ package nomic.api.models
  * @property mutableInput the value to update the mutable flag to
  */
 data class MutableInputModel(
-    val mutableInput: Boolean,
+    val mutableInput: Boolean
 )
