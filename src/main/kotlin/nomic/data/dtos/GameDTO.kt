@@ -21,7 +21,7 @@ import java.time.LocalDate
  * @property title the name of this game
  * @property createDate the date when this game was created
  * @property currentPlayer the id of player whose turn it is
- * @property userId the id of the user that made this game
+ * @property userId the user that made this game
  */
 
 interface GameDTO : Entity<GameDTO> {
@@ -29,8 +29,8 @@ interface GameDTO : Entity<GameDTO> {
     val gameId: Int
     val title: String
     val createDate: LocalDate
-    val userId: Int
     val currentPlayer: Int?
+    val user: UserDTO
 }
 
 /**
@@ -48,7 +48,7 @@ object Games : Table<GameDTO>("Game") {
     val title = varchar("title").bindTo { it.title }
     val createDate = date("createDate").bindTo { it.createDate }
     val currentPlayer = int("currentPlayer").bindTo { it.currentPlayer }
-    val userId = int("userId").bindTo { it.userId }
+    val userId = int("userId").references(Users) { it.user }
 }
 
 val Database.games get() = this.sequenceOf(Games)
