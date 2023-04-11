@@ -1,5 +1,6 @@
 package nomic.api
 
+import nomic.api.models.MutableInputModel
 import nomic.api.models.ResponseFormat
 import nomic.api.models.RulesAmendmentsApiModel
 import nomic.domain.entities.AmendmentInputModel
@@ -65,7 +66,8 @@ class RulesAmendmentsEndpoint(val ruleAmendmentDomain: RuleAmendmentDomain) {
     }
 
     @PostMapping("transmute_rule/{ruleId}")
-    fun transmuteRule(@RequestBody mutableInput: Boolean, @PathVariable(value = "ruleId") ruleId: String): ResponseEntity<ResponseFormat<String>> {
+    fun transmuteRule(@RequestBody mutableInputJSON: MutableInputModel, @PathVariable(value = "ruleId") ruleId: String): ResponseEntity<ResponseFormat<String>> {
+        val mutableInput = mutableInputJSON.mutableInput
         ruleAmendmentDomain.transmuteRule(mutableInput, ruleId)
         return ResponseEntity(ResponseFormat(true, HttpStatus.OK, "Rule Transmuted"), HttpStatus.OK)
     }
