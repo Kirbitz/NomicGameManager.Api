@@ -28,7 +28,7 @@ Returns json data about the game creation.
 
   2
 
-- **Auth Required:** Yes, JWT set in Authorization header.
+- **Auth Required:** Yes, Authorization header with a Bearer JWT token.
 
 ## Response
 

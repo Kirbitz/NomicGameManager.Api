@@ -1,22 +1,22 @@
-# Remove A Game
+# Repeal Rules
 
-Returns json data of the removal of a game.
+Changes the active flag of a specified amendment
 
 - **URL:**
 
-  /api/game/remove/{gameId}
+  /api/rules_amendments/repeal_amendment/{amendId}
 
 
 - **Method:**
 
-  `DELETE`
+  `GET`
 
 
 - **URL Params:**
 
-  __Required:__ GameId
+  __Required:__ AmendId
 
-  `gameId: [int]`
+  `amendmId: [int]`
 
   4321
 
@@ -31,15 +31,15 @@ Returns json data of the removal of a game.
 
 - **Success Response:**
 
-  **Code:** `202 ACCEPTED`
+  **Code:** `200 SUCCESS`
 
   **Content:**
 
   ```json
   {
     "success": true,
-    "status": 202,
-    "data": "Game Deleted"
+    "status": 200,
+    "data": "Amendment Repealed"
   }
   ```
 
@@ -68,16 +68,15 @@ Returns json data of the removal of a game.
     "data": "Unauthorized"
   }
   ```
+  **Code:** `404 Not Found`
 
-  **Code:** `404 NOT FOUND`
-  
   **Content:**
-  
+
   ```json
   {
     "success": false,
     "status": 404,
-    "data": "Game Not Found"
+    "data": "The entity with id 'ID' was not found on the database."
   }
   ```
 
@@ -97,8 +96,8 @@ Returns json data of the removal of a game.
 
 ```javascript
 {
-  method: 'DELETE',
-  url: '/api/game/remove/{gameId}',
+  method: 'GET',
+  url: '/api/rules_amendments/repeal_amendment/{amendmentId}',
   responseType: 'json'
 }
 ```

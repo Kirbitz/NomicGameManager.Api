@@ -25,7 +25,7 @@ Changes the active flag of a specified rule and any amendments that depend on it
 
   None
 
-- **Auth Required:** Yes, TBD
+- **Auth Required:** Yes, Authorization header with a Bearer JWT token.
 
 ## Response
 
@@ -98,9 +98,6 @@ Changes the active flag of a specified rule and any amendments that depend on it
 {
   method: 'GET',
   url: '/api/rules_amendments/repeal_rule/{ruleId}',
-  responseType: 'json',
-  data: {
-    gameId: 1234
-  }
+  responseType: 'json'
 }
 ```

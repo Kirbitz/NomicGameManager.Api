@@ -1,10 +1,10 @@
 # Enacting Rules
 
-Returns json data about the rule creation.
+Returns json data about the amendment creation.
 
 - **URL:**
 
-  /api/rules_amendments/enactRule
+  /api/rules_amendments/enactAmendment
 
 - **Method:**
 
@@ -22,41 +22,29 @@ Returns json data about the rule creation.
 
   1
 
+  __Required:__ id
+
+  `id: [int]`
+
+  21
+
   __Required:__ index
 
   `index: [int]`
 
   101
 
-  __Required:__ description
-
-  `description: [string]`
-
-  `this is the rule`
-
   __Required:__ title
 
   `title: [string]`
 
-  `player's rule`
+  `player's amendment`
 
-  __Required:__ gameId
+  __Optional:__ description
 
-  `gameId: [int]`
+  `description: [string]`
 
-  1
-
-- __Required:__ active
-
-  `active: [int]`
-
-  1
-
-- __Required:__ mutable
-
-  `mutable: [int]`
-
-  1
+  `this is the amendment`
 
 - **Auth Required:** Yes, Authorization header with a Bearer JWT token.
 
@@ -72,7 +60,7 @@ Returns json data about the rule creation.
   {
     "success": true,
     "status": 201,
-    "data": "Rule Created"
+    "data": "Amendment Created"
   }
   ```
 
@@ -102,11 +90,17 @@ Returns json data about the rule creation.
   }
   ```
 
-**Code:** `429 TOO MANY REQUESTS`
+**Code:** `404 Not Found`
 
 **Content:**
 
-None
+  ```json
+  {
+    "success": false,
+    "status": 404,
+    "data": "The entity with id 'ID' was not found on the database."
+  }
+  ```
 
 **Code:** `500 INTERNAL SERVER ERROR`
 
@@ -129,11 +123,9 @@ axios({
   responseType: 'json',
   data: {
     ruleId: 1,
+    id: 205,
     index: 101,
-    description: "no fun this game",
     title: "my rule title",
-    gameId: 20,
-    active: 1,
-    mutable: 1,
+    description: "no fun this game"
   }
 })

@@ -35,7 +35,6 @@ interface IRuleAmendmentRepository {
      * Creates an amendment
      *
      * @param inputAmend Model of the [AmendmentInputModel][nomic.domain.entities.AmendmentInputModel] amendment to be made
-     *
      */
     fun enactAmendment(inputAmend: AmendmentInputModel)
 

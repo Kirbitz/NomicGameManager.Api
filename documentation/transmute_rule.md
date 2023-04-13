@@ -1,29 +1,33 @@
-# Remove A Game
+# Repeal Rules
 
-Returns json data of the removal of a game.
+Changes the mutable flag of a specified rule
 
 - **URL:**
 
-  /api/game/remove/{gameId}
+  /api/rules_amendments/transmute_rule/{ruleId}
 
 
 - **Method:**
 
-  `DELETE`
+  `POST`
 
 
 - **URL Params:**
 
-  __Required:__ GameId
+  __Required:__ RuleId
 
-  `gameId: [int]`
+  `ruleId: [int]`
 
   4321
 
 
 - **Data Params:**
 
-  None
+  __Required:__ mutableInput
+
+  `mutableInput: [bool]`
+
+  false
 
 - **Auth Required:** Yes, Authorization header with a Bearer JWT token.
 
@@ -31,15 +35,15 @@ Returns json data of the removal of a game.
 
 - **Success Response:**
 
-  **Code:** `202 ACCEPTED`
+  **Code:** `200 SUCCESS`
 
   **Content:**
 
   ```json
   {
     "success": true,
-    "status": 202,
-    "data": "Game Deleted"
+    "status": 200,
+    "data": "Rule Transmuted"
   }
   ```
 
@@ -68,16 +72,15 @@ Returns json data of the removal of a game.
     "data": "Unauthorized"
   }
   ```
+  **Code:** `404 Not Found`
 
-  **Code:** `404 NOT FOUND`
-  
   **Content:**
-  
+
   ```json
   {
     "success": false,
     "status": 404,
-    "data": "Game Not Found"
+    "data": "The entity with id 'ID' was not found on the database."
   }
   ```
 
@@ -97,8 +100,11 @@ Returns json data of the removal of a game.
 
 ```javascript
 {
-  method: 'DELETE',
-  url: '/api/game/remove/{gameId}',
-  responseType: 'json'
+  method: 'GET',
+  url: '/api/rules_amendments/transmute_rule/{ruleId}',
+  responseType: 'json',
+  data: {
+    mutableInput: false
+  }
 }
 ```
