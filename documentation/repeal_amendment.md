@@ -25,7 +25,7 @@ Changes the active flag of a specified amendment
 
   None
 
-- **Auth Required:** Yes, TBD
+- **Auth Required:** Yes, Authorization header with a Bearer JWT token.
 
 ## Response
 

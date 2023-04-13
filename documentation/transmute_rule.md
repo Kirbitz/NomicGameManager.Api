@@ -29,7 +29,7 @@ Changes the mutable flag of a specified rule
 
   false
 
-- **Auth Required:** Yes, TBD
+- **Auth Required:** Yes, Authorization header with a Bearer JWT token.
 
 ## Response
 

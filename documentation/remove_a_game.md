@@ -25,7 +25,7 @@ Returns json data of the removal of a game.
 
   None
 
-- **Auth Required:** Yes, TBD
+- **Auth Required:** Yes, Authorization header with a Bearer JWT token.
 
 ## Response
 

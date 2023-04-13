@@ -46,7 +46,7 @@ Returns json data about the amendment creation.
 
   `this is the amendment`
 
-- **Auth Required:** Yes, JWT set in Authorization header.
+- **Auth Required:** Yes, Authorization header with a Bearer JWT token.
 
 ## Response
 

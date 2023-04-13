@@ -25,7 +25,7 @@ Returns json data of rules and amendments connected to a specific game.
 
   None
 
-- **Auth Required:** Yes, TBD
+- **Auth Required:** Yes, Authorization header with a Bearer JWT token.
 
 ## Response
 

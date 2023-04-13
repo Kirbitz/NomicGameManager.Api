@@ -58,7 +58,7 @@ Returns json data about the rule creation.
 
   1
 
-- **Auth Required:** Yes, JWT set in Authorization header.
+- **Auth Required:** Yes, Authorization header with a Bearer JWT token.
 
 ## Response
 
