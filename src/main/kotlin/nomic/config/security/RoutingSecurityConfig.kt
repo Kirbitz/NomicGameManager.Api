@@ -6,6 +6,7 @@ import nomic.domain.auth.ITokenRegistry
 import nomic.domain.auth.IUserAuthenticator
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.env.ConfigurableEnvironment
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
@@ -24,7 +25,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 class RoutingSecurityConfig {
 
     @Bean
-    fun filterChain(http: HttpSecurity, tokenRegistry: ITokenRegistry, userAuthenticator: IUserAuthenticator): SecurityFilterChain {
+    fun filterChain(http: HttpSecurity, tokenRegistry: ITokenRegistry, userAuthenticator: IUserAuthenticator, environment: ConfigurableEnvironment): SecurityFilterChain {
+        val isAuthOptional = environment.getProperty("auth.optional")?.equals("true") == true
+
         val jwtFilter = JWTAuthenticationSecurityFilter(tokenRegistry)
         val basicFilter = BasicAuthenticationSecurityFilter(userAuthenticator)
 
@@ -35,9 +38,13 @@ class RoutingSecurityConfig {
             .csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
-            .authorizeHttpRequests {
+
+        if (!isAuthOptional) {
+            http.authorizeHttpRequests {
                 it.anyRequest().authenticated()
             }
+        }
+
         return http.build()
     }
 }
