@@ -17,3 +17,9 @@ __Example__
 [api/auth/token](https://github.com/Kirbitz/NomicGameManager.Api/wiki/token)
 
 [api/game/remove](https://github.com/Kirbitz/NomicGameManager.Api/wiki/remove_a_game)
+
+[api/rules_amendments/enactAmendment](https://github.com/Kirbitz/NomicGameManager.Api/wiki/enact_amendment.md)
+
+[api/rules_amendments/repealAmendment](https://github.com/Kirbitz/NomicGameManager.Api/wiki/repeal_amendment.md)
+
+[api/rules_amendments/transmuteRule](https://github.com/Kirbitz/NomicGameManager.Api/wiki/transmute_rule.md)
