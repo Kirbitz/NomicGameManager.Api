@@ -3,6 +3,7 @@ package nomic.unit
 import nomic.data.repositories.games.GameRepository
 import nomic.domain.entities.GameModel
 import nomic.domain.games.GameDomain
+import nomic.domain.games.IGameSpecificationFactory
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.mock
@@ -15,7 +16,7 @@ class GameDomainTests {
     private val gameRepoMock: GameRepository = mock()
 
     init {
-        gameDomain = GameDomain(gameRepoMock)
+        gameDomain = GameDomain(gameRepoMock, mock<IGameSpecificationFactory>())
     }
 
     @Test
