@@ -185,3 +185,8 @@ INSERT INTO `User` VALUES(1620, 'ListGamesUser2');
 INSERT INTO `Game` VALUES(1621, 'Bar1', '2023-02-01', NULL, 1620);
 INSERT INTO `Game` VALUES(1622, 'Bar2', '2023-02-02', NULL, 1620);
 INSERT INTO `Game` VALUES(1623, 'Bar4', '2023-02-03', NULL, 1620);
+
+-- Database generated entities get forced here
+
+INSERT INTO `User` VALUES(1000000, 'DB-generated user');
+INSERT INTO `Game` VALUES(1000000, 'DB-generated games', '2023-02-03', NULL, 1000000);
