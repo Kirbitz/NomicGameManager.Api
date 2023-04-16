@@ -3,6 +3,7 @@ package nomic.unit.domain.auth
 import com.auth0.jwt.RegisteredClaims
 import nomic.data.repositories.IUserRepository
 import nomic.domain.auth.IKeyProvider
+import nomic.domain.auth.JWTTokenConfigurationProperties
 import nomic.domain.auth.RSAKeyPair
 import nomic.domain.auth.TokenRegistry
 import nomic.domain.entities.EndUser
@@ -32,6 +33,8 @@ class TokenRegistryTest {
 
         val testUser1 = EndUser(512, "Titius Livius")
         val testUser2 = EndUser(1024, "Achilleus")
+
+        val tokenConfig = JWTTokenConfigurationProperties(doesExpire = true)
     }
 
     init {
@@ -57,7 +60,7 @@ class TokenRegistryTest {
 
     @Test
     fun test_issueToken_hasSubjectId() {
-        val tokenRegistry = TokenRegistry(keyProvider, usersRepo)
+        val tokenRegistry = TokenRegistry(keyProvider, usersRepo, tokenConfig)
 
         val token1 = tokenRegistry.issueToken(testUser1)
         val token2 = tokenRegistry.issueToken(testUser2)
@@ -73,7 +76,7 @@ class TokenRegistryTest {
 
     @Test
     fun test_issueToken_hasIssuerAndAudience() {
-        val tokenRegistry = TokenRegistry(keyProvider, usersRepo)
+        val tokenRegistry = TokenRegistry(keyProvider, usersRepo, tokenConfig)
 
         val token = tokenRegistry.issueToken(testUser1)
 
@@ -88,7 +91,7 @@ class TokenRegistryTest {
 
     @Test
     fun test_issueToken_has_issuedAt_expires_notBefore() {
-        val tokenRegistry = TokenRegistry(keyProvider, usersRepo)
+        val tokenRegistry = TokenRegistry(keyProvider, usersRepo, tokenConfig)
 
         val token = tokenRegistry.issueToken(testUser1)
         val tokenBody = String(Base64.getDecoder().decode(token.split('.')[1]))
@@ -100,7 +103,7 @@ class TokenRegistryTest {
 
     @Test
     fun test_issueToken_validates() {
-        val tokenRegistry = TokenRegistry(keyProvider, usersRepo)
+        val tokenRegistry = TokenRegistry(keyProvider, usersRepo, tokenConfig)
 
         val token1 = tokenRegistry.issueToken(testUser1)
         val token2 = tokenRegistry.issueToken(testUser2)
@@ -117,7 +120,7 @@ class TokenRegistryTest {
 
     @Test
     fun test_validateToken_expiredToken() {
-        val tokenRegistry = TokenRegistry(keyProvider, usersRepo)
+        val tokenRegistry = TokenRegistry(keyProvider, usersRepo, tokenConfig)
         val badToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI1MTIiLCJhdWQiOiJOb21pY0dhbWVNYW5hZ2VyLkFwaSIsIm5iZiI6MTY3ODIyNDYyMCwiaXNzIjoiTm9taWNHYW1lTWFuYWdlci5BcGkiLCJleHAiOjE2NzgyMzE4MjAsImlhdCI6MTY3ODIyNDYyMH0.AzP26ODJH-QEUcaZnRTlIaNMjzIzltOaKPqWf4xW9mSpkJBYCbyoCJGdvU_0kw3E9Ydn9IX_X6ezD29KPmuC8Q"
 
         val result = tokenRegistry.validateToken(badToken)
@@ -128,7 +131,7 @@ class TokenRegistryTest {
 
     @Test
     fun test_validateToken_badToken() {
-        val tokenRegistry = TokenRegistry(keyProvider, usersRepo)
+        val tokenRegistry = TokenRegistry(keyProvider, usersRepo, tokenConfig)
         val result = tokenRegistry.validateToken("Blah.Foo.Bar")
         Assertions.assertThat(result.isSuccess).isFalse
         Assertions.assertThat(result.subject).isNull()
