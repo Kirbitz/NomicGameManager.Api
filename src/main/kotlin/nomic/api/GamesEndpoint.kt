@@ -60,10 +60,10 @@ class GamesEndpoint(val gameDomain: GameDomain) {
             return ResponseEntity(
                 ResponseFormat(
                     false,
-                    HttpStatus.BAD_REQUEST,
+                    HttpStatus.NOT_FOUND,
                     "Invalid offset"
                 ),
-                HttpStatus.BAD_REQUEST
+                HttpStatus.NOT_FOUND
             )
         } else {
             return ResponseEntity(
