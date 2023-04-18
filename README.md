@@ -10,6 +10,8 @@ Just click a link and away you go!
 
 - [api/game/create](https://github.com/Kirbitz/NomicGameManager.Api/wiki/create_game)
 
+- [api/game/list](https://github.com/Kirbitz/NomicGameManager.Api/wiki/list_games)
+
 - [api/game/remove](https://github.com/Kirbitz/NomicGameManager.Api/wiki/remove_a_game)
 
 #### Rules
