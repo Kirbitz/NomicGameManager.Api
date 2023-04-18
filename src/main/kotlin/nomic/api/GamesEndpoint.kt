@@ -38,6 +38,15 @@ class GamesEndpoint(val gameDomain: GameDomain) {
         return ResponseEntity(ResponseFormat(true, HttpStatus.CREATED, "Game Created"), HttpStatus.CREATED)
     }
 
+    /**
+     * This endpoint listens on `api/game/list`, allowing callers to paginate through the list
+     * of games that the authenticated user has created. It accepts a size and an optional offset
+     * parameter through [ListGamesApiRequestModel].
+     *
+     * @param[input] The model encapsulating the endpoint parameters
+     * @param[user] The user whose games will be listed, injected by the authentication framework.
+     * @return A Spring entity representing the response that gets serialized into JSON
+     */
     @GetMapping("list")
     fun listGames(
         @RequestBody input: ListGamesApiRequestModel,
