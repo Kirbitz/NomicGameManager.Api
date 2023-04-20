@@ -3,7 +3,6 @@ package nomic.data.repositories.games
 import nomic.data.dtos.GameDTO
 import nomic.data.dtos.Games
 import nomic.data.dtos.games
-import nomic.domain.entities.EndUser
 import nomic.domain.entities.GameModel
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.MethodOrderer
@@ -27,11 +26,6 @@ import org.springframework.boot.test.context.SpringBootTest
     webEnvironment = SpringBootTest.WebEnvironment.MOCK
 )
 class GameRepositoryTest(@Autowired private val db: Database) {
-
-    private companion object {
-        private val user1: EndUser = EndUser(50, "ListGamesUser1")
-        private val user2: EndUser = EndUser(55, "ListGamesUser2")
-    }
 
     @Test
     fun test_listGames_dataFromDatabase() {
@@ -75,7 +69,7 @@ class GameRepositoryTest(@Autowired private val db: Database) {
             games
         }
 
-        val games = repo.listGames(specUser, firstSpec, secondSpec)
+        repo.listGames(specUser, firstSpec, secondSpec)
     }
 
     @ParameterizedTest
