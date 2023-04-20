@@ -1,5 +1,6 @@
 package nomic.unit
 
+import nomic.api.ErrorParser
 import nomic.api.GamesEndpoint
 import nomic.api.models.ResponseFormat
 import nomic.domain.entities.EndUser
@@ -18,7 +19,7 @@ class GamesEndpointTests {
     private val gameDomainMock: GameDomain = mock()
 
     init {
-        gameEndpoint = GamesEndpoint(gameDomainMock)
+        gameEndpoint = GamesEndpoint(gameDomainMock, mock())
     }
 
     @Test
@@ -39,7 +40,7 @@ class GamesEndpointTests {
             on(it.listGames(user, 100U, 0U)) doReturn Optional.of(listOf())
         }
 
-        val endpoint = GamesEndpoint(domain)
+        val endpoint = GamesEndpoint(domain, ErrorParser())
 
         val result = endpoint.listGames(100U, 0U, user).body as ResponseFormat<*>
 
@@ -56,7 +57,7 @@ class GamesEndpointTests {
             on(it.listGames(user, size, 0U)) doReturn Optional.of(listOf())
         }
 
-        val endpoint = GamesEndpoint(domain)
+        val endpoint = GamesEndpoint(domain, ErrorParser())
 
         val result = endpoint.listGames(size, 0U, user).body as ResponseFormat<*>
 
@@ -72,7 +73,7 @@ class GamesEndpointTests {
             on(it.listGames(user, 100U, 0U)) doReturn Optional.empty()
         }
 
-        val endpoint = GamesEndpoint(domain)
+        val endpoint = GamesEndpoint(domain, ErrorParser())
 
         val result = endpoint.listGames(100U, 0U, user).body as ResponseFormat<*>
 

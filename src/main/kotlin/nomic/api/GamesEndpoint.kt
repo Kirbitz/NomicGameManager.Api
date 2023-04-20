@@ -25,7 +25,10 @@ import java.util.*
  */
 @RestController
 @RequestMapping("api/game")
-class GamesEndpoint(val gameDomain: GameDomain) {
+class GamesEndpoint(
+    val gameDomain: GameDomain,
+    val errorParser: ErrorParser
+) {
 
     /**
      * This endpoint listens on `api/game/create` and takes in data about a game that will be inserted into the game table in the DB
@@ -57,27 +60,13 @@ class GamesEndpoint(val gameDomain: GameDomain) {
         @AuthenticationPrincipal authUser: EndUser
     ): ResponseEntity<*> {
         if (0U >= size || 100U < size) {
-            return ResponseEntity(
-                ResponseFormat(
-                    false,
-                    HttpStatus.BAD_REQUEST,
-                    "You must request at least 1 game and at most 100 games."
-                ),
-                HttpStatus.BAD_REQUEST
-            )
+            return errorParser.fromBadArguments("You must request at least 1 game and at most 100 games.")
         }
 
         val games = gameDomain.listGames(authUser, size, offset)
 
         if (games.isEmpty) {
-            return ResponseEntity(
-                ResponseFormat(
-                    false,
-                    HttpStatus.NOT_FOUND,
-                    "Invalid offset"
-                ),
-                HttpStatus.NOT_FOUND
-            )
+            return errorParser.fromNotFound("Invalid offset")
         } else {
             return ResponseEntity(
                 ResponseFormat(
