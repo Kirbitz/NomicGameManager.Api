@@ -1,6 +1,5 @@
 package nomic.api
 
-import nomic.api.models.ListGamesApiRequestModel
 import nomic.api.models.ResponseFormat
 import nomic.domain.auth.ITokenRegistry
 import nomic.domain.entities.EndUser
@@ -20,9 +19,13 @@ class ListGamesTests(
 
     @Test
     fun test_listGames_incompleteSize_noOffset() {
-        val user = EndUser(1610, "ListGamesUser1")
-        val request = createRequest(ListGamesApiRequestModel(100U, 0U), user)
-        val entity = client.exchange<ResponseFormat<List<GameModel>>>("/api/game/list", HttpMethod.GET, request)
+        val size = 100U
+        val offset = 0U
+        val entity = client.exchange<ResponseFormat<List<GameModel>>>(
+            "/api/game/list?size=$size&offset=$offset",
+            HttpMethod.GET,
+            createRequest<Any>(user = EndUser(1610, "ListGamesUser1"))
+        )
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
 
@@ -36,9 +39,13 @@ class ListGamesTests(
 
     @Test
     fun test_listGames_completeSize_offset() {
-        val user = EndUser(1620, "ListGamesUser2")
-        val request = createRequest(ListGamesApiRequestModel(2U, 1U), user)
-        val entity = client.exchange<ResponseFormat<List<GameModel>>>("/api/game/list", HttpMethod.GET, request)
+        val size = 2U
+        val offset = 1U
+        val entity = client.exchange<ResponseFormat<List<GameModel>>>(
+            "/api/game/list?size=$size&offset=$offset",
+            HttpMethod.GET,
+            createRequest<Any>(user = EndUser(1620, "ListGamesUser2"))
+        )
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
 
@@ -55,9 +62,13 @@ class ListGamesTests(
 
     @Test
     fun test_listGames_invalidOffset() {
-        val user = EndUser(1620, "ListGamesUser2")
-        val request = createRequest(ListGamesApiRequestModel(2U, 10U), user)
-        val entity = client.exchange<ResponseFormat<String>>("/api/game/list", HttpMethod.GET, request)
+        val size = 2U
+        val offset = 10U
+        val entity = client.exchange<ResponseFormat<String>>(
+            "/api/game/list?size=$size&offset=$offset",
+            HttpMethod.GET,
+            createRequest<Any>(user = EndUser(1620, "ListGamesUser2"))
+        )
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.NOT_FOUND)
 
@@ -70,9 +81,13 @@ class ListGamesTests(
 
     @Test
     fun test_listGames_tooSmallSize() {
-        val user = EndUser(1620, "ListGamesUser2")
-        val request = createRequest(ListGamesApiRequestModel(0U, 0U), user)
-        val entity = client.exchange<ResponseFormat<String>>("/api/game/list", HttpMethod.GET, request)
+        val size = 0U
+        val offset = 0U
+        val entity = client.exchange<ResponseFormat<String>>(
+            "/api/game/list?size=$size&offset=$offset",
+            HttpMethod.GET,
+            createRequest<Any>(user = EndUser(1620, "ListGamesUser2"))
+        )
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
 
@@ -83,9 +98,13 @@ class ListGamesTests(
 
     @Test
     fun test_listGames_tooLargeSize() {
-        val user = EndUser(1620, "ListGamesUser2")
-        val request = createRequest(ListGamesApiRequestModel(1000U, 0U), user)
-        val entity = client.exchange<ResponseFormat<String>>("/api/game/list", HttpMethod.GET, request)
+        val size = 1000U
+        val offset = 0U
+        val entity = client.exchange<ResponseFormat<String>>(
+            "/api/game/list?size=$size&offset=$offset",
+            HttpMethod.GET,
+            createRequest<Any>(user = EndUser(1620, "ListGamesUser2"))
+        )
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
 
@@ -96,9 +115,9 @@ class ListGamesTests(
 
     @Test
     fun test_listGames_offsetOptional() {
-        val user = EndUser(1620, "ListGamesUser2")
-        val request = createRequest(object { val size: UInt = 100U }, user)
-        val entity = client.exchange<ResponseFormat<List<GameModel>>>("/api/game/list", HttpMethod.GET, request)
+        val request = createRequest<Any>(user = EndUser(1620, "ListGamesUser2"))
+        val size = 100
+        val entity = client.exchange<ResponseFormat<List<GameModel>>>("/api/game/list?size=$size", HttpMethod.GET, request)
 
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
 

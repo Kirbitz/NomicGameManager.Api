@@ -1,7 +1,6 @@
 package nomic.unit
 
 import nomic.api.GamesEndpoint
-import nomic.api.models.ListGamesApiRequestModel
 import nomic.api.models.ResponseFormat
 import nomic.domain.entities.EndUser
 import nomic.domain.entities.GameModel
@@ -42,7 +41,7 @@ class GamesEndpointTests {
 
         val endpoint = GamesEndpoint(domain)
 
-        val result = endpoint.listGames(ListGamesApiRequestModel(100U, 0U), user).body as ResponseFormat<*>
+        val result = endpoint.listGames(100U, 0U, user).body as ResponseFormat<*>
 
         Assertions.assertThat(result.success).isTrue
         Assertions.assertThat(result.status).isEqualTo(HttpStatus.OK)
@@ -59,7 +58,7 @@ class GamesEndpointTests {
 
         val endpoint = GamesEndpoint(domain)
 
-        val result = endpoint.listGames(ListGamesApiRequestModel(size, 0U), user).body as ResponseFormat<*>
+        val result = endpoint.listGames(size, 0U, user).body as ResponseFormat<*>
 
         Assertions.assertThat(result.success).isFalse
         Assertions.assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
@@ -75,7 +74,7 @@ class GamesEndpointTests {
 
         val endpoint = GamesEndpoint(domain)
 
-        val result = endpoint.listGames(ListGamesApiRequestModel(100U, 0U), user).body as ResponseFormat<*>
+        val result = endpoint.listGames(100U, 0U, user).body as ResponseFormat<*>
 
         Assertions.assertThat(result.success).isFalse
         Assertions.assertThat(result.status).isEqualTo(HttpStatus.NOT_FOUND)

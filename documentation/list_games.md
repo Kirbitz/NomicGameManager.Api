@@ -4,17 +4,13 @@ Returns json data about the list of games that a user has created.
 
 - **URL:**
 
-  /api/game/list
+  /api/game/list?size={size}&offset={offset}
 
 - **Method:**
 
   `GET`
 
 - **URL Params:**
-
-  None
-
-- **Data Params:**
 
   **Required:** Size
 
@@ -27,6 +23,10 @@ Returns json data about the list of games that a user has created.
   `offset: [unsigned int]`
 
   0
+
+- **Data Params:**
+
+  None
 
 - **Auth Required:** Yes, Authorization header with a Bearer JWT token.
 
@@ -120,7 +120,7 @@ Returns json data about the list of games that a user has created.
 ```javascript
 {
   method: 'GET',
-  url: '/api/game/list',
+  url: '/api/game/list?size={size}&offset={offset}',
   responseType: 'json'
 }
 ```

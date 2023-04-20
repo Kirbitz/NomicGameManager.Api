@@ -1,6 +1,5 @@
 package nomic.api
 
-import nomic.api.models.ListGamesApiRequestModel
 import nomic.api.models.ResponseFormat
 import nomic.domain.entities.EndUser
 import nomic.domain.entities.GameModel
@@ -14,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.util.*
 
 /**
  * This controller listens on `api/game` and works to provide, remove, or manipulate data related to games in the database
@@ -40,19 +41,22 @@ class GamesEndpoint(val gameDomain: GameDomain) {
 
     /**
      * This endpoint listens on `api/game/list`, allowing callers to paginate through the list
-     * of games that the authenticated user has created. It accepts a size and an optional offset
-     * parameter through [ListGamesApiRequestModel].
+     * of games that the authenticated user has created. It accepts a size and an optional offset.
      *
-     * @param[input] The model encapsulating the endpoint parameters
+     * @param[size] The size of the batch of games to retrieve. Maximum size is 100
+     * games, and the default is 100.
+     * @param[offset] How much the batch should be offset. This is used for paginatin
+     * games, and the default to 0.
      * @param[user] The user whose games will be listed, injected by the authentication framework.
      * @return A Spring entity representing the response that gets serialized into JSON
      */
     @GetMapping("list")
     fun listGames(
-        @RequestBody input: ListGamesApiRequestModel,
+        @RequestParam(defaultValue = "100") size: UInt,
+        @RequestParam(defaultValue = "0") offset: UInt,
         @AuthenticationPrincipal authUser: EndUser
     ): ResponseEntity<*> {
-        if (0U >= input.size || 100U < input.size) {
+        if (0U >= size || 100U < size) {
             return ResponseEntity(
                 ResponseFormat(
                     false,
@@ -63,7 +67,7 @@ class GamesEndpoint(val gameDomain: GameDomain) {
             )
         }
 
-        val games = gameDomain.listGames(authUser, input.size, input.offset)
+        val games = gameDomain.listGames(authUser, size, offset)
 
         if (games.isEmpty) {
             return ResponseEntity(
