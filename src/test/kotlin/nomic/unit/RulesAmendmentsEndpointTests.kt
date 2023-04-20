@@ -2,6 +2,7 @@ package nomic.unit
 
 import nomic.api.RulesAmendmentsEndpoint
 import nomic.api.models.AmendmentModel
+import nomic.api.models.MutableInputModel
 import nomic.api.models.ResponseFormat
 import nomic.api.models.RulesAmendmentsApiModel
 import nomic.domain.entities.AmendmentInputModel
@@ -84,7 +85,8 @@ class RulesAmendmentsEndpointTests {
 
     @Test
     fun `Transmute Rule with Rule Id & Boolean Provided and Proper Response Object Returned`() {
-        val result = rulesAmendmentsEndpoint.transmuteRule(true, "4321").body as ResponseFormat<String>
+        val mutableInput = MutableInputModel(true)
+        val result = rulesAmendmentsEndpoint.transmuteRule(mutableInput, "4321").body as ResponseFormat<String>
 
         Assertions.assertThat(result.success).isTrue
         Assertions.assertThat(result.status).isEqualTo(HttpStatus.OK)
