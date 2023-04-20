@@ -21,43 +21,15 @@ import java.util.stream.Stream
 )
 class PaginateGamesSpecificationTest(@Autowired private val db: Database) {
 
-    private companion object {
-
-        val filterListGameTestEntities = {
-                game: Games ->
-            (1600 lessEq game.gameId) and (game.gameId less 1700)
-        }
-
-        @JvmStatic
-        fun test_paginate_badOffset(): Stream<Int> {
-            return Stream.of(15, 20)
-        }
-
-        @JvmStatic
-        fun test_paginate_validOffset(): Stream<IntArray> {
-            return Stream.of(
-                intArrayOf(1602, 1603, 1611, 1612, 1613, 1614, 1621, 1622),
-                intArrayOf(1602, 1603, 1611, 1612, 1613, 1614),
-                intArrayOf(1602, 1603)
-            )
-        }
-
-        @JvmStatic
-        fun test_paginate_validSize(): Stream<Int> {
-            return Stream.of(0, 1, 2, 5, 7)
-        }
-
-        @JvmStatic
-        fun test_paginate_invalidSize_candidatesExceedSize(): Stream<Arguments> {
-            return Stream.of(
-                Arguments.of(10, 7),
-                Arguments.of(13, 7)
-            )
-        }
-    }
+    // These tests use JUnit's parameterized tests and method source. Essentially,
+    // JUnit grabs arguments from the method sources and runs each test with
+    // each set of arguments. In Java, the method source is just a static method,
+    // due to the differences between Java and Kotlin, they get implemented as a
+    // function in the companion object with the JvmStatic annotation, and those
+    // functions are located at the bottom of these tests.
 
     @ParameterizedTest
-    @MethodSource("test_paginate_badOffset")
+    @MethodSource("parameters_source_badOffset")
     fun test_paginate_badOffset(offset: Int) {
         val spec = PaginateGamesSpecification(size = 100u, offset.toUInt())
 
@@ -67,7 +39,7 @@ class PaginateGamesSpecificationTest(@Autowired private val db: Database) {
     }
 
     @ParameterizedTest
-    @MethodSource("test_paginate_validOffset")
+    @MethodSource("parameters_source_validOffset")
     fun test_paginate_validOffset(offsetGames: IntArray) {
         val spec = PaginateGamesSpecification(size = 100U, offsetGames.size.toUInt())
 
@@ -77,7 +49,7 @@ class PaginateGamesSpecificationTest(@Autowired private val db: Database) {
     }
 
     @ParameterizedTest
-    @MethodSource("test_paginate_validSize")
+    @MethodSource("parameters_source_validSize")
     fun test_paginate_validSize(size: Int) {
         val spec = PaginateGamesSpecification(size.toUInt(), 0U)
 
@@ -87,12 +59,46 @@ class PaginateGamesSpecificationTest(@Autowired private val db: Database) {
     }
 
     @ParameterizedTest
-    @MethodSource("test_paginate_invalidSize_candidatesExceedSize")
+    @MethodSource("parameters_source_candidatesExceedSize")
     fun test_paginate_invalidSize_candidatesExceedSize(expectedSize: Int, actualSize: Int) {
         val spec = PaginateGamesSpecification(expectedSize.toUInt(), 0U)
 
         val games = spec.apply(db.games).filter(filterListGameTestEntities).toList()
 
         Assertions.assertThat(games.size).isEqualTo(actualSize)
+    }
+
+    private companion object {
+        val filterListGameTestEntities = {
+                game: Games ->
+            (1600 lessEq game.gameId) and (game.gameId less 1700)
+        }
+
+        @JvmStatic
+        fun parameters_source_badOffset(): Stream<Int> {
+            return Stream.of(15, 20)
+        }
+
+        @JvmStatic
+        fun parameters_source_validOffset(): Stream<IntArray> {
+            return Stream.of(
+                intArrayOf(1602, 1603, 1611, 1612, 1613, 1614, 1621, 1622),
+                intArrayOf(1602, 1603, 1611, 1612, 1613, 1614),
+                intArrayOf(1602, 1603)
+            )
+        }
+
+        @JvmStatic
+        fun parameters_source_validSize(): Stream<Int> {
+            return Stream.of(0, 1, 2, 5, 7)
+        }
+
+        @JvmStatic
+        fun parameters_source_candidatesExceedSize(): Stream<Arguments> {
+            return Stream.of(
+                Arguments.of(10, 7),
+                Arguments.of(13, 7)
+            )
+        }
     }
 }

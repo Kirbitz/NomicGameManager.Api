@@ -72,6 +72,7 @@ class GameRepositoryTest(@Autowired private val db: Database) {
         repo.listGames(specUser, firstSpec, secondSpec)
     }
 
+    // This uses JUnit's ParameterizedTest to run the test with each value in ValueSource
     @ParameterizedTest
     @ValueSource(ints = [1, 2, 4, 8, 16])
     fun test_listGames_callsAllSpecifications(specificationCount: Int) {
