@@ -29,13 +29,20 @@ $dokka.location:nomic.api.models/RulesAmendmentsApiModel/mutable/#/PointingToDec
 $dokka.location:nomic.api.models/RulesAmendmentsApiModel/ruleId/#/PointingToDeclaration/nomic.game.manager.api/nomic.api.models/-rules-amendments-api-model/rule-id.html
 $dokka.location:nomic.api.models/RulesAmendmentsApiModel/title/#/PointingToDeclaration/nomic.game.manager.api/nomic.api.models/-rules-amendments-api-model/title.html
 $dokka.location:nomic.api////PointingToDeclaration/nomic.game.manager.api/nomic.api/index.html
+$dokka.location:nomic.api/ErrorParser///PointingToDeclaration/nomic.game.manager.api/nomic.api/-error-parser/index.html
+$dokka.location:nomic.api/ErrorParser/ErrorParser/#/PointingToDeclaration/nomic.game.manager.api/nomic.api/-error-parser/-error-parser.html
+$dokka.location:nomic.api/ErrorParser/fromBadArguments/#kotlin.String/PointingToDeclaration/nomic.game.manager.api/nomic.api/-error-parser/from-bad-arguments.html
+$dokka.location:nomic.api/ErrorParser/fromNotFound/#kotlin.String/PointingToDeclaration/nomic.game.manager.api/nomic.api/-error-parser/from-not-found.html
 $dokka.location:nomic.api/GamesEndpoint///PointingToDeclaration/nomic.game.manager.api/nomic.api/-games-endpoint/index.html
-$dokka.location:nomic.api/GamesEndpoint/GamesEndpoint/#nomic.domain.games.GameDomain/PointingToDeclaration/nomic.game.manager.api/nomic.api/-games-endpoint/-games-endpoint.html
+$dokka.location:nomic.api/GamesEndpoint/GamesEndpoint/#nomic.domain.games.GameDomain#nomic.api.ErrorParser/PointingToDeclaration/nomic.game.manager.api/nomic.api/-games-endpoint/-games-endpoint.html
 $dokka.location:nomic.api/GamesEndpoint/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/nomic.game.manager.api/nomic.api/-games-endpoint/create-game.html
 $dokka.location:nomic.api/GamesEndpoint/deleteGame/#kotlin.String/PointingToDeclaration/nomic.game.manager.api/nomic.api/-games-endpoint/delete-game.html
+$dokka.location:nomic.api/GamesEndpoint/errorParser/#/PointingToDeclaration/nomic.game.manager.api/nomic.api/-games-endpoint/error-parser.html
 $dokka.location:nomic.api/GamesEndpoint/gameDomain/#/PointingToDeclaration/nomic.game.manager.api/nomic.api/-games-endpoint/game-domain.html
+$dokka.location:nomic.api/GamesEndpoint/listGames/#kotlin.UInt#kotlin.UInt#nomic.domain.entities.EndUser/PointingToDeclaration/nomic.game.manager.api/nomic.api/-games-endpoint/list-games.html
 $dokka.location:nomic.api/GlobalExceptionHandler///PointingToDeclaration/nomic.game.manager.api/nomic.api/-global-exception-handler/index.html
-$dokka.location:nomic.api/GlobalExceptionHandler/GlobalExceptionHandler/#/PointingToDeclaration/nomic.game.manager.api/nomic.api/-global-exception-handler/-global-exception-handler.html
+$dokka.location:nomic.api/GlobalExceptionHandler/GlobalExceptionHandler/#nomic.api.ErrorParser/PointingToDeclaration/nomic.game.manager.api/nomic.api/-global-exception-handler/-global-exception-handler.html
+$dokka.location:nomic.api/GlobalExceptionHandler/errorParser/#/PointingToDeclaration/nomic.game.manager.api/nomic.api/-global-exception-handler/error-parser.html
 $dokka.location:nomic.api/GlobalExceptionHandler/handleAllUncaughtException/#java.lang.Exception/PointingToDeclaration/nomic.game.manager.api/nomic.api/-global-exception-handler/handle-all-uncaught-exception.html
 $dokka.location:nomic.api/GlobalExceptionHandler/handleEntityNotFoundException/#nomic.data.EntityNotFoundException/PointingToDeclaration/nomic.game.manager.api/nomic.api/-global-exception-handler/handle-entity-not-found-exception.html
 $dokka.location:nomic.api/GlobalExceptionHandler/handleIllegalArgumentException/#java.lang.IllegalArgumentException/PointingToDeclaration/nomic.game.manager.api/nomic.api/-global-exception-handler/handle-illegal-argument-exception.html
@@ -62,6 +69,7 @@ $dokka.location:nomic.config.security/RoutingSecurityConfig/RoutingSecurityConfi
 $dokka.location:nomic.config.security/RoutingSecurityConfig/filterChain/#org.springframework.security.config.annotation.web.builders.HttpSecurity#nomic.domain.auth.ITokenRegistry#nomic.domain.auth.IUserAuthenticator/PointingToDeclaration/nomic.game.manager.api/nomic.config.security/-routing-security-config/filter-chain.html
 $dokka.location:nomic.data.dtos////PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/index.html
 $dokka.location:nomic.data.dtos//credentials/org.ktorm.database.Database#/PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/credentials.html
+$dokka.location:nomic.data.dtos//games/org.ktorm.database.Database#/PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/games.html
 $dokka.location:nomic.data.dtos//users/org.ktorm.database.Database#/PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/users.html
 $dokka.location:nomic.data.dtos/AmendmentDTO.Companion///PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/-amendment-d-t-o/-companion/index.html
 $dokka.location:nomic.data.dtos/AmendmentDTO///PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/-amendment-d-t-o/index.html
@@ -93,7 +101,7 @@ $dokka.location:nomic.data.dtos/GameDTO/createDate/#/PointingToDeclaration/nomi
 $dokka.location:nomic.data.dtos/GameDTO/currentPlayer/#/PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/-game-d-t-o/current-player.html
 $dokka.location:nomic.data.dtos/GameDTO/gameId/#/PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/-game-d-t-o/game-id.html
 $dokka.location:nomic.data.dtos/GameDTO/title/#/PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/-game-d-t-o/title.html
-$dokka.location:nomic.data.dtos/GameDTO/userId/#/PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/-game-d-t-o/user-id.html
+$dokka.location:nomic.data.dtos/GameDTO/user/#/PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/-game-d-t-o/user.html
 $dokka.location:nomic.data.dtos/Games///PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/-games/index.html
 $dokka.location:nomic.data.dtos/Games/createDate/#/PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/-games/create-date.html
 $dokka.location:nomic.data.dtos/Games/currentPlayer/#/PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/-games/current-player.html
@@ -125,13 +133,30 @@ $dokka.location:nomic.data.dtos/Users///PointingToDeclaration/nomic.game.manage
 $dokka.location:nomic.data.dtos/Users/id/#/PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/-users/id.html
 $dokka.location:nomic.data.dtos/Users/name/#/PointingToDeclaration/nomic.game.manager.api/nomic.data.dtos/-users/name.html
 $dokka.location:nomic.data.repositories.games////PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/index.html
+$dokka.location:nomic.data.repositories.games/FilterGamesByUserSpecification///PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-filter-games-by-user-specification/index.html
+$dokka.location:nomic.data.repositories.games/FilterGamesByUserSpecification/FilterGamesByUserSpecification/#nomic.domain.entities.EndUser/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-filter-games-by-user-specification/-filter-games-by-user-specification.html
+$dokka.location:nomic.data.repositories.games/FilterGamesByUserSpecification/apply/#org.ktorm.entity.EntitySequence[nomic.data.dtos.GameDTO,nomic.data.dtos.Games]/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-filter-games-by-user-specification/apply.html
 $dokka.location:nomic.data.repositories.games/GameRepository///PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-game-repository/index.html
 $dokka.location:nomic.data.repositories.games/GameRepository/GameRepository/#org.ktorm.database.Database/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-game-repository/-game-repository.html
 $dokka.location:nomic.data.repositories.games/GameRepository/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-game-repository/create-game.html
 $dokka.location:nomic.data.repositories.games/GameRepository/deleteGame/#kotlin.Int/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-game-repository/delete-game.html
+$dokka.location:nomic.data.repositories.games/GameRepository/listGames/#kotlin.Array[nomic.data.repositories.games.IGameSpecification]/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-game-repository/list-games.html
+$dokka.location:nomic.data.repositories.games/GameSpecificationFactory///PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-game-specification-factory/index.html
+$dokka.location:nomic.data.repositories.games/GameSpecificationFactory/GameSpecificationFactory/#/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-game-specification-factory/-game-specification-factory.html
+$dokka.location:nomic.data.repositories.games/GameSpecificationFactory/filterByUser/#nomic.domain.entities.EndUser/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-game-specification-factory/filter-by-user.html
+$dokka.location:nomic.data.repositories.games/GameSpecificationFactory/paginate/#kotlin.UInt#kotlin.UInt/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-game-specification-factory/paginate.html
+$dokka.location:nomic.data.repositories.games/GameSpecificationFactory/sortByMostRecentFirst/#/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-game-specification-factory/sort-by-most-recent-first.html
 $dokka.location:nomic.data.repositories.games/IGameRepository///PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-i-game-repository/index.html
 $dokka.location:nomic.data.repositories.games/IGameRepository/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-i-game-repository/create-game.html
 $dokka.location:nomic.data.repositories.games/IGameRepository/deleteGame/#kotlin.Int/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-i-game-repository/delete-game.html
+$dokka.location:nomic.data.repositories.games/IGameRepository/listGames/#kotlin.Array[nomic.data.repositories.games.IGameSpecification]/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-i-game-repository/list-games.html
+$dokka.location:nomic.data.repositories.games/IGameSpecification///PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-i-game-specification/index.html
+$dokka.location:nomic.data.repositories.games/PaginateGamesSpecification///PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-paginate-games-specification/index.html
+$dokka.location:nomic.data.repositories.games/PaginateGamesSpecification/PaginateGamesSpecification/#kotlin.UInt#kotlin.UInt/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-paginate-games-specification/-paginate-games-specification.html
+$dokka.location:nomic.data.repositories.games/PaginateGamesSpecification/apply/#org.ktorm.entity.EntitySequence[nomic.data.dtos.GameDTO,nomic.data.dtos.Games]/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-paginate-games-specification/apply.html
+$dokka.location:nomic.data.repositories.games/SortGamesByMostRecentFirstSpecification///PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-sort-games-by-most-recent-first-specification/index.html
+$dokka.location:nomic.data.repositories.games/SortGamesByMostRecentFirstSpecification/SortGamesByMostRecentFirstSpecification/#/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-sort-games-by-most-recent-first-specification/-sort-games-by-most-recent-first-specification.html
+$dokka.location:nomic.data.repositories.games/SortGamesByMostRecentFirstSpecification/apply/#org.ktorm.entity.EntitySequence[nomic.data.dtos.GameDTO,nomic.data.dtos.Games]/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.games/-sort-games-by-most-recent-first-specification/apply.html
 $dokka.location:nomic.data.repositories.implementations////PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.implementations/index.html
 $dokka.location:nomic.data.repositories.implementations/CredentialRepository///PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.implementations/-credential-repository/index.html
 $dokka.location:nomic.data.repositories.implementations/CredentialRepository/CredentialRepository/#org.ktorm.database.Database/PointingToDeclaration/nomic.game.manager.api/nomic.data.repositories.implementations/-credential-repository/-credential-repository.html
@@ -186,6 +211,8 @@ $dokka.location:nomic.data/DatabaseProvider/DatabaseProvider/#/PointingToDeclara
 $dokka.location:nomic.data/DatabaseProvider/getDatabase/#nomic.data.DatabaseConfigProperties/PointingToDeclaration/nomic.game.manager.api/nomic.data/-database-provider/get-database.html
 $dokka.location:nomic.data/EntityNotFoundException///PointingToDeclaration/nomic.game.manager.api/nomic.data/-entity-not-found-exception/index.html
 $dokka.location:nomic.data/EntityNotFoundException/EntityNotFoundException/#kotlin.Int/PointingToDeclaration/nomic.game.manager.api/nomic.data/-entity-not-found-exception/-entity-not-found-exception.html
+$dokka.location:nomic.data/IDatabaseSpecification///PointingToDeclaration/nomic.game.manager.api/nomic.data/-i-database-specification/index.html
+$dokka.location:nomic.data/IDatabaseSpecification/apply/#org.ktorm.entity.EntitySequence[TypeParam(bounds=[kotlin.Any]),TypeParam(bounds=[org.ktorm.schema.BaseTable[TypeParam(bounds=[kotlin.Any])]])]/PointingToDeclaration/nomic.game.manager.api/nomic.data/-i-database-specification/apply.html
 $dokka.location:nomic.domain.auth////PointingToDeclaration/nomic.game.manager.api/nomic.domain.auth/index.html
 $dokka.location:nomic.domain.auth/Argon2UserAuthenticator///PointingToDeclaration/nomic.game.manager.api/nomic.domain.auth/-argon2-user-authenticator/index.html
 $dokka.location:nomic.domain.auth/Argon2UserAuthenticator/Argon2UserAuthenticator/#nomic.data.repositories.ICredentialRepository#nomic.data.repositories.IUserRepository/PointingToDeclaration/nomic.game.manager.api/nomic.domain.auth/-argon2-user-authenticator/-argon2-user-authenticator.html
@@ -285,12 +312,18 @@ $dokka.location:nomic.domain.entities/RulesModel/ruleId/#/PointingToDeclaration/
 $dokka.location:nomic.domain.entities/RulesModel/title/#/PointingToDeclaration/nomic.game.manager.api/nomic.domain.entities/-rules-model/title.html
 $dokka.location:nomic.domain.games////PointingToDeclaration/nomic.game.manager.api/nomic.domain.games/index.html
 $dokka.location:nomic.domain.games/GameDomain///PointingToDeclaration/nomic.game.manager.api/nomic.domain.games/-game-domain/index.html
-$dokka.location:nomic.domain.games/GameDomain/GameDomain/#nomic.data.repositories.games.GameRepository/PointingToDeclaration/nomic.game.manager.api/nomic.domain.games/-game-domain/-game-domain.html
+$dokka.location:nomic.domain.games/GameDomain/GameDomain/#nomic.data.repositories.games.GameRepository#nomic.domain.games.IGameSpecificationFactory/PointingToDeclaration/nomic.game.manager.api/nomic.domain.games/-game-domain/-game-domain.html
 $dokka.location:nomic.domain.games/GameDomain/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/nomic.game.manager.api/nomic.domain.games/-game-domain/create-game.html
 $dokka.location:nomic.domain.games/GameDomain/deleteGame/#kotlin.String/PointingToDeclaration/nomic.game.manager.api/nomic.domain.games/-game-domain/delete-game.html
+$dokka.location:nomic.domain.games/GameDomain/listGames/#nomic.domain.entities.EndUser#kotlin.UInt#kotlin.UInt/PointingToDeclaration/nomic.game.manager.api/nomic.domain.games/-game-domain/list-games.html
 $dokka.location:nomic.domain.games/IGameDomain///PointingToDeclaration/nomic.game.manager.api/nomic.domain.games/-i-game-domain/index.html
 $dokka.location:nomic.domain.games/IGameDomain/createGame/#nomic.domain.entities.GameModel/PointingToDeclaration/nomic.game.manager.api/nomic.domain.games/-i-game-domain/create-game.html
 $dokka.location:nomic.domain.games/IGameDomain/deleteGame/#kotlin.String/PointingToDeclaration/nomic.game.manager.api/nomic.domain.games/-i-game-domain/delete-game.html
+$dokka.location:nomic.domain.games/IGameDomain/listGames/#nomic.domain.entities.EndUser#kotlin.UInt#kotlin.UInt/PointingToDeclaration/nomic.game.manager.api/nomic.domain.games/-i-game-domain/list-games.html
+$dokka.location:nomic.domain.games/IGameSpecificationFactory///PointingToDeclaration/nomic.game.manager.api/nomic.domain.games/-i-game-specification-factory/index.html
+$dokka.location:nomic.domain.games/IGameSpecificationFactory/filterByUser/#nomic.domain.entities.EndUser/PointingToDeclaration/nomic.game.manager.api/nomic.domain.games/-i-game-specification-factory/filter-by-user.html
+$dokka.location:nomic.domain.games/IGameSpecificationFactory/paginate/#kotlin.UInt#kotlin.UInt/PointingToDeclaration/nomic.game.manager.api/nomic.domain.games/-i-game-specification-factory/paginate.html
+$dokka.location:nomic.domain.games/IGameSpecificationFactory/sortByMostRecentFirst/#/PointingToDeclaration/nomic.game.manager.api/nomic.domain.games/-i-game-specification-factory/sort-by-most-recent-first.html
 $dokka.location:nomic.domain.rulesamendments////PointingToDeclaration/nomic.game.manager.api/nomic.domain.rulesamendments/index.html
 $dokka.location:nomic.domain.rulesamendments/IRuleAmendmentDomain///PointingToDeclaration/nomic.game.manager.api/nomic.domain.rulesamendments/-i-rule-amendment-domain/index.html
 $dokka.location:nomic.domain.rulesamendments/IRuleAmendmentDomain/enactAmendment/#nomic.domain.entities.AmendmentInputModel/PointingToDeclaration/nomic.game.manager.api/nomic.domain.rulesamendments/-i-rule-amendment-domain/enact-amendment.html
@@ -307,6 +340,8 @@ $dokka.location:nomic.domain.rulesamendments/RuleAmendmentDomain/getRulesAmendme
 $dokka.location:nomic.domain.rulesamendments/RuleAmendmentDomain/repealAmendment/#kotlin.String/PointingToDeclaration/nomic.game.manager.api/nomic.domain.rulesamendments/-rule-amendment-domain/repeal-amendment.html
 $dokka.location:nomic.domain.rulesamendments/RuleAmendmentDomain/repealRule/#kotlin.String/PointingToDeclaration/nomic.game.manager.api/nomic.domain.rulesamendments/-rule-amendment-domain/repeal-rule.html
 $dokka.location:nomic.domain.rulesamendments/RuleAmendmentDomain/transmuteRule/#kotlin.Boolean#kotlin.String/PointingToDeclaration/nomic.game.manager.api/nomic.domain.rulesamendments/-rule-amendment-domain/transmute-rule.html
+$dokka.location:nomic.domain////PointingToDeclaration/nomic.game.manager.api/nomic.domain/index.html
+$dokka.location:nomic.domain/ISpecification///PointingToDeclaration/nomic.game.manager.api/nomic.domain/-i-specification/index.html
 $dokka.location:nomic////PointingToDeclaration/nomic.game.manager.api/nomic/index.html
 $dokka.location:nomic//main/#kotlin.Array[kotlin.String]/PointingToDeclaration/nomic.game.manager.api/nomic/main.html
 $dokka.location:nomic/ApiApplication///PointingToDeclaration/nomic.game.manager.api/nomic/-api-application/index.html
@@ -323,6 +358,7 @@ nomic.data.repositories
 nomic.data.repositories.games
 nomic.data.repositories.implementations
 nomic.data.repositories.rulesamendments
+nomic.domain
 nomic.domain.auth
 nomic.domain.entities
 nomic.domain.games
