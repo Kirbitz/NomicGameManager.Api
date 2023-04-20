@@ -2,11 +2,13 @@ package nomic.data.repositories.games
 
 import nomic.data.EntityNotFoundException
 import nomic.data.dtos.Games
+import nomic.data.dtos.games
 import nomic.domain.entities.GameModel
 import org.ktorm.database.Database
 import org.ktorm.dsl.delete
 import org.ktorm.dsl.eq
 import org.ktorm.dsl.insert
+import org.ktorm.entity.map
 import org.springframework.stereotype.Repository
 import java.time.LocalDate
 
@@ -29,6 +31,24 @@ class GameRepository(private val db: Database) : IGameRepository {
             // userId will need to be changed to use the token value
             set(it.userId, input.userId)
         }
+    }
+
+    override fun listGames(vararg specifications: IGameSpecification): List<GameModel> {
+        var sequence = db.games
+
+        for (specification in specifications) {
+            sequence = specification.apply(sequence)
+        }
+
+        return sequence.map {
+            GameModel(
+                it.gameId,
+                it.title,
+                it.createDate,
+                it.currentPlayer,
+                it.user.id
+            )
+        }.toList()
     }
 
     override fun deleteGame(gameId: Int) {

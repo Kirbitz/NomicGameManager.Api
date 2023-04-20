@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  * This handles all exceptions that could occur within an API endpoint
  */
 @ControllerAdvice
-class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
+class GlobalExceptionHandler(val errorParser: ErrorParser) : ResponseEntityExceptionHandler() {
     /**
      * Handles the Illegal Argument Exceptions that are thrown
      *
@@ -23,8 +23,8 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleIllegalArgumentException(
         exception: IllegalArgumentException
-    ): ResponseEntity<Any> {
-        return ResponseEntity(ResponseFormat(false, HttpStatus.BAD_REQUEST, exception.message!!), HttpStatus.BAD_REQUEST)
+    ): ResponseEntity<ResponseFormat<String>> {
+        return errorParser.fromBadArguments(exception.message!!)
     }
 
     /**
@@ -36,8 +36,8 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleEntityNotFoundException(
         exception: EntityNotFoundException
-    ): ResponseEntity<Any> {
-        return ResponseEntity(ResponseFormat(false, HttpStatus.NOT_FOUND, exception.message!!), HttpStatus.NOT_FOUND)
+    ): ResponseEntity<ResponseFormat<String>> {
+        return errorParser.fromNotFound(exception.message!!)
     }
 
     /**

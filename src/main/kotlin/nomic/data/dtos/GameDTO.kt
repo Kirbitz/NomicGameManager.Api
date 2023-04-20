@@ -5,7 +5,9 @@ import nomic.data.dtos.Games.currentPlayer
 import nomic.data.dtos.Games.gameId
 import nomic.data.dtos.Games.title
 import nomic.data.dtos.Games.userId
+import org.ktorm.database.Database
 import org.ktorm.entity.Entity
+import org.ktorm.entity.sequenceOf
 import org.ktorm.schema.Table
 import org.ktorm.schema.date
 import org.ktorm.schema.int
@@ -19,7 +21,7 @@ import java.time.LocalDate
  * @property title the name of this game
  * @property createDate the date when this game was created
  * @property currentPlayer the id of player whose turn it is
- * @property userId the id of the user that made this game
+ * @property userId the user that made this game
  */
 
 interface GameDTO : Entity<GameDTO> {
@@ -27,8 +29,8 @@ interface GameDTO : Entity<GameDTO> {
     val gameId: Int
     val title: String
     val createDate: LocalDate
-    val currentPlayer: Int
-    val userId: Int
+    val currentPlayer: Int?
+    val user: UserDTO
 }
 
 /**
@@ -46,5 +48,7 @@ object Games : Table<GameDTO>("Game") {
     val title = varchar("title").bindTo { it.title }
     val createDate = date("createDate").bindTo { it.createDate }
     val currentPlayer = int("currentPlayer").bindTo { it.currentPlayer }
-    val userId = int("userId").bindTo { it.userId }
+    val userId = int("userId").references(Users) { it.user }
 }
+
+val Database.games get() = this.sequenceOf(Games)

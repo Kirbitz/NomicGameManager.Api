@@ -173,3 +173,20 @@ INSERT INTO `Amendment` VALUES (6, 6, 'Or look at the ground again', 'MyAmendmen
 INSERT INTO `Amendment` VALUES (7, 7, 'Or look at the ground again part two', 'MyAmendment1', 6, 1);
 INSERT INTO `Amendment` VALUES (8, 8, 'Test for repealing amendments', 'repealAmend', 7, 1);
 
+-- List Games
+
+INSERT INTO `User` VALUES(1610, 'ListGamesUser1');
+INSERT INTO `Game` VALUES(1611, 'Foo1', '2023-01-01', NULL, 1610);
+INSERT INTO `Game` VALUES(1612, 'Foo2', '2023-01-02', NULL, 1610);
+INSERT INTO `Game` VALUES(1613, 'Foo3', '2023-01-04', NULL, 1610);
+INSERT INTO `Game` VALUES(1614, 'Foo4', '2023-01-03', NULL, 1610);
+
+INSERT INTO `User` VALUES(1620, 'ListGamesUser2');
+INSERT INTO `Game` VALUES(1621, 'Bar1', '2023-02-01', NULL, 1620);
+INSERT INTO `Game` VALUES(1622, 'Bar2', '2023-02-02', NULL, 1620);
+INSERT INTO `Game` VALUES(1623, 'Bar4', '2023-02-03', NULL, 1620);
+
+-- Database generated entities get forced here
+
+INSERT INTO `User` VALUES(1000000, 'DB-generated user');
+INSERT INTO `Game` VALUES(1000000, 'DB-generated games', '2023-02-03', NULL, 1000000);
