@@ -49,11 +49,13 @@ data class TokenValidationResult(val isSuccess: Boolean, val subject: EndUser? =
  * @see[ITokenRegistry]
  * @param[keyProvider] This dependency is used to retrieve the RSA keys used to sign all JWT Tokens to validate authenticity and integrity
  * @param[usersRepo] This dependency is used to retrieve the user entity that is the subject of valid JWT Tokens
+ * @param[tokenConfig] This dependency is used to retrieve the configured settings for creating and validating JWT Tokens.
  */
 @Service
 class TokenRegistry(
     private val keyProvider: IKeyProvider,
-    private val usersRepo: IUserRepository
+    private val usersRepo: IUserRepository,
+    private val tokenConfig: JWTTokenConfigurationProperties
 ) : ITokenRegistry {
     private val algorithm: Algorithm
     private val verifier: JWTVerifier
@@ -75,8 +77,11 @@ class TokenRegistry(
             .withIssuer(JWT_ISSUER)
             .withAudience(JWT_ISSUER)
             .withIssuedAt(Instant.now())
-            .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
             .withNotBefore(Instant.now())
+
+        if (tokenConfig.doesExpire != false) {
+            tokenBuilder.withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
+        }
 
         for (claim in claims) {
             tokenBuilder.withClaim(claim.key, claim.value)
